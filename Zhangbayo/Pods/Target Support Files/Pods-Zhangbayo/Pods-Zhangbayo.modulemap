@@ -1,0 +1,6 @@
+framework module Pods_Zhangbayo {
+  umbrella header "Pods-Zhangbayo-umbrella.h"
+
+  export *
+  module * { export * }
+}
