@@ -90,7 +90,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-                var action: WKNavigationActionPolicy?
+        var action: WKNavigationActionPolicy?
         
         guard let url = navigationAction.request.url else { return }
         

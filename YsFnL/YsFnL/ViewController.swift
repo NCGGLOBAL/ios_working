@@ -406,6 +406,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             print("url : \(url)")
             print("url absoluteString: \(url.absoluteString)")
             print("url scheme: \(url.scheme)")
+        
             if (url.scheme?.elementsEqual(kKeyOfWebActionKeyName))! {
 //                self.parseWebAction(decodeUrl: decodeString)
             } else {
@@ -414,6 +415,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     urlString.contains("m.facebook.com") ||
                     urlString.contains("accounts.kakao.com")) {
                     self.backButton.isHidden = false
+                } else if (urlString.contains("tel")) {
+                    // 전화걸기
+                    let startIdx = urlString.index(urlString.startIndex, offsetBy: 4)
+                    let phoneNum = String(urlString[startIdx...])
+                    self.callNumber(phoneNumber: phoneNum)
                 }
             }
 
@@ -529,6 +535,21 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             } catch let error as NSError {
               print(error)
             }
+    }
+    
+    private func callNumber(phoneNumber:String) {
+        if let phoneCallURL = URL(string: "telprompt://\(phoneNumber)") {
+
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                     application.openURL(phoneCallURL as URL)
+                }
+            }
+        }
     }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {
