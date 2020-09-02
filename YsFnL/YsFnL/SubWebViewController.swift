@@ -128,8 +128,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         }
             
         decisionHandler(.allow)
-        
-        #if DEBUG
+    
         let urlScheme = url.scheme
         let urlString = url.absoluteString
         let decodeString = urlString
@@ -137,7 +136,12 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         print("url : \(url)")
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
-        #endif
+        
+        if (!(url.scheme?.elementsEqual("http"))! &&
+                        !(url.scheme?.elementsEqual("https"))!) {
+        //                self.parseWebAction(decodeUrl: decodeString)
+                    UIApplication.shared.open(url, options: [:])
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

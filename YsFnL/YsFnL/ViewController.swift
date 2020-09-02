@@ -407,21 +407,23 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             print("url absoluteString: \(url.absoluteString)")
             print("url scheme: \(url.scheme)")
         
-            if (url.scheme?.elementsEqual(kKeyOfWebActionKeyName))! {
+        if (!(url.scheme?.elementsEqual("http"))! &&
+                !(url.scheme?.elementsEqual("https"))!) {
 //                self.parseWebAction(decodeUrl: decodeString)
-            } else {
-                if (urlString.contains("pf.kakao.com") ||
-                    urlString.contains("nid.naver.com") ||
-                    urlString.contains("m.facebook.com") ||
-                    urlString.contains("accounts.kakao.com")) {
-                    self.backButton.isHidden = false
-                } else if (urlString.contains("tel")) {
-                    // 전화걸기
-                    let startIdx = urlString.index(urlString.startIndex, offsetBy: 4)
-                    let phoneNum = String(urlString[startIdx...])
-                    self.callNumber(phoneNumber: phoneNum)
-                }
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            if (urlString.contains("pf.kakao.com") ||
+                urlString.contains("nid.naver.com") ||
+                urlString.contains("m.facebook.com") ||
+                urlString.contains("accounts.kakao.com")) {
+                self.backButton.isHidden = false
+            } else if (urlString.contains("tel")) {
+                // 전화걸기
+                let startIdx = urlString.index(urlString.startIndex, offsetBy: 4)
+                let phoneNum = String(urlString[startIdx...])
+                self.callNumber(phoneNumber: phoneNum)
             }
+        }
 
     //        if navigationAction.navigationType == .linkActivated, url.absoluteString.hasPrefix("http://www.example.com/open-in-safari") {
     //            action = .cancel                  // Stop in WebView
