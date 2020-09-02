@@ -45,6 +45,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        webView.customUserAgent = "webview-type=sub"
         
         // self.view = self.webView!
         self.containerView.addSubview(webView)
