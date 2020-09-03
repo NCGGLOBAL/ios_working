@@ -509,7 +509,7 @@
 				CODE_SIGN_ENTITLEMENTS = Zhangbayo/Zhangbayo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = K2HV53VH95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -527,7 +527,7 @@
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo;
 				PRODUCT_NAME = "장바요";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -547,7 +547,7 @@
 				CODE_SIGN_ENTITLEMENTS = Zhangbayo/Zhangbayo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = K2HV53VH95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,7 +565,7 @@
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo;
 				PRODUCT_NAME = "장바요";
 				PROVISIONING_PROFILE_SPECIFIER = "";
