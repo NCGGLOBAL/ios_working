@@ -18,6 +18,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     var urlString = ""
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
+    let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 webview-type=sub"
     private struct Constants {
         static let callBackHandlerKey = "ios"
     }
@@ -44,6 +45,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        webView.customUserAgent = userAgent
         
         // self.view = self.webView!
         self.containerView.addSubview(webView)
