@@ -1,0 +1,6 @@
+framework module Pods_SinsangChina {
+  umbrella header "Pods-SinsangChina-umbrella.h"
+
+  export *
+  module * { export * }
+}

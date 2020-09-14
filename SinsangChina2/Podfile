@@ -1,0 +1,11 @@
+# Firebase Cloud Messaging (FCM)
+
+use_frameworks!
+platform :ios, '8.0'
+
+
+target 'SinsangChina' do
+	pod 'Firebase/Core'
+	pod 'Firebase/Messaging'
+
+end
