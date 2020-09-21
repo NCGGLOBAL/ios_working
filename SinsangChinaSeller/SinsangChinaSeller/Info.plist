@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
-	<key>CFBundleDisplayName</key>
-	<string>sinsangchina卖家APP</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,25 +11,38 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>sinsangchina卖家APP</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>gonggushopscheme</string>
-				<string>kakao24b8f0a1f99824fdc33484911530efe4</string>
+				<string>fb652992528465036</string>
+				<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
+				<string>adbrix497925905</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>597519710746611</string>
+	<key>FacebookDisplayName</key>
+	<string>sinsangchina卖家APP</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
+	<key>KAKAO_APP_KEY</key>
+	<string>ba109aa09509e4146508f3182324580d</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -48,6 +59,7 @@
 		<string>nhappcardansimclick</string>
 		<string>nhallonepayansimclick</string>
 		<string>nonghyupcardansimclick</string>
+		<string>hanaskcardmobileportal</string>
 		<string>lotteappcard</string>
 		<string>lottesmartpay</string>
 		<string>kb-acp</string>
@@ -67,8 +79,10 @@
 		<string>vguardstart</string>
 		<string>samsungpay</string>
 		<string>uppay</string>
+		<string>paypin</string>
 		<string>shinsegaeeasypayment</string>
 		<string>naversearchapp</string>
+		<string>lpayapp</string>
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 		<string>fbauth2</string>
@@ -76,7 +90,37 @@
 		<string>kakaokompassauth</string>
 		<string>storykompassauth</string>
 		<string>naversearchthirdlogin</string>
-		<string>kakao24b8f0a1f99824fdc33484911530efe4</string>
+		<string>kpay</string>
+		<string>kftc-bankpay</string>
+		<string>bankwallet</string>
+		<string>ukbanksmartbanknonloginpay</string>
+		<string>kdb-bankpay</string>
+		<string>ibk-bankpay</string>
+		<string>kb-bankpay</string>
+		<string>keb-bankpay</string>
+		<string>sh-bankpay</string>
+		<string>nhb-bankpay</string>
+		<string>nh-bankpay</string>
+		<string>wr-bankpay</string>
+		<string>sc-bankpa</string>
+		<string>s-bankpay</string>
+		<string>ct-bankpay</string>
+		<string>dg-bankpay</string>
+		<string>bnk-bankpay</string>
+		<string>kj-bankpay</string>
+		<string>jj-bankpay</string>
+		<string>jb-bankpay</string>
+		<string>kn-bankpay</string>
+		<string>kp-bankpay</string>
+		<string>cu-bankpay</string>
+		<string>mg-bankpay</string>
+		<string>kbn-bankpay</string>
+		<string>kkb-bankpay</string>
+		<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
+		<string>kakaotalk</string>
+		<string>shinhan-sr-ansimclick-payco</string>
+		<string>shinhan-sr-ansimclick-naverpay</string>
+		<string>hanawalletmembers</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -86,11 +130,38 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>登录商品时才能拍摄。为了拍摄访问相机应用软件。</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>为了登录商品及图片访问相册应用软件。</string>
+	<string>通过扫描二维码打开页面的功能</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>同意接收活动或优惠信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>为了保存图片访问相册应用软件。</string>
+	<string>上传商品或照片时，允许打开相册</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -99,7 +170,12 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
 </dict>
 </plist>
