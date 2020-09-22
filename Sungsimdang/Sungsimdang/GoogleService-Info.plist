@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>254353469821-6u9mclg3l11daetbhe5d5vmcv329t2tr.apps.googleusercontent.com</string>
+	<string>254353469821-dki7rveo46vfiomjjrefijq63b3gsdse.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.254353469821-6u9mclg3l11daetbhe5d5vmcv329t2tr</string>
+	<string>com.googleusercontent.apps.254353469821-dki7rveo46vfiomjjrefijq63b3gsdse</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD7lufTmq_rTH0q818bqjkVUgPNKFlgQe4</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mallup.sungsimdang</string>
+	<string>com.mallup.sungsimdangapp</string>
 	<key>PROJECT_ID</key>
 	<string>sungsimdang-d7924</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:254353469821:ios:be7eb724bdf6a290185c14</string>
+	<string>1:254353469821:ios:022077a318c28ef2185c14</string>
 	<key>DATABASE_URL</key>
 	<string>https://sungsimdang-d7924.firebaseio.com</string>
 </dict>
