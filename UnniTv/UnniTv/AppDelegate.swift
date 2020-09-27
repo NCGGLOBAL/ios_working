@@ -100,9 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [END receive_message]
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        #if DEBUG
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
-        #endif
+//        print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
 
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
