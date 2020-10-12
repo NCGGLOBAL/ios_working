@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-               BuildableName = "&#x1110;&#x1162;&#x1100;&#x1173;&#x1107;&#x1175;.app"
+               BuildableName = "TagB.app"
                BlueprintName = "TagB"
                ReferencedContainer = "container:TagB.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x1110;&#x1162;&#x1100;&#x1173;&#x1107;&#x1175;.app"
+            BuildableName = "TagB.app"
             BlueprintName = "TagB"
             ReferencedContainer = "container:TagB.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x1110;&#x1162;&#x1100;&#x1173;&#x1107;&#x1175;.app"
+            BuildableName = "TagB.app"
             BlueprintName = "TagB"
             ReferencedContainer = "container:TagB.xcodeproj">
          </BuildableReference>

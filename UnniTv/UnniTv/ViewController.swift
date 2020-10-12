@@ -48,6 +48,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
+        config.mediaPlaybackRequiresUserAction = false
+        config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
         webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-               BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d;.app"
+               BuildableName = "Zhangbayo.app"
                BlueprintName = "Zhangbayo"
                ReferencedContainer = "container:Zhangbayo.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d;.app"
+            BuildableName = "Zhangbayo.app"
             BlueprintName = "Zhangbayo"
             ReferencedContainer = "container:Zhangbayo.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d;.app"
+            BuildableName = "Zhangbayo.app"
             BlueprintName = "Zhangbayo"
             ReferencedContainer = "container:Zhangbayo.xcodeproj">
          </BuildableReference>

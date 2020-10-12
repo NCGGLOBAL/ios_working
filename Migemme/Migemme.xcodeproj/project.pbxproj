@@ -76,7 +76,7 @@
 		FF60BA44247EB27700B0B1A8 /* icon_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_stop.png; sourceTree = "<group>"; };
 		FF60BA46247EB27700B0B1A8 /* btn_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close.png; sourceTree = "<group>"; };
 		FF60BA47247EB27700B0B1A8 /* icon_del@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_del@3x.png"; sourceTree = "<group>"; };
-		FF78E3DD24854469002AFAFF /* 미젬므.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "미젬므.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF78E3DD24854469002AFAFF /* Migemme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Migemme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF78E3DE2485448A002AFAFF /* sampleJs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sampleJs.html; sourceTree = "<group>"; };
 		FFA5E92824C19013003C9D02 /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = Migemme/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
 		FFAD29482494945300E5E559 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				FF60BA19247EA18E00B0B1A8 /* Migemme */,
 				5B09EBBDB2A5E88A5E27D900 /* Pods */,
 				5104FD419D222AF28E1831AA /* Frameworks */,
-				FF78E3DD24854469002AFAFF /* 미젬므.app */,
+				FF78E3DD24854469002AFAFF /* Migemme.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,7 +220,7 @@
 			);
 			name = Migemme;
 			productName = UnniTv;
-			productReference = FF78E3DD24854469002AFAFF /* 미젬므.app */;
+			productReference = FF78E3DD24854469002AFAFF /* Migemme.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -529,7 +529,7 @@
 				);
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.migemme;
-				PRODUCT_NAME = "미젬므";
+				PRODUCT_NAME = Migemme;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -567,7 +567,7 @@
 				);
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.migemme;
-				PRODUCT_NAME = "미젬므";
+				PRODUCT_NAME = Migemme;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;

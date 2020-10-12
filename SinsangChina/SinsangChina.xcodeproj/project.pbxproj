@@ -95,7 +95,7 @@
 		FF60BA44247EB27700B0B1A8 /* icon_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_stop.png; sourceTree = "<group>"; };
 		FF60BA46247EB27700B0B1A8 /* btn_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close.png; sourceTree = "<group>"; };
 		FF60BA47247EB27700B0B1A8 /* icon_del@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_del@3x.png"; sourceTree = "<group>"; };
-		FF78E3DD24854469002AFAFF /* 신상차이나.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "신상차이나.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF78E3DD24854469002AFAFF /* SinsangChina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinsangChina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8E74CC24EC1D1900B6F92F /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8E74CE24EC1D1900B6F92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		FF8E74D024EC1D1900B6F92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 				5B09EBBDB2A5E88A5E27D900 /* Pods */,
 				FF8E74CD24EC1D1900B6F92F /* NotificationServiceExtension */,
 				5104FD419D222AF28E1831AA /* Frameworks */,
-				FF78E3DD24854469002AFAFF /* 신상차이나.app */,
+				FF78E3DD24854469002AFAFF /* SinsangChina.app */,
 				FF8E74CC24EC1D1900B6F92F /* NotificationServiceExtension.appex */,
 			);
 			sourceTree = "<group>";
@@ -256,7 +256,7 @@
 			);
 			name = SinsangChina;
 			productName = UnniTv;
-			productReference = FF78E3DD24854469002AFAFF /* 신상차이나.app */;
+			productReference = FF78E3DD24854469002AFAFF /* SinsangChina.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FF8E74CB24EC1D1900B6F92F /* NotificationServiceExtension */ = {
@@ -594,7 +594,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.sinsangchina;
-				PRODUCT_NAME = "신상차이나";
+				PRODUCT_NAME = SinsangChina;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -624,7 +624,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.sinsangchina;
-				PRODUCT_NAME = "신상차이나";
+				PRODUCT_NAME = SinsangChina;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
