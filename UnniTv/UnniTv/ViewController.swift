@@ -24,6 +24,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     let kKeyOfWebActionParams = "action_param"
     let kKeyOfWebActionCallback = "callBack"
     let bridgeName = "ios"
+    let liveScheme = "ncglive"
     
     var callback = ""
     
@@ -401,13 +402,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
         let urlString = url.absoluteString
     #if DEBUG
-        let urlScheme = url.scheme
-        let decodeString = urlString
         print("url : \(url)")
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
     #endif
-        if (url.scheme?.elementsEqual(kKeyOfWebActionKeyName))! {
+        if (url.scheme?.elementsEqual(liveScheme))! {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             if (urlString.contains("pf.kakao.com") ||
                 urlString.contains("nid.naver.com") ||

@@ -13,7 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static let HOME_URL = "https://unni.tv"
+    static var HOME_URL = "https://unni.tv"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [END receive_message]
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-//        print("Unable to register for remote notifications: \(error.localizedDescription)")
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
 
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
@@ -160,6 +160,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
+    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler([])
   }
 
@@ -177,9 +178,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     #if DEBUG
     print(userInfo)
     #endif
+    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler()
   }
-    
 
 }
 // [END ios_10_message_handling]

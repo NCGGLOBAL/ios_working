@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-               BuildableName = "&#x1109;&#x1175;&#x11ab;&#x1109;&#x1161;&#x11bc;&#x110e;&#x1161;&#x110b;&#x1175;&#x1102;&#x1161;.app"
+               BuildableName = "SinsangChina.app"
                BlueprintName = "SinsangChina"
                ReferencedContainer = "container:SinsangChina.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x1109;&#x1175;&#x11ab;&#x1109;&#x1161;&#x11bc;&#x110e;&#x1161;&#x110b;&#x1175;&#x1102;&#x1161;.app"
+            BuildableName = "SinsangChina.app"
             BlueprintName = "SinsangChina"
             ReferencedContainer = "container:SinsangChina.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x1109;&#x1175;&#x11ab;&#x1109;&#x1161;&#x11bc;&#x110e;&#x1161;&#x110b;&#x1175;&#x1102;&#x1161;.app"
+            BuildableName = "SinsangChina.app"
             BlueprintName = "SinsangChina"
             ReferencedContainer = "container:SinsangChina.xcodeproj">
          </BuildableReference>

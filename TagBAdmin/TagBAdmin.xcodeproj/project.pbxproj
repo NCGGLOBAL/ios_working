@@ -510,7 +510,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TagBAdmin/TagBAdmin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 375X2LQRWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,7 +528,7 @@
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin;
 				PRODUCT_NAME = TagBAdmin;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -546,7 +546,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TagBAdmin/TagBAdmin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 375X2LQRWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -564,7 +564,7 @@
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin;
 				PRODUCT_NAME = TagBAdmin;
 				SWIFT_OBJC_BRIDGING_HEADER = "";

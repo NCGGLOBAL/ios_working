@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "695062F68262FAE6678669806B16D494"
+               BlueprintIdentifier = "38ABF9918D2FC2AED9F4413760F78448"
                BuildableName = "Pods_UnniTv.framework"
                BlueprintName = "Pods-UnniTv"
                ReferencedContainer = "container:Pods.xcodeproj">

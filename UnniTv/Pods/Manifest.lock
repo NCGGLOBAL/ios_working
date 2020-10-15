@@ -71,7 +71,23 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
+  - GPUImage (0.1.7)
   - Kingfisher (4.10.1)
+  - libksygpulive/base (3.0.4)
+  - libksygpulive/KSYGPUResource (3.0.4)
+  - libksygpulive/libksygpulive (3.0.4):
+    - GPUImage
+    - libksygpulive/streamerbase
+  - libksygpulive/mediacodec (3.0.4)
+  - libksygpulive/mediacore_enc_base (3.0.4)
+  - libksygpulive/mediacore_enc_lite (3.0.4)
+  - libksygpulive/streamerbase (3.0.4):
+    - libksygpulive/base
+    - libksygpulive/mediacodec
+    - libksygpulive/mediacore_enc_base
+    - libksygpulive/mediacore_enc_lite
+    - libksygpulive/yuv
+  - libksygpulive/yuv (3.0.4)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -83,6 +99,8 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
   - Kingfisher (~> 4.0)
+  - libksygpulive/KSYGPUResource
+  - libksygpulive/libksygpulive
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -98,7 +116,9 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - GPUImage
     - Kingfisher
+    - libksygpulive
     - nanopb
     - Protobuf
 
@@ -115,10 +135,12 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  libksygpulive: aca3eb30e7a38ee6565feb52feb82ccc0103ce43
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
 
-PODFILE CHECKSUM: 5d6f0a35a7e82e0e073f602e4bef5364d98efab2
+PODFILE CHECKSUM: cfce533dab35ceccc1b427247045a2a70fca87e4
 
 COCOAPODS: 1.6.1
