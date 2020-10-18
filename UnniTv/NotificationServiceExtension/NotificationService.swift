@@ -22,7 +22,7 @@ class NotificationService: UNNotificationServiceExtension {
             bestAttemptContent.title = "\(bestAttemptContent.title)"
             
             var urlString:String? = nil
-            if let urlImageString = request.content.userInfo["imgUr"] as? String {
+            if let urlImageString = request.content.userInfo["image"] as? String {
                 urlString = urlImageString
             }
             
