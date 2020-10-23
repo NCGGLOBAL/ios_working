@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
     static var HOME_URL = "http://modookot.co.kr/m"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/app/"
-    static let PUSH_REG_URL = AppDelegate.HOME_URL + "/app/pushRegister.asp"
+    static let PUSH_REG_URL = "http://modookot.co.kr/m/m/app/pushRegister.asp"
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""
     static var pushkey = ""
