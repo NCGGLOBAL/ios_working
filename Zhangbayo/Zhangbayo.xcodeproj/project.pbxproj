@@ -39,10 +39,36 @@
 		FFAD294C2494948300E5E559 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAD294B2494948300E5E559 /* ImageModel.swift */; };
 		FFBEC4442497D0D400CB3651 /* ImageFileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBEC4432497D0D400CB3651 /* ImageFileData.swift */; };
 		FFBFC9E324B366440056DC49 /* IOS_1242x2208_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBFC9E224B366440056DC49 /* IOS_1242x2208_intro.png */; };
+		FFBFF4DC2549BBA300E58B71 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBFF4DB2549BBA300E58B71 /* NotificationService.swift */; };
+		FFBFF4E02549BBA300E58B71 /* NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FFBFF4D92549BBA300E58B71 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FFD87A6B2493C28D008E44C7 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD87A6A2493C28D008E44C7 /* ImageCollectionViewCell.swift */; };
 		FFE1057D24AA3A8C000100E5 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE1057C24AA3A8C000100E5 /* QRReaderViewController.swift */; };
 		FFE608DF24936EA900AD630E /* ImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE608DE24936EA900AD630E /* ImageSelectViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FFBFF4DE2549BBA300E58B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF60BA0F247EA18E00B0B1A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFBFF4D82549BBA300E58B71;
+			remoteInfo = NotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FFBFF4E12549BBA300E58B71 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FFBFF4E02549BBA300E58B71 /* NotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3B5709028C56F4073CF93D0E /* Pods-Zhangbayo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zhangbayo.release.xcconfig"; path = "Target Support Files/Pods-Zhangbayo/Pods-Zhangbayo.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +108,9 @@
 		FFAD294B2494948300E5E559 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		FFBEC4432497D0D400CB3651 /* ImageFileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileData.swift; sourceTree = "<group>"; };
 		FFBFC9E224B366440056DC49 /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = Zhangbayo/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
+		FFBFF4D92549BBA300E58B71 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFBFF4DB2549BBA300E58B71 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		FFBFF4DD2549BBA300E58B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFD87A6A2493C28D008E44C7 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFE1057C24AA3A8C000100E5 /* QRReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 		FFE608DE24936EA900AD630E /* ImageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +122,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C269CFF77B776F411B75477A /* Pods_Zhangbayo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFBFF4D62549BBA300E58B71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +157,10 @@
 			children = (
 				FF60BA19247EA18E00B0B1A8 /* Zhangbayo */,
 				5B09EBBDB2A5E88A5E27D900 /* Pods */,
+				FFBFF4DA2549BBA300E58B71 /* NotificationServiceExtension */,
 				5104FD419D222AF28E1831AA /* Frameworks */,
 				FF78E3DD24854469002AFAFF /* Zhangbayo.app */,
+				FFBFF4D92549BBA300E58B71 /* NotificationServiceExtension.appex */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +239,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		FFBFF4DA2549BBA300E58B71 /* NotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				FFBFF4DB2549BBA300E58B71 /* NotificationService.swift */,
+				FFBFF4DD2549BBA300E58B71 /* Info.plist */,
+			);
+			path = NotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,15 +260,34 @@
 				FF60BA14247EA18E00B0B1A8 /* Frameworks */,
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
 				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
+				FFBFF4E12549BBA300E58B71 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FFBFF4DF2549BBA300E58B71 /* PBXTargetDependency */,
 			);
 			name = Zhangbayo;
 			productName = UnniTv;
 			productReference = FF78E3DD24854469002AFAFF /* Zhangbayo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		FFBFF4D82549BBA300E58B71 /* NotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFBFF4E42549BBA300E58B71 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
+			buildPhases = (
+				FFBFF4D52549BBA300E58B71 /* Sources */,
+				FFBFF4D62549BBA300E58B71 /* Frameworks */,
+				FFBFF4D72549BBA300E58B71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationServiceExtension;
+			productName = NotificationServiceExtension;
+			productReference = FFBFF4D92549BBA300E58B71 /* NotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -229,13 +295,16 @@
 		FF60BA0F247EA18E00B0B1A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = ncgglobal;
 				TargetAttributes = {
 					FF60BA16247EA18E00B0B1A8 = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1150;
+					};
+					FFBFF4D82549BBA300E58B71 = {
+						CreatedOnToolsVersion = 12.1;
 					};
 				};
 			};
@@ -253,6 +322,7 @@
 			projectRoot = "";
 			targets = (
 				FF60BA16247EA18E00B0B1A8 /* Zhangbayo */,
+				FFBFF4D82549BBA300E58B71 /* NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +356,13 @@
 				FF60BA54247EB27700B0B1A8 /* btn_camera.png in Resources */,
 				FF60BA58247EB27700B0B1A8 /* icon_del@3x.png in Resources */,
 				FF60BA4A247EB27700B0B1A8 /* btn_gallery@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFBFF4D72549BBA300E58B71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +441,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FFBFF4D52549BBA300E58B71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFBFF4DC2549BBA300E58B71 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FFBFF4DF2549BBA300E58B71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFBFF4D82549BBA300E58B71 /* NotificationServiceExtension */;
+			targetProxy = FFBFF4DE2549BBA300E58B71 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FF60BA20247EA18E00B0B1A8 /* Main.storyboard */ = {
@@ -504,12 +597,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8ED0D7C5715472AE18A6CF6 /* Pods-Zhangbayo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Zhangbayo/Zhangbayo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = K2HV53VH95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -527,7 +621,7 @@
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo;
 				PRODUCT_NAME = Zhangbayo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -542,12 +636,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B5709028C56F4073CF93D0E /* Pods-Zhangbayo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Zhangbayo/Zhangbayo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = K2HV53VH95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,13 +660,61 @@
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/Zhangbayo/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo;
 				PRODUCT_NAME = Zhangbayo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FFBFF4E22549BBA300E58B71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				DEVELOPMENT_TEAM = K2HV53VH95;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FFBFF4E32549BBA300E58B71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				DEVELOPMENT_TEAM = K2HV53VH95;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.zhangbayo.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -592,6 +735,15 @@
 			buildConfigurations = (
 				FF60BA2C247EA19400B0B1A8 /* Debug */,
 				FF60BA2D247EA19400B0B1A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFBFF4E42549BBA300E58B71 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFBFF4E22549BBA300E58B71 /* Debug */,
+				FFBFF4E32549BBA300E58B71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
