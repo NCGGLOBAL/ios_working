@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>맘챌</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -11,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>맘챌</string>
+	<string></string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -24,10 +26,9 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
-				<string>unnitvscheme</string>
+				<string>momchallscheme</string>
 				<string>fb652992528465036</string>
-				<string>kakao</string>
-				<string>a10c8c6298133d742e1782c2fe49f01f</string>
+				<string>kakaoa10c8c6298133d742e1782c2fe49f01f</string>
 				<string>adbrix497925905</string>
 			</array>
 		</dict>
@@ -117,7 +118,7 @@
 		<string>mg-bankpay</string>
 		<string>kbn-bankpay</string>
 		<string>kkb-bankpay</string>
-		<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
+		<string>kakaoa10c8c6298133d742e1782c2fe49f01f</string>
 		<string>kakaotalk</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
