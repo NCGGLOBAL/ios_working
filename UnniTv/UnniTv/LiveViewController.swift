@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-import libksygpulive
+//import libksygpulive
 
 class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
@@ -23,7 +23,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         static let callBackHandlerKey = "ios"
     }
     
-    var kit: KSYGPUStreamerKit? = nil
+//    var kit: KSYGPUStreamerKit? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
-        initCamera()
+//        initCamera()
     }
     
     func initWebView() {
@@ -184,148 +184,148 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 print("callBack : \(callback)")
                 #endif
                 
-                switch actionCode {
-                    case "ACT1027": // wlive 전, 후면 카메라 제어
-                        var resultcd = "1"
-                        if let val = actionParamObj?["key_type"] {
-                            kit?.switchCamera()
-                        } else {
-                            resultcd = "0"
-                        }
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-
-                        do {
-                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            #if DEBUG
-                            print("jsonData : \(jsonData)")
-                            print("javascript : \(javascript)")
-                            #endif
-                            // call back!
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                #if DEBUG
-                                print("result : \(String(describing: result))")
-                                print("error : \(error)")
-                                #endif
-                            }
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    break
-                
-                    case "ACT1028": // wlive 마이크 제어
-                        var resultcd = "1"
-                        if let val = actionParamObj?["key_type"] {
-                            if (actionParamObj?["key_type"] as! Int == 0) {  //0: 마이크 끄기,1: 켜기
-                                kit?.streamerBase.muteStream(true)
-                            } else  {
-                                kit?.streamerBase.muteStream(false)
-                            }
-                        } else {
-                            resultcd = "0"
-                        }
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-
-                        do {
-                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            #if DEBUG
-                            print("jsonData : \(jsonData)")
-                            print("javascript : \(javascript)")
-                            #endif
-                            // call back!
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                #if DEBUG
-                                print("result : \(String(describing: result))")
-                                print("error : \(error)")
-                                #endif
-                            }
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    break
-                    case "ACT1029": // wlive 이미지필터 제어
-                        var resultcd = "1"
-                        if let val = actionParamObj?["key_type"] as? Int {
-                            switch val {
-                            case 0:
-                                kit?.setupFilter(nil)
-                                break
-                            case 1:
-                                let bf = KSYBeautifyFaceFilter()
-                                kit?.setupFilter(bf)
-                                break
-                            case 2:
-                                let bf = KSYBeautifyProFilter()
-                                kit?.setupFilter(bf)
-                                break
-                            default:
-                                kit?.setupFilter(nil)
-                            }
-                        } else {
-                            resultcd = "0"
-                        }
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-
-                        do {
-                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            #if DEBUG
-                            print("jsonData : \(jsonData)")
-                            print("javascript : \(javascript)")
-                            #endif
-                            // call back!
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                #if DEBUG
-                                print("result : \(String(describing: result))")
-                                print("error : \(error)")
-                                #endif
-                            }
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    break
-                    case "ACT1030": // wlive 스트림키 전달 및 송출
-                        var resultcd = "1"
-                        if let streamUrl = actionParamObj?["stream_url"] as? String {
-                            self.initStreamer(streamUrl: streamUrl)
-                        } else {
-                            resultcd = "0"
-                        }
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-
-                        do {
-                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            #if DEBUG
-                            print("jsonData : \(jsonData)")
-                            print("javascript : \(javascript)")
-                            #endif
-                            // call back!
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                #if DEBUG
-                                print("result : \(String(describing: result))")
-                                print("error : \(error)")
-                                #endif
-                            }
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    break
-                    case "ACT1031": // 종료
-                        self.navigationController?.popViewController(animated: true)
-                    break
-                    default:
-                        print("디폴트를 꼭 해줘야 합니다.")
-                }
+//                switch actionCode {
+//                    case "ACT1027": // wlive 전, 후면 카메라 제어
+//                        var resultcd = "1"
+//                        if let val = actionParamObj?["key_type"] {
+//                            kit?.switchCamera()
+//                        } else {
+//                            resultcd = "0"
+//                        }
+//                        var dic = Dictionary<String, String>()
+//                        dic.updateValue(resultcd, forKey: "resultcd")
+//
+//                        do {
+//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+//                            let javascript = "\(callback)('\(stringValue)')"
+//                            #if DEBUG
+//                            print("jsonData : \(jsonData)")
+//                            print("javascript : \(javascript)")
+//                            #endif
+//                            // call back!
+//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+//                                #if DEBUG
+//                                print("result : \(String(describing: result))")
+//                                print("error : \(error)")
+//                                #endif
+//                            }
+//                        } catch let error as NSError {
+//                            print(error)
+//                        }
+//                    break
+//
+//                    case "ACT1028": // wlive 마이크 제어
+//                        var resultcd = "1"
+//                        if let val = actionParamObj?["key_type"] {
+//                            if (actionParamObj?["key_type"] as! Int == 0) {  //0: 마이크 끄기,1: 켜기
+//                                kit?.streamerBase.muteStream(true)
+//                            } else  {
+//                                kit?.streamerBase.muteStream(false)
+//                            }
+//                        } else {
+//                            resultcd = "0"
+//                        }
+//                        var dic = Dictionary<String, String>()
+//                        dic.updateValue(resultcd, forKey: "resultcd")
+//
+//                        do {
+//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+//                            let javascript = "\(callback)('\(stringValue)')"
+//                            #if DEBUG
+//                            print("jsonData : \(jsonData)")
+//                            print("javascript : \(javascript)")
+//                            #endif
+//                            // call back!
+//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+//                                #if DEBUG
+//                                print("result : \(String(describing: result))")
+//                                print("error : \(error)")
+//                                #endif
+//                            }
+//                        } catch let error as NSError {
+//                            print(error)
+//                        }
+//                    break
+////                    case "ACT1029": // wlive 이미지필터 제어
+////                        var resultcd = "1"
+////                        if let val = actionParamObj?["key_type"] as? Int {
+////                            switch val {
+////                            case 0:
+////                                kit?.setupFilter(nil)
+////                                break
+////                            case 1:
+////                                let bf = KSYBeautifyFaceFilter()
+////                                kit?.setupFilter(bf)
+////                                break
+////                            case 2:
+////                                let bf = KSYBeautifyProFilter()
+////                                kit?.setupFilter(bf)
+////                                break
+////                            default:
+////                                kit?.setupFilter(nil)
+////                            }
+////                        } else {
+////                            resultcd = "0"
+////                        }
+////                        var dic = Dictionary<String, String>()
+////                        dic.updateValue(resultcd, forKey: "resultcd")
+////
+////                        do {
+////                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+////                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+////                            let javascript = "\(callback)('\(stringValue)')"
+////                            #if DEBUG
+////                            print("jsonData : \(jsonData)")
+////                            print("javascript : \(javascript)")
+////                            #endif
+////                            // call back!
+////                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+////                                #if DEBUG
+////                                print("result : \(String(describing: result))")
+////                                print("error : \(error)")
+////                                #endif
+////                            }
+////                        } catch let error as NSError {
+////                            print(error)
+////                        }
+////                    break
+////                    case "ACT1030": // wlive 스트림키 전달 및 송출
+////                        var resultcd = "1"
+////                        if let streamUrl = actionParamObj?["stream_url"] as? String {
+////                            self.initStreamer(streamUrl: streamUrl)
+////                        } else {
+////                            resultcd = "0"
+////                        }
+////                        var dic = Dictionary<String, String>()
+////                        dic.updateValue(resultcd, forKey: "resultcd")
+////
+////                        do {
+////                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+////                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+////                            let javascript = "\(callback)('\(stringValue)')"
+////                            #if DEBUG
+////                            print("jsonData : \(jsonData)")
+////                            print("javascript : \(javascript)")
+////                            #endif
+////                            // call back!
+////                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+////                                #if DEBUG
+////                                print("result : \(String(describing: result))")
+////                                print("error : \(error)")
+////                                #endif
+////                            }
+////                        } catch let error as NSError {
+////                            print(error)
+////                        }
+////                    break
+//                    case "ACT1031": // 종료
+//                        self.navigationController?.popViewController(animated: true)
+//                    break
+//                    default:
+//                        print("디폴트를 꼭 해줘야 합니다.")
+//                }
             }
         }
     }
@@ -356,54 +356,54 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    func initCamera() {
-        kit = KSYGPUStreamerKit.init(defaultCfg: ())
-        
-        kit?.cameraPosition = .front
-        kit?.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA
-        kit?.capturePixelFormat = kCVPixelFormatType_32BGRA
-        
-        kit?.previewDimension =  self.view.frame.size//self.view.frame.size
-        
-        kit?.streamDimension = self.view.frame.size
-        
-        kit?.videoOrientation = .portrait
-        kit?.previewOrientation = .portrait
-        kit?.startPreview(self.view)
-    }
-    
-    func initStreamer(streamUrl: String) {
-        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
-        kit?.streamerBase.videoInitBitrate = Int32(1500)
-        kit?.streamerBase.videoMaxBitrate = Int32(2500)
-        kit?.streamerBase.videoMinBitrate = Int32(1000)
-        kit?.streamerBase.audiokBPS = Int32(48)
-        kit?.streamerBase.shouldEnableKSYStatModule = true
-        kit?.streamerBase.videoFPS = Int32(15)
-        kit?.streamerBase.maxKeyInterval = Float(3)
-        kit?.videoOrientation = .portrait
-        kit?.previewOrientation = .portrait
-        kit?.streamDimension = CGSize(width: 720, height: 1280)
-        
-        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
-        kit?.streamerBase.videoInitBitrate = 1500
-        kit?.streamerBase.videoMaxBitrate = 2500
-        kit?.streamerBase.videoMinBitrate = 1000
-        kit?.streamerBase.audiokBPS = 48
-        kit?.streamerBase.shouldEnableKSYStatModule = true
-        kit?.streamerBase.videoFPS = 15
-        kit?.streamerBase.maxKeyInterval = 3
-    
-        kit?.videoProcessingCallback = { (buf) -> Void in
-            
-        }
-        
-        kit?.streamerBase.logBlock = { (str) -> Void in
-            //            print(str ?? "")
-        }
-        
-        let url = URL(string: streamUrl)
-        kit?.streamerBase.startStream(url)
-    }
+//    func initCamera() {
+//        kit = KSYGPUStreamerKit.init(defaultCfg: ())
+//
+//        kit?.cameraPosition = .front
+//        kit?.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA
+//        kit?.capturePixelFormat = kCVPixelFormatType_32BGRA
+//
+//        kit?.previewDimension =  self.view.frame.size//self.view.frame.size
+//
+//        kit?.streamDimension = self.view.frame.size
+//
+//        kit?.videoOrientation = .portrait
+//        kit?.previewOrientation = .portrait
+//        kit?.startPreview(self.view)
+//    }
+//
+//    func initStreamer(streamUrl: String) {
+//        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
+//        kit?.streamerBase.videoInitBitrate = Int32(1500)
+//        kit?.streamerBase.videoMaxBitrate = Int32(2500)
+//        kit?.streamerBase.videoMinBitrate = Int32(1000)
+//        kit?.streamerBase.audiokBPS = Int32(48)
+//        kit?.streamerBase.shouldEnableKSYStatModule = true
+//        kit?.streamerBase.videoFPS = Int32(15)
+//        kit?.streamerBase.maxKeyInterval = Float(3)
+//        kit?.videoOrientation = .portrait
+//        kit?.previewOrientation = .portrait
+//        kit?.streamDimension = CGSize(width: 720, height: 1280)
+//
+//        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
+//        kit?.streamerBase.videoInitBitrate = 1500
+//        kit?.streamerBase.videoMaxBitrate = 2500
+//        kit?.streamerBase.videoMinBitrate = 1000
+//        kit?.streamerBase.audiokBPS = 48
+//        kit?.streamerBase.shouldEnableKSYStatModule = true
+//        kit?.streamerBase.videoFPS = 15
+//        kit?.streamerBase.maxKeyInterval = 3
+//
+//        kit?.videoProcessingCallback = { (buf) -> Void in
+//
+//        }
+//
+//        kit?.streamerBase.logBlock = { (str) -> Void in
+//            //            print(str ?? "")
+//        }
+//
+//        let url = URL(string: streamUrl)
+//        kit?.streamerBase.startStream(url)
+//    }
 
 }

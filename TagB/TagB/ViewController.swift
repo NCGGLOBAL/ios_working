@@ -26,6 +26,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     let kKeyOfWebActionCallback = "callBack";
     let bridgeName = "ios"
     var callback = ""
+    let openUrlSchemeKakao = "kakaoplus"
     
     let uniqueProcessPool = WKProcessPool()
     var locationManager: CLLocationManager!
@@ -457,38 +458,34 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         }
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//            var action: WKNavigationActionPolicy?
-//
-//            defer {
-//                decisionHandler(action ?? .allow)
-//            }
-//
-//            guard let url = navigationAction.request.url else { return }
-//
-//            let urlScheme = url.scheme
-//            let urlString = url.absoluteString
-//            let decodeString = urlString
-//
-//            print("url : \(url)")
-//            print("url absoluteString: \(url.absoluteString)")
-//            print("url scheme: \(url.scheme)")
-//            if (url.scheme?.elementsEqual(kKeyOfWebActionKeyName))! {
-////                self.parseWebAction(decodeUrl: decodeString)
-//            } else {
-//                if (urlString.contains("pf.kakao.com") ||
-//                    urlString.contains("nid.naver.com") ||
-//                    urlString.contains("m.facebook.com") ||
-//                    urlString.contains("accounts.kakao.com")) {
-//                    self.backButton.isHidden = false
-//                }
-//            }
-//
-//    //        if navigationAction.navigationType == .linkActivated, url.absoluteString.hasPrefix("http://www.example.com/open-in-safari") {
-//    //            action = .cancel                  // Stop in WebView
-//    //            UIApplication.shared.openURL(url) // Open in Safari
-//    //        }
-//        }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            var action: WKNavigationActionPolicy?
+
+            defer {
+                decisionHandler(action ?? .allow)
+            }
+
+            guard let url = navigationAction.request.url else { return }
+
+        let urlString = url.absoluteString
+        #if DEBUG
+            let urlScheme = url.scheme
+            let decodeString = urlString
+            print("url : \(url)")
+            print("url absoluteString: \(url.absoluteString)")
+            print("url scheme: \(url.scheme)")
+        #endif
+            if (url.scheme?.elementsEqual(openUrlSchemeKakao))! {
+                UIApplication.shared.openURL(url)
+            } else {
+                if (urlString.contains("pf.kakao.com") ||
+                    urlString.contains("nid.naver.com") ||
+                    urlString.contains("m.facebook.com") ||
+                    urlString.contains("accounts.kakao.com")) {
+                    self.backButton.isHidden = false
+                }
+            }
+        }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         // 로딩 시작

@@ -8,8 +8,8 @@ target 'UnniTv' do
 pod 'Firebase/Analytics'
 pod 'Firebase/Messaging'
 pod 'Kingfisher', '~> 4.0'
-pod 'libksygpulive/KSYGPUResource'
-pod 'libksygpulive/libksygpulive'
+#pod 'libksygpulive/KSYGPUResource'
+#pod 'libksygpulive/libksygpulive'
 
   # Pods for UnniTv
 

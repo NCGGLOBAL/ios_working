@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F8D09493E26105FB2FD9EBA /* Pods_TagBAdmin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B28386326C4E16B3B25DD67 /* Pods_TagBAdmin.framework */; };
+		FF255C7C25528E92006BF02D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF255C7B25528E92006BF02D /* NotificationService.swift */; };
+		FF255C8025528E92006BF02D /* NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FF255C7925528E92006BF02D /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FF297C6E2480DF67000660F4 /* sampleScheme.html in Resources */ = {isa = PBXBuildFile; fileRef = FF297C6C2480DF67000660F4 /* sampleScheme.html */; };
 		FF297C6F2480DF67000660F4 /* sampleBridge.html in Resources */ = {isa = PBXBuildFile; fileRef = FF297C6D2480DF67000660F4 /* sampleBridge.html */; };
 		FF4FA9ED248105040059908A /* SubWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9EC248105040059908A /* SubWebViewController.swift */; };
@@ -44,11 +46,38 @@
 		FFE608DF24936EA900AD630E /* ImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE608DE24936EA900AD630E /* ImageSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FF255C7E25528E92006BF02D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF60BA0F247EA18E00B0B1A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF255C7825528E92006BF02D;
+			remoteInfo = NotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FF255C8425528E93006BF02D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FF255C8025528E92006BF02D /* NotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2B28386326C4E16B3B25DD67 /* Pods_TagBAdmin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagBAdmin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91153166537055254BC8C95A /* Pods-TagBAdmin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TagBAdmin.release.xcconfig"; path = "Target Support Files/Pods-TagBAdmin/Pods-TagBAdmin.release.xcconfig"; sourceTree = "<group>"; };
 		B58B835C88292EA5D25662F8 /* Pods-TagBAdmin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TagBAdmin.debug.xcconfig"; path = "Target Support Files/Pods-TagBAdmin/Pods-TagBAdmin.debug.xcconfig"; sourceTree = "<group>"; };
 		FD812789891BFE2EC444D765 /* Pods_UnniTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnniTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF255C7925528E92006BF02D /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF255C7B25528E92006BF02D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		FF255C7D25528E92006BF02D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF297C6C2480DF67000660F4 /* sampleScheme.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sampleScheme.html; sourceTree = "<group>"; };
 		FF297C6D2480DF67000660F4 /* sampleBridge.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sampleBridge.html; sourceTree = "<group>"; };
 		FF4FA9EC248105040059908A /* SubWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubWebViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +118,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FF255C7625528E92006BF02D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF60BA14247EA18E00B0B1A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,13 +154,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FF255C7A25528E92006BF02D /* NotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				FF255C7B25528E92006BF02D /* NotificationService.swift */,
+				FF255C7D25528E92006BF02D /* Info.plist */,
+			);
+			path = NotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		FF60BA0E247EA18E00B0B1A8 = {
 			isa = PBXGroup;
 			children = (
 				FF60BA19247EA18E00B0B1A8 /* TagBAdmin */,
 				5B09EBBDB2A5E88A5E27D900 /* Pods */,
+				FF255C7A25528E92006BF02D /* NotificationServiceExtension */,
 				5104FD419D222AF28E1831AA /* Frameworks */,
 				FF78E3DD24854469002AFAFF /* TagBAdmin.app */,
+				FF255C7925528E92006BF02D /* NotificationServiceExtension.appex */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +253,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FF255C7825528E92006BF02D /* NotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF255C8125528E93006BF02D /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
+			buildPhases = (
+				FF255C7525528E92006BF02D /* Sources */,
+				FF255C7625528E92006BF02D /* Frameworks */,
+				FF255C7725528E92006BF02D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationServiceExtension;
+			productName = NotificationServiceExtension;
+			productReference = FF255C7925528E92006BF02D /* NotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FF60BA16247EA18E00B0B1A8 /* TagBAdmin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF60BA2B247EA19400B0B1A8 /* Build configuration list for PBXNativeTarget "TagBAdmin" */;
@@ -215,10 +279,12 @@
 				FF60BA14247EA18E00B0B1A8 /* Frameworks */,
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
 				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
+				FF255C8425528E93006BF02D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FF255C7F25528E92006BF02D /* PBXTargetDependency */,
 			);
 			name = TagBAdmin;
 			productName = UnniTv;
@@ -231,10 +297,13 @@
 		FF60BA0F247EA18E00B0B1A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = ncgglobal;
 				TargetAttributes = {
+					FF255C7825528E92006BF02D = {
+						CreatedOnToolsVersion = 12.1;
+					};
 					FF60BA16247EA18E00B0B1A8 = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1150;
@@ -255,11 +324,19 @@
 			projectRoot = "";
 			targets = (
 				FF60BA16247EA18E00B0B1A8 /* TagBAdmin */,
+				FF255C7825528E92006BF02D /* NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FF255C7725528E92006BF02D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF60BA15247EA18E00B0B1A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +426,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FF255C7525528E92006BF02D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF255C7C25528E92006BF02D /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF60BA13247EA18E00B0B1A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +452,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF255C7F25528E92006BF02D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF255C7825528E92006BF02D /* NotificationServiceExtension */;
+			targetProxy = FF255C7E25528E92006BF02D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FF60BA20247EA18E00B0B1A8 /* Main.storyboard */ = {
@@ -388,6 +481,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FF255C8225528E93006BF02D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = 375X2LQRWS;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF255C8325528E93006BF02D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = 375X2LQRWS;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FF60BA29247EA19400B0B1A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -506,11 +645,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B58B835C88292EA5D25662F8 /* Pods-TagBAdmin.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TagBAdmin/TagBAdmin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 375X2LQRWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,7 +668,7 @@
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin;
 				PRODUCT_NAME = TagBAdmin;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -542,11 +682,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91153166537055254BC8C95A /* Pods-TagBAdmin.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TagBAdmin/TagBAdmin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 375X2LQRWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -564,7 +705,7 @@
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/TagBAdmin/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nechingu.tagbadmin;
 				PRODUCT_NAME = TagBAdmin;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -576,6 +717,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FF255C8125528E93006BF02D /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF255C8225528E93006BF02D /* Debug */,
+				FF255C8325528E93006BF02D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FF60BA12247EA18E00B0B1A8 /* Build configuration list for PBXProject "TagBAdmin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

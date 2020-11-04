@@ -24,7 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>tagbscheme</string>
-				<string>kakao24b8f0a1f99824fdc33484911530efe4</string>
+				<string>kakao2d35a2a1beecc56ebd18419e91df1daf</string>
 			</array>
 		</dict>
 	</array>
@@ -39,7 +39,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>ba109aa09509e4146508f3182324580d</string>
+	<string>2d35a2a1beecc56ebd18419e91df1daf</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -113,7 +113,7 @@
 		<string>mg-bankpay</string>
 		<string>kbn-bankpay</string>
 		<string>kkb-bankpay</string>
-		<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
+		<string>kakao2d35a2a1beecc56ebd18419e91df1daf</string>
 		<string>kakaotalk</string>
 		<string>shinhan-sr-ansimclick-payco</string>
 		<string>shinhan-sr-ansimclick-naverpay</string>

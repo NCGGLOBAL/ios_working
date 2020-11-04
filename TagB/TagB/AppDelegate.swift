@@ -13,7 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static let HOME_URL = "http://tagb.co.kr"
+    static var HOME_URL = "http://tagb.co.kr"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
     static var QR_URL = ""
@@ -146,6 +146,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
+    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler([])
   }
 
@@ -160,7 +161,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print(userInfo)
-
+    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler()
   }
 }

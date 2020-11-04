@@ -25,6 +25,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     let kKeyOfWebActionCallback = "callBack"
     let bridgeName = "ios"
     let liveScheme = "ncglive"
+    let openUrlSchemeKakao = "kakaoplus"
     
     var callback = ""
     
@@ -49,7 +50,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
-        config.mediaPlaybackRequiresUserAction = false
+        config.mediaTypesRequiringUserActionForPlayback = .audio
         config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
@@ -409,6 +410,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         if (url.scheme?.elementsEqual(liveScheme))! {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if (url.scheme?.elementsEqual(openUrlSchemeKakao))! {
+            UIApplication.shared.openURL(url)
         } else {
             if (urlString.contains("pf.kakao.com") ||
                 urlString.contains("nid.naver.com") ||
