@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -263,6 +263,17 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbm-li-Lev">
+                                <rect key="frame" x="0.0" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ddw-b6-LA3"/>
+                                    <constraint firstAttribute="width" constant="50" id="H9x-Fd-Zcx"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="top_back.png"/>
+                                <connections>
+                                    <action selector="onClickBackButton:" destination="ZjZ-jp-6R5" eventType="touchUpInside" id="caL-9R-x7O"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="1na-O4-SWZ">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
@@ -271,6 +282,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1na-O4-SWZ" firstAttribute="centerX" secondItem="oa0-XQ-RdW" secondAttribute="centerX" id="1wK-ea-EUa"/>
+                            <constraint firstItem="tbm-li-Lev" firstAttribute="top" secondItem="DId-Ch-ULd" secondAttribute="top" id="4EN-fD-xQX"/>
+                            <constraint firstItem="tbm-li-Lev" firstAttribute="leading" secondItem="DId-Ch-ULd" secondAttribute="leading" id="Cz1-cb-YeK"/>
                             <constraint firstItem="1na-O4-SWZ" firstAttribute="centerY" secondItem="oa0-XQ-RdW" secondAttribute="centerY" id="MYt-c2-ISl"/>
                             <constraint firstItem="DId-Ch-ULd" firstAttribute="trailing" secondItem="Jed-Nf-0Rt" secondAttribute="trailing" id="PBn-cX-Zuj"/>
                             <constraint firstItem="Jed-Nf-0Rt" firstAttribute="leading" secondItem="DId-Ch-ULd" secondAttribute="leading" id="bOG-l9-bvb"/>
@@ -280,6 +293,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZRk-Dn-v1h"/>
                     <connections>
+                        <outlet property="backButton" destination="tbm-li-Lev" id="KHe-SE-EYu"/>
                         <outlet property="containerView" destination="Jed-Nf-0Rt" id="Jvs-cH-vNz"/>
                         <outlet property="indicatorView" destination="1na-O4-SWZ" id="nAe-fg-T5F"/>
                     </connections>

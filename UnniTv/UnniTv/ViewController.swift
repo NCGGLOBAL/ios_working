@@ -25,7 +25,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     let kKeyOfWebActionCallback = "callBack"
     let bridgeName = "ios"
     let liveScheme = "ncglive"
-    let openUrlSchemeKakao = "kakaoplus"
     
     var callback = ""
     
@@ -385,6 +384,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     }
                     break
                     
+                case "ACT1032": // 홈으로 이동
+                    self.initWebView(urlString: AppDelegate.HOME_URL)
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
@@ -408,14 +411,15 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         print("url scheme: \(url.scheme)")
     #endif
         if (url.scheme?.elementsEqual(liveScheme))! {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if (url.scheme?.elementsEqual(openUrlSchemeKakao))! {
+//            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
+//            self.navigationController?.pushViewController(vc, animated: true)
+        } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
             if (urlString.contains("pf.kakao.com") ||
                 urlString.contains("nid.naver.com") ||
                 urlString.contains("m.facebook.com") ||
+                urlString.contains("api.instagram.com") ||
                 urlString.contains("accounts.kakao.com")) {
                 self.backButton.isHidden = false
             }
