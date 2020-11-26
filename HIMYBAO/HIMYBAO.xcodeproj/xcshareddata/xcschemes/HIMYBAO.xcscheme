@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-               BuildableName = "&#x110b;&#x1165;&#x11ab;&#x1102;&#x1175;&#x1110;&#x1175;&#x1107;&#x1175;.app"
+               BuildableName = "HIMYBAO.app"
                BlueprintName = "HIMYBAO"
                ReferencedContainer = "container:HIMYBAO.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110b;&#x1165;&#x11ab;&#x1102;&#x1175;&#x1110;&#x1175;&#x1107;&#x1175;.app"
+            BuildableName = "HIMYBAO.app"
             BlueprintName = "HIMYBAO"
             ReferencedContainer = "container:HIMYBAO.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110b;&#x1165;&#x11ab;&#x1102;&#x1175;&#x1110;&#x1175;&#x1107;&#x1175;.app"
+            BuildableName = "HIMYBAO.app"
             BlueprintName = "HIMYBAO"
             ReferencedContainer = "container:HIMYBAO.xcodeproj">
          </BuildableReference>

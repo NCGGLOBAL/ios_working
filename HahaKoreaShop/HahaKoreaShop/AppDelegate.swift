@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
-        FirebaseApp.configure()
-        // [START set_messaging_delegate]
-        Messaging.messaging().delegate = self
+//        FirebaseApp.configure()
+//        // [START set_messaging_delegate]
+//        Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // this callback will not be fired till the user taps on the notification launching the application.
       // TODO: Handle data of notification
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-       Messaging.messaging().appDidReceiveMessage(userInfo)
+//       Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
         print("Message ID: \(messageID)")
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // this callback will not be fired till the user taps on the notification launching the application.
       // TODO: Handle data of notification
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-       Messaging.messaging().appDidReceiveMessage(userInfo)
+//       Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
         print("Message ID: \(messageID)")
@@ -101,7 +101,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       print("APNs token retrieved: \(deviceToken)")
     
       // With swizzling disabled you must set the APNs token here.
-       Messaging.messaging().apnsToken = deviceToken
+//       Messaging.messaging().apnsToken = deviceToken
+        let tokenParts = deviceToken.map {
+            data in String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+        AppDelegate.pushkey = token
     }
 
     // MARK: UISceneSession Lifecycle
@@ -136,7 +142,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     let userInfo = notification.request.content.userInfo
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
-     Messaging.messaging().appDidReceiveMessage(userInfo)
+//     Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print message ID.
     if let messageID = userInfo[gcmMessageIDKey] {
       print("Message ID: \(messageID)")
@@ -164,29 +170,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     completionHandler()
   }
     
-
-}
-// [END ios_10_message_handling]
-
-extension AppDelegate : MessagingDelegate {
-  // [START refresh_token]
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    print("Firebase registration token: \(fcmToken)")
-    AppDelegate.pushkey = fcmToken
-    let dataDict:[String: String] = ["token": fcmToken]
-    NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-    self.requestPushSetting()
-    // TODO: If necessary send token to application server.
-    // Note: This callback is fired at each app startup and whenever a new token is generated.
-  }
-  // [END refresh_token]
-  // [START ios_10_data_message]
-  // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-  // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    print("Received data message: \(remoteMessage.appData)")
-  }
-  // [END ios_10_data_message]
     func requestPushSetting() {
         let defaultConfigObject = URLSessionConfiguration.default
         let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
@@ -270,3 +253,4 @@ extension AppDelegate : MessagingDelegate {
         }
     }
 }
+// [END ios_10_message_handling]

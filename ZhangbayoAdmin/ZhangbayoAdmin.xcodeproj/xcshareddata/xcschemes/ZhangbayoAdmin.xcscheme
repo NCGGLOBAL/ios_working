@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-               BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d; &#x1111;&#x1161;&#x11ab;&#x1106;&#x1162;&#x110c;&#x1161;&#x110b;&#x1162;&#x11b8;.app"
+               BuildableName = "ZhangbayoAdmin.app"
                BlueprintName = "ZhangbayoAdmin"
                ReferencedContainer = "container:ZhangbayoAdmin.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d; &#x1111;&#x1161;&#x11ab;&#x1106;&#x1162;&#x110c;&#x1161;&#x110b;&#x1162;&#x11b8;.app"
+            BuildableName = "ZhangbayoAdmin.app"
             BlueprintName = "ZhangbayoAdmin"
             ReferencedContainer = "container:ZhangbayoAdmin.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
-            BuildableName = "&#x110c;&#x1161;&#x11bc;&#x1107;&#x1161;&#x110b;&#x116d; &#x1111;&#x1161;&#x11ab;&#x1106;&#x1162;&#x110c;&#x1161;&#x110b;&#x1162;&#x11b8;.app"
+            BuildableName = "ZhangbayoAdmin.app"
             BlueprintName = "ZhangbayoAdmin"
             ReferencedContainer = "container:ZhangbayoAdmin.xcodeproj">
          </BuildableReference>

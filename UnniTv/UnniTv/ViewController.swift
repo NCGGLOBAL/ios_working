@@ -411,8 +411,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         print("url scheme: \(url.scheme)")
     #endif
         if (url.scheme?.elementsEqual(liveScheme))! {
-//            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-//            self.navigationController?.pushViewController(vc, animated: true)
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
