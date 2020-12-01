@@ -387,24 +387,52 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            var action: WKNavigationActionPolicy?
-
-            defer {
-                decisionHandler(action ?? .allow)
+        var action: WKNavigationActionPolicy?
+        
+        guard let url = navigationAction.request.url else { return }
+        
+        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
+            UIApplication.shared.openURL(url)
+            decisionHandler(.cancel)
+            return
+        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
+                decisionHandler(.cancel)
+                return
             }
-
-            guard let url = navigationAction.request.url else { return }
-
+        }
+        
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
+                webView.load(URLRequest.init(url: url))
+                    decisionHandler(.cancel)
+                    return
+                }
+            case .backForward:
+                break
+            case .formResubmitted:
+                break
+            case .formSubmitted:
+                break
+            case .other:
+                break
+            case .reload:
+                break
+         default:
+            break
+        }
+            
+        decisionHandler(.allow)
         let urlString = url.absoluteString
         #if DEBUG
-            let urlScheme = url.scheme
-            let decodeString = urlString
             print("url : \(url)")
             print("url absoluteString: \(url.absoluteString)")
             print("url scheme: \(url.scheme)")
         #endif
-            if (url.scheme?.elementsEqual(kKeyOfWebActionKeyName))! {
-//                self.parseWebAction(decodeUrl: decodeString)
+        if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
+                UIApplication.shared.openURL(url)
             } else {
                 if (urlString.contains("pf.kakao.com") ||
                     urlString.contains("nid.naver.com") ||
@@ -413,11 +441,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     self.backButton.isHidden = false
                 }
             }
-
-    //        if navigationAction.navigationType == .linkActivated, url.absoluteString.hasPrefix("http://www.example.com/open-in-safari") {
-    //            action = .cancel                  // Stop in WebView
-    //            UIApplication.shared.openURL(url) // Open in Safari
-    //        }
         }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

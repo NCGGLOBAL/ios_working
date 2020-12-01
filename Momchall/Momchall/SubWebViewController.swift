@@ -14,6 +14,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var backButton: UIButton!
     
     var urlString = ""
     var uniqueProcessPool = WKProcessPool()
@@ -129,15 +130,25 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
             
         decisionHandler(.allow)
         
-        #if DEBUG
         let urlScheme = url.scheme
         let urlString = url.absoluteString
         let decodeString = urlString
-
-        print("url : \(url)")
-        print("url absoluteString: \(url.absoluteString)")
-        print("url scheme: \(url.scheme)")
+        #if DEBUG
+            print("url : \(url)")
+            print("url absoluteString: \(url.absoluteString)")
+            print("url scheme: \(url.scheme)")
         #endif
+        if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
+            UIApplication.shared.openURL(url)
+        } else {
+            if (urlString.contains("pf.kakao.com") ||
+                urlString.contains("nid.naver.com") ||
+                urlString.contains("m.facebook.com") ||
+                urlString.contains("api.instagram.com") ||
+                urlString.contains("accounts.kakao.com")) {
+                self.backButton.isHidden = false
+            }
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

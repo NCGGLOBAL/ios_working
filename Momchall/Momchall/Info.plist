@@ -120,6 +120,9 @@
 		<string>kkb-bankpay</string>
 		<string>kakaoa10c8c6298133d742e1782c2fe49f01f</string>
 		<string>kakaotalk</string>
+		<string>shinhan-sr-ansimclick-payco</string>
+		<string>shinhan-sr-ansimclick-naverpay</string>
+		<string>hanawalletmembers</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
