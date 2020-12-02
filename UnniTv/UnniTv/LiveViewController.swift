@@ -217,8 +217,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
                     case "ACT1028": // wlive 마이크 제어
                         var resultcd = "1"
-                        if let val = actionParamObj?["key_type"] {
-                            if (actionParamObj?["key_type"] as! Int == 0) {  //0: 마이크 끄기,1: 켜기
+                        if (actionParamObj?["key_type"]) != nil {
+                            if (actionParamObj?["key_type"] as? String == "0") {  //0: 마이크 끄기,1: 켜기
                                 kit?.streamerBase.muteStream(true)
                             } else  {
                                 kit?.streamerBase.muteStream(false)
@@ -259,10 +259,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                                 let bf = KSYBeautifyFaceFilter()
                                 kit?.setupFilter(bf)
                                 break
-                            case 2:
-                                let bf = KSYBeautifyProFilter()
-                                kit?.setupFilter(bf)
-                                break
+//                            case 2:
+//                                let bf = KSYBeautifyProFilter()
+//                                kit?.setupFilter(bf)
+//                                break
                             default:
                                 kit?.setupFilter(nil)
                             }
