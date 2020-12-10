@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var HOME_URL = "https://unni.tv"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
+    static var LANDING_URL = ""
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""
     static var pushkey = ""
@@ -161,7 +162,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
-    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
+    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler([])
   }
 
@@ -179,7 +180,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     #if DEBUG
     print(userInfo)
     #endif
-    AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
+    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler()
   }
 

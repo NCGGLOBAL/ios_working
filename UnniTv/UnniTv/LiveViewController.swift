@@ -15,7 +15,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    var urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
+    let urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 webview-type=sub"
@@ -27,6 +27,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.isIdleTimerDisabled = true
         
         let contentController = WKUserContentController()
         let config = WKWebViewConfiguration()
@@ -62,6 +64,12 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
         initCamera()
+        
+        webView.allowsBackForwardNavigationGestures = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     func initWebView() {
@@ -185,6 +193,21 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 #endif
                 
                 switch actionCode {
+                    case "ACT1015":
+                        #if DEBUG
+                        print("ACT1015 - 웹뷰 새창")
+                        #endif
+                        if let requestUrl = actionParamObj!["url"] as? String{
+                            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+                            vc.urlString = requestUrl
+                            vc.uniqueProcessPool = self.uniqueProcessPool
+                            WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
+                                (cookies) in
+                                vc.cookies = cookies
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            })
+                        }
+                    break
                     case "ACT1027": // wlive 전, 후면 카메라 제어
                         var resultcd = "1"
                         if let val = actionParamObj?["key_type"] {

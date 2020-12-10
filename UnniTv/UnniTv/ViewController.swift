@@ -64,7 +64,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initWebView(urlString: AppDelegate.HOME_URL)
+        if AppDelegate.LANDING_URL == "" {
+            self.initWebView(urlString: AppDelegate.HOME_URL)
+        } else {
+            self.initWebView(urlString: AppDelegate.LANDING_URL)
+        }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
@@ -237,7 +241,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         //Create task
                         let task = defaultSession.uploadTask(with: urlRequest! as URLRequest, from: body) { data, response, error in
                             //Handle your response here
-                            #if DEBUG
                             if let error = error {
                                 print("error : \(error)")
                             }
@@ -271,8 +274,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
                                 print("sResultData : \(sResultData ?? "")")
                             }
-                            #endif
-
                         }
 
                         task.resume()

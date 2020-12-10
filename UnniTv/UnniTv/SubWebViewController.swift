@@ -149,6 +149,8 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 urlString.contains("nid.naver.com") ||
                 urlString.contains("m.facebook.com") ||
                 urlString.contains("api.instagram.com") ||
+                urlString.contains("band.us") ||
+                urlString.contains("twitter.com") ||
                 urlString.contains("accounts.kakao.com")) {
                 self.backButton.isHidden = false
             }
@@ -419,6 +421,6 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
-        self.initWebView()
+        self.navigationController?.popViewController(animated: true)
     }
 }
