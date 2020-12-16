@@ -249,30 +249,25 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                             }
 
                             if data != nil {
-                                var jsonError: Error?
-                                var dicResData: String? = nil
-                                do {
-                                    if let data = data {
-                                        dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
-                                    }
-                                } catch let jsonError {
-                                }
-
-
-                                let jsonData = dicResData?.data(using: .utf8)
-
-                                print("jsonData : \(jsonData ?? nil)")
-                                if let jsonError = jsonError {
-                                    print("jsonData : \(jsonError)")
-                                }
-
-
                                 var sResultData: String? = nil
                                 if let data = data {
                                     sResultData = String(data: data, encoding: .utf8)
-                                }
+                                    print("sResultData : \(sResultData ?? "")")
+                                    do {
+                                        print("jsonEncodedData : \(sResultData)")
+                                        let javascript = "\(self.callback)('\(sResultData ?? "")')"     // set funcName parameter as a single quoted string
+    //                                    print("jsonData : \(jsonData)")
+                                        print("javascript : \(javascript)")
 
-                                print("sResultData : \(sResultData ?? "")")
+                                        // call back!
+                                        self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                            print("result : \(String(describing: result))")
+                                            print("error : \(error)")
+                                        }
+                                    } catch let error as NSError {
+                                        print(error)
+                                    }
+                                }
                             }
                         }
 
@@ -492,7 +487,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                 print(jsonString)
                 
                 let calbackJsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                var stringValue = String(data: calbackJsonData, encoding: .utf8) ?? ""
+                let stringValue = String(data: calbackJsonData, encoding: .utf8) ?? ""
 //                stringValue.replacingOccurrences(of: "\\", with: "")
                 
                 let dicJsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
