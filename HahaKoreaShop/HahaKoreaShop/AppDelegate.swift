@@ -108,6 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let token = tokenParts.joined()
         print("Device Token: \(token)")
         AppDelegate.pushkey = token
+        
+        self.requestPushSetting()
     }
 
     // MARK: UISceneSession Lifecycle
