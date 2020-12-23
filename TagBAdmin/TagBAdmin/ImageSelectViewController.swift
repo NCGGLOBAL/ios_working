@@ -39,36 +39,15 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let imageItem = ImageData()
             let imageFileItem = ImageFileData()
-            imageFileItem.image = image.jpegData(compressionQuality: 0.1)
-//            if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-//                imageItem.fileName = url.lastPathComponent
-//                imageFileItem.fileName = url.lastPathComponent
-//            }
+            imageFileItem.image = image.jpegData(compressionQuality: 0.5)
             
-
-            var date = Date()  // 날짜 데이터
+            let date = Date()  // 날짜 데이터
             let dateFomatter = DateFormatter()
-            dateFomatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFomatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
             let dateString = dateFomatter.string(from: date)
 
             // 이미지 확장자 추출
-//            let assetPath = info[UIImagePickerController.InfoKey.referenceURL] as! NSURL
-            var imageExtention = ".jpg"
-//            if (assetPath.absoluteString?.hasSuffix("JPG"))! {
-//                print("JPG")
-//                imageExtention = ".jpg"
-//            }
-//            else if (assetPath.absoluteString?.hasSuffix("PNG"))! {
-//                print("PNG")
-//                imageExtention = ".png"
-//            }
-//            else if (assetPath.absoluteString?.hasSuffix("GIF"))! {
-//                print("GIF")
-//                imageExtention = ".gif"
-//            }
-//            else {
-//                print("Unknown")
-//            }
+            let imageExtention = ".jpg"
             
             // 이미지 이름 지정
             let imageName : String = dateString + imageExtention

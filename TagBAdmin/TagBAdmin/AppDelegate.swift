@@ -13,8 +13,8 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "http://brand.tagb.co.kr"
-    static let UPLOAD_URL = "http://tagb.co.kr/m/app/"
+    static var HOME_URL = "https://brand.tagb.co.kr"
+    static let UPLOAD_URL = "https://brand.tagb.co.kr/m/app/"
     static let PUSH_REG_URL = "http://brand.tagb.co.kr/m/app/pushRegister.asp"
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""

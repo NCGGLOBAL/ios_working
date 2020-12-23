@@ -116,9 +116,9 @@
 		<string>mg-bankpay</string>
 		<string>kbn-bankpay</string>
 		<string>kkb-bankpay</string>
-        <string>shinhan-sr-ansimclick-payco</string>
-        <string>shinhan-sr-ansimclick-naverpay</string>
-        <string>hanawalletmembers</string>
+		<string>shinhan-sr-ansimclick-payco</string>
+		<string>shinhan-sr-ansimclick-naverpay</string>
+		<string>hanawalletmembers</string>
 		<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

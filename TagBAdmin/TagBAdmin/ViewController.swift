@@ -166,10 +166,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         }
                         
                         let boundary = "WebKitFormBoundaryDCqbvCHcQvEfbSAa" // 업로드 바이너리 이름
-                        
+
                         let defaultConfigObject = URLSessionConfiguration.default
                         let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
-                        
+
                         //Create an URLRequest
                         let url = URL(string: AppDelegate.UPLOAD_URL)
                         var urlRequest: NSMutableURLRequest? = nil
@@ -179,7 +179,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
                         // post body
                         var body = Data()
-
+//                        let string = String(data: data, encoding: .utf8)
                         if let data1 = "--\(boundary)\r\n".data(using: .utf8) {
                             body.append(data1)
                         }
@@ -199,25 +199,29 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         if let data1 = "\(token)\r\n".data(using: .utf8) {
                             body.append(data1)
                         }
-                        
+
                         // add image data
                         var imageToUpload: UIImage? = nil // 업로드할 이미지
                         var imageData: Data? = nil // 업로드할 이미지 스트림
                         var sImageName: String? = nil
 
                         for item in AppDelegate.ImageFileArray {
-                            imageData = imageToUpload?.jpegData(compressionQuality: 1.0)
-
+//                            imageData = imageToUpload?.jpegData(compressionQuality: 1.0)
+//                            self.uploadImage(uploadData: item, token: token!)
+                            
                             if let data1 = "--\(boundary)\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(item.fileName ?? "")\"\r\n".data(using: .utf8) {
+                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; fileName=\"\(item.fileName ?? "")\"\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
                             if let data1 = "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8) {
+//                            if let data1 = "Content-Type: multipart/form-data".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            body.append(item.image!)
+                            if item.image != nil {
+                                body.append(item.image!)
+                            }
                             if let data1 = "\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
@@ -226,7 +230,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         if let data1 = "--\(boundary)--\r\n".data(using: .utf8) {
                             body.append(data1)
                         }
-                        
+
                         let contentType = "multipart/form-data; boundary=\(boundary)"
                         urlRequest?.setValue(contentType, forHTTPHeaderField: "Content-Type")
                         urlRequest?.httpMethod = "POST"
@@ -236,11 +240,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         print("params body : \(body)")
                         print("params urlRequest : \(urlRequest)")
                         #endif
-                        
+
                         //Create task
-                        let task = defaultSession.uploadTask(with: urlRequest! as URLRequest, from: body) { data, response, error in
+                        let task = defaultSession.uploadTask(with: urlRequest! as URLRequest, from: body) { [self] data, response, error in
                             //Handle your response here
-                            #if DEBUG
                             if let error = error {
                                 print("error : \(error)")
                             }
@@ -249,33 +252,26 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                             }
 
                             if data != nil {
-                                var jsonError: Error?
-                                var dicResData: String? = nil
-                                do {
-                                    if let data = data {
-                                        dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
-                                    }
-                                } catch let jsonError {
-                                }
-
-
-                                let jsonData = dicResData?.data(using: .utf8)
-
-                                print("jsonData : \(jsonData ?? nil)")
-                                if let jsonError = jsonError {
-                                    print("jsonData : \(jsonError)")
-                                }
-
-
                                 var sResultData: String? = nil
                                 if let data = data {
                                     sResultData = String(data: data, encoding: .utf8)
+                                    print("sResultData : \(sResultData ?? "")")
+                                    do {
+                                        print("jsonEncodedData : \(sResultData)")
+                                        let javascript = "\(self.callback)('\(sResultData ?? "")')"     // set funcName parameter as a single quoted string
+    //                                    print("jsonData : \(jsonData)")
+                                        print("javascript : \(javascript)")
+
+                                        // call back!
+                                        self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                            print("result : \(String(describing: result))")
+                                            print("error : \(error)")
+                                        }
+                                    } catch let error as NSError {
+                                        print(error)
+                                    }
                                 }
-
-                                print("sResultData : \(sResultData ?? "")")
                             }
-                            #endif
-
                         }
 
                         task.resume()
@@ -470,10 +466,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
                     let base64Encoded = utf8str?.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)) ?? ""
                         print("Encoded: \(base64Encoded)")
-                
+                    let encoder = JSONEncoder()
+                    let encodeData = try! encoder.encode(jsonData)
+                    
                     var dic = Dictionary<String, Any>()
                     dic.updateValue("1", forKey: "resultcd")  // 변경사항 있을경우 : 1, 없을경우 : 0
                     dic.updateValue(base64Encoded, forKey: "imgArr")
+//                    dic.updateValue(encodeData, forKey: "imgArr")
                     dic.updateValue(AppDelegate.imageModel.token ?? "", forKey: "token")
                     dic.updateValue(AppDelegate.imageModel.pageGbn ?? "1", forKey: "pageGbn")
                     dic.updateValue(AppDelegate.imageArray.count, forKey: "cnt")
@@ -500,6 +499,59 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                   print(error)
                 }
         }
+    
+    func uploadImage(uploadData: ImageFileData, token: String) {
+        let url = URL(string: AppDelegate.UPLOAD_URL);
+        let request = MutableURLRequest(url: url!);
+        request.httpMethod = "POST"
+        let boundary = "Boundary-\(NSUUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+//        var retreivedImage: UIImage? = nil
+        //Get image
+//        do {
+//            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+//            let readData = try Data(contentsOf: URL(string: "file://\(documentsPath)/myImage")!)
+//            retreivedImage = UIImage(data: readData)
+////            addProfilePicView.setImage(retreivedImage, for: .normal)
+//        }
+//        catch {
+//            print("Error while opening image")
+//            return
+//        }
+
+//        let imageData = retreivedImage!.jpegData(compressionQuality: 1)
+//        let imageData = uploadData.image!.jpegData(compressionQuality: 1)
+//        if (imageData == nil) {
+//            print("UIImageJPEGRepresentation return nil")
+//            return
+//        }
+
+        let body = NSMutableData()
+        body.append(NSString(format: "\r\n--%@\r\n", boundary).data(using: String.Encoding.utf8.rawValue)!)
+        body.append(NSString(format: "Content-Disposition: form-data; name=\"token\"\r\n\r\n" as NSString).data(using: String.Encoding.utf8.rawValue)!)
+        body.append(NSString(format: (token as NSString)).data(using: String.Encoding.utf8.rawValue)!)
+        body.append(NSString(format: "\r\n--%@\r\n", boundary).data(using: String.Encoding.utf8.rawValue)!)
+        body.append(NSString(format:"Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(uploadData.fileName!)\"\r\n" as NSString).data(using: String.Encoding.utf8.rawValue)!)
+        body.append(NSString(format: "Content-Type: application/octet-stream\r\n\r\n").data(using: String.Encoding.utf8.rawValue)!)
+//        body.append(uploadData.image!)
+        body.append(NSString(format: "\r\n--%@\r\n", boundary).data(using: String.Encoding.utf8.rawValue)!)
+
+//        "\r\n--Boundary-B5723E13-E368-4C1F-96A9-5F400311C20E\r\nContent-Disposition: form-data; name=\"api_token\"\r\n\r\n88VCF4GBTC9ALP6AOYBL\r\n--Boundary-B5723E13-E368-4C1F-96A9-5F400311C20E\r\nContent-Disposition: form-data; name=\"profile_img\"; filename=\"2020-11-30 23:38:00.jpg\"\r\nContent-Type: application/octet-stream\r\n\r\n\r\n--Boundary-B5723E13-E368-4C1F-96A9-5F400311C20E\r\n"
+        request.httpBody = body as Data
+
+        let task =  URLSession.shared.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) -> Void in
+            if let data = data {
+               // do what you want in success case
+                print("response : \(response)")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        })
+
+        task.resume()
+    }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true

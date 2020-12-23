@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>585561486445-qmg2co7nah5apeab1f52ttnol9f3u8ji.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.585561486445-qmg2co7nah5apeab1f52ttnol9f3u8ji</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA1-5nln98aOExSFcQ1MhhaVYcqufo_oB0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>585561486445</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mallup.ownerspay</string>
+	<key>PROJECT_ID</key>
+	<string>ownerspay</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ownerspay.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:585561486445:ios:e85f9f794d0a9b80fcfb64</string>
+</dict>
+</plist>
