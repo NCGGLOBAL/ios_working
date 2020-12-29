@@ -48,12 +48,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
-        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
+//        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
+        webView.frame.size.height = self.view.frame.size.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.customUserAgent = userAgent
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
         // self.view = self.webView!
         self.containerView.addSubview(webView)
         

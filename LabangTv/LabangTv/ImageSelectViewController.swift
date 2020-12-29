@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ELCImagePickerControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -30,9 +30,15 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     // 앨범을 접근하는 함수
-    func openLibrary(){
+    func openLibrary() {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: false, completion: nil)
+//        let elcPicker = ELCImagePickerController()
+////        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+//        elcPicker.imagePickerDelegate  = self
+////        elcPicker.currentCount         = AppDelegate.ImageFileArray.count
+////        [self presentViewController:elcPicker animated:YES completion:nil];
+//        self.navigationController?.pushViewController(elcPicker, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -139,14 +145,11 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func onClickDone(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func elcImagePickerController(_ picker: ELCImagePickerController!, didFinishPickingMediaWithInfo info: [Any]!) {
     }
-    */
-
+    
+    func elcImagePickerControllerDidCancel(_ picker: ELCImagePickerController!) {
+        
+    }
 }
