@@ -61,8 +61,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.initWebView(urlString: AppDelegate.HOME_URL)
+
+        if AppDelegate.LANDING_URL == "" {
+            self.initWebView(urlString: AppDelegate.HOME_URL)
+        } else {
+            self.initWebView(urlString: AppDelegate.LANDING_URL)
+        }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }

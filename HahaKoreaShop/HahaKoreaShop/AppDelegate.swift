@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let HOME_URL = "https://hahakoreashop.com"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
+    static var LANDING_URL = ""
     static var QR_URL = ""
     static var pushkey = ""
     static var imageArray = Array<ImageData>()
@@ -154,6 +155,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
+    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler([])
   }
 
@@ -168,7 +170,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print(userInfo)
-
+    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
     completionHandler()
   }
     

@@ -503,7 +503,7 @@
 				CODE_SIGN_ENTITLEMENTS = HahaKoreaShop/HahaKoreaShop.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = Z875LDDM4U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,7 +521,7 @@
 					"$(PROJECT_DIR)/HahaKoreaShop/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/HahaKoreaShop/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.china.hahashop;
 				PRODUCT_NAME = hahakoreashop;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -541,7 +541,7 @@
 				CODE_SIGN_ENTITLEMENTS = HahaKoreaShop/HahaKoreaShop.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = Z875LDDM4U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,7 +559,7 @@
 					"$(PROJECT_DIR)/HahaKoreaShop/Libraries/ZBarSDK",
 					"$(PROJECT_DIR)/HahaKoreaShop/Libraries/ZBarSDK/ZBarSDK",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.china.hahashop;
 				PRODUCT_NAME = hahakoreashop;
 				PROVISIONING_PROFILE_SPECIFIER = "";
