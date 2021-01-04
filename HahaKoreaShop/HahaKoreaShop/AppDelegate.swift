@@ -154,8 +154,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // Print full message.
     print(userInfo)
 
-    // Change this to your preferred presentation option
-    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
+    guard let arrAPS = userInfo["aps"] as? [String: Any] else { return }
+    guard let arrAlert = arrAPS["alert"] as? [String:Any] else { return }
+
+    let strUrl:String = arrAlert["url"] as? String ?? AppDelegate.HOME_URL
+    
+    AppDelegate.LANDING_URL = strUrl
     completionHandler([])
   }
 
@@ -170,7 +174,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print(userInfo)
-    AppDelegate.LANDING_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
+    guard let arrAPS = userInfo["aps"] as? [String: Any] else { return }
+    guard let arrAlert = arrAPS["alert"] as? [String:Any] else { return }
+
+    let strUrl:String = arrAlert["url"] as? String ?? AppDelegate.HOME_URL
+    
+    AppDelegate.LANDING_URL = strUrl
     completionHandler()
   }
     
