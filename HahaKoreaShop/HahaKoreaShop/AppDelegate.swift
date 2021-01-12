@@ -153,11 +153,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print(userInfo)
-
     guard let arrAPS = userInfo["aps"] as? [String: Any] else { return }
-    guard let arrAlert = arrAPS["alert"] as? [String:Any] else { return }
-
-    let strUrl:String = arrAlert["url"] as? String ?? AppDelegate.HOME_URL
+    let strUrl:String = arrAPS["url"] as? String ?? AppDelegate.HOME_URL
     
     AppDelegate.LANDING_URL = strUrl
     completionHandler([])
@@ -175,9 +172,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // Print full message.
     print(userInfo)
     guard let arrAPS = userInfo["aps"] as? [String: Any] else { return }
-    guard let arrAlert = arrAPS["alert"] as? [String:Any] else { return }
-
-    let strUrl:String = arrAlert["url"] as? String ?? AppDelegate.HOME_URL
+    let strUrl:String = arrAPS["url"] as? String ?? AppDelegate.HOME_URL
     
     AppDelegate.LANDING_URL = strUrl
     completionHandler()
@@ -221,7 +216,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 let dataTask = defaultSession.dataTask(with: urlRequest!, completionHandler: { data, response, error in
                     //Handle your response here
 
-                #if DEBUG
+            
                     if let error = error {
                         print("error : \(error)")
                     }
@@ -255,8 +250,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
                         print("sResultData : \(sResultData ?? "")")
                     }
-                #endif
-
                 })
                 dataTask.resume()
                 } catch let error as NSError {
