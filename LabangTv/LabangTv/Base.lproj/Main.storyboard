@@ -64,6 +64,49 @@
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="95.758928571428569"/>
         </scene>
+        <!--1장 중 1번째 선택-->
+        <scene sceneID="een-tC-Pxa">
+            <objects>
+                <viewController storyboardIdentifier="imageSelectDetailViewController" id="xjc-3o-LJo" customClass="ImageSelectDetailViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pPb-VL-aQw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KeC-F8-iTg">
+                                <rect key="frame" x="0.0" y="122" width="414" height="346"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="346" id="c6S-GB-7AW"/>
+                                </constraints>
+                            </imageView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="we2-94-rME">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="편집" id="7eq-xG-wcs"/>
+                                    <tabBarItem title="삭제" id="c09-ki-PN9"/>
+                                    <tabBarItem title="순서변경" id="nU0-Xk-exi"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3MP-aV-qZ3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KeC-F8-iTg" firstAttribute="top" secondItem="3MP-aV-qZ3" secondAttribute="top" constant="34" id="Pgb-rJ-0yR"/>
+                            <constraint firstItem="3MP-aV-qZ3" firstAttribute="trailing" secondItem="KeC-F8-iTg" secondAttribute="trailing" id="YEG-f9-Kwb"/>
+                            <constraint firstItem="KeC-F8-iTg" firstAttribute="leading" secondItem="3MP-aV-qZ3" secondAttribute="leading" id="lSS-VO-4ru"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="1장 중 1번째 선택" id="bS9-tr-gPE"/>
+                    <connections>
+                        <outlet property="mainImageView" destination="KeC-F8-iTg" id="S4O-gJ-Ze6"/>
+                        <outlet property="tabBarView" destination="we2-94-rME" id="PyG-ma-dCO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aGm-Oy-MAd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="815.625"/>
+        </scene>
         <!--0 / 9-->
         <scene sceneID="q6P-GB-57p">
             <objects>
@@ -229,6 +272,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Z9T-AO-B5X" id="Hy0-oo-7Rz"/>
+                        <segue destination="xjc-3o-LJo" kind="show" identifier="selectImageSeque" id="Td0-IW-koh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMi-N4-i7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

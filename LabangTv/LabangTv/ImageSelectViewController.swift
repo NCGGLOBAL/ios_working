@@ -34,11 +34,11 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: false, completion: nil)
 //        let elcPicker = ELCImagePickerController()
-////        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+//        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
 //        elcPicker.imagePickerDelegate  = self
-////        elcPicker.currentCount         = AppDelegate.ImageFileArray.count
-////        [self presentViewController:elcPicker animated:YES completion:nil];
-//        self.navigationController?.pushViewController(elcPicker, animated: true)
+//        elcPicker.currentCount         = AppDelegate.ImageFileArray.count
+//        [self presentViewController:elcPicker animated:YES completion:nil];
+//        self.navigationController?.present(elcPicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -89,6 +89,15 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
             cell.mainImageView.image = UIImage(data: item.image!)
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectDetailViewController") as! ImageSelectDetailViewController
+        
+        let item = AppDelegate.ImageFileArray[indexPath.row]
+        vc.titleString = "\(AppDelegate.imageArray)장 중 \(indexPath.row + 1)번째 선택"
+        vc.selectedImage = item.image
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // size
