@@ -75,9 +75,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         if AppDelegate.QR_URL != "" {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.QR_URL
-            self.navigationController?.pushViewController(vc, animated: true)
+//            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+//            vc.urlString = AppDelegate.QR_URL
+//            self.navigationController?.pushViewController(vc, animated: true)
+            initWebView(urlString: AppDelegate.QR_URL)
             AppDelegate.QR_URL = ""
         }
         navigationController?.isNavigationBarHidden = true
