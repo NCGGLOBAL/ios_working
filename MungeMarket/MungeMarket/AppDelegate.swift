@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
     static var HOME_URL = "http://mungemarket.co.kr/m"
-    static let UPLOAD_URL = AppDelegate.HOME_URL + "/app/"
+    static let UPLOAD_URL = "https://mungemarket.co.kr/m/app/default.asp"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/app/pushRegister.asp"
     static var LANDING_URL = ""
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString

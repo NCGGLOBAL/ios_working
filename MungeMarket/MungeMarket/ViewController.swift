@@ -271,9 +271,22 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                                 var sResultData: String? = nil
                                 if let data = data {
                                     sResultData = String(data: data, encoding: .utf8)
-                                }
+                                    print("sResultData : \(sResultData ?? "")")
+                                    do {
+                                        print("jsonEncodedData : \(sResultData)")
+                                        let javascript = "\(self.callback)('\(sResultData ?? "")')"     // set funcName parameter as a single quoted string
+    //                                    print("jsonData : \(jsonData)")
+                                        print("javascript : \(javascript)")
 
-                                print("sResultData : \(sResultData ?? "")")
+                                        // call back!
+                                        self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                            print("result : \(String(describing: result))")
+                                            print("error : \(error)")
+                                        }
+                                    } catch let error as NSError {
+                                        print(error)
+                                    }
+                                }
                             }
                         }
 
