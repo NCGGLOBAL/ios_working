@@ -423,6 +423,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                 urlString.contains("api.instagram.com") ||
                 urlString.contains("accounts.kakao.com")) {
                 self.backButton.isHidden = false
+            } else {
+                self.backButton.isHidden = true
             }
         }
     }
