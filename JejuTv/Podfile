@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'JejuTv' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+pod 'Firebase/Analytics'
+pod 'Firebase/Messaging'
+pod 'Kingfisher', '~> 4.0'
+pod 'libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v3.0.5'
+#pod 'libksygpulive/KSYGPUResource'
+#pod 'libksygpulive/libksygpulive'
+
+  # Pods for JejuTv
+
+end
