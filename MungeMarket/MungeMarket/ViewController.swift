@@ -427,6 +427,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     #endif
         if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
+        } else if (url.absoluteString.elementsEqual("https://mungemarket.co.kr/addon/m_mallinmall/")) {
+            if AppDelegate.imageArray != nil &&
+                AppDelegate.imageArray.count > 0 {
+                AppDelegate.imageArray.removeAll()
+            }
+            if AppDelegate.ImageFileArray != nil && AppDelegate.ImageFileArray.count > 0 {
+                AppDelegate.ImageFileArray.removeAll()
+            }
         } else {
             if (urlString.contains("pf.kakao.com") ||
                 urlString.contains("nid.naver.com") ||
