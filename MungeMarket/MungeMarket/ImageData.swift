@@ -13,5 +13,5 @@ class ImageData: Codable {
     var fileName: String?
     var imgUrl: String?
     var sort: String?
-    var utype: Int?
+    var utype: String?
 }

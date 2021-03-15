@@ -213,7 +213,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                             data.fileName = fchild?["fileName"] as? String
                             data.imgUrl = fchild?["imgUrl"] as? String
                             data.sort = fchild?["sort"] as? String
-                            data.utype = fchild?["utype"] as? Int
+                            data.utype = fchild?["utype"] as? String
 
                             AppDelegate.imageModel.imgArr?.append(data)
                             

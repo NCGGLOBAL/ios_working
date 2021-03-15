@@ -141,19 +141,16 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-//                        for key in actionParamObj!.keys {
-//                            print("key : \(key)")
-//                        }
 
-                        let values = Array(arrayLiteral: actionParamObj?["imgArr"])
-
-                        for fchild in values {
+                        let values = actionParamObj?["imgArr"] as? NSMutableArray
+                        for fchild in values! {
+                            let item = fchild as! NSDictionary
                             let data = ImageData()
-                            data.fileName = fchild?["fileName"] as? String
-                            data.imgUrl = fchild?["imgUrl"] as? String
-                            data.sort = fchild?["sort"] as? String
-                            data.utype = fchild?["utype"] as? Int
-
+                            data.fileName = item["fileName"] as? String
+                            data.imgUrl = item["imgUrl"] as? String
+                            data.sort = item["sort"] as? String
+                            data.utype = item["utype"] as? String
+                        
                             AppDelegate.imageModel.imgArr?.append(data)
                             
                             if data.imgUrl != nil {
@@ -163,10 +160,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                                 AppDelegate.ImageFileArray.append(imageFileData)
                             }
                         }
-                        
-                        #if DEBUG
-                        print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")
-                        #endif
                         
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectViewController") as! ImageSelectViewController
                         self.navigationController?.pushViewController(vc, animated: true)

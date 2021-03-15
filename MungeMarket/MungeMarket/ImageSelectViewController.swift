@@ -82,6 +82,8 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         } else {
             cell.mainImageView.image = UIImage(data: item.image!)
         }
+        
+        self.navigationItem.title = "\(AppDelegate.ImageFileArray.count) / 9"
         return cell
     }
     
