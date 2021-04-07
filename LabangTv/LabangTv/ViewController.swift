@@ -126,7 +126,18 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     performSegue(withIdentifier: "qrReaderSeque", sender: nil)
                     break
                     case "ACT1011": // 카메라 및 사진 라이브라러 호출
-                        AppDelegate.imageModel.token = actionParamObj?["token"] as? String
+                        let token = actionParamObj?["token"] as? String
+                        if token != AppDelegate.imageModel.token {
+                            if AppDelegate.imageArray != nil && AppDelegate.imageArray.count > 0 {
+                                AppDelegate.imageArray.removeAll()
+                            }
+                            if AppDelegate.ImageFileArray != nil && AppDelegate.ImageFileArray.count > 0 {
+                                AppDelegate.ImageFileArray.removeAll()
+                            }
+                        }
+                        
+                        AppDelegate.imageModel.token = token
+                        
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
 //                        for key in actionParamObj!.keys {
