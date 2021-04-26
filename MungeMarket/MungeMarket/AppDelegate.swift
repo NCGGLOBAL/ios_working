@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let openUrlSchemeKakao = "kakaoplus"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        sleep(3)
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
