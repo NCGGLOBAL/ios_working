@@ -416,6 +416,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
+        } else if (url.scheme?.elementsEqual("tel"))! {
+//            let phoneCallURL = URL.init(string: urlString)
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(url)) {
+                application.open(url, options: [:], completionHandler: nil)
+            }
         } else {
             if (urlString.contains("pf.kakao.com") ||
                 urlString.contains("nid.naver.com") ||
