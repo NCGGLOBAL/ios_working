@@ -399,21 +399,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     func initStreamer(streamUrl: String) {
         kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
-        kit?.streamerBase.videoInitBitrate = Int32(1500)
-        kit?.streamerBase.videoMaxBitrate = Int32(2500)
-        kit?.streamerBase.videoMinBitrate = Int32(1000)
-        kit?.streamerBase.audiokBPS = Int32(48)
-        kit?.streamerBase.shouldEnableKSYStatModule = true
-        kit?.streamerBase.videoFPS = Int32(15)
-        kit?.streamerBase.maxKeyInterval = Float(3)
-        kit?.videoOrientation = .portrait
-        kit?.previewOrientation = .portrait
-        kit?.streamDimension = CGSize(width: 720, height: 1280)
-
-        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
-        kit?.streamerBase.videoInitBitrate = 1500
+        kit?.streamerBase.videoInitBitrate = 2048
         kit?.streamerBase.videoMaxBitrate = 2500
-        kit?.streamerBase.videoMinBitrate = 1000
+        kit?.streamerBase.videoMinBitrate = 2000
         kit?.streamerBase.audiokBPS = 48
         kit?.streamerBase.shouldEnableKSYStatModule = true
         kit?.streamerBase.videoFPS = 15
