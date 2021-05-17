@@ -13,7 +13,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "https://pigmarket.mallup.co.kr/m"
+    static var HOME_URL = "https://pigmarket.co.kr"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/app"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/app/pushRegister.asp"
     static var LANDING_URL = ""
