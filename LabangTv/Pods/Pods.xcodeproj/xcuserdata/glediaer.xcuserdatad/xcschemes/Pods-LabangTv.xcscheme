@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DDC8BCF069275E64E014609BC029A3BE"
+               BlueprintIdentifier = "69FC421301779379A77168FDC519E257"
                BuildableName = "Pods_LabangTv.framework"
                BlueprintName = "Pods-LabangTv"
                ReferencedContainer = "container:Pods.xcodeproj">

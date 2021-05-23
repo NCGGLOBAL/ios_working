@@ -9,6 +9,9 @@
 import UIKit
 import WebKit
 import CoreLocation
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
@@ -53,6 +56,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
+        
         webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -333,6 +337,72 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         }
                     case "ACT1016":
                         print("ACT1016 - 새 브라우저 창을 닫는 액션")
+                    break
+                case "ACT1020":
+                    print("ACT1020 - sns로그인")
+                    let snsType = actionParamObj?["snsType"] as? Int
+                    if snsType == 2 {   // 카카오 로그인
+                        // 카카오톡 설치 여부 확인
+                        if (UserApi.isKakaoTalkLoginAvailable()) {
+                            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                                if let error = error {
+                                    print(error)
+                                }
+                                else {
+                                    print("loginWithKakaoTalk() success.")
+
+                                    //do something
+//                                    _ = oauthToken
+                                    UserApi.shared.me() {(user, error) in
+                                        if let error = error {
+                                            print(error)
+                                        }
+                                        else {
+                                            print("me() success.")
+
+                                            //do something
+//                                            _ = user.
+                                            var dic = Dictionary<String, String>()
+                                            dic.updateValue(oauthToken?.accessToken ?? "", forKey: "accessToken")
+                                            dic.updateValue(user?.kakaoAccount?.email ?? "", forKey: "userInfo")
+                                            #if DEBUG
+                                            print("oauthToken : \(oauthToken?.accessToken)")
+                                            print("userInfo : \(user?.kakaoAccount?.email)")
+                                            #endif
+                                            do {
+                                              let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                                                let jsonEncodedData = jsonData.base64EncodedString()   // base64 eencode the data dictionary
+                                             let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                                let javascript = "\(self.callback)('\(stringValue)')"
+                                                #if DEBUG
+                                                print("jsonData : \(jsonData)")
+                                                print("javascript : \(javascript)")
+                                                #endif
+                                                // call back!
+                                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                                    #if DEBUG
+                                                    print("result : \(String(describing: result))")
+                                                    print("error : \(error)")
+                                                    #endif
+                                                }
+                                            } catch let error as NSError {
+                                                print(error)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            print("카카오 설치가 안되있습니다.")
+                            if let url = URL(string: "itms-apps://itunes.apple.com/app/362057947"), UIApplication.shared.canOpenURL(url) {
+                                if #available(iOS 10.0, *) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil) }
+                                else {
+                                    UIApplication.shared.openURL(url)
+                                }
+                            }
+                        }
+                    }
                     break
                 case "ACT1022":
                     print("ACT1022 - 전화걸기")

@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         // [END register_for_notifications]
+        KakaoSDKCommon.initSDK(appKey: "d3486cb7bb7f9255cec01ca61e7dbc2f")
         
         return true
     }
@@ -134,6 +137,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         print("open url : \(url.absoluteString)")
         #endif
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.handleOpenUrl(url: url)
+        }
         UIApplication.shared.open(url, options: [:])
         return true
     }
