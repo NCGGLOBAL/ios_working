@@ -88,8 +88,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     }
     
     func initWebView(urlString: String) {
+        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
+         
         let url = URL(string: urlString)
         let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
+        
+        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)       
         
         webView.load(request)
     }
