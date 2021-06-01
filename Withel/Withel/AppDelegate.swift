@@ -6,6 +6,38 @@
 //  Copyright © 2020 ncgglobal. All rights reserved.
 //
 
+/*신용카드 관련 간편결제 앱 스킴
+"itms-appss://";                     // 앱 스토어
+"ispmobile://";                      // ISP
+"payco://";                          // PAYCO
+"kakaotalk://";                      // KAKAO
+"shinsegaeeasypayment://";           // SSG PAY
+"lpayapp://";                        // LPAY
+"kb-acp://";                         // 국민 앱카드
+"hdcardappcardansimclick://";        // 현대 앱카드
+"shinhan-sr-ansimclick://";          // 신한 페이판
+"mpocket.online.ansimclick://";      // 삼성 앱카드
+"lotteappcard://";                   // 롯데카드 라이프앱
+"cloudpay://";                       // 하나 1Q 페이
+"hanawalletmembers://";              // 하나멤버스
+"nhallonepayansimclick://";          // 농협 올원페이
+"citimobileapp://";                  // 씨티 스마트 간편결제
+"wooripay://";                       // 우리 페이
+"shinhan-sr-ansimclick-naverpay://"; // 신한 네이버페이
+"shinhan-sr-ansimclick-payco://";    // 신한 페이코
+*/
+
+/*
+ 계좌이체 관련 간편결제 앱 스킴
+"kftc-bankpay://";    // 금결원
+"kb-bankpay://";      // 금결원 (리브 국민은행)
+"nhb-bankpay://";     // 금결원 (NH 앱캐시)
+"kn-bankpay://";      // 금결원 (경남은행)
+"mg-bankpay://";      // 금결원 (새마을금고)
+"lguthepay-xpay://";  // LG 유플러스
+"SmartBank2WB://";    // LG 유플러스
+*/
+
 import UIKit
 import Firebase
 
@@ -25,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var imageModel = ImageModel()
     static var isChangeImage = false
     static let openUrlSchemeKakao = "kakaoplus"
+    
+    static let app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
+        "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://"]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         sleep(3)

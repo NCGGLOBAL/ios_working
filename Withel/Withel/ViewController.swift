@@ -46,7 +46,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
         contentController.add(self, name: Constants.callBackHandlerKey)
         
-        config.processPool = uniqueProcessPool
+//        config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
         config.mediaTypesRequiringUserActionForPlayback = .audio
@@ -88,12 +88,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     }
     
     func initWebView(urlString: String) {
-//        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
+        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
          
         let url = URL(string: urlString)
         let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
         
-//        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)       
+        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)
         
         webView.load(request)
     }
@@ -402,19 +402,68 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
-
-        defer {
-            decisionHandler(action ?? .allow)
-        }
-
+        
         guard let url = navigationAction.request.url else { return }
-
+        
+        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
+            UIApplication.shared.openURL(url)
+            decisionHandler(.cancel)
+            return
+        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
+                webView.load(URLRequest.init(url: url))
+                    decisionHandler(.cancel)
+                    return
+                }
+            case .backForward:
+                break
+            case .formResubmitted:
+                break
+            case .formSubmitted:
+                break
+            case .other:
+                break
+            case .reload:
+                break
+         default:
+            break
+        }
+        
+        let urlScheme = url.scheme
         let urlString = url.absoluteString
-    #if DEBUG
+        let decodeString = urlString
+        
+        #if DEBUG
         print("url : \(url)")
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
-    #endif
+        #endif
+
+        for index in 0..<AppDelegate.app_scheme_arr.count {
+            let app_scheme = AppDelegate.app_scheme_arr[index]
+            let app_pass_yn = UIApplication.shared.canOpenURL(navigationAction.request.url!)
+                        
+            if(!urlString.hasPrefix(app_scheme)){continue;}
+            
+            print("#해당 앱 스킴 등록 여부 ->  ", app_pass_yn)
+
+            if(app_pass_yn){ UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)}
+            else{noAppDialog()}
+            
+            break;
+        }
+            
+        decisionHandler(.allow)
+        
         if (url.scheme?.elementsEqual(liveScheme))! {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -459,30 +508,37 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         self.indicatorView.stopAnimating()
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
-            completionHandler()
-        }
-        alertController.addAction(cancelAction)
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
+    // JS: alert 처리
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: {
+            (action) in completionHandler() }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
-            completionHandler(false)
-        }
-        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+    // JS: confirm 처리
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { (action) in
             completionHandler(true)
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
+        }))
+        alertController.addAction(UIAlertAction(title: "취소", style: .default, handler: { (action) in
+            completionHandler(false)
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func noAppDialog(){
+        let dialog = UIAlertController(title: "", message: "해당 앱이 설치 되어 있지 않습니다.", preferredStyle: .alert)
+
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        dialog.addAction(action)
+           
+        self.present(dialog, animated: true, completion: nil)
     }
     
     func sendImageData(){
