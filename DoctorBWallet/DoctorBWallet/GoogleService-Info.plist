@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>787817860618-dj6p1vqgbk0as37cqisak2sv8eb8ni0i.apps.googleusercontent.com</string>
+	<string>787817860618-n7f9tr4l2sc30po09v5g3rkimkut7a4f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.787817860618-dj6p1vqgbk0as37cqisak2sv8eb8ni0i</string>
+	<string>com.googleusercontent.apps.787817860618-n7f9tr4l2sc30po09v5g3rkimkut7a4f</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBZi44TcjOOtgtOTFvkEfyuNQtCZCW4TUM</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mallup.doctorbwallet</string>
+	<string>com.mallup.doctorbwalletapp</string>
 	<key>PROJECT_ID</key>
 	<string>doctorbwallet</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:787817860618:ios:a168473e3f6d2365b0d9f3</string>
+	<string>1:787817860618:ios:c43990146fcd1ef4b0d9f3</string>
 </dict>
 </plist>
