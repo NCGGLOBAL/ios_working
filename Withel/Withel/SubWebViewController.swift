@@ -62,7 +62,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func initWebView() {
-        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
+//        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
         let url = URL(string: self.urlString)
         var request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
         
@@ -73,7 +73,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         }
         webView.navigationDelegate = self
         
-        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)
+//        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)
         webView?.allowsBackForwardNavigationGestures = true
         webView.load(request)
     }

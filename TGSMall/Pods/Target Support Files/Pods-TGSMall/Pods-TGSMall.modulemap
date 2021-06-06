@@ -1,0 +1,6 @@
+framework module Pods_TGSMall {
+  umbrella header "Pods-TGSMall-umbrella.h"
+
+  export *
+  module * { export * }
+}

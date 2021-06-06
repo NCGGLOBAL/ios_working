@@ -46,7 +46,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
         contentController.add(self, name: Constants.callBackHandlerKey)
         
-//        config.processPool = uniqueProcessPool
+        config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
         config.mediaTypesRequiringUserActionForPlayback = .audio
@@ -88,12 +88,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     }
     
     func initWebView(urlString: String) {
-        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
+//        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
          
         let url = URL(string: urlString)
         let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
         
-        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)
+//        webView.configuration.processPool.perform(Selector(("_setCookieAcceptPolicy:")), with: HTTPCookie.AcceptPolicy.always)
         
         webView.load(request)
     }
