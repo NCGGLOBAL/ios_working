@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>515949641186-mcioa0if4cdgmve4a6b2ut5ch56dffs6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.515949641186-mcioa0if4cdgmve4a6b2ut5ch56dffs6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC60hgKCEa-GwZr-3W06XJB7tQl_dN4xbM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>515949641186</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mallup.dabaltong</string>
+	<key>PROJECT_ID</key>
+	<string>dabaltong</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dabaltong.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:515949641186:ios:2356463da051e49b17cdbb</string>
+</dict>
+</plist>

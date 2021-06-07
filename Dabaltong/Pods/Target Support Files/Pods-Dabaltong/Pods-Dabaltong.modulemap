@@ -1,0 +1,6 @@
+framework module Pods_Dabaltong {
+  umbrella header "Pods-Dabaltong-umbrella.h"
+
+  export *
+  module * { export * }
+}
