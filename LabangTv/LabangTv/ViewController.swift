@@ -343,23 +343,26 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     let snsType = actionParamObj?["snsType"] as? Int
                     if snsType == 2 {   // 카카오 로그인
                         // 카카오톡 설치 여부 확인
+                        self.showToast(message: "카카오 로그인 시작")
                         if (UserApi.isKakaoTalkLoginAvailable()) {
                             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                                 if let error = error {
                                     print(error)
+                                    self.showToast(message: "카카오 로그인 실패 : \(error)")
                                 }
                                 else {
                                     print("loginWithKakaoTalk() success.")
-
+                                    self.showToast(message: "카카오 로그인 성공")
                                     //do something
 //                                    _ = oauthToken
                                     UserApi.shared.me() {(user, error) in
                                         if let error = error {
                                             print(error)
+                                            self.showToast(message: "카카오 로그인 정보 가져오기 실패 : \(error)")
                                         }
                                         else {
                                             print("me() success.")
-
+                                            self.showToast(message: "카카오 로그인 정보 가져오기 성공")
                                             //do something
 //                                            _ = user.
                                             var dic = Dictionary<String, String>()
@@ -394,6 +397,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                             }
                         } else {
                             print("카카오 설치가 안되있습니다.")
+                            self.showToast(message: "카카오 설치가 안되있습니다.")
                             if let url = URL(string: "itms-apps://itunes.apple.com/app/362057947"), UIApplication.shared.canOpenURL(url) {
                                 if #available(iOS 10.0, *) {
                                     UIApplication.shared.open(url, options: [:], completionHandler: nil) }
@@ -590,6 +594,26 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
               print(error)
             }
     }
+    
+    func showToast(message : String) {
+            let width_variable:CGFloat = 10
+            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
+            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
+            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            toastLabel.textColor = UIColor.white
+            toastLabel.textAlignment = .center;
+            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+            toastLabel.text = message
+            toastLabel.alpha = 1.0
+            toastLabel.layer.cornerRadius = 10;
+            toastLabel.clipsToBounds  =  true
+            self.view.addSubview(toastLabel)
+            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+                toastLabel.alpha = 0.0
+            }, completion: {(isCompleted) in
+                toastLabel.removeFromSuperview()
+            })
+        }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true

@@ -137,9 +137,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         print("open url : \(url.absoluteString)")
         #endif
-        if (AuthApi.isKakaoTalkLoginUrl(url)) {
-            return AuthController.handleOpenUrl(url: url)
-        }
+//        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+//            return AuthController.handleOpenUrl(url: url)
+//        }
         UIApplication.shared.open(url, options: [:])
         return true
     }
