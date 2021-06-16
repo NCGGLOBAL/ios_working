@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>728383807854-0svs5ens44vnhent6q38jrv1qc91km8i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.728383807854-0svs5ens44vnhent6q38jrv1qc91km8i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBMkhtSdPiJCq1vJ9cLoWnqms-_0RNjx7I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>728383807854</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creator.thestylelive</string>
+	<key>PROJECT_ID</key>
+	<string>thestylelive-69cf4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thestylelive-69cf4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:728383807854:ios:f9c79073ac601760cbe17f</string>
+</dict>
+</plist>
