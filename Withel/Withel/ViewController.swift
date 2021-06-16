@@ -402,90 +402,24 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
-        
+
+        defer {
+            decisionHandler(action ?? .allow)
+        }
+
         guard let url = navigationAction.request.url else { return }
-        
-        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
-            UIApplication.shared.openURL(url)
-            decisionHandler(.cancel)
-            return
-        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
-                decisionHandler(.cancel)
-                return
-            }
-        }
-        
-        switch navigationAction.navigationType {
-        case .linkActivated:
-            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
-                webView.load(URLRequest.init(url: url))
-                    decisionHandler(.cancel)
-                    return
-                }
-            case .backForward:
-                break
-            case .formResubmitted:
-                break
-            case .formSubmitted:
-                break
-            case .other:
-                break
-            case .reload:
-                break
-         default:
-            break
-        }
-        
-        let urlScheme = url.scheme
+
         let urlString = url.absoluteString
-        let decodeString = urlString
-        
-        #if DEBUG
+    #if DEBUG
         print("url : \(url)")
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
-        #endif
-
-        for index in 0..<AppDelegate.app_scheme_arr.count {
-            let app_scheme = AppDelegate.app_scheme_arr[index]
-            let app_pass_yn = UIApplication.shared.canOpenURL(navigationAction.request.url!)
-                        
-            if(!urlString.hasPrefix(app_scheme)){continue;}
-            
-            print("#해당 앱 스킴 등록 여부 ->  ", app_pass_yn)
-
-            if(app_pass_yn){ UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)}
-            else{noAppDialog()}
-            
-            break;
-        }
-            
-        decisionHandler(.allow)
-        
-        if (url.scheme?.elementsEqual(liveScheme))! {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
-            UIApplication.shared.openURL(url)
-        } else if (url.scheme?.elementsEqual("tel"))! {
-//            let phoneCallURL = URL.init(string: urlString)
-            let application:UIApplication = UIApplication.shared
-            
-            if (application.canOpenURL(url)) {
-                application.open(url, options: [:], completionHandler: nil)
-            }
-        } else {
-            if (urlString.contains("pf.kakao.com") ||
-                urlString.contains("nid.naver.com") ||
-                urlString.contains("m.facebook.com") ||
-                urlString.contains("api.instagram.com") ||
-                urlString.contains("accounts.kakao.com")) {
-                self.backButton.isHidden = false
-            } else {
-                self.backButton.isHidden = true
-            }
+    #endif
+        if (urlString.contains("pf.kakao.com") ||
+            urlString.contains("nid.naver.com") ||
+            urlString.contains("m.facebook.com") ||
+            urlString.contains("accounts.kakao.com")) {
+            self.backButton.isHidden = false
         }
     }
     
