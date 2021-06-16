@@ -343,61 +343,76 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     let snsType = actionParamObj?["snsType"] as? Int
                     if snsType == 2 {   // 카카오 로그인
                         // 카카오톡 설치 여부 확인
-                        self.showToast(message: "카카오 로그인 시작")
                         if (UserApi.isKakaoTalkLoginAvailable()) {
                             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                                 if let error = error {
                                     print(error)
-                                    self.showToast(message: "카카오 로그인 실패 : \(error)")
                                 }
                                 else {
                                     print("loginWithKakaoTalk() success.")
-                                    self.showToast(message: "카카오 로그인 성공")
                                     //do something
 //                                    _ = oauthToken
                                     UserApi.shared.me() {(user, error) in
                                         if let error = error {
                                             print(error)
-                                            self.showToast(message: "카카오 로그인 정보 가져오기 실패 : \(error)")
                                         }
                                         else {
                                             print("me() success.")
-                                            self.showToast(message: "카카오 로그인 정보 가져오기 성공")
                                             //do something
 //                                            _ = user.
-                                            var dic = Dictionary<String, String>()
-                                            dic.updateValue(oauthToken?.accessToken ?? "", forKey: "accessToken")
-                                            dic.updateValue(user?.kakaoAccount?.email ?? "", forKey: "userInfo")
-                                            #if DEBUG
-                                            print("oauthToken : \(oauthToken?.accessToken)")
-                                            print("userInfo : \(user?.kakaoAccount?.email)")
-                                            #endif
+                                            let email = user?.kakaoAccount?.email ?? ""
+                                            let nickname = user?.kakaoAccount?.profile?.nickname ?? ""
+                                            let profileImagePath = user?.kakaoAccount?.profile?.profileImageUrl?.absoluteString ?? ""
+                                            let thumnailPath = user?.kakaoAccount?.profile?.thumbnailImageUrl?.absoluteString ?? ""
+                                            let id = String(user?.id ?? 0)
+                                            var accountDic = Dictionary<String, String>()
+                                            accountDic.updateValue(email, forKey: "email")
+                                            accountDic.updateValue(nickname, forKey: "nickname")
+                                            accountDic.updateValue(profileImagePath, forKey: "profileImagePath")
+                                            accountDic.updateValue(thumnailPath, forKey: "thumnailPath")
+                                            accountDic.updateValue(id, forKey: "id")
                                             do {
-                                              let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                                                let jsonEncodedData = jsonData.base64EncodedString()   // base64 eencode the data dictionary
-                                             let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                                let javascript = "\(self.callback)('\(stringValue)')"
+                                                let accountJsonData = try JSONSerialization.data(withJSONObject: accountDic, options: [])
+//                                                let accountJsonEncodedData = accountJsonData.base64EncodedString()
+                                                let accountDicString = String(data: accountJsonData, encoding: .utf8) ?? ""
+                                                
+                                                var dic = Dictionary<String, String>()
+                                                dic.updateValue(oauthToken?.accessToken ?? "", forKey: "accessToken")
+                                                dic.updateValue(accountDicString, forKey: "userInfo")
                                                 #if DEBUG
-                                                print("jsonData : \(jsonData)")
-                                                print("javascript : \(javascript)")
+                                                print("oauthToken : \(oauthToken?.accessToken ?? "")")
+                                                print("userInfo : \(accountDicString)")
                                                 #endif
-                                                // call back!
-                                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                                
+                                                do {
+                                                  let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+//                                                    let jsonEncodedData = jsonData.base64EncodedString()   // base64 eencode the data dictionary
+                                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                                    let javascript = "\(self.callback)('\(stringValue)')"
                                                     #if DEBUG
-                                                    print("result : \(String(describing: result))")
-                                                    print("error : \(error)")
+                                                    print("jsonData : \(jsonData)")
+                                                    print("javascript : \(javascript)")
                                                     #endif
+                                                    // call back!
+                                                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                                        #if DEBUG
+                                                        print("result : \(String(describing: result))")
+                                                        print("error : \(error)")
+                                                        #endif
+                                                    }
+                                                } catch let error as NSError {
+                                                    print(error)
                                                 }
                                             } catch let error as NSError {
                                                 print(error)
                                             }
+                                            
                                         }
                                     }
                                 }
                             }
                         } else {
                             print("카카오 설치가 안되있습니다.")
-                            self.showToast(message: "카카오 설치가 안되있습니다.")
                             if let url = URL(string: "itms-apps://itunes.apple.com/app/362057947"), UIApplication.shared.canOpenURL(url) {
                                 if #available(iOS 10.0, *) {
                                     UIApplication.shared.open(url, options: [:], completionHandler: nil) }
@@ -595,25 +610,25 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             }
     }
     
-    func showToast(message : String) {
-            let width_variable:CGFloat = 10
-            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
-            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
-            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-            toastLabel.textColor = UIColor.white
-            toastLabel.textAlignment = .center;
-            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-            toastLabel.text = message
-            toastLabel.alpha = 1.0
-            toastLabel.layer.cornerRadius = 10;
-            toastLabel.clipsToBounds  =  true
-            self.view.addSubview(toastLabel)
-            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-                toastLabel.alpha = 0.0
-            }, completion: {(isCompleted) in
-                toastLabel.removeFromSuperview()
-            })
-        }
+//    func showToast(message : String) {
+//            let width_variable:CGFloat = 10
+//            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
+//            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
+//            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+//            toastLabel.textColor = UIColor.white
+//            toastLabel.textAlignment = .center;
+//            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+//            toastLabel.text = message
+//            toastLabel.alpha = 1.0
+//            toastLabel.layer.cornerRadius = 10;
+//            toastLabel.clipsToBounds  =  true
+//            self.view.addSubview(toastLabel)
+//            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+//                toastLabel.alpha = 0.0
+//            }, completion: {(isCompleted) in
+//                toastLabel.removeFromSuperview()
+//            })
+//        }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
