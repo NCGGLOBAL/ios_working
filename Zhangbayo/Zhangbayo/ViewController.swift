@@ -477,15 +477,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
     #endif
-        if (url.scheme?.elementsEqual(openUrlSchemeKakao))! {
-            UIApplication.shared.openURL(url)
-        } else {
-            if (urlString.contains("pf.kakao.com") ||
-                urlString.contains("nid.naver.com") ||
-                urlString.contains("m.facebook.com") ||
-                urlString.contains("accounts.kakao.com")) {
-                self.backButton.isHidden = false
-            }
+        if (urlString.contains("pf.kakao.com") ||
+            urlString.contains("nid.naver.com") ||
+            urlString.contains("m.facebook.com") ||
+            urlString.contains("accounts.kakao.com")) {
+            self.backButton.isHidden = false
         }
     }
     

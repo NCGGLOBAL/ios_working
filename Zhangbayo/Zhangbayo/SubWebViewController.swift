@@ -92,54 +92,20 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-                var action: WKNavigationActionPolicy?
-        
-        guard let url = navigationAction.request.url else { return }
-        
-        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
-            UIApplication.shared.openURL(url)
-            decisionHandler(.cancel)
-            return
-        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
-                decisionHandler(.cancel)
-                return
-            }
-        }
-        
-        switch navigationAction.navigationType {
-        case .linkActivated:
-            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
-                webView.load(URLRequest.init(url: url))
-                    decisionHandler(.cancel)
-                    return
-                }
-            case .backForward:
-                break
-            case .formResubmitted:
-                break
-            case .formSubmitted:
-                break
-            case .other:
-                break
-            case .reload:
-                break
-         default:
-            break
-        }
-            
-        decisionHandler(.allow)
-        
-        #if DEBUG
-        let urlScheme = url.scheme
-        let urlString = url.absoluteString
-        let decodeString = urlString
+        var action: WKNavigationActionPolicy?
 
+        defer {
+            decisionHandler(action ?? .allow)
+        }
+
+        guard let url = navigationAction.request.url else { return }
+
+        let urlString = url.absoluteString
+    #if DEBUG
         print("url : \(url)")
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
-        #endif
+    #endif
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
