@@ -389,6 +389,9 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                     case "ACT1023":
                         print("ACT1023 - 스타일뷰에 사용 byappsapi://bridge?shopidx=1111&mbridx=2222")
                     break
+                case "ACT1031": // 창 닫기
+                    self.dismiss(animated: true, completion: nil)
+                    break
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }

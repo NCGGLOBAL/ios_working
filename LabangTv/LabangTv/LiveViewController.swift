@@ -346,7 +346,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         }
                     break
                     case "ACT1031": // 종료
-                        self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     break
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
