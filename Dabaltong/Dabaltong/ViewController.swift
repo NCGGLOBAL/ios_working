@@ -330,10 +330,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     break
                 case "ACT1022":
                     print("ACT1022 - 전화걸기")
-                    let token = actionParamObj?["tel"] as? String
+                    var token = actionParamObj?["tel"] as? String
                     if token == nil || token == "" {
                         return
                     }
+//                    token = "tel://1588-6547"
                     let phoneCallURL = URL.init(string: token!)
                     let application:UIApplication = UIApplication.shared
                     

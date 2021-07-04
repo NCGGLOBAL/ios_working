@@ -399,6 +399,17 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
 
+        // 카카오 SDK가 호출하는 커스텀 스킴인 경우 open(_ url:) 메소드를 호출합니다.
+        if let url = navigationAction.request.url
+            , ["kakaokompassauth", "kakaolink"].contains(url.scheme) {
+
+            // 카카오톡 실행
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            decisionHandler(.cancel)
+            return
+        }
+        
         defer {
             decisionHandler(action ?? .allow)
         }

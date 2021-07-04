@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.3)
   - Firebase/Analytics (6.8.1):
     - Firebase/Core
   - Firebase/Core (6.8.1):
@@ -71,6 +72,17 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
+  - KakaoSDKAuth (2.5.2):
+    - KakaoSDKCommon (= 2.5.2)
+  - KakaoSDKCommon (2.5.2):
+    - KakaoSDKCommon/Common (= 2.5.2)
+    - KakaoSDKCommon/Network (= 2.5.2)
+  - KakaoSDKCommon/Common (2.5.2)
+  - KakaoSDKCommon/Network (2.5.2):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.5.2)
+  - KakaoSDKUser (2.5.2):
+    - KakaoSDKAuth (= 2.5.2)
   - Kingfisher (4.10.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -82,10 +94,14 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
+  - KakaoSDKAuth
+  - KakaoSDKCommon
+  - KakaoSDKUser
   - Kingfisher (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -98,11 +114,15 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - Kingfisher
     - nanopb
     - Protobuf
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
   FirebaseAnalytics: 843c7f64a8f9c79f0d03281197ebe7bb1d58d477
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -115,10 +135,13 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
+  KakaoSDKAuth: 81715662c03e4c8c1a140f293e9fd6fd68b2e9dd
+  KakaoSDKCommon: 887e22f7aa4647bd0a7d1397512fc5f6211b83d6
+  KakaoSDKUser: b79c1a18da69681de7c9d3fa59e83c37b711ce7e
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
 
-PODFILE CHECKSUM: 29532172e61c805b3a2c9d6d4c0088d17213b744
+PODFILE CHECKSUM: ac995cc4baad8dfff50658e402ff6226dd3dd386
 
 COCOAPODS: 1.6.1
