@@ -24,9 +24,9 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
-				<string>labangtvscheme</string>
+				<string>tgsscheme</string>
 				<string>fb652992528465036</string>
-				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
+				<string>kakao8c24e97ba6b30a694dfe9535af382778</string>
 				<string>adbrix497925905</string>
 			</array>
 		</dict>
@@ -42,7 +42,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>ba109aa09509e4146508f3182324580d</string>
+	<string>8c24e97ba6b30a694dfe9535af382778</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>

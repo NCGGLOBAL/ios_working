@@ -26,8 +26,8 @@
 				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>thestylelivescheme</string>
 				<string>fb652992528465036</string>
-				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
 				<string>adbrix497925905</string>
+				<string>kakao286ffba23ce579c9e0f9d1a9c46ec244</string>
 			</array>
 		</dict>
 	</array>
@@ -42,7 +42,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>ba109aa09509e4146508f3182324580d</string>
+	<string>286ffba23ce579c9e0f9d1a9c46ec244</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
