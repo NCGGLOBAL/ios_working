@@ -399,6 +399,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
 
+        guard let url = navigationAction.request.url else { return }
         // 카카오 SDK가 호출하는 커스텀 스킴인 경우 open(_ url:) 메소드를 호출합니다.
         if let url = navigationAction.request.url
             , ["kakaokompassauth", "kakaolink"].contains(url.scheme) {
@@ -410,11 +411,42 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             return
         }
         
+        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
+            UIApplication.shared.openURL(url)
+            decisionHandler(.cancel)
+            return
+        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
+                webView.load(URLRequest.init(url: url))
+                    decisionHandler(.cancel)
+                    return
+                }
+            case .backForward:
+                break
+            case .formResubmitted:
+                break
+            case .formSubmitted:
+                break
+            case .other:
+                break
+            case .reload:
+                break
+         default:
+            break
+        }
+        
         defer {
             decisionHandler(action ?? .allow)
         }
-
-        guard let url = navigationAction.request.url else { return }
 
         let urlString = url.absoluteString
     #if DEBUG
