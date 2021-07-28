@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>858575664108-rp2qlhocpcm4oc7gr9hpn7gcct1gk858.apps.googleusercontent.com</string>
+	<string>406304927508-7kmni0dobv58ppa5pnu415dgjdadts7c.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.858575664108-rp2qlhocpcm4oc7gr9hpn7gcct1gk858</string>
+	<string>com.googleusercontent.apps.406304927508-7kmni0dobv58ppa5pnu415dgjdadts7c</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBh3HlKTIewDJbKO8Xw4or7ZV9sW3gsNRA</string>
+	<string>AIzaSyABBFptxyqbDpqKL2TzaD_bqU2e0pAsIjA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>858575664108</string>
+	<string>406304927508</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.allshoppinglive</string>
+	<string>com.creator.allshoppingliveapp</string>
 	<key>PROJECT_ID</key>
-	<string>allshoppinglive</string>
+	<string>allshoppinglive-f4b53</string>
 	<key>STORAGE_BUCKET</key>
-	<string>allshoppinglive.appspot.com</string>
+	<string>allshoppinglive-f4b53.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:858575664108:ios:ad38144fd4eca6a13406c9</string>
+	<string>1:406304927508:ios:e7acceb3fd123436e15c01</string>
 </dict>
 </plist>
