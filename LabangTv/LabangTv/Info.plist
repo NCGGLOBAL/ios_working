@@ -23,11 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
+				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
 				<string>labangtvscheme</string>
-				<string>fb652992528465036</string>
-				<string>
-kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
 				<string>kakaolink</string>
 			</array>
 		</dict>
