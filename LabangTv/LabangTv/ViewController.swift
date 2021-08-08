@@ -499,6 +499,18 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
 
         guard let url = navigationAction.request.url else { return }
 
+        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
+            UIApplication.shared.openURL(url)
+            decisionHandler(.cancel)
+            return
+        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        
         let urlString = url.absoluteString
         print("#요청 URL -> " + urlString)
 

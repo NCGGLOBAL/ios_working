@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>devlabangtvscheme</string>
+				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>

@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TGSmall</string>
+	<string>무진장라이브쇼핑몰</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -23,11 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>tgsscheme</string>
-				<string>fb652992528465036</string>
 				<string>kakao8c24e97ba6b30a694dfe9535af382778</string>
-				<string>adbrix497925905</string>
 			</array>
 		</dict>
 	</array>
@@ -36,7 +33,7 @@
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
-	<string>TGSmall</string>
+	<string>무진장라이브쇼핑몰</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
