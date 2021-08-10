@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>593098678523-vbvsbgt56sl40fno5u2fuqe3lu0gsa8f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.593098678523-vbvsbgt56sl40fno5u2fuqe3lu0gsa8f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC5Kwi4Ja8tkBaVvvkdY-nInJVt0QGWYpQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>593098678523</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mallup.goodch</string>
+	<key>PROJECT_ID</key>
+	<string>goodch-fafe7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>goodch-fafe7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:593098678523:ios:b4ca9599cb110fcea1105e</string>
+</dict>
+</plist>
