@@ -23,10 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>ganaahnscheme</string>
-				<string>fb652992528465036</string>
-				<string>kakaolink</string>
+				<string>kakao5bb3cd44294af2bd5f8c66d42db810f7</string>
 			</array>
 		</dict>
 	</array>

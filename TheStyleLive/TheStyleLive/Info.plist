@@ -23,10 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>thestylelivescheme</string>
 				<string>fb652992528465036</string>
-				<string>adbrix497925905</string>
 				<string>kakao286ffba23ce579c9e0f9d1a9c46ec244</string>
 			</array>
 		</dict>
