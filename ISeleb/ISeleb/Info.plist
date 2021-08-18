@@ -23,11 +23,9 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
+				<string>kakao2af97e6230bdb8a046e670f9424275fd</string>
 				<string>iselebscheme</string>
-				<string>fb652992528465036</string>
-				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
-				<string>adbrix497925905</string>
+				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>
@@ -42,7 +40,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>ba109aa09509e4146508f3182324580d</string>
+	<string>2af97e6230bdb8a046e670f9424275fd</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>

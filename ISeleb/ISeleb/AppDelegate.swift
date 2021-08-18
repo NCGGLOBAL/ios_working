@@ -15,7 +15,7 @@ import KakaoSDKAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "https://labang.tv"
+    static var HOME_URL = "https://iceleb.co.kr"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
     static var LANDING_URL = ""
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         // [END register_for_notifications]
-        KakaoSDKCommon.initSDK(appKey: "d3486cb7bb7f9255cec01ca61e7dbc2f")
+        KakaoSDKCommon.initSDK(appKey: "2af97e6230bdb8a046e670f9424275fd")
         
         return true
     }
