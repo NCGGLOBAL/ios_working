@@ -24,8 +24,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>thestylelivescheme</string>
-				<string>fb652992528465036</string>
 				<string>kakao286ffba23ce579c9e0f9d1a9c46ec244</string>
+				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>
