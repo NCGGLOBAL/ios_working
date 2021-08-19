@@ -22,11 +22,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
-				<string>labangtvscheme</string>
-				<string>kakaolink</string>
-			</array>
+            <array>
+                <string>goodchscheme</string>
+            </array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
