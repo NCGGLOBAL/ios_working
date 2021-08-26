@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sellovelyscheme</string>
+				<string>kakao9e0bac03837ef32097bd61d2218e6d41</string>
 			</array>
 		</dict>
 	</array>
@@ -34,7 +35,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string></string>
+	<string>9e0bac03837ef32097bd61d2218e6d41</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
