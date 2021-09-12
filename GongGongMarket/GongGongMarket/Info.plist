@@ -24,7 +24,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>gonggongmarketscheme</string>
-				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>
