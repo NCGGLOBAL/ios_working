@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>포도알</string>
+	<string>포도알TV</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,7 +32,7 @@
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
-	<string>포도알</string>
+	<string>포도알TV</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
