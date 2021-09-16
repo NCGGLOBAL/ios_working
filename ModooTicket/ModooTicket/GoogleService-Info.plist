@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>877659973919-ktb4irldvk9j4vnp4a1mqnbc7n293dqp.apps.googleusercontent.com</string>
+	<string>736279782675-bujqrgj1g5orefhfqrm5n01d9f5sfjc8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.877659973919-ktb4irldvk9j4vnp4a1mqnbc7n293dqp</string>
+	<string>com.googleusercontent.apps.736279782675-bujqrgj1g5orefhfqrm5n01d9f5sfjc8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD5HxaGRUaNFxrv6RfTOEU7kPH42jgIAXQ</string>
+	<string>AIzaSyBp3Of-iTB5X5yCLsu9rcs35GYwymEPsu0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>877659973919</string>
+	<string>736279782675</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mallup.modooticket</string>
+	<string>com.mallup.modooticketapp</string>
 	<key>PROJECT_ID</key>
-	<string>modooticket</string>
+	<string>modooticket-a4e2e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>modooticket.appspot.com</string>
+	<string>modooticket-a4e2e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:877659973919:ios:a76c2f51b3ed5eb859a82a</string>
+	<string>1:736279782675:ios:111b620e87a0948929e6e6</string>
 </dict>
 </plist>
