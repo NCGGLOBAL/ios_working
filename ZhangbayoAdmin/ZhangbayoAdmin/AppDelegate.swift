@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
     static let HOME_URL = "http://zhangbayo.co.kr/addon/m_mallinmall"
-    static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
-    static let PUSH_REG_URL = "https://zhangbayo.co.kr/m/app/pushRegister.asp"
+    static let UPLOAD_URL = "https://zhangbayo.co.kr/m/app/"
+    static let PUSH_REG_URL = UPLOAD_URL + "pushRegister.asp"
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""
     static var pushkey = ""
