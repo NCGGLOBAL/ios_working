@@ -23,9 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaod3486cb7bb7f9255cec01ca61e7dbc2f</string>
+				<string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
 				<string>labangtvscheme</string>
-				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>
@@ -40,7 +39,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>d3486cb7bb7f9255cec01ca61e7dbc2f</string>
+	<string>20a5a19074892fea22a99d21dc8cfb37</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
