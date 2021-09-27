@@ -23,8 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>kakaob280c1665c0295a81cbd9e969c255d1a</string>
 				<string>devlabangtvscheme</string>
-				<string>kakaolink</string>
 			</array>
 		</dict>
 	</array>
@@ -39,7 +39,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string></string>
+	<string>b280c1665c0295a81cbd9e969c255d1a</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
