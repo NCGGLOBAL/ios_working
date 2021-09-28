@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         application.registerForRemoteNotifications()
+        
+        Thread.sleep(forTimeInterval: 1.0)
 
         // [END register_for_notifications]
 //        KakaoSDKCommon.initSDK(appKey: "d3486cb7bb7f9255cec01ca61e7dbc2f")

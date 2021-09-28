@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>303569745392-tccahsqk4am4n7u91b3lmcd2790nqsev.apps.googleusercontent.com</string>
+	<string>303569745392-gfnuic3sdfiobe27netjmkkkujcfpfpo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.303569745392-tccahsqk4am4n7u91b3lmcd2790nqsev</string>
+	<string>com.googleusercontent.apps.303569745392-gfnuic3sdfiobe27netjmkkkujcfpfpo</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD-_lkQWenHwhKM9hCsvPcUgJvREDF_zEg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.podoal</string>
+	<string>kr.fanbridge.podoaltv</string>
 	<key>PROJECT_ID</key>
 	<string>podoal-582bc</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:303569745392:ios:7349e9d9774a05ed141935</string>
+	<string>1:303569745392:ios:540405a209b7334c141935</string>
 </dict>
 </plist>
