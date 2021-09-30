@@ -14,6 +14,8 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var collectionView: UICollectionView!
 
     let imagePicker = UIImagePickerController()
+    
+    let LIMIT_IMAGE_SIZE = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         imagePicker.delegate = self
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationItem.title = "\(AppDelegate.ImageFileArray.count) / 9"
+        self.navigationItem.title = "\(AppDelegate.ImageFileArray.count) / \(LIMIT_IMAGE_SIZE)"
     }
     
     func openCamera() {
@@ -64,7 +66,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
             AppDelegate.imageArray.append(imageItem)
             AppDelegate.ImageFileArray.append(imageFileItem)
             
-            self.navigationItem.title = "\(AppDelegate.imageArray.count) / 9"
+            self.navigationItem.title = "\(AppDelegate.imageArray.count) / \(LIMIT_IMAGE_SIZE)"
         }
         self.collectionView.reloadData()
         
@@ -137,7 +139,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func onClickCamera(_ sender: UIButton) {
-        if AppDelegate.ImageFileArray.count > 9 {
+        if AppDelegate.ImageFileArray.count >= LIMIT_IMAGE_SIZE {
             self.setCommonPopup(msg: "10개의 이미지만 등록 가능합니다.")
             return
         }
@@ -145,7 +147,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func onClickAlbum(_ sender: Any) {
-        if AppDelegate.ImageFileArray.count > 9 {
+        if AppDelegate.ImageFileArray.count >= LIMIT_IMAGE_SIZE {
             self.setCommonPopup(msg: "10개의 이미지만 등록 가능합니다.")
             return
         }
