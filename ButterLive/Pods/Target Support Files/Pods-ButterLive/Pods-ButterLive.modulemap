@@ -1,0 +1,6 @@
+framework module Pods_ButterLive {
+  umbrella header "Pods-ButterLive-umbrella.h"
+
+  export *
+  module * { export * }
+}
