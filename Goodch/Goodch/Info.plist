@@ -22,9 +22,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-            <array>
-                <string>goodchscheme</string>
-            </array>
+			<array>
+				<string>goodchscheme</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
