@@ -141,6 +141,22 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         let urlScheme = url.scheme
         let urlString = url.absoluteString
         let decodeString = urlString
+        
+        if( url.scheme != "http" && url.scheme != "https" ) {
+            if( url.scheme == "ispmobile" && !UIApplication.shared.canOpenURL(url) ) {  //ISP 미설치 시
+                UIApplication.shared.openURL(URL(string: "http://itunes.apple.com/kr/app/id369125087?mt=8")!)
+            } else if( url.scheme == "kftc-bankpay" && !UIApplication.shared.canOpenURL(url) ) {    //BANKPAY 미설치 시
+                UIApplication.shared.openURL(URL(string: "http://itunes.apple.com/us/app/id398456030?mt=8")!)
+            } else {
+                if( UIApplication.shared.canOpenURL(url) ) {
+                    UIApplication.shared.openURL(url)
+                } else {
+                    //1. App 미설치 확인
+                    //2. info.plist 내 scheme 등록 확인
+                }
+            }
+        }
+        
         #if DEBUG
             print("url : \(url)")
             print("url absoluteString: \(url.absoluteString)")

@@ -115,6 +115,41 @@
 		<string>shinhan-sr-ansimclick-payco</string>
 		<string>shinhan-sr-ansimclick-naverpay</string>
 		<string>hanawalletmembers</string>
+		<string>kftc-bankpay</string>
+		<string>ispmobile</string>
+		<string>shinhan-sr-ansimclick</string>
+		<string>smshinhanansimclick</string>
+		<string>hdcardappcardansimclick</string>
+		<string>smhyundaiansimclick</string>
+		<string>mpocket.online.ansimclick</string>
+		<string>scardcertiapp</string>
+		<string>cloudpay</string>
+		<string>nhappcardansimclick</string>
+		<string>nonghyupcardansimclick</string>
+		<string>kb-acp</string>
+		<string>lotteappcard</string>
+		<string>lottesmartpay</string>
+		<string>citispay</string>
+		<string>shinsegaeeasypayment</string>
+		<string>kakaotalk</string>
+		<string>tswansimclick</string>
+		<string>nhallonepayansimclick</string>
+		<string>citimobileapp</string>
+		<string>payco</string>
+		<string>hanaskcardmobileportal</string>
+		<string>wooripay</string>
+		<string>lpayapp</string>
+		<string>hanawalletmembers</string>
+		<string>tauthlink</string>
+		<string>ktauthexternalcall</string>
+		<string>upluscorporation</string>
+		<string>liivbank</string>
+		<string>kb-bankpay</string>
+		<string>naversearchthirdlogin</string>
+		<string>lmslpay</string>
+		<string>com.wooricard.wcard</string>
+		<string>newliiv</string>
+		<string>NewSmartPib</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
