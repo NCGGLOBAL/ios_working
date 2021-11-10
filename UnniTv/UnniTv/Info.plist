@@ -23,11 +23,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>unnitvscheme</string>
-				<string>fb652992528465036</string>
-				<string>kakao9140c18f1ae45fc32ee7df96a3b1e2a3</string>
-				<string>adbrix497925905</string>
+				<string>kakaob32e41f4678d77e2abed8b5eaa120290</string>
 			</array>
 		</dict>
 	</array>
@@ -44,7 +41,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>ba109aa09509e4146508f3182324580d</string>
+	<string>b32e41f4678d77e2abed8b5eaa120290</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>

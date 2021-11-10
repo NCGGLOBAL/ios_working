@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         // [END register_for_notifications]
+        KakaoSDKCommon.initSDK(appKey: "b32e41f4678d77e2abed8b5eaa120290")
         
         return true
     }
