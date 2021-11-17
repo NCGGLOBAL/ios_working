@@ -12,6 +12,7 @@ import CoreLocation
 import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoSDKUser
+import AVFoundation
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
@@ -177,6 +178,9 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectViewController") as! ImageSelectViewController
                         self.navigationController?.pushViewController(vc, animated: true)
                         break
+                    break
+                case "ACT1004":
+                    AudioServicesPlayAlertSound(SystemSoundID(1007))
                     break
                     case "ACT1012": // 사진 임시저장 통신
                         let token = actionParamObj?["token"] as? String
