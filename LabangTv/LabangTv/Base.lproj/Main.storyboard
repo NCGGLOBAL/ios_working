@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -294,6 +294,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUg-eN-rcP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2862" y="816"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="2fn-iN-DxK">
+            <objects>
+                <pageViewController storyboardIdentifier="PageVC" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="xDi-f2-1hS" customClass="PageViewController" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G1T-b7-KmR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3620" y="816"/>
+        </scene>
+        <!--Tutorial ContentsVC-->
+        <scene sceneID="2mx-Rm-Aa1">
+            <objects>
+                <viewController storyboardIdentifier="ContentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sV3-9c-k6G" customClass="TutorialContentsVC" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XZS-5m-QdI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNq-jF-ELt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHT-7q-DhS">
+                                <rect key="frame" x="50" y="712" width="314" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="bnt-at-XyS"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                <connections>
+                                    <action selector="startOnClickListner:" destination="sV3-9c-k6G" eventType="touchUpInside" id="s3K-gi-Aw4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Su-Ir-VyX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uNq-jF-ELt" firstAttribute="leading" secondItem="1Su-Ir-VyX" secondAttribute="leading" id="8Qf-9R-3xt"/>
+                            <constraint firstItem="VHT-7q-DhS" firstAttribute="leading" secondItem="1Su-Ir-VyX" secondAttribute="leading" constant="50" id="8xn-Lu-uWA"/>
+                            <constraint firstAttribute="bottom" secondItem="uNq-jF-ELt" secondAttribute="bottom" id="Jll-0d-ywi"/>
+                            <constraint firstItem="1Su-Ir-VyX" firstAttribute="bottom" secondItem="VHT-7q-DhS" secondAttribute="bottom" constant="50" id="OPU-Cx-ks8"/>
+                            <constraint firstItem="1Su-Ir-VyX" firstAttribute="trailing" secondItem="VHT-7q-DhS" secondAttribute="trailing" constant="50" id="XP9-ZW-vSB"/>
+                            <constraint firstItem="uNq-jF-ELt" firstAttribute="trailing" secondItem="1Su-Ir-VyX" secondAttribute="trailing" id="mDH-C4-MOV"/>
+                            <constraint firstItem="uNq-jF-ELt" firstAttribute="top" secondItem="XZS-5m-QdI" secondAttribute="top" id="qh3-xH-sco"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bgImageView" destination="uNq-jF-ELt" id="jTF-Zq-RNS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdg-Qg-Z4F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4410.144927536232" y="815.625"/>
         </scene>
         <!--Sub Web View Controller-->
         <scene sceneID="zjK-mF-rnf">

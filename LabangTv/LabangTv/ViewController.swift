@@ -14,7 +14,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 class ViewController: UIViewController, WKUIDelegate,
-WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
+WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -39,7 +39,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     
     private struct Constants {
         static let callBackHandlerKey = "ios"
+        static let TUTORIAL = "TUTORIAL"
     }
+    
+    let MAX_PAGE_COUNT = 2
+    var currentSelectedPosition = 0
     
     override func loadView() {
         super.loadView()
@@ -71,6 +75,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let ud = UserDefaults.standard
+//        if ud.bool(forKey: Constants.TUTORIAL) == false {
+//            self.initTutorial()
+//            ud.set(true, forKey: Constants.TUTORIAL)
+//        }
+        
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
         } else {
@@ -79,6 +89,76 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
+    
+    var contentImages = ["bg_swipe1", "bg_swipe2"]
+    var pageVC: UIPageViewController!
+    func initTutorial() {
+        // 페이지 뷰 컨트롤러 객체 생성
+        self.pageVC = self.storyboard!.instantiateViewController(withIdentifier: "PageVC") as! UIPageViewController
+        
+        self.pageVC.dataSource = self
+        
+        // 페이지 뷰 컨트롤러의 기본 페이지 지정
+        let startContentVC = self.getContentVC(atIndex: 0)!
+        self.pageVC.setViewControllers([startContentVC], direction: .forward, animated: true)
+        
+        // 페이지 뷰 컨트롤러 출력 영역
+//        self.pageVC.view.frame.origin = CGPoint(x: 0, y: 0)
+//        self.pageVC.view.frame.size.width = self.view.frame.width
+//        self.pageVC.view.frame.size.height = self.view.frame.height
+        
+        // 페이지 뷰 컨트롤러를 마스터 뷰 컨트롤러의 자식 뷰 컨트롤러로 지정
+        self.addChild(self.pageVC)
+        self.view.addSubview(self.pageVC.view)
+        self.pageVC.didMove(toParent: self)
+    }
+    
+    func getContentVC(atIndex idx: Int) -> UIViewController? {
+        // stroyboard ID가 ContentsVC인 뷰 컨트롤러의 인스턴스 생성
+        let pageVC = self.storyboard!.instantiateViewController(withIdentifier: "ContentsVC") as! TutorialContentsVC
+        pageVC.imageFile = self.contentImages[idx]
+        pageVC.pageIndex = idx
+        pageVC.parentView = self.pageVC
+        return pageVC
+    }
+    
+    // 현재의 콘텐츠 뷰 컨트롤러보다 앞쪽에 올 콘텐츠 뷰 컨트롤러 객체
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        // 현재 페이지 인덱스
+        guard var index = (viewController as! TutorialContentsVC).pageIndex else {
+            return nil
+        }
+        // 인덱스가 맨 앞이면 nil
+        guard index > 0 else {
+            return nil
+        }
+        
+        // 이전 페이지 인덱스
+        index -= 1
+        return self.getContentVC(atIndex: index)
+    }
+        
+        // 현재의 콘텐츠 뷰 컨트롤러 뒤쪽에 올 콘텐츠 뷰 컨트롤러 객체
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        // 현재 페이지 인덱스
+        guard var index = (viewController as! TutorialContentsVC).pageIndex else {
+            return nil
+        }
+        
+        
+        // 다음 페이지 인덱스
+        index += 1
+    
+        currentSelectedPosition = index
+        
+        // 인덱스는 배열 데이터의 크기보다 작아야함
+        guard index < self.contentImages.count else {
+            return nil
+        }
+        
+        return self.getContentVC(atIndex: index)
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         if AppDelegate.QR_URL != "" {

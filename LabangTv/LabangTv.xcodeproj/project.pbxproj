@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		6BDCFE766F3C1ADAD19888D9 /* Pods_LabangTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
 		FF45458F25B5CF3200B05D71 /* ImageSelectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */; };
@@ -92,6 +93,7 @@
 /* Begin PBXFileReference section */
 		03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabangTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
+		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectDetailViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				FF1298C4253829E8000731CE /* LiveViewController.swift */,
 				FFE8918F259A28F500497503 /* Bridge-Header.h */,
 				FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */,
+				17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */,
 			);
 			path = LabangTv;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				FF60BA1D247EA18E00B0B1A8 /* SceneDelegate.swift in Sources */,
 				FFE8923525A76C2900497503 /* ELCAssetCollectionPicker.m in Sources */,
 				FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */,
+				17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */,
 				FFE8922625A76C2900497503 /* JYBStringHelper.m in Sources */,
 				FFE8922925A76C2900497503 /* JYBLoadingIndicator.m in Sources */,
 				FFE8922B25A76C2900497503 /* UIImage+Color.m in Sources */,
