@@ -202,6 +202,9 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 switch actionCode {
                     case "ACT1001": // 네이버 페이
                     break
+                case "ACT1002": // qrcode
+                    performSegue(withIdentifier: "qrReaderSeque", sender: nil)
+                    break
                     case "ACT1011": // 카메라 및 사진 라이브라러 호출
                         AppDelegate.imageModel.token = actionParamObj?["token"] as? String
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입

@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>더엔페이(THE N PAY)-포인트</string>
+	<string>더엔페이</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -33,7 +33,7 @@
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
-	<string>더엔페이(THE N PAY)-포인트</string>
+	<string>더엔페이</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
