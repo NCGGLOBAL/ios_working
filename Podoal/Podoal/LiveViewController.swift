@@ -72,6 +72,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
+        kit?.stopPreview()
+        kit?.streamerBase.stopStream()
     }
     
     func initWebView() {
