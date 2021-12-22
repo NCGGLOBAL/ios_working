@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1752730627738E28003ADBDD /* push_sound.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 1752730527738E28003ADBDD /* push_sound.aiff */; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		E11BA92708674353AB520199 /* Pods_SangsangMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C4B9644CB38A6BF194E908 /* Pods_SangsangMarket.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -92,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
+		1752730527738E28003ADBDD /* push_sound.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = push_sound.aiff; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		2EB171E0EA63378FD6084570 /* Pods-SangsangMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SangsangMarket.debug.xcconfig"; path = "Target Support Files/Pods-SangsangMarket/Pods-SangsangMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,7 +101,7 @@
 		98C4B9644CB38A6BF194E908 /* Pods_SangsangMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SangsangMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectDetailViewController.swift; sourceTree = "<group>"; };
-		FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = LabangTv/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
+		FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = SangsangMarket/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
 		FF4FA9EC248105040059908A /* SubWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubWebViewController.swift; sourceTree = "<group>"; };
 		FF60BA1A247EA18E00B0B1A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF60BA1C247EA18E00B0B1A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		FF60BA19247EA18E00B0B1A8 /* SangsangMarket */ = {
 			isa = PBXGroup;
 			children = (
+				1752730527738E28003ADBDD /* push_sound.aiff */,
 				FFE89162259A230700497503 /* Libraries */,
 				FFAD294A2494946900E5E559 /* Model */,
 				FFAD29472494943F00E5E559 /* Data */,
@@ -491,6 +494,7 @@
 				FFE8923025A76C2900497503 /* Overlay.png in Resources */,
 				FF60BA55247EB27700B0B1A8 /* icon_stop.png in Resources */,
 				FF60BA27247EA19400B0B1A8 /* LaunchScreen.storyboard in Resources */,
+				1752730627738E28003ADBDD /* push_sound.aiff in Resources */,
 				FF60BA33247EAACD00B0B1A8 /* GoogleService-Info.plist in Resources */,
 				FF60BA4D247EB27700B0B1A8 /* top_back.png in Resources */,
 				FF60BA51247EB27700B0B1A8 /* icon_camerachange.png in Resources */,
