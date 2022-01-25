@@ -42,6 +42,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         static let callBackHandlerKey = "ios"
     }
     
+    var popupView: WKWebView?
+    
     override func loadView() {
         super.loadView()
         
@@ -100,6 +102,23 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
         
         webView.load(request)
+    }
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        popupView = WKWebView(frame: UIScreen.main.bounds, configuration: configuration)
+        popupView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        popupView?.uiDelegate = self
+          
+        view.addSubview(popupView!)
+                
+        return popupView
+    }
+    
+    func webViewDidClose(_ webView: WKWebView) {
+        if webView == popupView {
+            popupView?.removeFromSuperview()
+            popupView = nil
+        }
     }
 
     // JS -> Native CALL
