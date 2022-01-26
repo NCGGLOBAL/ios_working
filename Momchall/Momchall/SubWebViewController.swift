@@ -142,7 +142,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
             UIApplication.shared.openURL(url)
         } else {
             if (urlString.contains("pf.kakao.com") ||
-                urlString.contains("nid.naver.com") ||
+                urlString.contains("order.pay.naver.com") ||
                 urlString.contains("m.facebook.com") ||
                 urlString.contains("api.instagram.com") ||
                 urlString.contains("accounts.kakao.com")) {

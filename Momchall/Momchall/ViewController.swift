@@ -435,7 +435,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                 UIApplication.shared.openURL(url)
             } else {
                 if (urlString.contains("pf.kakao.com") ||
-                    urlString.contains("nid.naver.com") ||
+                    urlString.contains("order.pay.naver.com") ||
                     urlString.contains("m.facebook.com") ||
                     urlString.contains("accounts.kakao.com")) {
                     self.backButton.isHidden = false
