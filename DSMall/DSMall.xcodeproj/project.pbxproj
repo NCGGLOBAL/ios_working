@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171B622627A2E50B009383B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 171B622527A2E50B009383B6 /* GoogleService-Info.plist */; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		8E29FD7688701C29548B96FF /* Pods_DSMall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F21D2CCDFB6956E537C4A19 /* Pods_DSMall.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
+		171B622527A2E50B009383B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		1F21D2CCDFB6956E537C4A19 /* Pods_DSMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D905BD0E65408915C0A11BE /* Pods-DSMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSMall.release.xcconfig"; path = "Target Support Files/Pods-DSMall/Pods-DSMall.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		FF60BA19247EA18E00B0B1A8 /* DSMall */ = {
 			isa = PBXGroup;
 			children = (
+				171B622527A2E50B009383B6 /* GoogleService-Info.plist */,
 				FFE89162259A230700497503 /* Libraries */,
 				FFAD294A2494946900E5E559 /* Model */,
 				FFAD29472494943F00E5E559 /* Data */,
@@ -496,6 +499,7 @@
 				FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */,
 				FF60BA50247EB27700B0B1A8 /* btn_camera@2x.png in Resources */,
 				FF60BA52247EB27700B0B1A8 /* btn_gallery.png in Resources */,
+				171B622627A2E50B009383B6 /* GoogleService-Info.plist in Resources */,
 				FF60BA4B247EB27700B0B1A8 /* icon_del.png in Resources */,
 				FFE8922E25A76C2900497503 /* Overlay_select@2x.png in Resources */,
 				FF60BA53247EB27700B0B1A8 /* icon_del@2x.png in Resources */,
@@ -762,7 +766,7 @@
 				CODE_SIGN_ENTITLEMENTS = DSMall/DSMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DSMall/Info.plist;
@@ -771,7 +775,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall;
 				PRODUCT_NAME = DSMall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -792,7 +796,7 @@
 				CODE_SIGN_ENTITLEMENTS = DSMall/DSMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DSMall/Info.plist;
@@ -801,7 +805,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall;
 				PRODUCT_NAME = DSMall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -816,7 +820,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -825,7 +829,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -840,7 +844,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -849,7 +853,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

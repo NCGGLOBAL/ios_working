@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 import KakaoSDKCommon
 import KakaoSDKAuth
 
@@ -31,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         // [START set_messaging_delegate]
-//        Messaging.messaging().delegate = self
-//        Messaging.messaging().shouldEstablishDirectChannel = true
+        Messaging.messaging().delegate = self
+        Messaging.messaging().shouldEstablishDirectChannel = true
         // [END set_messaging_delegate]
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // this callback will not be fired till the user taps on the notification launching the application.
       // TODO: Handle data of notification
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-//       Messaging.messaging().appDidReceiveMessage(userInfo)
+       Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
         #if DEBUG
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // this callback will not be fired till the user taps on the notification launching the application.
       // TODO: Handle data of notification
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-//       Messaging.messaging().appDidReceiveMessage(userInfo)
+       Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
         #if DEBUG
@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs token retrieved: \(deviceToken)")
         #endif
       // With swizzling disabled you must set the APNs token here.
-//       Messaging.messaging().apnsToken = deviceToken
+       Messaging.messaging().apnsToken = deviceToken
     }
 
     // MARK: UISceneSession Lifecycle
@@ -137,9 +137,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         print("open url : \(url.absoluteString)")
         #endif
-//        if (AuthApi.isKakaoTalkLoginUrl(url)) {
-//            return AuthController.handleOpenUrl(url: url)
-//        }
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.handleOpenUrl(url: url)
+        }
         UIApplication.shared.open(url, options: [:])
         return true
     }
@@ -156,7 +156,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     let userInfo = notification.request.content.userInfo
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
-//     Messaging.messaging().appDidReceiveMessage(userInfo)
+     Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print message ID.
     if let messageID = userInfo[gcmMessageIDKey] {
         #if DEBUG
@@ -193,109 +193,107 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 }
 // [END ios_10_message_handling]
 
-//extension AppDelegate : MessagingDelegate {
-//  // [START refresh_token]
-//  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-//    #if DEBUG
-//    print("Firebase registration token: \(fcmToken)")
-//    #endif
-//    AppDelegate.pushkey = fcmToken
-//    let dataDict:[String: String] = ["token": fcmToken]
-//    NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-//    self.requestPushSetting()
-//    // TODO: If necessary send token to application server.
-//    // Note: This callback is fired at each app startup and whenever a new token is generated.
-//  }
-//  // [END refresh_token]
-//  // [START ios_10_data_message]
-//  // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-//  // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-//  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-//    #if DEBUG
-//    print("Received data message: \(remoteMessage.appData)")
-//    #endif
-//  }
-//  // [END ios_10_data_message]
-//    func requestPushSetting() {
-//        let defaultConfigObject = URLSessionConfiguration.default
-//        let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
-//
-//        //Create an URLRequest
-//        let url = URL(string: AppDelegate.PUSH_REG_URL)
-//        var urlRequest: URLRequest? = nil
-//        if let url = url {
-//            urlRequest = URLRequest(url: url)
-//
-//            var dicParam: [AnyHashable : String] = [:]
-//            dicParam["os"] = "IPhone"
-//            dicParam["deviceId"] = AppDelegate.deviceId
-//            dicParam["pushKey"] = AppDelegate.pushkey
-//            dicParam["memberKey"] = ""
-//
-//            dicParam["appId"] = ""
-//            dicParam["userId"] = ""
-//            dicParam["channelId"] = ""
-//            dicParam["requestId"] = ""
-//
-//            //Create POST Params and add it to HTTPBody
-//            do {
-//                let jsonData = try JSONSerialization.data(withJSONObject: dicParam, options: [])
-//                let params = String(data: jsonData, encoding: .utf8) ?? ""
-//
-//                urlRequest?.httpMethod = "POST"
-//                urlRequest?.httpBody = params.data(using: .utf8)
-//                urlRequest?.setValue("text/html", forHTTPHeaderField: "Content-Type")
-//                #if DEBUG
-//                print("params : \(params)")
-//                print("params : \(urlRequest)")
-//                #endif
-//
-//                let dataTask = defaultSession.dataTask(with: urlRequest!, completionHandler: { data, response, error in
-//                    //Handle your response here
-//
-//                #if DEBUG
-//                    if let error = error {
-//                        print("error : \(error)")
-//                    }
-//                    if let response = response {
-//                        print("response : \(response)")
-//                    }
-//
-//                    if data != nil {
-//                        var jsonError: Error?
-//                        var dicResData: String? = nil
-//                        do {
-//                            if let data = data {
-//                                dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
-//                            }
-//                        } catch let jsonError {
-//                        }
-//
-//
-//                        let jsonData = dicResData?.data(using: .utf8)
-//
-//                        print("jsonData : \(jsonData ?? nil)")
-//                        if let jsonError = jsonError {
-//                            print("jsonData : \(jsonError)")
-//                        }
-//
-//
-//                        var sResultData: String? = nil
-//                        if let data = data {
-//                            sResultData = String(data: data, encoding: .utf8)
-//                        }
-//
-//                        print("sResultData : \(sResultData ?? "")")
-//                    }
-//                #endif
-//
-//                })
-//                dataTask.resume()
-//                } catch let error as NSError {
-//                    print(error)
-//                }
-//        }
-//    }
-//}
-//
-//
+extension AppDelegate : MessagingDelegate {
+  // [START refresh_token]
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    #if DEBUG
+    print("Firebase registration token: \(fcmToken)")
+    #endif
+    AppDelegate.pushkey = fcmToken
+    let dataDict:[String: String] = ["token": fcmToken]
+    NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+    self.requestPushSetting()
+    // TODO: If necessary send token to application server.
+    // Note: This callback is fired at each app startup and whenever a new token is generated.
+  }
+  // [END refresh_token]
+  // [START ios_10_data_message]
+  // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+  // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+    #if DEBUG
+    print("Received data message: \(remoteMessage.appData)")
+    #endif
+  }
+  // [END ios_10_data_message]
+    func requestPushSetting() {
+        let defaultConfigObject = URLSessionConfiguration.default
+        let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
+
+        //Create an URLRequest
+        let url = URL(string: AppDelegate.PUSH_REG_URL)
+        var urlRequest: URLRequest? = nil
+        if let url = url {
+            urlRequest = URLRequest(url: url)
+
+            var dicParam: [AnyHashable : String] = [:]
+            dicParam["os"] = "IPhone"
+            dicParam["deviceId"] = AppDelegate.deviceId
+            dicParam["pushKey"] = AppDelegate.pushkey
+            dicParam["memberKey"] = ""
+
+            dicParam["appId"] = ""
+            dicParam["userId"] = ""
+            dicParam["channelId"] = ""
+            dicParam["requestId"] = ""
+
+            //Create POST Params and add it to HTTPBody
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: dicParam, options: [])
+                let params = String(data: jsonData, encoding: .utf8) ?? ""
+
+                urlRequest?.httpMethod = "POST"
+                urlRequest?.httpBody = params.data(using: .utf8)
+                urlRequest?.setValue("text/html", forHTTPHeaderField: "Content-Type")
+                #if DEBUG
+                print("params : \(params)")
+                print("params : \(urlRequest)")
+                #endif
+
+                let dataTask = defaultSession.dataTask(with: urlRequest!, completionHandler: { data, response, error in
+                    //Handle your response here
+
+                #if DEBUG
+                    if let error = error {
+                        print("error : \(error)")
+                    }
+                    if let response = response {
+                        print("response : \(response)")
+                    }
+
+                    if data != nil {
+                        var jsonError: Error?
+                        var dicResData: String? = nil
+                        do {
+                            if let data = data {
+                                dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
+                            }
+                        } catch let jsonError {
+                        }
+
+
+                        let jsonData = dicResData?.data(using: .utf8)
+
+                        print("jsonData : \(jsonData ?? nil)")
+                        if let jsonError = jsonError {
+                            print("jsonData : \(jsonError)")
+                        }
+
+
+                        var sResultData: String? = nil
+                        if let data = data {
+                            sResultData = String(data: data, encoding: .utf8)
+                        }
+
+                        print("sResultData : \(sResultData ?? "")")
+                    }
+                #endif
+
+                })
+                dataTask.resume()
+                } catch let error as NSError {
+                    print(error)
+                }
+        }
+    }
+}
