@@ -25,6 +25,7 @@
 			<array>
 				<string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
 				<string>dsmallscheme</string>
+				<string>naverlogin</string>
 			</array>
 		</dict>
 	</array>
@@ -118,6 +119,8 @@
 		<string>shinhan-sr-ansimclick-payco</string>
 		<string>shinhan-sr-ansimclick-naverpay</string>
 		<string>hanawalletmembers</string>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import KakaoSDKCommon
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -57,6 +58,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // [END register_for_notifications]
         KakaoSDKCommon.initSDK(appKey: "d3486cb7bb7f9255cec01ca61e7dbc2f")
+        
+        NaverThirdPartyLoginConnection.getSharedInstance().isInAppOauthEnable = true
+        NaverThirdPartyLoginConnection.getSharedInstance().isNaverAppOauthEnable = true
+
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        instance?.isNaverAppOauthEnable = true
+        instance?.isInAppOauthEnable = true
+
+        instance?.serviceUrlScheme = kServiceAppUrlScheme // 앱을 등록할 때 입력한 URL Scheme
+        instance?.consumerKey = kConsumerKey // 상수 - client id
+        instance?.consumerSecret = kConsumerSecret // pw
+        instance?.appName = kServiceAppName // app name
         
         return true
     }
@@ -140,6 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (AuthApi.isKakaoTalkLoginUrl(url)) {
             return AuthController.handleOpenUrl(url: url)
         }
+        NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
         UIApplication.shared.open(url, options: [:])
         return true
     }

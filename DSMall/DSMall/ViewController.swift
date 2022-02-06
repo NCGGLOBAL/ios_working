@@ -12,9 +12,12 @@ import CoreLocation
 import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoSDKUser
+import NaverThirdPartyLogin
+import Alamofire
 
 class ViewController: UIViewController, WKUIDelegate,
-WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource {
+WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource,
+                      NaverThirdPartyLoginConnectionDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -44,6 +47,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     let MAX_PAGE_COUNT = 2
     var currentSelectedPosition = 0
+    
+    let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     override func loadView() {
         super.loadView()
@@ -179,6 +184,27 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
         
         webView.load(request)
+    }
+    
+    // 로그인에 성공한 경우 호출
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        print("Success login")
+        getInfo()
+    }
+    
+    // referesh token
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        loginInstance?.accessToken
+    }
+    
+    // 로그아웃
+    func oauth20ConnectionDidFinishDeleteToken() {
+        print("log out")
+    }
+    
+    // 모든 error
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        print("error = \(error.localizedDescription)")
     }
 
     // JS -> Native CALL
@@ -424,7 +450,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 case "ACT1020":
                     print("ACT1020 - sns로그인")
                     let snsType = actionParamObj?["snsType"] as? Int
-                    if snsType == 2 {   // 카카오 로그인
+                    if snsType == 1 {   // 네이버 로그인
+                        loginInstance?.delegate = self
+                        loginInstance?.requestThirdPartyLogin()
+                    } else if snsType == 2 {    // 카카오 로그인
                         // 카카오톡 설치 여부 확인
                         if (UserApi.isKakaoTalkLoginAvailable()) {
                             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
@@ -730,6 +759,75 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             } catch let error as NSError {
               print(error)
             }
+    }
+    
+    // RESTful API, id가져오기
+    func getInfo() {
+      guard let isValidAccessToken = loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+      
+      if !isValidAccessToken {
+        return
+      }
+      
+      guard let tokenType = loginInstance?.tokenType else { return }
+      guard let accessToken = loginInstance?.accessToken else { return }
+        
+      let urlStr = "https://openapi.naver.com/v1/nid/me"
+      let url = URL(string: urlStr)!
+      
+      let authorization = "\(tokenType) \(accessToken)"
+      
+      let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
+      
+      req.responseJSON { response in
+        guard let result = response.value as? [String: Any] else { return }
+        guard let object = result["response"] as? [String: Any] else { return }
+        guard let name = object["name"] as? String else { return }
+        guard let email = object["email"] as? String else { return }
+        guard let id = object["id"] as? String else {return}
+        
+        print(email)
+        
+          var accountDic = Dictionary<String, String>()
+          accountDic.updateValue(email, forKey: "email")
+          accountDic.updateValue(name, forKey: "nickname")
+          accountDic.updateValue("", forKey: "profileImagePath")
+          accountDic.updateValue("", forKey: "thumnailPath")
+          accountDic.updateValue(id, forKey: "id")
+          do {
+              let accountJsonData = try JSONSerialization.data(withJSONObject: accountDic, options: [])
+    //                                                let accountJsonEncodedData = accountJsonData.base64EncodedString()
+              let accountDicString = String(data: accountJsonData, encoding: .utf8) ?? ""
+              
+              var dic = Dictionary<String, String>()
+              dic.updateValue(accessToken ?? "", forKey: "accessToken")
+              dic.updateValue(accountDicString, forKey: "userInfo")
+              #if DEBUG
+              print("userInfo : \(accountDicString)")
+              #endif
+              
+              do {
+                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+               let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                  let javascript = "\(self.callback)('\(stringValue)')"
+                  #if DEBUG
+                  print("jsonData : \(jsonData)")
+                  print("javascript : \(javascript)")
+                  #endif
+                  // call back!
+                  self.webView.evaluateJavaScript(javascript) { (result, error) in
+                      #if DEBUG
+                      print("result : \(String(describing: result))")
+                      print("error : \(error)")
+                      #endif
+                  }
+              } catch let error as NSError {
+                  print(error)
+              }
+          } catch let error as NSError {
+              print(error)
+          }
+      }
     }
     
 //    func showToast(message : String) {

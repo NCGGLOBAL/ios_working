@@ -91,12 +91,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
 		171B622527A2E50B009383B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		1F21D2CCDFB6956E537C4A19 /* Pods_DSMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D905BD0E65408915C0A11BE /* Pods-DSMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSMall.release.xcconfig"; path = "Target Support Files/Pods-DSMall/Pods-DSMall.release.xcconfig"; sourceTree = "<group>"; };
-		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
 		7CE8DFB08CF82A1B3287E076 /* Pods-DSMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSMall.debug.xcconfig"; path = "Target Support Files/Pods-DSMall/Pods-DSMall.debug.xcconfig"; sourceTree = "<group>"; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectDetailViewController.swift; sourceTree = "<group>"; };
@@ -206,8 +204,6 @@
 		5B09EBBDB2A5E88A5E27D900 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */,
-				0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */,
 				7CE8DFB08CF82A1B3287E076 /* Pods-DSMall.debug.xcconfig */,
 				2D905BD0E65408915C0A11BE /* Pods-DSMall.release.xcconfig */,
 			);
@@ -766,7 +762,7 @@
 				CODE_SIGN_ENTITLEMENTS = DSMall/DSMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DSMall/Info.plist;
@@ -775,7 +771,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall;
 				PRODUCT_NAME = DSMall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -796,7 +792,7 @@
 				CODE_SIGN_ENTITLEMENTS = DSMall/DSMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DSMall/Info.plist;
@@ -805,7 +801,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall;
 				PRODUCT_NAME = DSMall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -820,7 +816,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -829,7 +825,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -844,7 +840,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QHDWD9NL3;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -853,7 +849,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mallup.dsmall.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
