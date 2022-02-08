@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>553130272284-9chf2jsujb14dl05prcgph7suopvun03.apps.googleusercontent.com</string>
+	<string>553130272284-6vbo7upipdi8cjsmssq0m7h3sbr0llpb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.553130272284-9chf2jsujb14dl05prcgph7suopvun03</string>
+	<string>com.googleusercontent.apps.553130272284-6vbo7upipdi8cjsmssq0m7h3sbr0llpb</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAfzlLVZVijTrYIHHc9Tk3gU8a-qvrt6xE</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.byapps.thehana</string>
+	<string>com.creator.thehana</string>
 	<key>PROJECT_ID</key>
 	<string>thehana-1f868</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:553130272284:ios:4bb1525eb526680029a1d9</string>
+	<string>1:553130272284:ios:d0fb2f526ff9cb1829a1d9</string>
 </dict>
 </plist>
