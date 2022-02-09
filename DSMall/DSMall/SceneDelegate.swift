@@ -26,9 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           if (AuthApi.isKakaoTalkLoginUrl(url)) {
             _ = AuthController.handleOpenUrl(url: url)
           }
-            NaverThirdPartyLoginConnection
-                .getSharedInstance()?
-                .receiveAccessToken(url)
+            if NaverThirdPartyLoginConnection.getSharedInstance().isValidAccessTokenExpireTimeNow() {
+                NaverThirdPartyLoginConnection
+                    .getSharedInstance()?
+                    .receiveAccessToken(url)
+            }
         }
     }
 
