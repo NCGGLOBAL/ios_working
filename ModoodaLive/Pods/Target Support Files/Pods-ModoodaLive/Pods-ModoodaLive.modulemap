@@ -1,0 +1,6 @@
+framework module Pods_ModoodaLive {
+  umbrella header "Pods-ModoodaLive-umbrella.h"
+
+  export *
+  module * { export * }
+}
