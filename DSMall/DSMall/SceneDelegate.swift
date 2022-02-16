@@ -25,12 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url {
           if (AuthApi.isKakaoTalkLoginUrl(url)) {
             _ = AuthController.handleOpenUrl(url: url)
+          } else {
+              NaverThirdPartyLoginConnection
+                  .getSharedInstance()?
+                  .receiveAccessToken(url)
           }
-            if NaverThirdPartyLoginConnection.getSharedInstance().isValidAccessTokenExpireTimeNow() {
-                NaverThirdPartyLoginConnection
-                    .getSharedInstance()?
-                    .receiveAccessToken(url)
-            }
         }
     }
 

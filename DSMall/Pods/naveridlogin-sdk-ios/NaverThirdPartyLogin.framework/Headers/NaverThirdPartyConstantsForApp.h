@@ -32,8 +32,8 @@ typedef enum {
     OK
 } OAuthLoginState;
 
-#define kServiceAppUrlScheme    @"naverlogin"
+#define kServiceAppUrlScheme    @"naverLogin"
 
-#define kConsumerKey            @"jyvqXeaVOVmV"
+#define kConsumerKey            @"3_YQlU4igGa3Cnx6cJzU"
 #define kConsumerSecret         @"W_uMqETG5n"
 #define kServiceAppName         @"대순몰"

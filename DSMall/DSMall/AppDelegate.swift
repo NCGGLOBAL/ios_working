@@ -152,8 +152,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         if (AuthApi.isKakaoTalkLoginUrl(url)) {
             return AuthController.handleOpenUrl(url: url)
+        } else {
+            NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
         }
-        NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
         UIApplication.shared.open(url, options: [:])
         return true
     }

@@ -764,71 +764,73 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     // RESTful API, id가져오기
     func getInfo() {
-      guard let isValidAccessToken = loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
-      
-      if !isValidAccessToken {
-        return
-      }
-      
-      guard let tokenType = loginInstance?.tokenType else { return }
-      guard let accessToken = loginInstance?.accessToken else { return }
-        
-      let urlStr = "https://openapi.naver.com/v1/nid/me"
-      let url = URL(string: urlStr)!
-      
-      let authorization = "\(tokenType) \(accessToken)"
-      
-      let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
-      
-      req.responseJSON { response in
-        guard let result = response.value as? [String: Any] else { return }
-        guard let object = result["response"] as? [String: Any] else { return }
-        guard let name = object["name"] as? String else { return }
-        guard let email = object["email"] as? String else { return }
-        guard let id = object["id"] as? String else {return}
-        
-        print(email)
-        
-          var accountDic = Dictionary<String, String>()
-          accountDic.updateValue(email, forKey: "email")
-          accountDic.updateValue(name, forKey: "nickname")
-          accountDic.updateValue("", forKey: "profileImagePath")
-          accountDic.updateValue("", forKey: "thumnailPath")
-          accountDic.updateValue(id, forKey: "id")
-          do {
-              let accountJsonData = try JSONSerialization.data(withJSONObject: accountDic, options: [])
-    //                                                let accountJsonEncodedData = accountJsonData.base64EncodedString()
-              let accountDicString = String(data: accountJsonData, encoding: .utf8) ?? ""
+        DispatchQueue.main.async {
+            guard let isValidAccessToken = self.loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+            
+            if !isValidAccessToken {
+              return
+            }
+            
+            guard let tokenType = self.loginInstance?.tokenType else { return }
+            guard let accessToken = self.loginInstance?.accessToken else { return }
               
-              var dic = Dictionary<String, String>()
-              dic.updateValue(accessToken ?? "", forKey: "accessToken")
-              dic.updateValue(accountDicString, forKey: "userInfo")
-              #if DEBUG
-              print("userInfo : \(accountDicString)")
-              #endif
+            let urlStr = "https://openapi.naver.com/v1/nid/me"
+            let url = URL(string: urlStr)!
+            
+            let authorization = "\(tokenType) \(accessToken)"
+            
+            let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
+            
+            req.responseJSON { response in
+                do {
+              guard let result = response.value as? [String: Any] else { return }
+              guard let object = result["response"] as? [String: Any] else { return }
+              guard let name = object["name"] as? String else { return }
+              guard let email = object["email"] as? String else { return }
+              guard let id = object["id"] as? String else {return}
               
-              do {
-                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-               let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                  let javascript = "\(self.callback)('\(stringValue)')"
-                  #if DEBUG
-                  print("jsonData : \(jsonData)")
-                  print("javascript : \(javascript)")
-                  #endif
-                  // call back!
-                  self.webView.evaluateJavaScript(javascript) { (result, error) in
-                      #if DEBUG
-                      print("result : \(String(describing: result))")
-                      print("error : \(error)")
-                      #endif
-                  }
-              } catch let error as NSError {
-                  print(error)
-              }
-          } catch let error as NSError {
-              print(error)
-          }
-      }
+              print(email)
+              
+                var accountDic = Dictionary<String, String>()
+                accountDic.updateValue(email, forKey: "email")
+                accountDic.updateValue(name, forKey: "nickname")
+                accountDic.updateValue(id, forKey: "id")
+                
+                    let accountJsonData = try JSONSerialization.data(withJSONObject: accountDic, options: [])
+          //                                                let accountJsonEncodedData = accountJsonData.base64EncodedString()
+                    let accountDicString = String(data: accountJsonData, encoding: .utf8) ?? ""
+                    
+                    var dic = Dictionary<String, String>()
+                    dic.updateValue(accessToken ?? "", forKey: "accessToken")
+                    dic.updateValue(accountDicString, forKey: "userInfo")
+                    #if DEBUG
+                    print("userInfo : \(accountDicString)")
+                    #endif
+                    
+                    do {
+                      let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                     let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                        let javascript = "\(self.callback)('\(stringValue)')"
+                        #if DEBUG
+                        print("jsonData : \(jsonData)")
+                        print("javascript : \(javascript)")
+                        #endif
+                        // call back!
+                        self.webView.evaluateJavaScript(javascript) { (result, error) in
+                            #if DEBUG
+                            print("result : \(String(describing: result))")
+                            print("error : \(error)")
+                            #endif
+                        }
+                    } catch let error as NSError {
+                        print(error)
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }
+      
     }
     
 //    func showToast(message : String) {
