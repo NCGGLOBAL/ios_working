@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>핫플</string>
+	<string>핫플 라이브</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -33,7 +33,7 @@
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
-	<string>핫플</string>
+	<string>핫플 라이브</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
