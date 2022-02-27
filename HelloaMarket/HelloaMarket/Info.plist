@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>헬로아마켓</string>
+	<string>헬로아러쉬</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -24,7 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
-				<string>labangtvscheme</string>
+				<string>helloamarketscheme</string>
 			</array>
 		</dict>
 	</array>
@@ -33,7 +33,7 @@
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
-	<string>헬로아마켓</string>
+	<string>헬로아러쉬</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
