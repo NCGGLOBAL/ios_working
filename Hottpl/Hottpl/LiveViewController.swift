@@ -15,7 +15,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    let urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
+    let urlString = "https://live.hottpl.com/addon/wlive/TV_live_creator.asp"
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 webview-type=sub"
