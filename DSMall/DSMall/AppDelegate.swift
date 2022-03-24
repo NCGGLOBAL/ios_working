@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         // [END register_for_notifications]
-        KakaoSDKCommon.initSDK(appKey: "81ab9684a0d3d9648be661938be0bbf7")
+        KakaoSDKCommon.initSDK(appKey: "f698f15a2ccbf3754228fe525750c526")
         
         NaverThirdPartyLoginConnection.getSharedInstance().isInAppOauthEnable = true
         NaverThirdPartyLoginConnection.getSharedInstance().isNaverAppOauthEnable = true
