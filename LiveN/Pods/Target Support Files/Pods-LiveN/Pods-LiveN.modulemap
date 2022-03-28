@@ -1,0 +1,6 @@
+framework module Pods_LiveN {
+  umbrella header "Pods-LiveN-umbrella.h"
+
+  export *
+  module * { export * }
+}
