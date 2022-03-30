@@ -118,7 +118,7 @@ DEPENDENCIES:
   - libksygpulive (from `https://github.com/ksvc/KSYLive_iOS.git`, tag `v3.0.5`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - Firebase
     - FirebaseAnalytics
@@ -173,6 +173,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
 
-PODFILE CHECKSUM: 5b15d580497697caad9f8619c97976ab9c9df209
+PODFILE CHECKSUM: c0b46d6e772bff8b50a7476095e4cf3b8473e353
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.10.2
