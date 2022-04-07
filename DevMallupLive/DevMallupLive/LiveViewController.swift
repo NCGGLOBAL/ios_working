@@ -345,7 +345,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             print(error)
                         }
                     break
-                    case "ACT1031": // 종료
+                    case "ACT1031", "ACT1035": // 종료
                         self.navigationController?.popToRootViewController(animated: true)
                     break
                     default:
