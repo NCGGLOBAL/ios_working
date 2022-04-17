@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
+				<string>kakao70308c188ba339c185aaa362fbe1e12a</string>
 				<string>billibscheme</string>
 			</array>
 		</dict>
@@ -39,7 +39,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string>20a5a19074892fea22a99d21dc8cfb37</string>
+	<string>70308c188ba339c185aaa362fbe1e12a</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
