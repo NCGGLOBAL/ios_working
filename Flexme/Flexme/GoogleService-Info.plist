@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>139247890276-2rikst6a4mk6uuc33gps5gmel46ehelf.apps.googleusercontent.com</string>
+	<string>426944374096-9mmbsv2bai8r6lnfih1fai91rh015lcr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.139247890276-2rikst6a4mk6uuc33gps5gmel46ehelf</string>
+	<string>com.googleusercontent.apps.426944374096-9mmbsv2bai8r6lnfih1fai91rh015lcr</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA-MhqDOFla8jij8SlYnYMbmxMbWrAfr9M</string>
+	<string>AIzaSyBod-UWt8SxlatR-NuVUSNhVUqIiTzC6UQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>139247890276</string>
+	<string>426944374096</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.labangtv</string>
+	<string>com.flexme.shop.ios</string>
 	<key>PROJECT_ID</key>
-	<string>labangtv</string>
+	<string>flexme-mallup</string>
 	<key>STORAGE_BUCKET</key>
-	<string>labangtv.appspot.com</string>
+	<string>flexme-mallup.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:139247890276:ios:73becd63bfcf9b69289471</string>
+	<string>1:426944374096:ios:8f288a140fe1c4a8a87855</string>
 </dict>
 </plist>
