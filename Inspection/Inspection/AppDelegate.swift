@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
     static var HOME_URL = "http://inspection.mallup.co.kr/addon/m_admin"
-    static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
-//    static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
+    static let UPLOAD_URL = "http://inspection.mallup.co.kr/m/app/"
+    static let PUSH_REG_URL = "http://inspection.mallup.co.kr/m/app/pushRegister.asp"
     static var LANDING_URL = ""
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""
@@ -202,7 +202,7 @@ extension AppDelegate : MessagingDelegate {
     AppDelegate.pushkey = fcmToken
     let dataDict:[String: String] = ["token": fcmToken]
     NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-//    self.requestPushSetting()
+    self.requestPushSetting()
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
   }
@@ -216,86 +216,86 @@ extension AppDelegate : MessagingDelegate {
     #endif
   }
   // [END ios_10_data_message]
-//    func requestPushSetting() {
-//        let defaultConfigObject = URLSessionConfiguration.default
-//        let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
-//
-//        //Create an URLRequest
-//        let url = URL(string: AppDelegate.PUSH_REG_URL)
-//        var urlRequest: URLRequest? = nil
-//        if let url = url {
-//            urlRequest = URLRequest(url: url)
-//
-//            var dicParam: [AnyHashable : String] = [:]
-//            dicParam["os"] = "IPhone"
-//            dicParam["deviceId"] = AppDelegate.deviceId
-//            dicParam["pushKey"] = AppDelegate.pushkey
-//            dicParam["memberKey"] = ""
-//
-//            dicParam["appId"] = ""
-//            dicParam["userId"] = ""
-//            dicParam["channelId"] = ""
-//            dicParam["requestId"] = ""
-//
-//            //Create POST Params and add it to HTTPBody
-//            do {
-//                let jsonData = try JSONSerialization.data(withJSONObject: dicParam, options: [])
-//                let params = String(data: jsonData, encoding: .utf8) ?? ""
-//
-//                urlRequest?.httpMethod = "POST"
-//                urlRequest?.httpBody = params.data(using: .utf8)
-//                urlRequest?.setValue("text/html", forHTTPHeaderField: "Content-Type")
-//                #if DEBUG
-//                print("params : \(params)")
-//                print("params : \(urlRequest)")
-//                #endif
-//
-//                let dataTask = defaultSession.dataTask(with: urlRequest!, completionHandler: { data, response, error in
-//                    //Handle your response here
-//
-//                #if DEBUG
-//                    if let error = error {
-//                        print("error : \(error)")
-//                    }
-//                    if let response = response {
-//                        print("response : \(response)")
-//                    }
-//
-//                    if data != nil {
-//                        var jsonError: Error?
-//                        var dicResData: String? = nil
-//                        do {
-//                            if let data = data {
-//                                dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
-//                            }
-//                        } catch let jsonError {
-//                        }
-//
-//
-//                        let jsonData = dicResData?.data(using: .utf8)
-//
-//                        print("jsonData : \(jsonData ?? nil)")
-//                        if let jsonError = jsonError {
-//                            print("jsonData : \(jsonError)")
-//                        }
-//
-//
-//                        var sResultData: String? = nil
-//                        if let data = data {
-//                            sResultData = String(data: data, encoding: .utf8)
-//                        }
-//
-//                        print("sResultData : \(sResultData ?? "")")
-//                    }
-//                #endif
-//
-//                })
-//                dataTask.resume()
-//                } catch let error as NSError {
-//                    print(error)
-//                }
-//        }
-//    }
+    func requestPushSetting() {
+        let defaultConfigObject = URLSessionConfiguration.default
+        let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
+
+        //Create an URLRequest
+        let url = URL(string: AppDelegate.PUSH_REG_URL)
+        var urlRequest: URLRequest? = nil
+        if let url = url {
+            urlRequest = URLRequest(url: url)
+
+            var dicParam: [AnyHashable : String] = [:]
+            dicParam["os"] = "IPhone"
+            dicParam["deviceId"] = AppDelegate.deviceId
+            dicParam["pushKey"] = AppDelegate.pushkey
+            dicParam["memberKey"] = ""
+
+            dicParam["appId"] = ""
+            dicParam["userId"] = ""
+            dicParam["channelId"] = ""
+            dicParam["requestId"] = ""
+
+            //Create POST Params and add it to HTTPBody
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: dicParam, options: [])
+                let params = String(data: jsonData, encoding: .utf8) ?? ""
+
+                urlRequest?.httpMethod = "POST"
+                urlRequest?.httpBody = params.data(using: .utf8)
+                urlRequest?.setValue("text/html", forHTTPHeaderField: "Content-Type")
+                #if DEBUG
+                print("params : \(params)")
+                print("params : \(urlRequest)")
+                #endif
+
+                let dataTask = defaultSession.dataTask(with: urlRequest!, completionHandler: { data, response, error in
+                    //Handle your response here
+
+                #if DEBUG
+                    if let error = error {
+                        print("error : \(error)")
+                    }
+                    if let response = response {
+                        print("response : \(response)")
+                    }
+
+                    if data != nil {
+                        var jsonError: Error?
+                        var dicResData: String? = nil
+                        do {
+                            if let data = data {
+                                dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
+                            }
+                        } catch let jsonError {
+                        }
+
+
+                        let jsonData = dicResData?.data(using: .utf8)
+
+                        print("jsonData : \(jsonData ?? nil)")
+                        if let jsonError = jsonError {
+                            print("jsonData : \(jsonError)")
+                        }
+
+
+                        var sResultData: String? = nil
+                        if let data = data {
+                            sResultData = String(data: data, encoding: .utf8)
+                        }
+
+                        print("sResultData : \(sResultData ?? "")")
+                    }
+                #endif
+
+                })
+                dataTask.resume()
+                } catch let error as NSError {
+                    print(error)
+                }
+        }
+    }
 }
 
 
