@@ -346,6 +346,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         }
                     break
                     case "ACT1031": // 종료
+                        kit?.streamerBase.stopStream()
+                        kit?.stopPreview()
+                        kit?.stopBgpStream()
                         self.navigationController?.popToRootViewController(animated: true)
                     break
                     default:
