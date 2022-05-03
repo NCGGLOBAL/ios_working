@@ -17,6 +17,7 @@ class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource {
 
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var indicatorContainer: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
     
@@ -642,20 +643,24 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         // 로딩 시작
+        self.indicatorContainer.isHidden = false
         self.indicatorView.startAnimating()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
+        self.indicatorContainer.isHidden = true
         self.indicatorView.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // 로딩 에러
+        self.indicatorContainer.isHidden = true
         self.indicatorView.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.indicatorContainer.isHidden = true
         self.indicatorView.stopAnimating()
     }
     
