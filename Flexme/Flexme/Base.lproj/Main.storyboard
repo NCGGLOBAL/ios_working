@@ -33,21 +33,24 @@
                                     <action selector="onClickBackButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Se-ot-NzJ"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-IL-CXu">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-IL-CXu">
+                                <rect key="frame" x="0.0" y="88" width="414" height="726"/>
                                 <color key="color" red="0.0038178274410000002" green="0.4715975523" blue="0.5536378622" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NXO-IL-CXu" secondAttribute="bottom" constant="48" id="CpS-4p-Yoa"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Dm6-IT-5dA"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Eal-RG-EWP"/>
+                            <constraint firstItem="NXO-IL-CXu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Rwk-BJ-8Eh"/>
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TM9-B7-BzW"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cP3-f2-wnS"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="cXH-Yl-Cxw"/>
+                            <constraint firstItem="NXO-IL-CXu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wCI-OW-76h"/>
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zPK-yz-GE0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NXO-IL-CXu" secondAttribute="trailing" id="zcs-CS-mPt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="SF2-QI-VVG"/>
@@ -378,12 +381,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1na-O4-SWZ" firstAttribute="centerX" secondItem="oa0-XQ-RdW" secondAttribute="centerX" id="1wK-ea-EUa"/>
+                            <constraint firstItem="Jed-Nf-0Rt" firstAttribute="top" secondItem="DId-Ch-ULd" secondAttribute="top" id="2QO-lW-tpP"/>
                             <constraint firstItem="tbm-li-Lev" firstAttribute="top" secondItem="DId-Ch-ULd" secondAttribute="top" id="4EN-fD-xQX"/>
                             <constraint firstItem="tbm-li-Lev" firstAttribute="leading" secondItem="DId-Ch-ULd" secondAttribute="leading" id="Cz1-cb-YeK"/>
                             <constraint firstItem="1na-O4-SWZ" firstAttribute="centerY" secondItem="oa0-XQ-RdW" secondAttribute="centerY" id="MYt-c2-ISl"/>
                             <constraint firstItem="DId-Ch-ULd" firstAttribute="trailing" secondItem="Jed-Nf-0Rt" secondAttribute="trailing" id="PBn-cX-Zuj"/>
                             <constraint firstItem="Jed-Nf-0Rt" firstAttribute="leading" secondItem="DId-Ch-ULd" secondAttribute="leading" id="bOG-l9-bvb"/>
+                            <constraint firstItem="Jed-Nf-0Rt" firstAttribute="trailing" secondItem="DId-Ch-ULd" secondAttribute="trailing" id="daP-gn-pw6"/>
                             <constraint firstItem="Jed-Nf-0Rt" firstAttribute="top" secondItem="DId-Ch-ULd" secondAttribute="top" id="eyn-sA-4wI"/>
+                            <constraint firstItem="Jed-Nf-0Rt" firstAttribute="bottom" secondItem="DId-Ch-ULd" secondAttribute="bottom" id="fWy-fT-OEe"/>
+                            <constraint firstItem="Jed-Nf-0Rt" firstAttribute="leading" secondItem="DId-Ch-ULd" secondAttribute="leading" id="ge5-PQ-hqe"/>
                             <constraint firstItem="DId-Ch-ULd" firstAttribute="bottom" secondItem="Jed-Nf-0Rt" secondAttribute="bottom" id="oFO-mr-DP7"/>
                         </constraints>
                     </view>
@@ -436,12 +443,12 @@
                         <viewLayoutGuide key="safeArea" id="zgX-q9-Efr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="top" secondItem="qIQ-ZN-cdu" secondAttribute="top" id="KeL-at-gD8"/>
                             <constraint firstItem="Wor-IW-eZA" firstAttribute="centerX" secondItem="qIQ-ZN-cdu" secondAttribute="centerX" id="L1r-Va-eDW"/>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="trailing" secondItem="zgX-q9-Efr" secondAttribute="trailing" id="Wpv-Hb-vRo"/>
-                            <constraint firstAttribute="bottom" secondItem="bvH-Pr-WXD" secondAttribute="bottom" id="aKh-di-k6E"/>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="leading" secondItem="zgX-q9-Efr" secondAttribute="leading" id="bzd-HM-2zT"/>
+                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="trailing" secondItem="zgX-q9-Efr" secondAttribute="trailing" id="UIG-CK-pUp"/>
+                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="leading" secondItem="zgX-q9-Efr" secondAttribute="leading" id="YP7-aZ-Bxc"/>
+                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="top" secondItem="qIQ-ZN-cdu" secondAttribute="top" id="dGa-iC-IYm"/>
                             <constraint firstItem="Wor-IW-eZA" firstAttribute="centerY" secondItem="qIQ-ZN-cdu" secondAttribute="centerY" id="nBn-T5-AAu"/>
+                            <constraint firstAttribute="bottom" secondItem="bvH-Pr-WXD" secondAttribute="bottom" id="nGy-Cs-Dmk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7DH-Uu-xXT"/>
