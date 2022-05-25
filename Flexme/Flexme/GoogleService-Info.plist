@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>426944374096-9mmbsv2bai8r6lnfih1fai91rh015lcr.apps.googleusercontent.com</string>
+	<string>872195454277-pjtjptdcp3tef632n4d6d0nbfn4pu2vi.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.426944374096-9mmbsv2bai8r6lnfih1fai91rh015lcr</string>
+	<string>com.googleusercontent.apps.872195454277-pjtjptdcp3tef632n4d6d0nbfn4pu2vi</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>872195454277-8s58346si2roeris0024f37fqs3p17et.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBod-UWt8SxlatR-NuVUSNhVUqIiTzC6UQ</string>
+	<string>AIzaSyBJwB81bw0j-pjMgXFlSz994oE9GjTF5_c</string>
 	<key>GCM_SENDER_ID</key>
-	<string>426944374096</string>
+	<string>872195454277</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.flexme.shop.ios</string>
 	<key>PROJECT_ID</key>
-	<string>flexme-mallup</string>
+	<string>flexme</string>
 	<key>STORAGE_BUCKET</key>
-	<string>flexme-mallup.appspot.com</string>
+	<string>flexme.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:426944374096:ios:8f288a140fe1c4a8a87855</string>
+	<string>1:872195454277:ios:909962a78d9b2919bdba2c</string>
 </dict>
 </plist>
