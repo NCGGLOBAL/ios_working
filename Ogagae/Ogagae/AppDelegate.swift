@@ -143,6 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.open(url, options: [:])
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
 }
 
 // [START ios_10_message_handling]

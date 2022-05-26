@@ -66,6 +66,8 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         
         // self.view = self.webView!
         self.containerView.addSubview(webView)
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     override func viewDidLoad() {
