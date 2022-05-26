@@ -77,6 +77,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             self.initWebView(urlString: AppDelegate.LANDING_URL)
         }
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
