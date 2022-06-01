@@ -131,7 +131,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     func setCommonPopup(msg: String) {
         let alertController = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "확인", style: .default) { (UIAlertAction) in
+        let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
         }
         alertController.addAction(okAction)
         

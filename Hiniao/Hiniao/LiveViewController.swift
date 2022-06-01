@@ -357,7 +357,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "确认", style: .cancel) { _ in
             completionHandler()
         }
         alertController.addAction(cancelAction)
@@ -371,7 +371,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
             completionHandler(false)
         }
-        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+        let okAction = UIAlertAction(title: "确认", style: .default) { _ in
             completionHandler(true)
         }
         alertController.addAction(cancelAction)
