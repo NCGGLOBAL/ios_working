@@ -15,9 +15,9 @@ import KakaoSDKAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "https://metaceleb.com/default.asp"
+    static var HOME_URL = "https://metaceleb.com"
     static let UPLOAD_URL = "https://metaceleb.mallup.co.kr/m/app/"
-    static let PUSH_REG_URL = "https://metaceleb.mallup.co.kr/m/app/pushRegister.asp"
+    static let PUSH_REG_URL = "https://metaceleb.com/m/app/pushRegister.asp"
     static var LANDING_URL = ""
     static let deviceId = UIDevice.current.identifierForVendor?.uuidString
     static var QR_URL = ""
