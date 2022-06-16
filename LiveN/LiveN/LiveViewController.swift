@@ -388,9 +388,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         kit?.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA
         kit?.capturePixelFormat = kCVPixelFormatType_32BGRA
 
-        kit?.previewDimension =  self.view.frame.size//self.view.frame.size
-
-        kit?.streamDimension = self.view.frame.size
+        let ratio = self.view.frame.size.height / self.view.frame.size.width;
+        self.kit?.previewDimension = CGSize.init(width: 1280, height: 720 * ratio)
+        self.kit?.streamDimension = CGSize.init(width: 1280, height: 720 * ratio)
+//        kit?.previewDimension =  self.view.frame.size//self.view.frame.size
+//        kit?.streamDimension = self.view.frame.size
 
         kit?.videoOrientation = .portrait
         kit?.previewOrientation = .portrait
