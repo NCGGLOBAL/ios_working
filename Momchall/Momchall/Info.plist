@@ -25,12 +25,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.757631808201-nrtqdp65sg6olqqm8thcfuh8ibfj0h37</string>
 				<string>momchallscheme</string>
-				<string>fb652992528465036</string>
 				<string>kakaoa10c8c6298133d742e1782c2fe49f01f</string>
-				<string>adbrix497925905</string>
-				<string>kakaotalk</string>
 			</array>
 		</dict>
 	</array>
