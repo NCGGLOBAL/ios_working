@@ -145,7 +145,8 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 urlString.contains("order.pay.naver.com") ||
                 urlString.contains("m.facebook.com") ||
                 urlString.contains("api.instagram.com") ||
-                urlString.contains("accounts.kakao.com")) {
+                urlString.contains("api.instagram.com") ||
+                urlString.contains("npg.nicepay.co.kr")) {
                 self.backButton.isHidden = false
             }
         }
@@ -410,5 +411,9 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+    @IBAction func onClickBackButton(_ sender: UIButton) {
+        self.backButton.isHidden = true
+        self.navigationController?.popViewController(animated: true)
     }
 }
