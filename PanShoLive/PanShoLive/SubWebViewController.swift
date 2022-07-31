@@ -28,6 +28,9 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     var callback = ""
     
+    var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
+        "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://","com.wooricard.wcard://","newsmartpib://"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,69 +101,25 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        var action: WKNavigationActionPolicy?
-        
-        guard let url = navigationAction.request.url else { return }
-        
-        if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
-            UIApplication.shared.openURL(url)
-            decisionHandler(.cancel)
-            return
-        } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
-                decisionHandler(.cancel)
-                return
-            }
-        }
-        
-        switch navigationAction.navigationType {
-        case .linkActivated:
-            if navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame {
-                webView.load(URLRequest.init(url: url))
-                    decisionHandler(.cancel)
-                    return
-                }
-            case .backForward:
-                break
-            case .formResubmitted:
-                break
-            case .formSubmitted:
-                break
-            case .other:
-                break
-            case .reload:
-                break
-         default:
-            break
-        }
+        let req_url : String = navigationAction.request.url!.absoluteString
+
+        print("#요청 URL -> " + req_url)
+
+        for index in 0..<app_scheme_arr.count {
+            let app_scheme = app_scheme_arr[index]
+            let app_pass_yn = UIApplication.shared.canOpenURL(navigationAction.request.url!)
+                        
+            if(!req_url.hasPrefix(app_scheme)){continue;}
             
-        decisionHandler(.allow)
-        
-        let urlScheme = url.scheme
-        let urlString = url.absoluteString
-        let decodeString = urlString
-        #if DEBUG
-            print("url : \(url)")
-            print("url absoluteString: \(url.absoluteString)")
-            print("url scheme: \(url.scheme)")
-        #endif
-        if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
-            UIApplication.shared.openURL(url)
-        } else {
-            if (urlString.contains("pf.kakao.com") ||
-                urlString.contains("nid.naver.com") ||
-                urlString.contains("m.facebook.com") ||
-                urlString.contains("api.instagram.com") ||
-                urlString.contains("band.us") ||
-                urlString.contains("twitter.com") ||
-                urlString.contains("accounts.kakao.com")) {
-                self.backButton.isHidden = false
-            } else {
-                self.backButton.isHidden = true
-            }
+            print("#해당 앱 스킴 등록 여부 ->  ", app_pass_yn)
+
+            if(app_pass_yn){ UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)}
+            else{noAppDialog()}
+            
+            break;
         }
+        
+        decisionHandler(.allow)
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -172,6 +131,15 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 return nil
             }
         return nil
+    }
+    
+    func noAppDialog(){
+        let dialog = UIAlertController(title: "", message: "해당 앱이 설치 되어 있지 않습니다.", preferredStyle: .alert)
+
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        dialog.addAction(action)
+           
+        self.present(dialog, animated: true, completion: nil)
     }
 
     // JS -> Native CALL
