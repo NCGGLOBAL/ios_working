@@ -35,7 +35,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     var locationManager: CLLocationManager!
     
     var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
-        "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://","com.wooricard.wcard://"]
+        "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://","com.wooricard.wcard://","kakaotalk://"]
     
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1"
     
