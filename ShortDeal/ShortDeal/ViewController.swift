@@ -412,14 +412,28 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         print("ACT1015 - 웹뷰 새창")
                         #endif
                         if let requestUrl = actionParamObj!["url"] as? String{
-                            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-                            vc.urlString = requestUrl
-                            vc.uniqueProcessPool = self.uniqueProcessPool
-                            WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
-                                (cookies) in
-                                vc.cookies = cookies
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            })
+                            let isNavi = actionParamObj!["isNavi"] as? Int
+                            if isNavi == 1 {
+                                let vc = self.storyboard!.instantiateViewController(withIdentifier: "naviWebViewController") as! NaviWebViewController
+                                
+                                vc.urlString = requestUrl
+                                vc.uniqueProcessPool = self.uniqueProcessPool
+                                WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
+                                    (cookies) in
+                                    vc.cookies = cookies
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                })
+                            } else {
+                                let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+                                
+                                vc.urlString = requestUrl
+                                vc.uniqueProcessPool = self.uniqueProcessPool
+                                WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
+                                    (cookies) in
+                                    vc.cookies = cookies
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                })
+                            }
                         }
                     case "ACT1016":
                         print("ACT1016 - 새 브라우저 창을 닫는 액션")
