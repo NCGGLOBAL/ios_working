@@ -42,34 +42,36 @@
 	<string>20a5a19074892fea22a99d21dc8cfb37</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-        <string>kb-bankpay</string>
-        <string>nhb-bankpay</string>
-        <string>mg-bankpay</string>
-        <string>kn-bankpay</string>
-        <string>SmartBank2WB</string>
-        <string>lguthepay-xpay</string>
-        <string>kftc-bankpay</string>
-        <string>shinhan-sr-ansimclick-payco</string>
-        <string>shinhan-sr-ansimclick-naverpay</string>
-        <string>wooripay</string>
-        <string>citimobileapp</string>
-        <string>nhallonepayansimclick</string>
-        <string>lotteappcard</string>
-        <string>cloudpay</string>
-        <string>hanawalletmembers</string>
-        <string>mpocket.online.ansimclick</string>
-        <string>shinhan-sr-ansimclick</string>
-        <string>hdcardappcardansimclick</string>
-        <string>lpayapp</string>
-        <string>payco</string>
-        <string>kakaotalk</string>
-        <string>shinsegaeeasypayment</string>
-        <string>ispmobile</string>
-        <string>kb-acp</string>
-        <string>itms-appss</string>
-        <string>com.wooricard.wcard</string>
-        <string>newsmartpib</string>
-        <string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
+		<string>kb-bankpay</string>
+		<string>nhb-bankpay</string>
+		<string>mg-bankpay</string>
+		<string>kn-bankpay</string>
+		<string>SmartBank2WB</string>
+		<string>lguthepay-xpay</string>
+		<string>kftc-bankpay</string>
+		<string>shinhan-sr-ansimclick-payco</string>
+		<string>shinhan-sr-ansimclick-naverpay</string>
+		<string>wooripay</string>
+		<string>citimobileapp</string>
+		<string>nhallonepayansimclick</string>
+		<string>lotteappcard</string>
+		<string>cloudpay</string>
+		<string>hanawalletmembers</string>
+		<string>mpocket.online.ansimclick</string>
+		<string>shinhan-sr-ansimclick</string>
+		<string>hdcardappcardansimclick</string>
+		<string>lpayapp</string>
+		<string>payco</string>
+		<string>kakaotalk</string>
+		<string>shinsegaeeasypayment</string>
+		<string>ispmobile</string>
+		<string>kb-acp</string>
+		<string>itms-appss</string>
+		<string>com.wooricard.wcard</string>
+		<string>newsmartpib</string>
+		<string>kakao20a5a19074892fea22a99d21dc8cfb37</string>
+		<string>kakaolink</string>
+		<string>kakaokompassauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
