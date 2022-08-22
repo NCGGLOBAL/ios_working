@@ -1,0 +1,6 @@
+framework module Pods_Ssubassu {
+  umbrella header "Pods-Ssubassu-umbrella.h"
+
+  export *
+  module * { export * }
+}
