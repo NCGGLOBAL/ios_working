@@ -50,7 +50,7 @@ class NaviWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         }
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
-        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
+        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height - 80
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.customUserAgent = userAgent
@@ -511,26 +511,28 @@ class NaviWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             })
         }
 
-    @IBAction func onRefreshButton(_ sender: UIBarButtonItem) {
-        self.initWebView()
+
+    @IBAction func backButton(_ sender: UIButton) {
+        self.webView.goBack()
     }
-    @IBAction func onCopyLinkButton(_ sender: UIBarButtonItem) {
+    @IBAction func closeButton(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func onCopyLinkButton(_ sender: UIButton) {
         // 클립보드에 값 복사하기
         UIPasteboard.general.string = self.urlString
         self.showToast(message: "링크가 복사되었습니다.")
     }
-    @IBAction func onShareLinkButton(_ sender: UIBarButtonItem) {
+    @IBAction func onRefreshButton(_ sender: UIButton) {
+        self.initWebView()
+    }
+    @IBAction func onShareLinkButton(_ sender: UIButton) {
         var shareItems = [String]()
         shareItems.append(self.urlString)
 
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
-    }
-    @IBAction func backButton(_ sender: UIButton) {
-        self.webView.goBack()
-    }
-    @IBAction func closeButton(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
     }
 }
