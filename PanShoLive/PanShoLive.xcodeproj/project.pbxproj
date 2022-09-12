@@ -699,7 +699,7 @@
 				CODE_SIGN_ENTITLEMENTS = PanShoLive/PanShoLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TAZ56VRYQY;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = PanShoLive/Info.plist;
@@ -708,7 +708,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.pansholive;
 				PRODUCT_NAME = PanShoLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -729,7 +729,7 @@
 				CODE_SIGN_ENTITLEMENTS = PanShoLive/PanShoLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TAZ56VRYQY;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = PanShoLive/Info.plist;
@@ -738,7 +738,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.pansholive;
 				PRODUCT_NAME = PanShoLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
