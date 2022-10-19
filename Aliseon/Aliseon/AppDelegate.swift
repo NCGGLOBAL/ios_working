@@ -8,14 +8,12 @@
 
 import UIKit
 //import Firebase
-import KakaoSDKCommon
-import KakaoSDKAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "http://aliseon.mallup.co.kr/"
+    static var HOME_URL = "https://aliseon.com"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
     static var LANDING_URL = ""
@@ -56,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        application.registerForRemoteNotifications()
 
         // [END register_for_notifications]
-        KakaoSDKCommon.initSDK(appKey: "20a5a19074892fea22a99d21dc8cfb37")
         
         return true
     }

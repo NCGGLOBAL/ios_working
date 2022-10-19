@@ -9,9 +9,6 @@
 import UIKit
 import WebKit
 import CoreLocation
-import KakaoSDKCommon
-import KakaoSDKAuth
-import KakaoSDKUser
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource {
@@ -426,88 +423,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     break
                 case "ACT1020":
                     print("ACT1020 - sns로그인")
-                    let snsType = actionParamObj?["snsType"] as? Int
-                    if snsType == 2 {   // 카카오 로그인
-                        // 카카오톡 설치 여부 확인
-                        if (UserApi.isKakaoTalkLoginAvailable()) {
-                            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-                                if let error = error {
-                                    print(error)
-                                }
-                                else {
-                                    print("loginWithKakaoTalk() success.")
-                                    //do something
-//                                    _ = oauthToken
-                                    UserApi.shared.me() {(user, error) in
-                                        if let error = error {
-                                            print(error)
-                                        }
-                                        else {
-                                            print("me() success.")
-                                            //do something
-//                                            _ = user.
-                                            let email = user?.kakaoAccount?.email ?? ""
-                                            let nickname = user?.kakaoAccount?.profile?.nickname ?? ""
-                                            let profileImagePath = user?.kakaoAccount?.profile?.profileImageUrl?.absoluteString ?? ""
-                                            let thumnailPath = user?.kakaoAccount?.profile?.thumbnailImageUrl?.absoluteString ?? ""
-                                            let id = String(user?.id ?? 0)
-                                            var accountDic = Dictionary<String, String>()
-                                            accountDic.updateValue(email, forKey: "email")
-                                            accountDic.updateValue(nickname, forKey: "nickname")
-                                            accountDic.updateValue(profileImagePath, forKey: "profileImagePath")
-                                            accountDic.updateValue(thumnailPath, forKey: "thumnailPath")
-                                            accountDic.updateValue(id, forKey: "id")
-                                            do {
-                                                let accountJsonData = try JSONSerialization.data(withJSONObject: accountDic, options: [])
-//                                                let accountJsonEncodedData = accountJsonData.base64EncodedString()
-                                                let accountDicString = String(data: accountJsonData, encoding: .utf8) ?? ""
-                                                
-                                                var dic = Dictionary<String, String>()
-                                                dic.updateValue(oauthToken?.accessToken ?? "", forKey: "accessToken")
-                                                dic.updateValue(accountDicString, forKey: "userInfo")
-                                                #if DEBUG
-                                                print("oauthToken : \(oauthToken?.accessToken ?? "")")
-                                                print("userInfo : \(accountDicString)")
-                                                #endif
-                                                
-                                                do {
-                                                  let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-//                                                    let jsonEncodedData = jsonData.base64EncodedString()   // base64 eencode the data dictionary
-                                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                                    let javascript = "\(self.callback)('\(stringValue)')"
-                                                    #if DEBUG
-                                                    print("jsonData : \(jsonData)")
-                                                    print("javascript : \(javascript)")
-                                                    #endif
-                                                    // call back!
-                                                    self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                                        #if DEBUG
-                                                        print("result : \(String(describing: result))")
-                                                        print("error : \(error)")
-                                                        #endif
-                                                    }
-                                                } catch let error as NSError {
-                                                    print(error)
-                                                }
-                                            } catch let error as NSError {
-                                                print(error)
-                                            }
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            print("카카오 설치가 안되있습니다.")
-                            if let url = URL(string: "itms-apps://itunes.apple.com/app/362057947"), UIApplication.shared.canOpenURL(url) {
-                                if #available(iOS 10.0, *) {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil) }
-                                else {
-                                    UIApplication.shared.openURL(url)
-                                }
-                            }
-                        }
-                    }
                     break
                 case "ACT1022":
                     print("ACT1022 - 전화걸기")
