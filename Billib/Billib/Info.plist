@@ -42,6 +42,8 @@
 	<string>70308c188ba339c185aaa362fbe1e12a</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
 		<string>kb-bankpay</string>
 		<string>nhb-bankpay</string>
 		<string>mg-bankpay</string>
@@ -69,7 +71,7 @@
 		<string>itms-appss</string>
 		<string>com.wooricard.wcard</string>
 		<string>newsmartpib</string>
-        <string>kakao70308c188ba339c185aaa362fbe1e12a</string>
+		<string>kakao70308c188ba339c185aaa362fbe1e12a</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
