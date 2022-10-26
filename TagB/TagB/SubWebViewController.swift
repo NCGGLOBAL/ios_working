@@ -16,6 +16,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
+    let openUrlSchemeKakao = "kakaoplus"
     var urlString = ""
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
@@ -97,6 +98,10 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 var action: WKNavigationActionPolicy?
         
         guard let url = navigationAction.request.url else { return }
+        
+        if (url.scheme?.elementsEqual(openUrlSchemeKakao))! {
+            UIApplication.shared.openURL(url)
+        }
         
         if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
             UIApplication.shared.openURL(url)
