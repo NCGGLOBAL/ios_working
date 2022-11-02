@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>223660325758-vkpuihslv4h5cd866m9c4itrkibprr2j.apps.googleusercontent.com</string>
+	<string>223660325758-u7tofgs36np6rttuhrhkk6ci179q1qvr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.223660325758-vkpuihslv4h5cd866m9c4itrkibprr2j</string>
+	<string>com.googleusercontent.apps.223660325758-u7tofgs36np6rttuhrhkk6ci179q1qvr</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAO08egnNNJgRFJ1o8VDRZTiqI8jIGoAKc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.wisefashion.mdlens</string>
+	<string>com.gollala.app</string>
 	<key>PROJECT_ID</key>
 	<string>wise-prod</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:223660325758:ios:9f725040bf74a47d79512f</string>
+	<string>1:223660325758:ios:bae3213beaa5b98b79512f</string>
 	<key>DATABASE_URL</key>
 	<string>https://wise-prod.firebaseio.com</string>
 </dict>
