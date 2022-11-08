@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		178851FB29190733004CE1AB /* BSImagePicker.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 178851FA29190732004CE1AB /* BSImagePicker.xcframework */; };
+		178851FC29190733004CE1AB /* BSImagePicker.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 178851FA29190732004CE1AB /* BSImagePicker.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		1A8E5424F1C35E21BADBBD4D /* Pods_Gollala.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB97889390838EF5A97EBAE /* Pods_Gollala.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -77,6 +79,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		178851FD29190733004CE1AB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				178851FC29190733004CE1AB /* BSImagePicker.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF8E74D424EC1D1900B6F92F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,6 +105,7 @@
 
 /* Begin PBXFileReference section */
 		0B4E01E25252C09F24221262 /* Pods-Gollala.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gollala.debug.xcconfig"; path = "Target Support Files/Pods-Gollala/Pods-Gollala.debug.xcconfig"; sourceTree = "<group>"; };
+		178851FA29190732004CE1AB /* BSImagePicker.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BSImagePicker.xcframework; path = Carthage/Build/BSImagePicker.xcframework; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		5FB97889390838EF5A97EBAE /* Pods_Gollala.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gollala.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7759A59B82F666C25A6E20D /* Pods-Gollala.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gollala.release.xcconfig"; path = "Target Support Files/Pods-Gollala/Pods-Gollala.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				178851FB29190733004CE1AB /* BSImagePicker.xcframework in Frameworks */,
 				1A8E5424F1C35E21BADBBD4D /* Pods_Gollala.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +211,7 @@
 		5104FD419D222AF28E1831AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				178851FA29190732004CE1AB /* BSImagePicker.xcframework */,
 				5FB97889390838EF5A97EBAE /* Pods_Gollala.framework */,
 			);
 			name = Frameworks;
@@ -413,6 +429,7 @@
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
 				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
 				FF8E74D424EC1D1900B6F92F /* Embed App Extensions */,
+				178851FD29190733004CE1AB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -762,7 +779,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gollala/Gollala.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 5NX4697WZG;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Gollala/Info.plist;
@@ -771,7 +788,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gollala.app;
 				PRODUCT_NAME = Gollala;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -792,7 +809,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gollala/Gollala.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 5NX4697WZG;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Gollala/Info.plist;
@@ -801,7 +818,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gollala.app;
 				PRODUCT_NAME = Gollala;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -816,7 +833,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 5NX4697WZG;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -825,7 +842,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gollala.app.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -840,7 +857,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 5NX4697WZG;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -849,7 +866,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gollala.app.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
