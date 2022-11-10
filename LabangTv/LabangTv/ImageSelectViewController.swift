@@ -8,8 +8,10 @@
 
 import UIKit
 import Kingfisher
+import BSImagePicker
+import Photos
 
-class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ELCImagePickerControllerDelegate {
+class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -33,14 +35,36 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     
     // 앨범을 접근하는 함수
     func openLibrary() {
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: false, completion: nil)
-//        let elcPicker = ELCImagePickerController()
-//        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-//        elcPicker.imagePickerDelegate  = self
-//        elcPicker.currentCount         = AppDelegate.ImageFileArray.count
-//        [self presentViewController:elcPicker animated:YES completion:nil];
-//        self.navigationController?.present(elcPicker, animated: true, completion: nil)
+        let imagePicker = ImagePickerController()
+
+        presentImagePicker(imagePicker, select: { (asset) in
+            // User selected an asset. Do something with it. Perhaps begin processing/upload?
+        }, deselect: { (asset) in
+            // User deselected an asset. Cancel whatever you did when asset was selected.
+        }, cancel: { (assets) in
+            // User canceled selection.
+        }, finish: { (assets) in
+            // User finished selection assets.
+            for asset in assets {
+                let imageItem = ImageData()
+                let imageFileItem = ImageFileData()
+                
+                let imageData = self.getAssetThumbnail(asset: asset).pngData()
+                imageFileItem.image = imageData
+                
+                let resources = PHAssetResource.assetResources(for: asset)
+                imageItem.fileName = resources.first!.originalFilename
+                imageFileItem.fileName = resources.first!.originalFilename
+                
+                AppDelegate.imageArray.append(imageItem)
+                AppDelegate.ImageFileArray.append(imageFileItem)
+            }
+            
+            self.navigationItem.title = "\(AppDelegate.imageArray.count) / \(self.LIMIT_IMAGE_SIZE)"
+            self.collectionView.reloadData()
+            
+            AppDelegate.isChangeImage = true
+        })
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -73,6 +97,17 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         AppDelegate.isChangeImage = true
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func getAssetThumbnail(asset: PHAsset) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+                thumbnail = result!
+        })
+        return thumbnail
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -155,12 +190,5 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     @IBAction func onClickDone(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
-    }
-
-    func elcImagePickerController(_ picker: ELCImagePickerController!, didFinishPickingMediaWithInfo info: [Any]!) {
-    }
-    
-    func elcImagePickerControllerDidCancel(_ picker: ELCImagePickerController!) {
-        
     }
 }

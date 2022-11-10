@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		175F1A82291D307F0095CA5C /* BSImagePicker.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; };
+		175F1A83291D307F0095CA5C /* BSImagePicker.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		6BDCFE766F3C1ADAD19888D9 /* Pods_LabangTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -43,27 +45,6 @@
 		FFD87A6B2493C28D008E44C7 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD87A6A2493C28D008E44C7 /* ImageCollectionViewCell.swift */; };
 		FFE1057D24AA3A8C000100E5 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE1057C24AA3A8C000100E5 /* QRReaderViewController.swift */; };
 		FFE608DF24936EA900AD630E /* ImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE608DE24936EA900AD630E /* ImageSelectViewController.swift */; };
-		FFE8922325A76C2900497503 /* JYBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE891F925A76C2900497503 /* JYBBaseViewController.m */; };
-		FFE8922425A76C2900497503 /* JYBMultiImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE891FB25A76C2900497503 /* JYBMultiImageView.m */; };
-		FFE8922525A76C2900497503 /* UIImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE891FE25A76C2900497503 /* UIImageButton.m */; };
-		FFE8922625A76C2900497503 /* JYBStringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920025A76C2900497503 /* JYBStringHelper.m */; };
-		FFE8922725A76C2900497503 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920325A76C2900497503 /* MBProgressHUD.m */; };
-		FFE8922825A76C2900497503 /* JYBLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920425A76C2900497503 /* JYBLoading.m */; };
-		FFE8922925A76C2900497503 /* JYBLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920825A76C2900497503 /* JYBLoadingIndicator.m */; };
-		FFE8922A25A76C2900497503 /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920B25A76C2900497503 /* UIView+Ext.m */; };
-		FFE8922B25A76C2900497503 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8920D25A76C2900497503 /* UIImage+Color.m */; };
-		FFE8922C25A76C2900497503 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8921125A76C2900497503 /* ELCImagePickerController.m */; };
-		FFE8922D25A76C2900497503 /* Overlay_select.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921525A76C2900497503 /* Overlay_select.png */; };
-		FFE8922E25A76C2900497503 /* Overlay_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921625A76C2900497503 /* Overlay_select@2x.png */; };
-		FFE8922F25A76C2900497503 /* ELCAssetCollectionPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921725A76C2900497503 /* ELCAssetCollectionPicker.xib */; };
-		FFE8923025A76C2900497503 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921825A76C2900497503 /* Overlay.png */; };
-		FFE8923125A76C2900497503 /* goods_add_plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921925A76C2900497503 /* goods_add_plus@3x.png */; };
-		FFE8923225A76C2900497503 /* goods_add_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921A25A76C2900497503 /* goods_add_plus@2x.png */; };
-		FFE8923325A76C2900497503 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE8921B25A76C2900497503 /* Overlay@2x.png */; };
-		FFE8923425A76C2900497503 /* ELCAssetCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8921E25A76C2900497503 /* ELCAssetCollectionCell.m */; };
-		FFE8923525A76C2900497503 /* ELCAssetCollectionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8922025A76C2900497503 /* ELCAssetCollectionPicker.m */; };
-		FFE8923625A76C2900497503 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8922125A76C2900497503 /* ELCAsset.m */; };
-		FFE8923725A76C2900497503 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE8922225A76C2900497503 /* ELCAlbumPickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +58,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		175F1A84291D307F0095CA5C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				175F1A83291D307F0095CA5C /* BSImagePicker.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FF8E74D424EC1D1900B6F92F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +85,7 @@
 /* Begin PBXFileReference section */
 		03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabangTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
+		175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BSImagePicker.xcframework; path = Carthage/Build/BSImagePicker.xcframework; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
@@ -133,45 +126,6 @@
 		FFD87A6A2493C28D008E44C7 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFE1057C24AA3A8C000100E5 /* QRReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 		FFE608DE24936EA900AD630E /* ImageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectViewController.swift; sourceTree = "<group>"; };
-		FFE8918F259A28F500497503 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
-		FFE891F825A76C2900497503 /* JYBMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBMacros.h; sourceTree = "<group>"; };
-		FFE891F925A76C2900497503 /* JYBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBBaseViewController.m; sourceTree = "<group>"; };
-		FFE891FB25A76C2900497503 /* JYBMultiImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBMultiImageView.m; sourceTree = "<group>"; };
-		FFE891FC25A76C2900497503 /* UIImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageButton.h; sourceTree = "<group>"; };
-		FFE891FD25A76C2900497503 /* JYBMultiImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBMultiImageView.h; sourceTree = "<group>"; };
-		FFE891FE25A76C2900497503 /* UIImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageButton.m; sourceTree = "<group>"; };
-		FFE891FF25A76C2900497503 /* JYBMultiImageSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBMultiImageSelector.h; sourceTree = "<group>"; };
-		FFE8920025A76C2900497503 /* JYBStringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBStringHelper.m; sourceTree = "<group>"; };
-		FFE8920125A76C2900497503 /* JYBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBBaseViewController.h; sourceTree = "<group>"; };
-		FFE8920325A76C2900497503 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		FFE8920425A76C2900497503 /* JYBLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBLoading.m; sourceTree = "<group>"; };
-		FFE8920525A76C2900497503 /* JYBLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBLoadingIndicator.h; sourceTree = "<group>"; };
-		FFE8920625A76C2900497503 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		FFE8920725A76C2900497503 /* JYBLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBLoading.h; sourceTree = "<group>"; };
-		FFE8920825A76C2900497503 /* JYBLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBLoadingIndicator.m; sourceTree = "<group>"; };
-		FFE8920A25A76C2900497503 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
-		FFE8920B25A76C2900497503 /* UIView+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Ext.m"; sourceTree = "<group>"; };
-		FFE8920C25A76C2900497503 /* UIView+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Ext.h"; sourceTree = "<group>"; };
-		FFE8920D25A76C2900497503 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
-		FFE8920E25A76C2900497503 /* JYBStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBStringHelper.h; sourceTree = "<group>"; };
-		FFE8921025A76C2900497503 /* ELCAssetCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCollectionCell.h; sourceTree = "<group>"; };
-		FFE8921125A76C2900497503 /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
-		FFE8921225A76C2900497503 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
-		FFE8921325A76C2900497503 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
-		FFE8921525A76C2900497503 /* Overlay_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay_select.png; sourceTree = "<group>"; };
-		FFE8921625A76C2900497503 /* Overlay_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay_select@2x.png"; sourceTree = "<group>"; };
-		FFE8921725A76C2900497503 /* ELCAssetCollectionPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetCollectionPicker.xib; sourceTree = "<group>"; };
-		FFE8921825A76C2900497503 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
-		FFE8921925A76C2900497503 /* goods_add_plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goods_add_plus@3x.png"; sourceTree = "<group>"; };
-		FFE8921A25A76C2900497503 /* goods_add_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goods_add_plus@2x.png"; sourceTree = "<group>"; };
-		FFE8921B25A76C2900497503 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
-		FFE8921C25A76C2900497503 /* ELCAssetCollectionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCollectionPicker.h; sourceTree = "<group>"; };
-		FFE8921D25A76C2900497503 /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
-		FFE8921E25A76C2900497503 /* ELCAssetCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCollectionCell.m; sourceTree = "<group>"; };
-		FFE8921F25A76C2900497503 /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
-		FFE8922025A76C2900497503 /* ELCAssetCollectionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCollectionPicker.m; sourceTree = "<group>"; };
-		FFE8922125A76C2900497503 /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
-		FFE8922225A76C2900497503 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175F1A82291D307F0095CA5C /* BSImagePicker.xcframework in Frameworks */,
 				6BDCFE766F3C1ADAD19888D9 /* Pods_LabangTv.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +151,7 @@
 		5104FD419D222AF28E1831AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */,
 				03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */,
 			);
 			name = Frameworks;
@@ -225,7 +181,6 @@
 		FF60BA19247EA18E00B0B1A8 /* LabangTv */ = {
 			isa = PBXGroup;
 			children = (
-				FFE89162259A230700497503 /* Libraries */,
 				FFAD294A2494946900E5E559 /* Model */,
 				FFAD29472494943F00E5E559 /* Data */,
 				FF60BA35247EB27700B0B1A8 /* Resources */,
@@ -243,7 +198,6 @@
 				FFD87A6A2493C28D008E44C7 /* ImageCollectionViewCell.swift */,
 				FFE1057C24AA3A8C000100E5 /* QRReaderViewController.swift */,
 				FF1298C4253829E8000731CE /* LiveViewController.swift */,
-				FFE8918F259A28F500497503 /* Bridge-Header.h */,
 				FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */,
 				17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */,
 			);
@@ -307,99 +261,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		FFE89162259A230700497503 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				FFE891F725A76C2900497503 /* JYBMultiImageSelector */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		FFE891F725A76C2900497503 /* JYBMultiImageSelector */ = {
-			isa = PBXGroup;
-			children = (
-				FFE891F825A76C2900497503 /* JYBMacros.h */,
-				FFE891F925A76C2900497503 /* JYBBaseViewController.m */,
-				FFE891FA25A76C2900497503 /* ImagesSelectorView */,
-				FFE891FF25A76C2900497503 /* JYBMultiImageSelector.h */,
-				FFE8920025A76C2900497503 /* JYBStringHelper.m */,
-				FFE8920125A76C2900497503 /* JYBBaseViewController.h */,
-				FFE8920225A76C2900497503 /* MBProgressHUD */,
-				FFE8920925A76C2900497503 /* UIKit+Helper */,
-				FFE8920E25A76C2900497503 /* JYBStringHelper.h */,
-				FFE8920F25A76C2900497503 /* ELCImagePicker */,
-			);
-			path = JYBMultiImageSelector;
-			sourceTree = "<group>";
-		};
-		FFE891FA25A76C2900497503 /* ImagesSelectorView */ = {
-			isa = PBXGroup;
-			children = (
-				FFE891FB25A76C2900497503 /* JYBMultiImageView.m */,
-				FFE891FC25A76C2900497503 /* UIImageButton.h */,
-				FFE891FD25A76C2900497503 /* JYBMultiImageView.h */,
-				FFE891FE25A76C2900497503 /* UIImageButton.m */,
-			);
-			path = ImagesSelectorView;
-			sourceTree = "<group>";
-		};
-		FFE8920225A76C2900497503 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				FFE8920325A76C2900497503 /* MBProgressHUD.m */,
-				FFE8920425A76C2900497503 /* JYBLoading.m */,
-				FFE8920525A76C2900497503 /* JYBLoadingIndicator.h */,
-				FFE8920625A76C2900497503 /* MBProgressHUD.h */,
-				FFE8920725A76C2900497503 /* JYBLoading.h */,
-				FFE8920825A76C2900497503 /* JYBLoadingIndicator.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		FFE8920925A76C2900497503 /* UIKit+Helper */ = {
-			isa = PBXGroup;
-			children = (
-				FFE8920A25A76C2900497503 /* UIImage+Color.h */,
-				FFE8920B25A76C2900497503 /* UIView+Ext.m */,
-				FFE8920C25A76C2900497503 /* UIView+Ext.h */,
-				FFE8920D25A76C2900497503 /* UIImage+Color.m */,
-			);
-			path = "UIKit+Helper";
-			sourceTree = "<group>";
-		};
-		FFE8920F25A76C2900497503 /* ELCImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				FFE8921025A76C2900497503 /* ELCAssetCollectionCell.h */,
-				FFE8921125A76C2900497503 /* ELCImagePickerController.m */,
-				FFE8921225A76C2900497503 /* ELCAlbumPickerController.h */,
-				FFE8921325A76C2900497503 /* ELCAsset.h */,
-				FFE8921425A76C2900497503 /* Resources */,
-				FFE8921C25A76C2900497503 /* ELCAssetCollectionPicker.h */,
-				FFE8921D25A76C2900497503 /* ELCImagePickerController.h */,
-				FFE8921E25A76C2900497503 /* ELCAssetCollectionCell.m */,
-				FFE8921F25A76C2900497503 /* ELCAssetSelectionDelegate.h */,
-				FFE8922025A76C2900497503 /* ELCAssetCollectionPicker.m */,
-				FFE8922125A76C2900497503 /* ELCAsset.m */,
-				FFE8922225A76C2900497503 /* ELCAlbumPickerController.m */,
-			);
-			path = ELCImagePicker;
-			sourceTree = "<group>";
-		};
-		FFE8921425A76C2900497503 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				FFE8921525A76C2900497503 /* Overlay_select.png */,
-				FFE8921625A76C2900497503 /* Overlay_select@2x.png */,
-				FFE8921725A76C2900497503 /* ELCAssetCollectionPicker.xib */,
-				FFE8921825A76C2900497503 /* Overlay.png */,
-				FFE8921925A76C2900497503 /* goods_add_plus@3x.png */,
-				FFE8921A25A76C2900497503 /* goods_add_plus@2x.png */,
-				FFE8921B25A76C2900497503 /* Overlay@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -413,6 +274,7 @@
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
 				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
 				FF8E74D424EC1D1900B6F92F /* Embed App Extensions */,
+				175F1A84291D307F0095CA5C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -484,27 +346,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE8923025A76C2900497503 /* Overlay.png in Resources */,
 				FF60BA55247EB27700B0B1A8 /* icon_stop.png in Resources */,
 				FF60BA27247EA19400B0B1A8 /* LaunchScreen.storyboard in Resources */,
 				FF60BA33247EAACD00B0B1A8 /* GoogleService-Info.plist in Resources */,
 				FF60BA4D247EB27700B0B1A8 /* top_back.png in Resources */,
 				FF60BA51247EB27700B0B1A8 /* icon_camerachange.png in Resources */,
-				FFE8922D25A76C2900497503 /* Overlay_select.png in Resources */,
-				FFE8922F25A76C2900497503 /* ELCAssetCollectionPicker.xib in Resources */,
 				FF60BA49247EB27700B0B1A8 /* icon_play.png in Resources */,
 				FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */,
 				FF60BA50247EB27700B0B1A8 /* btn_camera@2x.png in Resources */,
 				FF60BA52247EB27700B0B1A8 /* btn_gallery.png in Resources */,
 				FF60BA4B247EB27700B0B1A8 /* icon_del.png in Resources */,
-				FFE8922E25A76C2900497503 /* Overlay_select@2x.png in Resources */,
 				FF60BA53247EB27700B0B1A8 /* icon_del@2x.png in Resources */,
-				FFE8923225A76C2900497503 /* goods_add_plus@2x.png in Resources */,
 				FF60BA4C247EB27700B0B1A8 /* ic_main.png in Resources */,
 				FF60BA4F247EB27700B0B1A8 /* btn_camera@3x.png in Resources */,
 				FF60BA57247EB27700B0B1A8 /* btn_close.png in Resources */,
-				FFE8923125A76C2900497503 /* goods_add_plus@3x.png in Resources */,
-				FFE8923325A76C2900497503 /* Overlay@2x.png in Resources */,
 				FF60BA24247EA19400B0B1A8 /* Assets.xcassets in Resources */,
 				FF60BA22247EA18E00B0B1A8 /* Main.storyboard in Resources */,
 				FF60BA4E247EB27700B0B1A8 /* btn_gallery@2x.png in Resources */,
@@ -570,14 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE8923725A76C2900497503 /* ELCAlbumPickerController.m in Sources */,
 				FFD87A6B2493C28D008E44C7 /* ImageCollectionViewCell.swift in Sources */,
-				FFE8923625A76C2900497503 /* ELCAsset.m in Sources */,
-				FFE8922325A76C2900497503 /* JYBBaseViewController.m in Sources */,
-				FFE8922425A76C2900497503 /* JYBMultiImageView.m in Sources */,
-				FFE8922825A76C2900497503 /* JYBLoading.m in Sources */,
-				FFE8922525A76C2900497503 /* UIImageButton.m in Sources */,
-				FFE8922C25A76C2900497503 /* ELCImagePickerController.m in Sources */,
 				FF4FA9ED248105040059908A /* SubWebViewController.swift in Sources */,
 				FFE1057D24AA3A8C000100E5 /* QRReaderViewController.swift in Sources */,
 				FF60BA1F247EA18E00B0B1A8 /* ViewController.swift in Sources */,
@@ -586,17 +434,10 @@
 				FFAD294C2494948300E5E559 /* ImageModel.swift in Sources */,
 				FF60BA1B247EA18E00B0B1A8 /* AppDelegate.swift in Sources */,
 				FFAD29492494945300E5E559 /* ImageData.swift in Sources */,
-				FFE8923425A76C2900497503 /* ELCAssetCollectionCell.m in Sources */,
 				FFE608DF24936EA900AD630E /* ImageSelectViewController.swift in Sources */,
 				FF60BA1D247EA18E00B0B1A8 /* SceneDelegate.swift in Sources */,
-				FFE8923525A76C2900497503 /* ELCAssetCollectionPicker.m in Sources */,
 				FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */,
 				17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */,
-				FFE8922625A76C2900497503 /* JYBStringHelper.m in Sources */,
-				FFE8922925A76C2900497503 /* JYBLoadingIndicator.m in Sources */,
-				FFE8922B25A76C2900497503 /* UIImage+Color.m in Sources */,
-				FFE8922A25A76C2900497503 /* UIView+Ext.m in Sources */,
-				FFE8922725A76C2900497503 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,7 +616,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv;
 				PRODUCT_NAME = LabangTv;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "LabangTv/Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -805,7 +645,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv;
 				PRODUCT_NAME = LabangTv;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "LabangTv/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

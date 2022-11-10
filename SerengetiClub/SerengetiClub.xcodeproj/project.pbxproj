@@ -92,9 +92,7 @@
 
 /* Begin PBXFileReference section */
 		0A1E96437DB8042427B71C0A /* Pods-SerengetiClub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SerengetiClub.release.xcconfig"; path = "Target Support Files/Pods-SerengetiClub/Pods-SerengetiClub.release.xcconfig"; sourceTree = "<group>"; };
-		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
-		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
 		A5AF52A21DE2F07EF8D9578C /* Pods_SerengetiClub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SerengetiClub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9AE5381769D7E8CCF167E0 /* Pods-SerengetiClub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SerengetiClub.debug.xcconfig"; path = "Target Support Files/Pods-SerengetiClub/Pods-SerengetiClub.debug.xcconfig"; sourceTree = "<group>"; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
@@ -206,8 +204,6 @@
 		5B09EBBDB2A5E88A5E27D900 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */,
-				0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */,
 				EC9AE5381769D7E8CCF167E0 /* Pods-SerengetiClub.debug.xcconfig */,
 				0A1E96437DB8042427B71C0A /* Pods-SerengetiClub.release.xcconfig */,
 			);
@@ -766,7 +762,7 @@
 				CODE_SIGN_ENTITLEMENTS = SerengetiClub/SerengetiClub.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QL2ZVH5674;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SerengetiClub/Info.plist;
@@ -775,7 +771,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.serengeticlub;
 				PRODUCT_NAME = SerengetiClub;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -796,7 +792,7 @@
 				CODE_SIGN_ENTITLEMENTS = SerengetiClub/SerengetiClub.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QL2ZVH5674;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SerengetiClub/Info.plist;
@@ -805,7 +801,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.serengeticlub;
 				PRODUCT_NAME = SerengetiClub;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -820,7 +816,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QL2ZVH5674;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -829,7 +825,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.serengeticlub.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -844,7 +840,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QL2ZVH5674;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -853,7 +849,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.serengeticlub.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

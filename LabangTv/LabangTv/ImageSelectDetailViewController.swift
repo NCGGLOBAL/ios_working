@@ -12,15 +12,14 @@ class ImageSelectDetailViewController: UIViewController {
     
     var titleString = ""
     var selectedImage: Data? = nil
+    var selectedImageIndex: Int? = nil
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tabBarView: UITabBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationItem.title = titleString
+        navigationItem.title = titleString
         mainImageView.image = UIImage(data: selectedImage!)
-        
-        
     }
 }
