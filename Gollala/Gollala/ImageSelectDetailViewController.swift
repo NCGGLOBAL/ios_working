@@ -29,8 +29,6 @@ class ImageSelectDetailViewController: UIViewController {
         AppDelegate.ImageFileArray.remove(at: selectedImageIndex ?? 0)
         mainImageView.image = nil
         
-        if AppDelegate.imageArray.count == 0 || AppDelegate.ImageFileArray.count == 0 {
-            navigationController?.popViewController(animated: true)
-        }
+        navigationController?.popViewController(animated: true)
     }
 }
