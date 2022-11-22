@@ -1,0 +1,6 @@
+framework module Pods_CupidHour {
+  umbrella header "Pods-CupidHour-umbrella.h"
+
+  export *
+  module * { export * }
+}
