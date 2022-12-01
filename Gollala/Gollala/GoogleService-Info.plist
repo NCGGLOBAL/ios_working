@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>223660325758-u7tofgs36np6rttuhrhkk6ci179q1qvr.apps.googleusercontent.com</string>
+	<string>188366343384-5nm4jslg7b312deq8jsoh7bget0ud8ou.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.223660325758-u7tofgs36np6rttuhrhkk6ci179q1qvr</string>
+	<string>com.googleusercontent.apps.188366343384-5nm4jslg7b312deq8jsoh7bget0ud8ou</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAO08egnNNJgRFJ1o8VDRZTiqI8jIGoAKc</string>
+	<string>AIzaSyAZcWxb0Zr_G3rKxOP8GI-Y3PLCDzA6gV8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>223660325758</string>
+	<string>188366343384</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.gollala.app</string>
 	<key>PROJECT_ID</key>
-	<string>wise-prod</string>
+	<string>gollala-live-d591b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>wise-prod.appspot.com</string>
+	<string>gollala-live-d591b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:223660325758:ios:bae3213beaa5b98b79512f</string>
-	<key>DATABASE_URL</key>
-	<string>https://wise-prod.firebaseio.com</string>
+	<string>1:188366343384:ios:d59aad4548afc1c8a25bad</string>
 </dict>
 </plist>
