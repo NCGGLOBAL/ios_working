@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>703433104898-v5bs3rvthhkhberd0bh09f82nftge7kh.apps.googleusercontent.com</string>
+	<string>128975721070-e01qtcmouqfvmhk876mj5v9djmogm5na.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.703433104898-v5bs3rvthhkhberd0bh09f82nftge7kh</string>
+	<string>com.googleusercontent.apps.128975721070-e01qtcmouqfvmhk876mj5v9djmogm5na</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>128975721070-4k2jpph99b7p3h0r7d2gasjiq4djlflg.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAT_csnT6U8WcTCHLA80dbOT0t06uBd74s</string>
+	<string>AIzaSyDCc5N6qRVyl7LNwD93wh_ed4pOklgXxVo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>703433104898</string>
+	<string>128975721070</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.talktalklive</string>
+	<string>com.creator.talktalklive.ios</string>
 	<key>PROJECT_ID</key>
-	<string>talktalklive-b08f7</string>
+	<string>moykomiks-a3364</string>
 	<key>STORAGE_BUCKET</key>
-	<string>talktalklive-b08f7.appspot.com</string>
+	<string>moykomiks-a3364.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:703433104898:ios:bdb67f955444b7d2f3911b</string>
+	<string>1:128975721070:ios:15bb558471a55c8358cc7f</string>
 </dict>
 </plist>
