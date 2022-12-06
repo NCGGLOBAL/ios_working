@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17144ADF293F6E8200D5DFBE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 17144ADE293F6E8200D5DFBE /* FacebookCore */; };
+		17144AE1293F6E8200D5DFBE /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 17144AE0293F6E8200D5DFBE /* FacebookGamingServices */; };
+		17144AE3293F6E8200D5DFBE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 17144AE2293F6E8200D5DFBE /* FacebookLogin */; };
+		17144AE5293F6E8200D5DFBE /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 17144AE4293F6E8200D5DFBE /* FacebookShare */; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		CCCEA7E40229737BFC925546 /* Pods_Billib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F4883249BAE345EEDE36D4 /* Pods_Billib.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -181,7 +185,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17144AE3293F6E8200D5DFBE /* FacebookLogin in Frameworks */,
+				17144AE1293F6E8200D5DFBE /* FacebookGamingServices in Frameworks */,
 				CCCEA7E40229737BFC925546 /* Pods_Billib.framework in Frameworks */,
+				17144AE5293F6E8200D5DFBE /* FacebookShare in Frameworks */,
+				17144ADF293F6E8200D5DFBE /* FacebookCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +432,12 @@
 				FF8E74D224EC1D1900B6F92F /* PBXTargetDependency */,
 			);
 			name = Billib;
+			packageProductDependencies = (
+				17144ADE293F6E8200D5DFBE /* FacebookCore */,
+				17144AE0293F6E8200D5DFBE /* FacebookGamingServices */,
+				17144AE2293F6E8200D5DFBE /* FacebookLogin */,
+				17144AE4293F6E8200D5DFBE /* FacebookShare */,
+			);
 			productName = UnniTv;
 			productReference = FF78E3DD24854469002AFAFF /* Billib.app */;
 			productType = "com.apple.product-type.application";
@@ -473,6 +487,9 @@
 				Base,
 			);
 			mainGroup = FF60BA0E247EA18E00B0B1A8;
+			packageReferences = (
+				17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = FF60BA0E247EA18E00B0B1A8;
 			projectDirPath = "";
 			projectRoot = "";
@@ -766,7 +783,7 @@
 				CODE_SIGN_ENTITLEMENTS = Billib/Billib.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = NPKAQ5KC54;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Billib/Info.plist;
@@ -775,7 +792,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.billib;
 				PRODUCT_NAME = Billib;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -796,7 +813,7 @@
 				CODE_SIGN_ENTITLEMENTS = Billib/Billib.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = NPKAQ5KC54;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Billib/Info.plist;
@@ -805,7 +822,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.billib;
 				PRODUCT_NAME = Billib;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -820,7 +837,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = NPKAQ5KC54;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -829,7 +846,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.billib.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -844,7 +861,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = NPKAQ5KC54;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -853,7 +870,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.billib.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -894,6 +911,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17144ADE293F6E8200D5DFBE /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		17144AE0293F6E8200D5DFBE /* FacebookGamingServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookGamingServices;
+		};
+		17144AE2293F6E8200D5DFBE /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		17144AE4293F6E8200D5DFBE /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17144ADD293F6E8200D5DFBE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF60BA0F247EA18E00B0B1A8 /* Project object */;
 }
