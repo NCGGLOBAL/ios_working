@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
 //import KakaoSDKCommon
 //import KakaoSDKAuth
 
@@ -57,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // [END register_for_notifications]
 //        KakaoSDKCommon.initSDK(appKey: "70308c188ba339c185aaa362fbe1e12a")
+        
+        // Set AdvertiserTrackingEnabled to true if a device provides consent
+        Settings.setAdvertiserTrackingEnabled(true)
         
         return true
     }
