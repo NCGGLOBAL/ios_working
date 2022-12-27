@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.4.3)
   - Firebase/Analytics (6.8.1):
     - Firebase/Core
   - Firebase/Core (6.8.1):
@@ -73,17 +72,6 @@ PODS:
   - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
   - GPUImage (0.1.7)
-  - KakaoSDKAuth (2.5.2):
-    - KakaoSDKCommon (= 2.5.2)
-  - KakaoSDKCommon (2.5.2):
-    - KakaoSDKCommon/Common (= 2.5.2)
-    - KakaoSDKCommon/Network (= 2.5.2)
-  - KakaoSDKCommon/Common (2.5.2)
-  - KakaoSDKCommon/Network (2.5.2):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.5.2)
-  - KakaoSDKUser (2.5.2):
-    - KakaoSDKAuth (= 2.5.2)
   - Kingfisher (4.10.1)
   - libksygpulive (3.0.4):
     - libksygpulive/libksygpulive (= 3.0.4)
@@ -111,15 +99,11 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
-  - KakaoSDKAuth
-  - KakaoSDKCommon
-  - KakaoSDKUser
   - Kingfisher (~> 4.0)
   - libksygpulive (from `https://github.com/ksvc/KSYLive_iOS.git`, tag `v3.0.5`)
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -133,9 +117,6 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GPUImage
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
     - Kingfisher
     - nanopb
     - Protobuf
@@ -151,7 +132,6 @@ CHECKOUT OPTIONS:
     :tag: v3.0.5
 
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
   FirebaseAnalytics: 843c7f64a8f9c79f0d03281197ebe7bb1d58d477
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -165,14 +145,11 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  KakaoSDKAuth: 81715662c03e4c8c1a140f293e9fd6fd68b2e9dd
-  KakaoSDKCommon: 887e22f7aa4647bd0a7d1397512fc5f6211b83d6
-  KakaoSDKUser: b79c1a18da69681de7c9d3fa59e83c37b711ce7e
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   libksygpulive: aca3eb30e7a38ee6565feb52feb82ccc0103ce43
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
 
-PODFILE CHECKSUM: 594c4c1be0d5943af33ca06ec90c11d1406239f2
+PODFILE CHECKSUM: 9ba5ba7a3a46dd58411c10c6f4d92bc7d93f8b57
 
 COCOAPODS: 1.10.2

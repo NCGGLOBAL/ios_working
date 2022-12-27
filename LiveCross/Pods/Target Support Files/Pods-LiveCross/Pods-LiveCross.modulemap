@@ -1,0 +1,6 @@
+framework module Pods_LiveCross {
+  umbrella header "Pods-LiveCross-umbrella.h"
+
+  export *
+  module * { export * }
+}

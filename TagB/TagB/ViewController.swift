@@ -354,19 +354,19 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     case "ACT1013":
                         let latestVersionCode = actionParamObj?["app_ver"] as? Int
                         let bundleVersion = Int(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
-                    let alert = UIAlertController(title: "", message: "업데이트 하시겠습니까?", preferredStyle: .alert)
-                            let alertAction = UIAlertAction(title: "예", style: .default) { (_) in
-                               //  여기에 실행할 코드
-                                let appStoreOpenUrlString = "itms-apps://itunes.apple.com/app/apple-store/1509717384"
-                                
-                                let url = URL(string: appStoreOpenUrlString)
-
-                                if UIApplication.shared.canOpenURL(url!) {
-                                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                                }
-                            }
-                            alert.addAction(alertAction)
-                            self.present(alert, animated: true, completion: nil)
+//                    let alert = UIAlertController(title: "", message: "업데이트 하시겠습니까?", preferredStyle: .alert)
+//                            let alertAction = UIAlertAction(title: "예", style: .default) { (_) in
+//                               //  여기에 실행할 코드
+//                                let appStoreOpenUrlString = "itms-apps://itunes.apple.com/app/apple-store/1509717384"
+//                                
+//                                let url = URL(string: appStoreOpenUrlString)
+//
+//                                if UIApplication.shared.canOpenURL(url!) {
+//                                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+//                                }
+//                            }
+//                            alert.addAction(alertAction)
+//                            self.present(alert, animated: true, completion: nil)
 //                    if latestVersionCode! > bundleVersion! {
 //                        let alert = UIAlertController(title: "", message: "업데이트 하시겠습니까?", preferredStyle: .alert)
 //                                let alertAction = UIAlertAction(title: "예", style: .default) { (_) in

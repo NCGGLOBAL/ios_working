@@ -27,6 +27,14 @@
 				<string>modooticketscheme</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao62ca6570cc5d52238b98aa4326b91ec2</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -39,7 +47,7 @@
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
-	<string></string>
+	<string>62ca6570cc5d52238b98aa4326b91ec2</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -113,7 +121,7 @@
 		<string>mg-bankpay</string>
 		<string>kbn-bankpay</string>
 		<string>kkb-bankpay</string>
-		<string>kakao d3486cb7bb7f9255cec01ca61e7dbc2f</string>
+		<string>kakao84261b7b28d975f96fd23bb5f58e9fc0</string>
 		<string>kakaotalk</string>
 		<string>shinhan-sr-ansimclick-payco</string>
 		<string>shinhan-sr-ansimclick-naverpay</string>
