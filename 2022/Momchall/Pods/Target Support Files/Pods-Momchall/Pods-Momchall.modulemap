@@ -1,0 +1,6 @@
+framework module Pods_Momchall {
+  umbrella header "Pods-Momchall-umbrella.h"
+
+  export *
+  module * { export * }
+}

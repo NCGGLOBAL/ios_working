@@ -1,6 +1,0 @@
-framework module Pods_NiceCaddy {
-  umbrella header "Pods-NiceCaddy-umbrella.h"
-
-  export *
-  module * { export * }
-}

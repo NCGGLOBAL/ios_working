@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  SinsangChinaSeller
+
+  Created by glediaer on 09/09/2019.
+  Copyright © 2019 JungWoon Kwon. All rights reserved.
+*/
+
+"str_guide" = "안내";
+"str_fail_get_photo" = "사진을 불러오지 못했습니다.";
+"str_add_photo" = "사진추가";
+"str_select_photo" = "사진선택";
+"str_no_select_image" = "선택된 이미지가 없습니다.";
+"str_fail_auth" = "인증에 실패하였습니다.";
+"str_fail_network" = "통신이 실패하였습니다.";
+"str_not_support_camera" = "장치에서 카메라 기능을 지원하지 않습니다.";
+"str_empty_token" = "토큰값이 존재하지 않습니다.";
+"str_detail_view" = "상세보기";
+"str_delete_photo" = "사진을 삭제하시겠습니까?";
+"str_cancel" = "취소";
+"str_delete" = "삭제";
+"str_use" = "사용";
+"str_camera" = "카메라";
+"str_edit_order" = "순서편집";
+"str_edit" = "편집";
+"str_done" = "완료";
+"str_rotate" = "회전";
+"str_cut" = "자르기";
+"str_edit_photo" = "사진편집";
+"str_direct_capture" = "직접촬영";
+"str_reg_product" = "상품등록";
+"str_change_order" = "순서변경";
+"str_confirm" = "확인";
+"str_reg_limit" = "10개만 등록 가능합니다";
+"str_permission_camera" = "상품을 등록할 때 촬영할 수 있습니다. 서비스를 위해 카메라에 접근합니다.";
+"str_permission_album" = "상품 및 이미지 등록을 위해 사진첩에 접근합니다.";
+"str_permission_storage" = "사진을 저장하기 위해 저장소에 접근합니다.";

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>600410498626-fnqvsqa1c3d42foh5b6a5ji9pf9pappu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.600410498626-fnqvsqa1c3d42foh5b6a5ji9pf9pappu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7p6X4k_VH3RTtTOZRFbbWyMzTasG7awE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>600410498626</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mallup.sangsangmarket</string>
+	<key>PROJECT_ID</key>
+	<string>sangsangmarket-9a289</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sangsangmarket-9a289.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:600410498626:ios:dcfdd5d5d45343632f6fdb</string>
+</dict>
+</plist>

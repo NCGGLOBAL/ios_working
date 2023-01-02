@@ -1,0 +1,429 @@
+2021-04-02 08:44:53 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fd743b90910; archive(resolved)='<IDEArchive: 0x7fd7330a20d0>', distributionTask(resolved)='2', distributionDestination(resolved)='1', distributionMethod(resolved)='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team(resolved)='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	Chain (12, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fd743b90910; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionProcessingPipelineContext: 0x7fd7318706d0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd7371865b0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd7333e02c0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd7378123e0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd731927dc0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd737885150; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd73730e2c0; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd733205760; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fd72e31b9d0; teamID='AC2B37E968', teamName='Tom Apparel', teamType='Company', username='mrstreet99@gmail.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fd737321d90; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='(null)'>
+	<IDEDistributionContext: 0x7fd7324e7c00; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7fd7330a3390>', team='(null)'>
+	<IDEDistributionContext: 0x7fd737457530; archive = '<IDEArchive: 0x7fd7330a20d0>', distributionMethod='(null)', team='(null)'>
+</IDEDistributionProcessingPipelineContext: 0x7fd743b90910>
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCreateDestRootStep
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCopyItemStep
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app 
+2021-04-02 08:44:53 +0000  copying file ./_CodeSignature/CodeResources ... 
+2021-04-02 08:44:53 +0000  13571 bytes for ./_CodeSignature/CodeResources
+2021-04-02 08:44:53 +0000  copying file ./icon_play.png ... 
+2021-04-02 08:44:53 +0000  2737 bytes for ./icon_play.png
+2021-04-02 08:44:53 +0000  copying file ./btn_gallery@3x.png ... 
+2021-04-02 08:44:53 +0000  4183 bytes for ./btn_gallery@3x.png
+2021-04-02 08:44:53 +0000  copying file ./AppIcon60x60@2x.png ... 
+2021-04-02 08:44:53 +0000  3982 bytes for ./AppIcon60x60@2x.png
+copying file ./icon_del.png ... 
+2021-04-02 08:44:53 +0000  1254 bytes for ./icon_del.png
+copying file ./ic_main.png ... 
+2021-04-02 08:44:53 +0000  821 bytes for ./ic_main.png
+2021-04-02 08:44:53 +0000  copying file ./top_back.png ... 
+2021-04-02 08:44:53 +0000  752 bytes for ./top_back.png
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/subWebViewController.nib ... 
+2021-04-02 08:44:53 +0000  1140 bytes for ./Base.lproj/Main.storyboardc/subWebViewController.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/fdD-VF-3rn-view-Lj6-dj-3FC.nib ... 
+2021-04-02 08:44:53 +0000  1197 bytes for ./Base.lproj/Main.storyboardc/fdD-VF-3rn-view-Lj6-dj-3FC.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-fdD-VF-3rn.nib ... 
+2021-04-02 08:44:53 +0000  1018 bytes for ./Base.lproj/Main.storyboardc/UIViewController-fdD-VF-3rn.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/NN2-QL-X6M-view-LRc-TD-opF.nib ... 
+2021-04-02 08:44:53 +0000  10477 bytes for ./Base.lproj/Main.storyboardc/NN2-QL-X6M-view-LRc-TD-opF.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/ZjZ-jp-6R5-view-oa0-XQ-RdW.nib ... 
+2021-04-02 08:44:53 +0000  3803 bytes for ./Base.lproj/Main.storyboardc/ZjZ-jp-6R5-view-oa0-XQ-RdW.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2021-04-02 08:44:53 +0000  3806 bytes for ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/imageSelectViewController.nib ... 
+2021-04-02 08:44:53 +0000  1795 bytes for ./Base.lproj/Main.storyboardc/imageSelectViewController.nib
+copying file ./Base.lproj/Main.storyboardc/fLt-8t-3ae-view-qIQ-ZN-cdu.nib ... 
+2021-04-02 08:44:53 +0000  2914 bytes for ./Base.lproj/Main.storyboardc/fLt-8t-3ae-view-qIQ-ZN-cdu.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/UINavigationController-30H-vX-MTW.nib ... 
+2021-04-02 08:44:53 +0000  2233 bytes for ./Base.lproj/Main.storyboardc/UINavigationController-30H-vX-MTW.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/liveViewController.nib ... 
+2021-04-02 08:44:53 +0000  1136 bytes for ./Base.lproj/Main.storyboardc/liveViewController.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+2021-04-02 08:44:53 +0000  513 bytes for ./Base.lproj/Main.storyboardc/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2021-04-02 08:44:53 +0000  2485 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2021-04-02 08:44:53 +0000  896 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2021-04-02 08:44:53 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2021-04-02 08:44:53 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./btn_gallery@2x.png ... 
+2021-04-02 08:44:53 +0000  3111 bytes for ./btn_gallery@2x.png
+2021-04-02 08:44:53 +0000  copying file ./btn_camera@3x.png ... 
+2021-04-02 08:44:53 +0000  4024 bytes for ./btn_camera@3x.png
+2021-04-02 08:44:53 +0000  copying file ./Assets.car ... 
+2021-04-02 08:44:53 +0000  85032 bytes for ./Assets.car
+2021-04-02 08:44:53 +0000  copying file ./btn_camera@2x.png ... 
+2021-04-02 08:44:53 +0000  2618 bytes for ./btn_camera@2x.png
+2021-04-02 08:44:53 +0000  copying file ./icon_camerachange.png ... 
+2021-04-02 08:44:53 +0000  3735 bytes for ./icon_camerachange.png
+2021-04-02 08:44:53 +0000  copying file ./btn_gallery.png ... 
+2021-04-02 08:44:53 +0000  1269 bytes for ./btn_gallery.png
+2021-04-02 08:44:53 +0000  copying file ./icon_del@2x.png ... 
+2021-04-02 08:44:53 +0000  4106 bytes for ./icon_del@2x.png
+2021-04-02 08:44:53 +0000  copying file ./Pigmarket ... 
+2021-04-02 08:44:53 +0000  10542608 bytes for ./Pigmarket
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/Protobuf.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:44:53 +0000  1798 bytes for ./Frameworks/Protobuf.framework/_CodeSignature/CodeResources
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/Protobuf.framework/Protobuf ... 
+2021-04-02 08:44:53 +0000  3021536 bytes for ./Frameworks/Protobuf.framework/Protobuf
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/Protobuf.framework/Info.plist ... 
+2021-04-02 08:44:53 +0000  742 bytes for ./Frameworks/Protobuf.framework/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/Kingfisher.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:44:53 +0000  1798 bytes for ./Frameworks/Kingfisher.framework/_CodeSignature/CodeResources
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/Kingfisher.framework/Kingfisher ... 
+2021-04-02 08:44:53 +0000  3273872 bytes for ./Frameworks/Kingfisher.framework/Kingfisher
+copying file ./Frameworks/Kingfisher.framework/Info.plist ... 
+2021-04-02 08:44:53 +0000  747 bytes for ./Frameworks/Kingfisher.framework/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:44:53 +0000  1798 bytes for ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+2021-04-02 08:44:53 +0000  856688 bytes for ./Frameworks/GoogleUtilities.framework/GoogleUtilities
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/GoogleUtilities.framework/Info.plist ... 
+2021-04-02 08:44:53 +0000  758 bytes for ./Frameworks/GoogleUtilities.framework/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:44:53 +0000  1798 bytes for ./Frameworks/nanopb.framework/_CodeSignature/CodeResources
+2021-04-02 08:44:53 +0000  copying file ./Frameworks/nanopb.framework/nanopb ... 
+2021-04-02 08:44:53 +0000  277616 bytes for ./Frameworks/nanopb.framework/nanopb
+copying file ./Frameworks/nanopb.framework/Info.plist ... 
+2021-04-02 08:44:53 +0000  740 bytes for ./Frameworks/nanopb.framework/Info.plist
+2021-04-02 08:44:53 +0000  copying file ./btn_camera.png ... 
+2021-04-02 08:44:53 +0000  1007 bytes for ./btn_camera.png
+2021-04-02 08:44:53 +0000  copying file ./icon_stop.png ... 
+2021-04-02 08:44:53 +0000  2539 bytes for ./icon_stop.png
+2021-04-02 08:44:53 +0000  copying file ./embedded.mobileprovision ... 
+2021-04-02 08:44:53 +0000  12096 bytes for ./embedded.mobileprovision
+copying file ./IOS_1242x2208_intro.png ... 
+2021-04-02 08:44:53 +0000  56402 bytes for ./IOS_1242x2208_intro.png
+copying file ./Info.plist ... 
+2021-04-02 08:44:53 +0000  3947 bytes for ./Info.plist
+copying file ./btn_close.png ... 
+2021-04-02 08:44:53 +0000  885 bytes for ./btn_close.png
+2021-04-02 08:44:53 +0000  copying file ./PkgInfo ... 
+2021-04-02 08:44:53 +0000  8 bytes for ./PkgInfo
+copying file ./icon_del@3x.png ... 
+2021-04-02 08:44:53 +0000  4941 bytes for ./icon_del@3x.png
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionEmbedProfileStep
+2021-04-02 08:44:53 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fd73328b280; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x7fd7332523f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd73328b620; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd731e55920; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743114920>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x7fd731b9cc00:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fd7373e54e0; bundleID='org.cocoapods.Kingfisher', path='<DVTFilePath:0x7fd7318e2900:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737196540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd731e55920; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd7370d8da0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Kingfisher', executablePath='<DVTFilePath:0x7fd7372b60c0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fd73329bc00; bundleID='org.cocoapods.Protobuf', path='<DVTFilePath:0x7fd747f8cce0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7332962e0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd731e55920; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd745ba1490>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Protobuf', executablePath='<DVTFilePath:0x7fd7318e10f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fd73726c0e0; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x7fd731b6bbf0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7377737f0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd743b6cca0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743b42330>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x7fd737294980:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionInfoPlistStep
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionItemRemovalStep
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities' '-l' '-o' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher' '-l' '-o' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf' '-l' '-o' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework/nanopb' '-l' '-o' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework/nanopb'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Pigmarket' '-l' '-o' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Pigmarket'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/BCSymbolMaps/EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap 
+2021-04-02 08:44:53 +0000  copying file ./EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap ... 
+2021-04-02 08:44:53 +0000  45263 bytes for ./EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/BCSymbolMaps/101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap 
+2021-04-02 08:44:53 +0000  copying file ./101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap ... 
+2021-04-02 08:44:53 +0000  333096 bytes for ./101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/BCSymbolMaps/6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap 
+2021-04-02 08:44:53 +0000  copying file ./6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap ... 
+2021-04-02 08:44:53 +0000  175925 bytes for ./6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/BCSymbolMaps/427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap 
+2021-04-02 08:44:53 +0000  copying file ./427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap ... 
+2021-04-02 08:44:53 +0000  13076 bytes for ./427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Running /usr/bin/ditto '-V' '/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/BCSymbolMaps/F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap'
+2021-04-02 08:44:53 +0000  >>> Copying /Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/BCSymbolMaps/F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap 
+2021-04-02 08:44:53 +0000  copying file ./F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap ... 
+2021-04-02 08:44:53 +0000  456523 bytes for ./F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap
+2021-04-02 08:44:53 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionSymbolsStep
+2021-04-02 08:44:53 +0000  Excluding symbols for GoogleUtilities.framework
+2021-04-02 08:44:53 +0000  Excluding symbols for Kingfisher.framework
+2021-04-02 08:44:53 +0000  Excluding symbols for Protobuf.framework
+2021-04-02 08:44:53 +0000  Excluding symbols for nanopb.framework
+2021-04-02 08:44:53 +0000  Excluding symbols for Pigmarket.app
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionCopyAppleProvidedContentStep
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionAppThinningStep
+2021-04-02 08:44:53 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionArchThinningStep
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities' '-verify_arch' 'arm64e'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-04-02 08:44:53 +0000  Skipping architecture thinning for item "GoogleUtilities" because arch "arm64e" wasn't found
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher' '-verify_arch' 'arm64e'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-04-02 08:44:53 +0000  Skipping architecture thinning for item "Kingfisher" because arch "arm64e" wasn't found
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf' '-verify_arch' 'arm64e'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-04-02 08:44:53 +0000  Skipping architecture thinning for item "Protobuf" because arch "arm64e" wasn't found
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework/nanopb' '-verify_arch' 'arm64e'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-04-02 08:44:53 +0000  Skipping architecture thinning for item "nanopb" because arch "arm64e" wasn't found
+2021-04-02 08:44:53 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Pigmarket' '-verify_arch' 'arm64e'
+2021-04-02 08:44:53 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-04-02 08:44:53 +0000  Skipping architecture thinning for item "Pigmarket" because arch "arm64e" wasn't found
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionODRStep
+2021-04-02 08:44:53 +0000  Processing step: IDEDistributionStripXattrsStep
+2021-04-02 08:44:53 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fd73328b280; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x7fd7332523f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd73328b620; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72f0a5f60>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x7fd731b9cc00:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fd7373e54e0; bundleID='org.cocoapods.Kingfisher', path='<DVTFilePath:0x7fd7318e2900:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737196540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72f027560>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Kingfisher', executablePath='<DVTFilePath:0x7fd7372b60c0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fd73329bc00; bundleID='org.cocoapods.Protobuf', path='<DVTFilePath:0x7fd747f8cce0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7332962e0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72f0a5f60>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Protobuf', executablePath='<DVTFilePath:0x7fd7318e10f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fd73726c0e0; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x7fd731b6bbf0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7377737f0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72f027560>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x7fd737294980:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>
+2021-04-02 08:44:53 +0000  Running /usr/bin/xattr '-crs' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app'
+2021-04-02 08:44:54 +0000  /usr/bin/xattr exited with 0
+2021-04-02 08:44:54 +0000  Processing step: IDEDistributionCodesignStep
+2021-04-02 08:44:54 +0000  Entitlements for <IDEDistributionItem: 0x7fd73328b280; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x7fd7332523f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd73328b620; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd7342b31e0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x7fd731b9cc00:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>: {
+}
+2021-04-02 08:44:54 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd73328b280; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x7fd7332523f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd73328b620; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd743b84690; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72e16d540>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x7fd731b9cc00:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'> to: /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~tPNMc8
+2021-04-02 08:44:54 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'DA52A1D74EE54DB9A845067F59BF53FD61D2C9DC' '--entitlements' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~tPNMc8' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework'
+2021-04-02 08:45:04 +0000  /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.GoogleUtilities]
+2021-04-02 08:45:04 +0000  /usr/bin/codesign exited with 0
+2021-04-02 08:45:04 +0000  Entitlements for <IDEDistributionItem: 0x7fd7373e54e0; bundleID='org.cocoapods.Kingfisher', path='<DVTFilePath:0x7fd7318e2900:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737196540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd7434a98a0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Kingfisher', executablePath='<DVTFilePath:0x7fd7372b60c0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher'>', hardenedRuntime='0'>'>: {
+}
+2021-04-02 08:45:04 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd7373e54e0; bundleID='org.cocoapods.Kingfisher', path='<DVTFilePath:0x7fd7318e2900:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737196540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd732682380; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd7342ac670>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Kingfisher', executablePath='<DVTFilePath:0x7fd7372b60c0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher'>', hardenedRuntime='0'>'> to: /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~Cc6EEa
+2021-04-02 08:45:04 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'DA52A1D74EE54DB9A845067F59BF53FD61D2C9DC' '--entitlements' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~Cc6EEa' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework'
+2021-04-02 08:45:08 +0000  /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.Kingfisher]
+2021-04-02 08:45:08 +0000  /usr/bin/codesign exited with 0
+2021-04-02 08:45:08 +0000  Entitlements for <IDEDistributionItem: 0x7fd73329bc00; bundleID='org.cocoapods.Protobuf', path='<DVTFilePath:0x7fd747f8cce0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7332962e0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd743b89ae0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743b6c130>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Protobuf', executablePath='<DVTFilePath:0x7fd7318e10f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf'>', hardenedRuntime='0'>'>: {
+}
+2021-04-02 08:45:08 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd73329bc00; bundleID='org.cocoapods.Protobuf', path='<DVTFilePath:0x7fd747f8cce0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7332962e0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd7326aee30; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743764aa0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.Protobuf', executablePath='<DVTFilePath:0x7fd7318e10f0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf'>', hardenedRuntime='0'>'> to: /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~0JmkoI
+2021-04-02 08:45:08 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'DA52A1D74EE54DB9A845067F59BF53FD61D2C9DC' '--entitlements' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~0JmkoI' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework'
+2021-04-02 08:45:11 +0000  /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.Protobuf]
+2021-04-02 08:45:11 +0000  /usr/bin/codesign exited with 0
+2021-04-02 08:45:11 +0000  Entitlements for <IDEDistributionItem: 0x7fd73726c0e0; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x7fd731b6bbf0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7377737f0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd743b89ae0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743b6c130>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x7fd737294980:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>: {
+}
+2021-04-02 08:45:11 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd73726c0e0; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x7fd731b6bbf0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd7377737f0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd7326aee30; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd743764aa0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='(null)', teamID='AC2B37E968', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x7fd737294980:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'> to: /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~8QqTtY
+2021-04-02 08:45:11 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'DA52A1D74EE54DB9A845067F59BF53FD61D2C9DC' '--entitlements' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~8QqTtY' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework'
+2021-04-02 08:45:14 +0000  /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.nanopb]
+2021-04-02 08:45:14 +0000  /usr/bin/codesign exited with 0
+2021-04-02 08:45:14 +0000  Entitlements for <IDEDistributionItem: 0x7fd73181d9b0; bundleID='com.admin.pigmarketapp', path='<DVTFilePath:0x7fd732683b50:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737287200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd72dd489a0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd7342d63f0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='{
+    "application-identifier" = "AC2B37E968.com.admin.pigmarketapp";
+    "com.apple.developer.team-identifier" = AC2B37E968;
+    "get-task-allow" = 1;
+}', teamID='AC2B37E968', identifier='com.admin.pigmarketapp', executablePath='<DVTFilePath:0x7fd732434ec0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Pigmarket'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "AC2B37E968.com.admin.pigmarketapp";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = AC2B37E968;
+    "get-task-allow" = 0;
+}
+2021-04-02 08:45:14 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd73181d9b0; bundleID='com.admin.pigmarketapp', path='<DVTFilePath:0x7fd732683b50:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fd737287200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fd731ba4db0; name='Apple Development: YOUNG JAE DOO (NNU6PG6MNN)', hash='77FAEB3C59C0400D35D9FBFC5C076BD8F0EC3B02', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fd72d322990>', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-02 08:28:05 +0000''>', entitlements='{
+    "application-identifier" = "AC2B37E968.com.admin.pigmarketapp";
+    "com.apple.developer.team-identifier" = AC2B37E968;
+    "get-task-allow" = 1;
+}', teamID='AC2B37E968', identifier='com.admin.pigmarketapp', executablePath='<DVTFilePath:0x7fd732434ec0:'/Users/glediaer/Library/Developer/Xcode/Archives/2021-04-02/Pigmarket 2021-04-02 5.43 PM.xcarchive/Products/Applications/Pigmarket.app/Pigmarket'>', hardenedRuntime='0'>'> to: /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~UvhsQ0
+2021-04-02 08:45:14 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'DA52A1D74EE54DB9A845067F59BF53FD61D2C9DC' '--entitlements' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/entitlements~~~UvhsQ0' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app'
+2021-04-02 08:45:18 +0000  /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app: signed app bundle with Mach-O thin (arm64) [com.admin.pigmarketapp]
+2021-04-02 08:45:18 +0000  /usr/bin/codesign exited with 0
+2021-04-02 08:45:18 +0000  Processing step: IDEDistributionZipODRItemStep
+2021-04-02 08:45:18 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-04-02 08:45:18 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-04-02 08:45:18 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-04-02 08:45:18 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-04-02 08:45:18 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-04-02 08:45:18 +0000  Processing step: IDEDistributionCreateIPAStep
+2021-04-02 08:45:18 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root' '/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Packages/피그마켓.ipa'
+2021-04-02 08:45:18 +0000  >>> Copying /var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root 
+2021-04-02 08:45:18 +0000  copying file ./BCSymbolMaps/101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap ... 
+2021-04-02 08:45:18 +0000  333096 bytes for ./BCSymbolMaps/101AB012-39BB-3C73-AD6B-9436F55A1D1C.bcsymbolmap
+copying file ./BCSymbolMaps/F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap ... 
+2021-04-02 08:45:18 +0000  456523 bytes for ./BCSymbolMaps/F0E87830-E0D7-3B1F-ACD4-AA81AF4831AF.bcsymbolmap
+2021-04-02 08:45:18 +0000  copying file ./BCSymbolMaps/427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap ... 
+2021-04-02 08:45:18 +0000  13076 bytes for ./BCSymbolMaps/427A3FA9-7C47-3758-B39D-E3678BC82246.bcsymbolmap
+2021-04-02 08:45:18 +0000  copying file ./BCSymbolMaps/6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap ... 
+2021-04-02 08:45:18 +0000  175925 bytes for ./BCSymbolMaps/6E0E0491-427F-39D6-A825-334DC54D01DE.bcsymbolmap
+2021-04-02 08:45:18 +0000  copying file ./BCSymbolMaps/EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap ... 
+2021-04-02 08:45:18 +0000  45263 bytes for ./BCSymbolMaps/EEB8409C-4238-33AB-852B-49BEB66D4BBA.bcsymbolmap
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/_CodeSignature/CodeResources ... 
+2021-04-02 08:45:18 +0000  13571 bytes for ./Payload/Pigmarket.app/_CodeSignature/CodeResources
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/icon_play.png ... 
+2021-04-02 08:45:18 +0000  2737 bytes for ./Payload/Pigmarket.app/icon_play.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/btn_gallery@3x.png ... 
+2021-04-02 08:45:18 +0000  4183 bytes for ./Payload/Pigmarket.app/btn_gallery@3x.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/AppIcon60x60@2x.png ... 
+2021-04-02 08:45:18 +0000  3982 bytes for ./Payload/Pigmarket.app/AppIcon60x60@2x.png
+copying file ./Payload/Pigmarket.app/icon_del.png ... 
+2021-04-02 08:45:18 +0000  1254 bytes for ./Payload/Pigmarket.app/icon_del.png
+copying file ./Payload/Pigmarket.app/ic_main.png ... 
+2021-04-02 08:45:18 +0000  821 bytes for ./Payload/Pigmarket.app/ic_main.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/top_back.png ... 
+2021-04-02 08:45:18 +0000  752 bytes for ./Payload/Pigmarket.app/top_back.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/subWebViewController.nib ... 
+2021-04-02 08:45:18 +0000  1140 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/subWebViewController.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/fdD-VF-3rn-view-Lj6-dj-3FC.nib ... 
+2021-04-02 08:45:18 +0000  1197 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/fdD-VF-3rn-view-Lj6-dj-3FC.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/UIViewController-fdD-VF-3rn.nib ... 
+2021-04-02 08:45:18 +0000  1018 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/UIViewController-fdD-VF-3rn.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/NN2-QL-X6M-view-LRc-TD-opF.nib ... 
+2021-04-02 08:45:18 +0000  10477 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/NN2-QL-X6M-view-LRc-TD-opF.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/ZjZ-jp-6R5-view-oa0-XQ-RdW.nib ... 
+2021-04-02 08:45:18 +0000  3803 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/ZjZ-jp-6R5-view-oa0-XQ-RdW.nib
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2021-04-02 08:45:18 +0000  3806 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/imageSelectViewController.nib ... 
+2021-04-02 08:45:18 +0000  1795 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/imageSelectViewController.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/fLt-8t-3ae-view-qIQ-ZN-cdu.nib ... 
+2021-04-02 08:45:18 +0000  2914 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/fLt-8t-3ae-view-qIQ-ZN-cdu.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/UINavigationController-30H-vX-MTW.nib ... 
+2021-04-02 08:45:18 +0000  2233 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/UINavigationController-30H-vX-MTW.nib
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/liveViewController.nib ... 
+2021-04-02 08:45:18 +0000  1136 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/liveViewController.nib
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/Info.plist ... 
+2021-04-02 08:45:18 +0000  513 bytes for ./Payload/Pigmarket.app/Base.lproj/Main.storyboardc/Info.plist
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2021-04-02 08:45:18 +0000  2485 bytes for ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2021-04-02 08:45:18 +0000  896 bytes for ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2021-04-02 08:45:18 +0000  258 bytes for ./Payload/Pigmarket.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/btn_gallery@2x.png ... 
+2021-04-02 08:45:18 +0000  3111 bytes for ./Payload/Pigmarket.app/btn_gallery@2x.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/btn_camera@3x.png ... 
+2021-04-02 08:45:18 +0000  4024 bytes for ./Payload/Pigmarket.app/btn_camera@3x.png
+copying file ./Payload/Pigmarket.app/Assets.car ... 
+2021-04-02 08:45:18 +0000  85032 bytes for ./Payload/Pigmarket.app/Assets.car
+copying file ./Payload/Pigmarket.app/btn_camera@2x.png ... 
+2021-04-02 08:45:18 +0000  2618 bytes for ./Payload/Pigmarket.app/btn_camera@2x.png
+copying file ./Payload/Pigmarket.app/icon_camerachange.png ... 
+2021-04-02 08:45:18 +0000  3735 bytes for ./Payload/Pigmarket.app/icon_camerachange.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/btn_gallery.png ... 
+2021-04-02 08:45:18 +0000  1269 bytes for ./Payload/Pigmarket.app/btn_gallery.png
+copying file ./Payload/Pigmarket.app/icon_del@2x.png ... 
+2021-04-02 08:45:18 +0000  4106 bytes for ./Payload/Pigmarket.app/icon_del@2x.png
+2021-04-02 08:45:18 +0000  copying file ./Payload/Pigmarket.app/Pigmarket ... 
+2021-04-02 08:45:19 +0000  8880896 bytes for ./Payload/Pigmarket.app/Pigmarket
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/_CodeSignature/CodeResources
+copying file ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf ... 
+2021-04-02 08:45:19 +0000  2048320 bytes for ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/Protobuf
+copying file ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/Info.plist ... 
+2021-04-02 08:45:19 +0000  742 bytes for ./Payload/Pigmarket.app/Frameworks/Protobuf.framework/Info.plist
+copying file ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/_CodeSignature/CodeResources
+copying file ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher ... 
+2021-04-02 08:45:19 +0000  2239232 bytes for ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Kingfisher
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Info.plist ... 
+747 bytes for ./Payload/Pigmarket.app/Frameworks/Kingfisher.framework/Info.plist
+copying file ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:45:19 +0000  1798 bytes for ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+2021-04-02 08:45:19 +0000  639136 bytes for ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/GoogleUtilities
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/Info.plist ... 
+2021-04-02 08:45:19 +0000  758 bytes for ./Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework/Info.plist
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+2021-04-02 08:45:19 +0000  1798 bytes for ./Payload/Pigmarket.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/nanopb.framework/nanopb ... 
+2021-04-02 08:45:19 +0000  213952 bytes for ./Payload/Pigmarket.app/Frameworks/nanopb.framework/nanopb
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Frameworks/nanopb.framework/Info.plist ... 
+740 bytes for ./Payload/Pigmarket.app/Frameworks/nanopb.framework/Info.plist
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/btn_camera.png ... 
+2021-04-02 08:45:19 +0000  1007 bytes for ./Payload/Pigmarket.app/btn_camera.png
+copying file ./Payload/Pigmarket.app/icon_stop.png ... 
+2021-04-02 08:45:19 +0000  2539 bytes for ./Payload/Pigmarket.app/icon_stop.png
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/embedded.mobileprovision ... 
+2021-04-02 08:45:19 +0000  11417 bytes for ./Payload/Pigmarket.app/embedded.mobileprovision
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/IOS_1242x2208_intro.png ... 
+2021-04-02 08:45:19 +0000  56402 bytes for ./Payload/Pigmarket.app/IOS_1242x2208_intro.png
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/Info.plist ... 
+2021-04-02 08:45:19 +0000  3947 bytes for ./Payload/Pigmarket.app/Info.plist
+copying file ./Payload/Pigmarket.app/btn_close.png ... 
+2021-04-02 08:45:19 +0000  885 bytes for ./Payload/Pigmarket.app/btn_close.png
+2021-04-02 08:45:19 +0000  copying file ./Payload/Pigmarket.app/PkgInfo ... 
+2021-04-02 08:45:19 +0000  8 bytes for ./Payload/Pigmarket.app/PkgInfo
+copying file ./Payload/Pigmarket.app/icon_del@3x.png ... 
+2021-04-02 08:45:19 +0000  4941 bytes for ./Payload/Pigmarket.app/icon_del@3x.png
+2021-04-02 08:45:19 +0000  /usr/bin/ditto exited with 0
+2021-04-02 08:45:19 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2021-04-02 08:45:19 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2021-04-02 08:45:19 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2021-04-02 08:45:19 +0000  IDEDistributionItem init <DVTFilePath:0x7fd7414eeb00:'/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Protobuf.framework'>
+2021-04-02 08:45:19 +0000  IDEDistributionItem init <DVTFilePath:0x7fd743b98f70:'/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/GoogleUtilities.framework'>
+2021-04-02 08:45:19 +0000  IDEDistributionItem init <DVTFilePath:0x7fd72f7a81a0:'/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/nanopb.framework'>
+2021-04-02 08:45:19 +0000  IDEDistributionItem init <DVTFilePath:0x7fd73724b420:'/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app/Frameworks/Kingfisher.framework'>
+2021-04-02 08:45:19 +0000  IDEDistributionItem init <DVTFilePath:0x7fd73357d8a0:'/var/folders/m7/2nrqdjmj3yn6bxldpjjg522h0000gr/T/XcodeDistPipeline.~~~DIB7p6/Root/Payload/Pigmarket.app'>
+2021-04-02 08:45:19 +0000  Processing step: IDEDistributionCreateManifestStep
+2021-04-02 08:45:19 +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

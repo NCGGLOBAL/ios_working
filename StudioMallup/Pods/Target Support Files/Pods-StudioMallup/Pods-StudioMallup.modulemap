@@ -1,6 +1,0 @@
-framework module Pods_StudioMallup {
-  umbrella header "Pods-StudioMallup-umbrella.h"
-
-  export *
-  module * { export * }
-}

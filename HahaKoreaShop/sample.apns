@@ -1,9 +1,0 @@
-{
-    "Simulator Target Bundle" : "com.china.hahashop",
-    "aps" : {
-        "alert" : {
-            "title" : "test",
-            "body" : "pushtest",
-        },
-    },
-}

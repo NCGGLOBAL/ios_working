@@ -1,0 +1,6 @@
+framework module Pods_LiveMentor {
+  umbrella header "Pods-LiveMentor-umbrella.h"
+
+  export *
+  module * { export * }
+}

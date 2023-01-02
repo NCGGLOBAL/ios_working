@@ -1,0 +1,6 @@
+framework module Pods_SeeStore {
+  umbrella header "Pods-SeeStore-umbrella.h"
+
+  export *
+  module * { export * }
+}

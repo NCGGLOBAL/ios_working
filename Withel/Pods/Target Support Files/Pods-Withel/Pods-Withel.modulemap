@@ -1,6 +1,0 @@
-framework module Pods_Withel {
-  umbrella header "Pods-Withel-umbrella.h"
-
-  export *
-  module * { export * }
-}

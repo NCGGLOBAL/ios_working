@@ -1,0 +1,6 @@
+framework module Pods_Playit {
+  umbrella header "Pods-Playit-umbrella.h"
+
+  export *
+  module * { export * }
+}

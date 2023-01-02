@@ -1,6 +1,0 @@
-framework module Pods_Borisoo {
-  umbrella header "Pods-Borisoo-umbrella.h"
-
-  export *
-  module * { export * }
-}

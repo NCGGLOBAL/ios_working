@@ -1,6 +1,0 @@
-framework module Pods_Podoal {
-  umbrella header "Pods-Podoal-umbrella.h"
-
-  export *
-  module * { export * }
-}

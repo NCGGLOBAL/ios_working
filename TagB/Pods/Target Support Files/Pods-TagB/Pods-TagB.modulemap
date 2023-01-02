@@ -1,6 +1,0 @@
-framework module Pods_TagB {
-  umbrella header "Pods-TagB-umbrella.h"
-
-  export *
-  module * { export * }
-}

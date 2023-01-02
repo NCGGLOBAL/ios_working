@@ -1,6 +1,0 @@
-framework module Pods_DmMarket {
-  umbrella header "Pods-DmMarket-umbrella.h"
-
-  export *
-  module * { export * }
-}

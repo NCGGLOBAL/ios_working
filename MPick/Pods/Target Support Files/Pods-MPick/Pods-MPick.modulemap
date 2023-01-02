@@ -1,6 +1,0 @@
-framework module Pods_MPick {
-  umbrella header "Pods-MPick-umbrella.h"
-
-  export *
-  module * { export * }
-}

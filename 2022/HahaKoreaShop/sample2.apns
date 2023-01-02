@@ -1,0 +1,10 @@
+{
+    "Simulator Target Bundle" : "com.china.hahashop",
+    "aps" : {
+        "alert" : {
+            "title" : "test",
+            "body" : "pushtest",
+            "url": "https://hahakoreashop.com/m/mobile_login.asp"
+        },
+    },
+}

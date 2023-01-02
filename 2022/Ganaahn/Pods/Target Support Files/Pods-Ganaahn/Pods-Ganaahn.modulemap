@@ -1,0 +1,6 @@
+framework module Pods_Ganaahn {
+  umbrella header "Pods-Ganaahn-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_HKCMall {
+  umbrella header "Pods-HKCMall-umbrella.h"
+
+  export *
+  module * { export * }
+}

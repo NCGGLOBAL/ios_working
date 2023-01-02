@@ -1,6 +1,0 @@
-framework module Pods_DevShortDeal {
-  umbrella header "Pods-DevShortDeal-umbrella.h"
-
-  export *
-  module * { export * }
-}

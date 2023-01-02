@@ -1,6 +1,0 @@
-framework module Pods_ZhangbayoAdmin {
-  umbrella header "Pods-ZhangbayoAdmin-umbrella.h"
-
-  export *
-  module * { export * }
-}

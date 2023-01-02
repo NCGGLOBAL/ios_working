@@ -1,6 +1,0 @@
-framework module Pods_JejuTv {
-  umbrella header "Pods-JejuTv-umbrella.h"
-
-  export *
-  module * { export * }
-}

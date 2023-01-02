@@ -1,6 +1,0 @@
-framework module Pods_TheStyleLive {
-  umbrella header "Pods-TheStyleLive-umbrella.h"
-
-  export *
-  module * { export * }
-}

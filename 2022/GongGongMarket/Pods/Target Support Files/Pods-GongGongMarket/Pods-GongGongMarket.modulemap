@@ -1,0 +1,6 @@
+framework module Pods_GongGongMarket {
+  umbrella header "Pods-GongGongMarket-umbrella.h"
+
+  export *
+  module * { export * }
+}

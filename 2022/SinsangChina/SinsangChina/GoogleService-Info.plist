@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>555192172278-6jiab65ku1mgmjmu6htk906cbj6ko839.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.555192172278-6jiab65ku1mgmjmu6htk906cbj6ko839</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxy5c2Ev-qsiz2RU3Zoddot8pfHX39evA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>555192172278</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nechingu.sinsangchina</string>
+	<key>PROJECT_ID</key>
+	<string>sinsangchina</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sinsangchina.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:555192172278:ios:587b343c27c66ad6</string>
+	<key>DATABASE_URL</key>
+	<string>https://sinsangchina.firebaseio.com</string>
+</dict>
+</plist>

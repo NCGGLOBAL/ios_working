@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>538138018322-faqp98s3k55e4ebi0u54960aqv4dmeog.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.538138018322-faqp98s3k55e4ebi0u54960aqv4dmeog</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCUDZIHXC9TKpQXJ5YW4feVb4kseESwTLY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>538138018322</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creator.livecross</string>
+	<key>PROJECT_ID</key>
+	<string>livecross-9fe14</string>
+	<key>STORAGE_BUCKET</key>
+	<string>livecross-9fe14.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:538138018322:ios:83d80b1c467a6fbda4cecb</string>
+</dict>
+</plist>

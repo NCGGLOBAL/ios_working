@@ -1,0 +1,6 @@
+framework module Pods_StyleSu {
+  umbrella header "Pods-StyleSu-umbrella.h"
+
+  export *
+  module * { export * }
+}

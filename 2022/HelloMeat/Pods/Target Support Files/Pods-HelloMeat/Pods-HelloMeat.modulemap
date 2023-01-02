@@ -1,0 +1,6 @@
+framework module Pods_HelloMeat {
+  umbrella header "Pods-HelloMeat-umbrella.h"
+
+  export *
+  module * { export * }
+}

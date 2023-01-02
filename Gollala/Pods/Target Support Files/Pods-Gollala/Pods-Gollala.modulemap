@@ -1,6 +1,0 @@
-framework module Pods_Gollala {
-  umbrella header "Pods-Gollala-umbrella.h"
-
-  export *
-  module * { export * }
-}

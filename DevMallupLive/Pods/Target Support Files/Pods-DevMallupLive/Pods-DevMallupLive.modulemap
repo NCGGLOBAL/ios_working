@@ -1,6 +1,0 @@
-framework module Pods_DevMallupLive {
-  umbrella header "Pods-DevMallupLive-umbrella.h"
-
-  export *
-  module * { export * }
-}

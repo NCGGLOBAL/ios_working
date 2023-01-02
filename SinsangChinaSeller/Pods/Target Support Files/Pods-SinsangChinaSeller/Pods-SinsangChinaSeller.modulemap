@@ -1,6 +1,0 @@
-framework module Pods_SinsangChinaSeller {
-  umbrella header "Pods-SinsangChinaSeller-umbrella.h"
-
-  export *
-  module * { export * }
-}

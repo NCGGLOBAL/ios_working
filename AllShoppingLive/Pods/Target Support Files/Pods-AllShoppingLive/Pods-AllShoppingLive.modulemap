@@ -1,6 +1,0 @@
-framework module Pods_AllShoppingLive {
-  umbrella header "Pods-AllShoppingLive-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module Pods_Sellovely {
-  umbrella header "Pods-Sellovely-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module Pods_YsFnL {
-  umbrella header "Pods-YsFnL-umbrella.h"
-
-  export *
-  module * { export * }
-}
