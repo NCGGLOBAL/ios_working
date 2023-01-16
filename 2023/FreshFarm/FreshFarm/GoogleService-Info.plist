@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>957140885142-74e7sc0mpbioq20iel8ono21g07da3rb.apps.googleusercontent.com</string>
+	<string>957140885142-tmjs7th55nc63q4q29f87n4oj6i9ems8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.957140885142-74e7sc0mpbioq20iel8ono21g07da3rb</string>
+	<string>com.googleusercontent.apps.957140885142-tmjs7th55nc63q4q29f87n4oj6i9ems8</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD7L6bPfANNTik9fNdiUFkoKuJkJmNvLLU</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.freshfarm</string>
+	<string>com.creator.freshfarm.ios</string>
 	<key>PROJECT_ID</key>
 	<string>freshfarm-9e570</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:957140885142:ios:81b04e1179a1f31ee4acb7</string>
+	<string>1:957140885142:ios:aeb04661cc58a758e4acb7</string>
 </dict>
 </plist>
