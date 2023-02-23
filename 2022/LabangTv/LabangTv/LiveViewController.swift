@@ -72,6 +72,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
+        
+        kit?.streamerBase.stopStream()
+        kit?.stopPreview()
     }
     
     func initWebView() {
@@ -319,7 +322,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     case "ACT1030": // wlive 스트림키 전달 및 송출
                         var resultcd = "1"
                         if let streamUrl = actionParamObj?["stream_url"] as? String {
-                            self.initStreamer(streamUrl: streamUrl)
+                            DispatchQueue.main.async {
+                                self.kit?.streamerBase.stopStream()
+                                self.initStreamer(streamUrl: streamUrl)
+                            }
                         } else {
                             resultcd = "0"
                         }
