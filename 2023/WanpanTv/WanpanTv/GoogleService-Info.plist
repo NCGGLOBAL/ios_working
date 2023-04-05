@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>23241974867-5ak10m3r4vfm6ahco32tngg63m21bqko.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.23241974867-5ak10m3r4vfm6ahco32tngg63m21bqko</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC6jHFo3hB9ev25Y4eGYw_CHSAfKx8MErw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>23241974867</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creator.wanpantv</string>
+	<key>PROJECT_ID</key>
+	<string>wanpantv-2d660</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wanpantv-2d660.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:23241974867:ios:e6072378d0d9765cd012a6</string>
+</dict>
+</plist>
