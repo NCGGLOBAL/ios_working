@@ -14,7 +14,7 @@ import CoreLocation
 //import KakaoSDKUser
 
 class ViewController: UIViewController, WKUIDelegate,
-WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
+                      WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -490,11 +490,83 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
                     self.initWebView(urlString: AppDelegate.HOME_URL)
                     break
                     
+                case "ACT1037": // 앨범 열기
+                    self.uploadPhoto()
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
             }
         }
+    }
+    
+    func uploadPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self //3
+        // imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                    let imageName = imageUrl.lastPathComponent
+                    print(imageName) // "example.jpg"
+                    var myDict = [String: Any]()
+                    if let imageData = image.pngData() {
+                        let base64String = imageData.base64EncodedString()
+                        myDict["fData"] = base64String
+                        myDict["fName"] = imageName
+                    }
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                            // webView는 UIWebView 또는 WKWebView 객체입니다.
+                            webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                                if let error = error {
+                                    print("Error: \(error.localizedDescription)")
+                                } else {
+                                    print("Result: \(result ?? "")")
+                                }
+                            })
+                        }
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    
+                    
+//                    if let imageData = image.pngData() {
+//                        let base64String = imageData.base64EncodedString() // 이미지 데이터를 Base64 인코딩
+//                        var dic = Dictionary<String, Any>()
+//                        dic.updateValue(imageName ?? "", forKey: "fName")
+//                        dic.updateValue(base64String, forKey: "fData")
+//
+//                        do {
+//                            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+////                            let jsonEncodedData = jsonData.base64EncodedString()   // base64 eencode the data dictionary
+//                            let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+//                            let javascript = "\(callback)('\(stringValue)')"
+//                            #if DEBUG
+//                            print("jsonData : \(jsonData)")
+//                            print("javascript : \(javascript)")
+//                            #endif
+//                            // call back!
+//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+//                                #if DEBUG
+//                                print("result : \(String(describing: result))")
+//                                print("error : \(error)")
+//                                #endif
+//                            }
+//                        } catch let error as NSError {
+//                            print(error)
+//                        }
+//                    }
+                }
+            }
+            picker.dismiss(animated: true, completion: nil)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
