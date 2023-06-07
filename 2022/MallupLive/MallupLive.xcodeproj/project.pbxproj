@@ -90,8 +90,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
-		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
 		59106D8B0B3102B16C06F450 /* Pods-MallupLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MallupLive.release.xcconfig"; path = "Target Support Files/Pods-MallupLive/Pods-MallupLive.release.xcconfig"; sourceTree = "<group>"; };
 		A8B2CEBC01066C051FB9FB7B /* Pods_MallupLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MallupLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F071DCEB4E619CC8A0BC7F97 /* Pods-MallupLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MallupLive.debug.xcconfig"; path = "Target Support Files/Pods-MallupLive/Pods-MallupLive.debug.xcconfig"; sourceTree = "<group>"; };
@@ -204,8 +202,6 @@
 		5B09EBBDB2A5E88A5E27D900 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */,
-				0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */,
 				F071DCEB4E619CC8A0BC7F97 /* Pods-MallupLive.debug.xcconfig */,
 				59106D8B0B3102B16C06F450 /* Pods-MallupLive.release.xcconfig */,
 			);
@@ -762,7 +758,7 @@
 				CODE_SIGN_ENTITLEMENTS = MallupLive/MallupLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MallupLive/Info.plist;
@@ -771,7 +767,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.malluplive;
 				PRODUCT_NAME = MallupLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -792,7 +788,7 @@
 				CODE_SIGN_ENTITLEMENTS = MallupLive/MallupLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MallupLive/Info.plist;
@@ -801,7 +797,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.malluplive;
 				PRODUCT_NAME = MallupLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -815,7 +811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -824,7 +820,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.malluplive.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -837,7 +833,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -846,7 +842,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.malluplive.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

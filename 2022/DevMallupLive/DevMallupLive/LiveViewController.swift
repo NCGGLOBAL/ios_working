@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import libksygpulive
 
-class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
@@ -354,11 +354,33 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     case "ACT1031", "ACT1035": // 종료
                         self.navigationController?.popToRootViewController(animated: true)
                     break
+//                    case "ACT1036": // 스트리밍 캡쳐
+//                        // 현재 프레임의 이미지를 가져오기 위해 GPUImage로부터 texture ID를 얻어옴
+//                    let textureID = self.kit.cameraPreview.getOutputFramebuffer()?.texture?.name ?? 0
+//
+//                        // Texture ID를 가지고 현재 프레임의 이미지를 캡쳐
+//                        let image = captureImageFromTexture(textureID: textureID, size: CGSize(width: 640, height: 360))
+//
+//                        // 이미지를 파일로 저장
+//                        saveImageToFile(image: image)
+//                    break
+                case "ACT1037": // 앨범 열기
+                    self.uploadPhoto()
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
             }
         }
+    }
+    
+    func uploadPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self //3
+        // imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
