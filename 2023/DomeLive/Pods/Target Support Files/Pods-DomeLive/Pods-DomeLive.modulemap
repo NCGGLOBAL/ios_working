@@ -1,0 +1,6 @@
+framework module Pods_DomeLive {
+  umbrella header "Pods-DomeLive-umbrella.h"
+
+  export *
+  module * { export * }
+}
