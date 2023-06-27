@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>139247890276-2rikst6a4mk6uuc33gps5gmel46ehelf.apps.googleusercontent.com</string>
+	<string>785629632959-huk53u3as355q7knij5ekadj5l1ghu53.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.139247890276-2rikst6a4mk6uuc33gps5gmel46ehelf</string>
+	<string>com.googleusercontent.apps.785629632959-huk53u3as355q7knij5ekadj5l1ghu53</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA-MhqDOFla8jij8SlYnYMbmxMbWrAfr9M</string>
+	<string>AIzaSyCiVPAKEJFffO75KbTH9Ug2WJH03FEQSNI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>139247890276</string>
+	<string>785629632959</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creator.labangtv</string>
+	<string>com.creator.bingbing</string>
 	<key>PROJECT_ID</key>
-	<string>labangtv</string>
+	<string>bingbing-f989e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>labangtv.appspot.com</string>
+	<string>bingbing-f989e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:139247890276:ios:73becd63bfcf9b69289471</string>
+	<string>1:785629632959:ios:30de8011a1d7bfec0de90a</string>
 </dict>
 </plist>
