@@ -14,7 +14,7 @@ import CoreLocation
 //import KakaoSDKUser
 
 class ViewController: UIViewController, WKUIDelegate,
-WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource {
+                      WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -570,11 +570,23 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     self.initWebView(urlString: AppDelegate.HOME_URL)
                     break
                     
+                case "ACT1037": // 앨범 열기
+                    self.uploadPhoto()
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
             }
         }
+    }
+    
+    func uploadPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self //3
+        // imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

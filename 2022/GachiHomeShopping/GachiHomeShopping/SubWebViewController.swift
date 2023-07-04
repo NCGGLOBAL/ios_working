@@ -12,7 +12,7 @@ import WebKit
 //import KakaoSDKAuth
 //import KakaoSDKUser
 
-class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
@@ -481,11 +481,24 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 case "ACT1031": // 창 닫기
                     self.dismiss(animated: true, completion: nil)
                     break
+                    
+                case "ACT1037": // 앨범 열기
+                    self.uploadPhoto()
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
             }
         }
+    }
+    
+    func uploadPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self //3
+        // imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
