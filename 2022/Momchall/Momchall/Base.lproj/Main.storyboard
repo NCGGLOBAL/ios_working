@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6C0-vs-P33">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-IL-CXu">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDj-f8-wPh">
-                                <rect key="frame" x="0.0" y="88" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="92" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CAb-vA-O1t"/>
                                     <constraint firstAttribute="width" constant="50" id="QSy-7A-xi1"/>
@@ -36,17 +36,24 @@
                                     <action selector="onClickBackButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Se-ot-NzJ"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IOS_1242x2208_intro.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZW2-g7-Gjt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ZW2-g7-Gjt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2bV-h0-ov0"/>
                             <constraint firstItem="NXO-IL-CXu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Xy-bo-YFj"/>
+                            <constraint firstItem="ZW2-g7-Gjt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6wO-sk-RU8"/>
                             <constraint firstItem="NXO-IL-CXu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="C4S-Ft-pfV"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Dm6-IT-5dA"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Eal-RG-EWP"/>
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TM9-B7-BzW"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cP3-f2-wnS"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="cXH-Yl-Cxw"/>
+                            <constraint firstAttribute="bottom" secondItem="ZW2-g7-Gjt" secondAttribute="bottom" id="uYa-LT-Ltr"/>
+                            <constraint firstItem="ZW2-g7-Gjt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wsq-dX-1he"/>
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zPK-yz-GE0"/>
                         </constraints>
                     </view>
@@ -56,6 +63,7 @@
                         <outlet property="backButton" destination="xDj-f8-wPh" id="xhp-8R-vnU"/>
                         <outlet property="containerView" destination="6C0-vs-P33" id="kE2-KL-kn0"/>
                         <outlet property="indicatorView" destination="NXO-IL-CXu" id="gsJ-kn-M09"/>
+                        <outlet property="splashImageView" destination="ZW2-g7-Gjt" id="QHr-Fz-UvF"/>
                         <segue destination="NN2-QL-X6M" kind="show" identifier="imageSelectSegue" id="lrN-cQ-axV"/>
                         <segue destination="fdD-VF-3rn" kind="show" identifier="qrReaderSeque" id="KGW-Rd-nEG"/>
                     </connections>
@@ -73,10 +81,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CT0-EW-Z3x">
-                                <rect key="frame" x="15" y="291" width="384" height="556"/>
+                                <rect key="frame" x="15" y="295" width="384" height="552"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z9T-AO-B5X">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="556"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="552"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G1z-sr-43L">
                                             <size key="itemSize" width="128" height="128"/>
@@ -125,7 +133,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAO-rD-Dro">
-                                <rect key="frame" x="15" y="106" width="384" height="170"/>
+                                <rect key="frame" x="15" y="110" width="384" height="170"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uv2-Py-4zd">
                                         <rect key="frame" x="15" y="15" width="161.5" height="140"/>
@@ -260,11 +268,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jed-Nf-0Rt">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4u-bM-jYL">
-                                <rect key="frame" x="0.0" y="44" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="48" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="2WR-ts-Gxn"/>
                                     <constraint firstAttribute="height" constant="50" id="pHp-Qe-TlE"/>
@@ -322,6 +330,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="IOS_1242x2208_intro.png" width="1242" height="2208"/>
         <image name="btn_camera.png" width="72" height="51"/>
         <image name="btn_gallery.png" width="72" height="51"/>
         <image name="top_back.png" width="88" height="88"/>

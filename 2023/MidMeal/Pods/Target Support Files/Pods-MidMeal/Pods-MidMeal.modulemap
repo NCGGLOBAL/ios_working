@@ -1,0 +1,6 @@
+framework module Pods_MidMeal {
+  umbrella header "Pods-MidMeal-umbrella.h"
+
+  export *
+  module * { export * }
+}

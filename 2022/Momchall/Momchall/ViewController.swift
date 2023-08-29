@@ -19,6 +19,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet var splashImageView: UIImageView!
     
     var webView: WKWebView!
     
@@ -59,6 +60,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         
         // self.view = self.webView!
         self.containerView.addSubview(webView)
+        
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+//            self.splashImageView.isHidden = true
+//        }
     }
     
     override func viewDidLoad() {
@@ -539,15 +544,18 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
+        self.splashImageView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // 로딩 에러
         self.indicatorView.stopAnimating()
+        self.splashImageView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.indicatorView.stopAnimating()
+        self.splashImageView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
