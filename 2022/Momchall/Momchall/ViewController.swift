@@ -61,9 +61,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
         // self.view = self.webView!
         self.containerView.addSubview(webView)
         
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-//            self.splashImageView.isHidden = true
-//        }
+        self.randomSplash()
     }
     
     override func viewDidLoad() {
@@ -623,6 +621,20 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate {
             } catch let error as NSError {
               print(error)
             }
+    }
+    
+    func randomSplash() {
+        let randomInt = Int.random(in: 0...2)
+        switch randomInt {
+        case 0:
+            self.splashImageView.image = UIImage(named: "intro1")
+            break
+        case 1:
+            self.splashImageView.image = UIImage(named: "intro2")
+            break
+        default:
+            self.splashImageView.image = UIImage(named: "intro3")
+        }
     }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {

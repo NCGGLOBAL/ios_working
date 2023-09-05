@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17BE0C0F2AA769EE0005003B /* intro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0C2AA769EA0005003B /* intro1.png */; };
+		17BE0C102AA769EE0005003B /* intro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0D2AA769EC0005003B /* intro2.png */; };
+		17BE0C112AA769EE0005003B /* intro3.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0E2AA769EE0005003B /* intro3.png */; };
 		73F9C58208C89F7B821353BC /* Pods_Momchall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39649EDC5D5ECA56908EE70 /* Pods_Momchall.framework */; };
 		FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */; };
 		FF4FA9ED248105040059908A /* SubWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9EC248105040059908A /* SubWebViewController.swift */; };
@@ -68,6 +71,9 @@
 
 /* Begin PBXFileReference section */
 		0AA607D2FE8C8E372BA41733 /* Pods-Momchall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momchall.debug.xcconfig"; path = "Target Support Files/Pods-Momchall/Pods-Momchall.debug.xcconfig"; sourceTree = "<group>"; };
+		17BE0C0C2AA769EA0005003B /* intro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro1.png; sourceTree = "<group>"; };
+		17BE0C0D2AA769EC0005003B /* intro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro2.png; sourceTree = "<group>"; };
+		17BE0C0E2AA769EE0005003B /* intro3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro3.png; sourceTree = "<group>"; };
 		99A02381AD82932473950FC0 /* Pods-Momchall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momchall.release.xcconfig"; path = "Target Support Files/Pods-Momchall/Pods-Momchall.release.xcconfig"; sourceTree = "<group>"; };
 		A39649EDC5D5ECA56908EE70 /* Pods_Momchall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momchall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD812789891BFE2EC444D765 /* Pods_UnniTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnniTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +198,9 @@
 		FF60BA37247EB27700B0B1A8 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				17BE0C0C2AA769EA0005003B /* intro1.png */,
+				17BE0C0D2AA769EC0005003B /* intro2.png */,
+				17BE0C0E2AA769EE0005003B /* intro3.png */,
 				FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */,
 				FF60BA38247EB27700B0B1A8 /* icon_play.png */,
 				FF60BA39247EB27700B0B1A8 /* btn_gallery@3x.png */,
@@ -327,7 +336,9 @@
 				FF60BA33247EAACD00B0B1A8 /* GoogleService-Info.plist in Resources */,
 				FF60BA4D247EB27700B0B1A8 /* top_back.png in Resources */,
 				FF60BA51247EB27700B0B1A8 /* icon_camerachange.png in Resources */,
+				17BE0C102AA769EE0005003B /* intro2.png in Resources */,
 				FF60BA49247EB27700B0B1A8 /* icon_play.png in Resources */,
+				17BE0C112AA769EE0005003B /* intro3.png in Resources */,
 				FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */,
 				FF60BA50247EB27700B0B1A8 /* btn_camera@2x.png in Resources */,
 				FF60BA52247EB27700B0B1A8 /* btn_gallery.png in Resources */,
@@ -342,6 +353,7 @@
 				FF60BA54247EB27700B0B1A8 /* btn_camera.png in Resources */,
 				FF60BA58247EB27700B0B1A8 /* icon_del@3x.png in Resources */,
 				FF60BA4A247EB27700B0B1A8 /* btn_gallery@3x.png in Resources */,
+				17BE0C0F2AA769EE0005003B /* intro1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +588,7 @@
 				CODE_SIGN_ENTITLEMENTS = Momchall/Momchall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Momchall/Info.plist;
@@ -585,7 +597,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal;
 				PRODUCT_NAME = Momchall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -606,7 +618,7 @@
 				CODE_SIGN_ENTITLEMENTS = Momchall/Momchall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Momchall/Info.plist;
@@ -615,7 +627,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal;
 				PRODUCT_NAME = Momchall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -631,7 +643,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -640,7 +652,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -656,7 +668,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -665,7 +677,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
