@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDSY58iKBRPgIEdc1w4KAXBQi_rUXkAIfs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1066031588911</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creator.allpick</string>
+	<key>PROJECT_ID</key>
+	<string>allpick-fc88d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>allpick-fc88d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1066031588911:ios:3fd69c315eb3a1ca2908da</string>
+</dict>
+</plist>

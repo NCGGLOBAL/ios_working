@@ -1,0 +1,6 @@
+framework module Pods_AllPick {
+  umbrella header "Pods-AllPick-umbrella.h"
+
+  export *
+  module * { export * }
+}
