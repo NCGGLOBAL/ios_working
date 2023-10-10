@@ -179,6 +179,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
 
     
     override func viewWillAppear(_ animated: Bool) {
+        self.changeStatusBarBgColor(bgColor:UIColor(hexCode: "013b96"))
         if AppDelegate.QR_URL != "" {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
             vc.urlString = AppDelegate.QR_URL
@@ -724,6 +725,21 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             }
     }
     
+    func changeStatusBarBgColor(bgColor: UIColor?) {
+            if #available(iOS 13.0, *) {
+                let window = UIApplication.shared.windows.first
+                let statusBarManager = window?.windowScene?.statusBarManager
+                
+                let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
+                statusBarView.backgroundColor = bgColor
+                
+                window?.addSubview(statusBarView)
+            } else {
+                let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
+                statusBarView?.backgroundColor = bgColor
+            }
+        }
+    
 //    func showToast(message : String) {
 //            let width_variable:CGFloat = 10
 //            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
@@ -747,6 +763,27 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
         self.initWebView(urlString: AppDelegate.HOME_URL)
+    }
+}
+
+extension UIColor {
+    
+    convenience init(hexCode: String, alpha: CGFloat = 1.0) {
+        var hexFormatted: String = hexCode.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
+        
+        if hexFormatted.hasPrefix("#") {
+            hexFormatted = String(hexFormatted.dropFirst())
+        }
+        
+        assert(hexFormatted.count == 6, "Invalid hex code used.")
+        
+        var rgbValue: UInt64 = 0
+        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
+        
+        self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+                  green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+                  blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+                  alpha: alpha)
     }
 }
 
