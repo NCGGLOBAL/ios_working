@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IOS_1242x2208_intro.png" translatesAutoresizingMaskIntoConstraints="NO" id="iIh-Vk-5z0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8eI-oD-ot4"/>
-                            <constraint firstAttribute="bottom" secondItem="iIh-Vk-5z0" secondAttribute="bottom" id="GVq-at-hRY"/>
-                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="kEm-vb-qou"/>
-                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lOm-Nd-Bc2"/>
+                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7zr-1z-MvW"/>
+                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="AIa-3h-cim"/>
+                            <constraint firstAttribute="bottom" secondItem="iIh-Vk-5z0" secondAttribute="bottom" id="Hdc-ub-c9v"/>
+                            <constraint firstItem="iIh-Vk-5z0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oeN-Fr-dPz"/>
                         </constraints>
                     </view>
                 </viewController>
