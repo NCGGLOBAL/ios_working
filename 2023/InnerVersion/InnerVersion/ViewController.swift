@@ -63,7 +63,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
         
-        webView.frame.size.height = self.view.frame.size.height
+        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.customUserAgent = userAgent
