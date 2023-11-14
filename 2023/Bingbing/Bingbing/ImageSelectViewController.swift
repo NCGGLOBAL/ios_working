@@ -28,6 +28,11 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         self.navigationItem.title = "\(AppDelegate.ImageFileArray.count) / \(LIMIT_IMAGE_SIZE)"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "\(AppDelegate.imageArray.count) / \(self.LIMIT_IMAGE_SIZE)"
+        self.collectionView.reloadData()
+    }
+    
     func openCamera() {
         imagePicker.sourceType = .camera
         present(imagePicker, animated: false, completion: nil)
@@ -104,7 +109,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let option = PHImageRequestOptions()
         var thumbnail = UIImage()
         option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+        manager.requestImage(for: asset, targetSize: CGSize(width: self.view.bounds.width, height: self.view.bounds.width), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
                 thumbnail = result!
         })
         return thumbnail
@@ -132,7 +137,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectDetailViewController") as! ImageSelectDetailViewController
         
         let item = AppDelegate.ImageFileArray[indexPath.row]
-        vc.titleString = "\(AppDelegate.imageArray)장 중 \(indexPath.row + 1)번째 선택"
+        vc.titleString = "\(AppDelegate.imageArray.count)장 중 \(indexPath.row + 1)번째 선택"
         vc.selectedImage = item.image
         self.navigationController?.pushViewController(vc, animated: true)
     }
