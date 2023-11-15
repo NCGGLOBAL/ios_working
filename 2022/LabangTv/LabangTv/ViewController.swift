@@ -102,7 +102,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
         } else {
-            self.initWebView(urlString: AppDelegate.LANDING_URL)
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+            vc.urlString = AppDelegate.LANDING_URL
+            self.navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.LANDING_URL = ""
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
