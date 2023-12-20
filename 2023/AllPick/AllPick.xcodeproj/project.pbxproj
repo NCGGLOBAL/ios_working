@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172B59602B33264E0081A498 /* allpickorder.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 172B595E2B33264B0081A498 /* allpickorder.aiff */; };
+		172B59612B33264E0081A498 /* allpick.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 172B595F2B33264D0081A498 /* allpick.aiff */; };
 		175F1A82291D307F0095CA5C /* BSImagePicker.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; };
 		175F1A83291D307F0095CA5C /* BSImagePicker.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
@@ -83,6 +85,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		172B595E2B33264B0081A498 /* allpickorder.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = allpickorder.aiff; sourceTree = "<group>"; };
+		172B595F2B33264D0081A498 /* allpick.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = allpick.aiff; sourceTree = "<group>"; };
 		175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BSImagePicker.xcframework; path = Carthage/Build/BSImagePicker.xcframework; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		4A39C0B6B8AFF24E3778FD63 /* Pods_AllPick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllPick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +185,8 @@
 		FF60BA19247EA18E00B0B1A8 /* AllPick */ = {
 			isa = PBXGroup;
 			children = (
+				172B595F2B33264D0081A498 /* allpick.aiff */,
+				172B595E2B33264B0081A498 /* allpickorder.aiff */,
 				FFAD294A2494946900E5E559 /* Model */,
 				FFAD29472494943F00E5E559 /* Data */,
 				FF60BA35247EB27700B0B1A8 /* Resources */,
@@ -352,10 +358,12 @@
 				FF60BA4D247EB27700B0B1A8 /* top_back.png in Resources */,
 				FF60BA51247EB27700B0B1A8 /* icon_camerachange.png in Resources */,
 				FF60BA49247EB27700B0B1A8 /* icon_play.png in Resources */,
+				172B59612B33264E0081A498 /* allpick.aiff in Resources */,
 				FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */,
 				FF60BA50247EB27700B0B1A8 /* btn_camera@2x.png in Resources */,
 				FF60BA52247EB27700B0B1A8 /* btn_gallery.png in Resources */,
 				FF60BA4B247EB27700B0B1A8 /* icon_del.png in Resources */,
+				172B59602B33264E0081A498 /* allpickorder.aiff in Resources */,
 				FF60BA53247EB27700B0B1A8 /* icon_del@2x.png in Resources */,
 				FF60BA4C247EB27700B0B1A8 /* ic_main.png in Resources */,
 				FF60BA4F247EB27700B0B1A8 /* btn_camera@3x.png in Resources */,
@@ -603,7 +611,7 @@
 				CODE_SIGN_ENTITLEMENTS = AllPick/AllPick.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8XFPMA9AHK;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AllPick/Info.plist;
@@ -612,7 +620,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.allpick;
 				PRODUCT_NAME = AllPick;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -632,7 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = AllPick/AllPick.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8XFPMA9AHK;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AllPick/Info.plist;
@@ -641,7 +649,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.allpick;
 				PRODUCT_NAME = AllPick;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -655,7 +663,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8XFPMA9AHK;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -664,7 +672,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.allpick.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -679,7 +687,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8XFPMA9AHK;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -688,7 +696,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.allpick.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
