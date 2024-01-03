@@ -638,6 +638,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
+        if let url = webView.url {
+            if (url.absoluteString == "https://innerversion.co.kr/") {
+                changeStatusBarBgColor(bgColor: UIColor(hexCode: "013b96"))
+            } else {
+                changeStatusBarBgColor(bgColor: UIColor.white)
+            }
+        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

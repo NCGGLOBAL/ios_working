@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,21 +67,27 @@
         <!--1장 중 1번째 선택-->
         <scene sceneID="een-tC-Pxa">
             <objects>
-                <viewController storyboardIdentifier="imageSelectDetailViewController" id="xjc-3o-LJo" customClass="ImageSelectDetailViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageSelectDetailViewController" id="xjc-3o-LJo" customClass="ImageSelectDetailViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pPb-VL-aQw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KeC-F8-iTg">
-                                <rect key="frame" x="0.0" y="126" width="414" height="346"/>
+                                <rect key="frame" x="0.0" y="82" width="414" height="346"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="346" id="c6S-GB-7AW"/>
                                 </constraints>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LiT-SD-tr3">
-                                <rect key="frame" x="-1" y="817" width="415" height="45"/>
+                                <rect key="frame" x="-3" y="759" width="417" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
+                                    <barButtonItem title="편집" id="dPn-Xf-Mkg">
+                                        <connections>
+                                            <action selector="onClickEditImage:" destination="xjc-3o-LJo" id="JRO-C3-jiY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="H5b-92-2ht"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="DSk-Fl-dTw"/>
                                     <barButtonItem title="삭제" id="M5a-T2-RFC">
                                         <connections>
@@ -109,10 +115,28 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="815.625"/>
         </scene>
+        <!--Edit Image View Controller-->
+        <scene sceneID="GS2-7P-MU5">
+            <objects>
+                <viewController storyboardIdentifier="editImageViewController" id="ckG-6p-zAd" customClass="EditImageViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KJX-Zi-dvk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="NQe-Z0-m87"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="xjc-3o-LJo" kind="show" id="CeI-Bm-HaR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NZr-np-DpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1037" y="1480"/>
+        </scene>
         <!--0 / 9-->
         <scene sceneID="q6P-GB-57p">
             <objects>
-                <viewController storyboardIdentifier="imageSelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NN2-QL-X6M" customClass="ImageSelectViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageSelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NN2-QL-X6M" customClass="ImageSelectViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LRc-TD-opF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +154,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Gl0-XE-TXt" customClass="ImageCollectionViewCell" customModule="LabangTv" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Gl0-XE-TXt" customClass="ImageCollectionViewCell" customModule="Bingbing" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c19-Ge-qd0">
@@ -284,7 +308,7 @@
         <!--Reader View Controller-->
         <scene sceneID="Sbf-Cg-4hN">
             <objects>
-                <viewController id="fdD-VF-3rn" customClass="QRReaderViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fdD-VF-3rn" customClass="QRReaderViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lj6-dj-3FC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,7 +332,7 @@
         <!--Tutorial ContentsVC-->
         <scene sceneID="2mx-Rm-Aa1">
             <objects>
-                <viewController storyboardIdentifier="ContentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sV3-9c-k6G" customClass="TutorialContentsVC" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sV3-9c-k6G" customClass="TutorialContentsVC" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XZS-5m-QdI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,7 +375,7 @@
         <!--Sub Web View Controller-->
         <scene sceneID="zjK-mF-rnf">
             <objects>
-                <viewController storyboardIdentifier="subWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZjZ-jp-6R5" customClass="SubWebViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="subWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZjZ-jp-6R5" customClass="SubWebViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oa0-XQ-RdW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,7 +444,7 @@
         <!--Live View Controller-->
         <scene sceneID="R9W-Vx-lJ0">
             <objects>
-                <viewController storyboardIdentifier="liveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLt-8t-3ae" customClass="LiveViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="liveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLt-8t-3ae" customClass="LiveViewController" customModule="Bingbing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qIQ-ZN-cdu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -455,6 +479,9 @@
             <point key="canvasLocation" x="3582.608695652174" y="95.758928571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CeI-Bm-HaR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="btn_camera.png" width="72" height="51"/>
         <image name="btn_gallery.png" width="72" height="51"/>

@@ -227,21 +227,18 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-//                        for key in actionParamObj!.keys {
-//                            print("key : \(key)")
-//                        }
 
-                        let values = Array(arrayLiteral: actionParamObj?["imgArr"])
-
-                        for fchild in values {
+                    if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                        values.forEach { dictionary in
                             let data = ImageData()
-                            data.fileName = fchild?["fileName"] as? String
-                            data.imgUrl = fchild?["imgUrl"] as? String
-                            data.sort = fchild?["sort"] as? String
-                            data.utype = fchild?["utype"] as? Int
+                            let dict = dictionary as? Dictionary<String, AnyObject>
+                            data.fileName = dict?["fileName"] as? String
+                            data.imgUrl = dict?["imgUrl"] as? String
+                            data.sort = dict?["sort"] as? String
+                            data.utype = dict?["utype"] as? Int
 
                             AppDelegate.imageModel.imgArr?.append(data)
-                            
+
                             if data.imgUrl != nil {
                                 let imageFileData = ImageFileData()
                                 imageFileData.fileName = data.fileName
@@ -249,6 +246,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                                 AppDelegate.ImageFileArray.append(imageFileData)
                             }
                         }
+                    }
                         
                         #if DEBUG
                         print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")
@@ -256,7 +254,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectViewController") as! ImageSelectViewController
                         self.navigationController?.pushViewController(vc, animated: true)
-                        break
                     break
                     case "ACT1012": // 사진 임시저장 통신
                         let token = actionParamObj?["token"] as? String

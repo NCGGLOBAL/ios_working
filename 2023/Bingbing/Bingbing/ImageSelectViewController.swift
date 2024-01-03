@@ -139,6 +139,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let item = AppDelegate.ImageFileArray[indexPath.row]
         vc.titleString = "\(AppDelegate.imageArray.count)장 중 \(indexPath.row + 1)번째 선택"
         vc.selectedImage = item.image
+        vc.selectedImageIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
