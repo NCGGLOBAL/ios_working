@@ -61,9 +61,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         config.mediaTypesRequiringUserActionForPlayback = .audio
         config.allowsInlineMediaPlayback = true
         
-        webView = WKWebView(frame: self.view.frame, configuration: config)
+//        webView = WKWebView(frame: self.view.frame, configuration: config)
+        webView = WKWebView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: self.view.frame.height - UIApplication.shared.statusBarFrame.height))
         
-        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
+//        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
         // 웹뷰 크기 조정
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -72,7 +73,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         webView.customUserAgent = userAgent
         
         // self.view = self.webView!
-        self.containerView.addSubview(webView)
+        self.view.addSubview(webView)
         //self.loadAppStoreVersion()
     }
     
@@ -112,6 +113,17 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { [weak self] context in
+                    // 화면이 회전하는 중에 수행할 작업
+                    if size.width > size.height {
+                        self?.webView.frame.origin.y = 0
+                    } else {
+                        self?.webView.frame.origin.y = UIApplication.shared.statusBarFrame.height
+                    }
+                }, completion: nil)
     }
     
     var contentImages = ["bg_swipe1", "bg_swipe2"]
