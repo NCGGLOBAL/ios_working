@@ -102,13 +102,25 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
         } else {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.LANDING_URL
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.initWebView(urlString: AppDelegate.LANDING_URL)
             AppDelegate.LANDING_URL = ""
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if AppDelegate.QR_URL != "" {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+            vc.urlString = AppDelegate.QR_URL
+            self.navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.QR_URL = ""
+        }
+        navigationController?.isNavigationBarHidden = true
+        if AppDelegate.isChangeImage {
+            self.sendImageData()
+            AppDelegate.isChangeImage = false
+        }
     }
     
     var contentImages = ["bg_swipe1", "bg_swipe2"]
@@ -178,21 +190,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         return self.getContentVC(atIndex: index)
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if AppDelegate.QR_URL != "" {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.QR_URL
-            self.navigationController?.pushViewController(vc, animated: true)
-            AppDelegate.QR_URL = ""
-        }
-        navigationController?.isNavigationBarHidden = true
-        if AppDelegate.isChangeImage {
-            self.sendImageData()
-            AppDelegate.isChangeImage = false
-        }
     }
     
     func initWebView(urlString: String) {
