@@ -3,14 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		175F1A82291D307F0095CA5C /* BSImagePicker.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; };
-		175F1A83291D307F0095CA5C /* BSImagePicker.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		17A9614E2B7FA123002663B2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 17A9614D2B7FA123002663B2 /* FirebaseAnalytics */; };
+		17A961502B7FA123002663B2 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 17A9614F2B7FA123002663B2 /* FirebaseMessaging */; };
+		17A961532B7FA155002663B2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 17A961522B7FA155002663B2 /* Kingfisher */; };
+		17A961562B7FA269002663B2 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 17A961552B7FA269002663B2 /* BSImagePicker */; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
-		6BDCFE766F3C1ADAD19888D9 /* Pods_LabangTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */; };
+		3443B4A4C81B1CECD8F6FF2B /* Pods_LabangTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB42EBFF515BE1543E1D3E /* Pods_LabangTv.framework */; };
+		CF260C8343DE0E9667801240 /* Pods_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7050A12E45DECFCFAB5DBDE3 /* Pods_NotificationServiceExtension.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
 		FF45458F25B5CF3200B05D71 /* ImageSelectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */; };
 		FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */; };
@@ -58,17 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		175F1A84291D307F0095CA5C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				175F1A83291D307F0095CA5C /* BSImagePicker.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FF8E74D424EC1D1900B6F92F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,11 +75,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabangTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
-		175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BSImagePicker.xcframework; path = Carthage/Build/BSImagePicker.xcframework; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
-		3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
+		1F609B5776ACA5764DFE5581 /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		279E9ED742973BDFD12E2AEB /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		50A087DA7AF3E5158FF8919F /* Pods-LabangTv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.debug.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.debug.xcconfig"; sourceTree = "<group>"; };
+		7050A12E45DECFCFAB5DBDE3 /* Pods_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B71DE6EB5499DB21A19E27F /* Pods-LabangTv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabangTv.release.xcconfig"; path = "Target Support Files/Pods-LabangTv/Pods-LabangTv.release.xcconfig"; sourceTree = "<group>"; };
+		BFBB42EBFF515BE1543E1D3E /* Pods_LabangTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabangTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1298C4253829E8000731CE /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		FF45458E25B5CF3200B05D71 /* ImageSelectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectDetailViewController.swift; sourceTree = "<group>"; };
 		FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = LabangTv/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
@@ -133,8 +127,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				175F1A82291D307F0095CA5C /* BSImagePicker.xcframework in Frameworks */,
-				6BDCFE766F3C1ADAD19888D9 /* Pods_LabangTv.framework in Frameworks */,
+				17A961532B7FA155002663B2 /* Kingfisher in Frameworks */,
+				17A961502B7FA123002663B2 /* FirebaseMessaging in Frameworks */,
+				17A9614E2B7FA123002663B2 /* FirebaseAnalytics in Frameworks */,
+				17A961562B7FA269002663B2 /* BSImagePicker in Frameworks */,
+				3443B4A4C81B1CECD8F6FF2B /* Pods_LabangTv.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,27 +139,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF260C8343DE0E9667801240 /* Pods_NotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5104FD419D222AF28E1831AA /* Frameworks */ = {
+		282F25A33134C46EAFDED1DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */,
-				03C1D6A9F328540E91F1AFB2 /* Pods_LabangTv.framework */,
+				BFBB42EBFF515BE1543E1D3E /* Pods_LabangTv.framework */,
+				7050A12E45DECFCFAB5DBDE3 /* Pods_NotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5B09EBBDB2A5E88A5E27D900 /* Pods */ = {
+		364FB679E0E49498E4569D42 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */,
-				0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */,
+				50A087DA7AF3E5158FF8919F /* Pods-LabangTv.debug.xcconfig */,
+				7B71DE6EB5499DB21A19E27F /* Pods-LabangTv.release.xcconfig */,
+				279E9ED742973BDFD12E2AEB /* Pods-NotificationServiceExtension.debug.xcconfig */,
+				1F609B5776ACA5764DFE5581 /* Pods-NotificationServiceExtension.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -170,11 +171,11 @@
 			isa = PBXGroup;
 			children = (
 				FF60BA19247EA18E00B0B1A8 /* LabangTv */,
-				5B09EBBDB2A5E88A5E27D900 /* Pods */,
 				FF8E74CD24EC1D1900B6F92F /* NotificationServiceExtension */,
-				5104FD419D222AF28E1831AA /* Frameworks */,
 				FF78E3DD24854469002AFAFF /* LabangTv.app */,
 				FF8E74CC24EC1D1900B6F92F /* NotificationServiceExtension.appex */,
+				364FB679E0E49498E4569D42 /* Pods */,
+				282F25A33134C46EAFDED1DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -268,13 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF60BA2B247EA19400B0B1A8 /* Build configuration list for PBXNativeTarget "LabangTv" */;
 			buildPhases = (
-				C0F6A0E29C2E0CC5B089451F /* [CP] Check Pods Manifest.lock */,
+				BA0F708F8C1C25758753324A /* [CP] Check Pods Manifest.lock */,
 				FF60BA13247EA18E00B0B1A8 /* Sources */,
 				FF60BA14247EA18E00B0B1A8 /* Frameworks */,
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
-				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
 				FF8E74D424EC1D1900B6F92F /* Embed App Extensions */,
-				175F1A84291D307F0095CA5C /* Embed Frameworks */,
+				DCA211C0FAB2B0BD42B522BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,6 +282,12 @@
 				FF8E74D224EC1D1900B6F92F /* PBXTargetDependency */,
 			);
 			name = LabangTv;
+			packageProductDependencies = (
+				17A9614D2B7FA123002663B2 /* FirebaseAnalytics */,
+				17A9614F2B7FA123002663B2 /* FirebaseMessaging */,
+				17A961522B7FA155002663B2 /* Kingfisher */,
+				17A961552B7FA269002663B2 /* BSImagePicker */,
+			);
 			productName = UnniTv;
 			productReference = FF78E3DD24854469002AFAFF /* LabangTv.app */;
 			productType = "com.apple.product-type.application";
@@ -290,6 +296,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF8E74D724EC1D1900B6F92F /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
 			buildPhases = (
+				070CF990840BB91066266383 /* [CP] Check Pods Manifest.lock */,
 				FF8E74C824EC1D1900B6F92F /* Sources */,
 				FF8E74C924EC1D1900B6F92F /* Frameworks */,
 				FF8E74CA24EC1D1900B6F92F /* Resources */,
@@ -331,6 +338,11 @@
 				Base,
 			);
 			mainGroup = FF60BA0E247EA18E00B0B1A8;
+			packageReferences = (
+				17A9614C2B7FA123002663B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				17A961512B7FA155002663B2 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				17A961542B7FA269002663B2 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */,
+			);
 			productRefGroup = FF60BA0E247EA18E00B0B1A8;
 			projectDirPath = "";
 			projectRoot = "";
@@ -379,24 +391,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */ = {
+		070CF990840BB91066266383 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0F6A0E29C2E0CC5B089451F /* [CP] Check Pods Manifest.lock */ = {
+		BA0F708F8C1C25758753324A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -416,6 +433,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCA211C0FAB2B0BD42B522BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LabangTv/Pods-LabangTv-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -595,7 +629,7 @@
 		};
 		FF60BA2C247EA19400B0B1A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F8776A0F2F0BBB67B81EB02 /* Pods-LabangTv.debug.xcconfig */;
+			baseConfigurationReference = 50A087DA7AF3E5158FF8919F /* Pods-LabangTv.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -624,7 +658,7 @@
 		};
 		FF60BA2D247EA19400B0B1A8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C657A337E082E64711060B8 /* Pods-LabangTv.release.xcconfig */;
+			baseConfigurationReference = 7B71DE6EB5499DB21A19E27F /* Pods-LabangTv.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -652,6 +686,7 @@
 		};
 		FF8E74D524EC1D1900B6F92F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279E9ED742973BDFD12E2AEB /* Pods-NotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
@@ -674,6 +709,7 @@
 		};
 		FF8E74D624EC1D1900B6F92F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F609B5776ACA5764DFE5581 /* Pods-NotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
@@ -725,6 +761,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17A9614C2B7FA123002663B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
+			};
+		};
+		17A961512B7FA155002663B2 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+		17A961542B7FA269002663B2 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17A9614D2B7FA123002663B2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A9614C2B7FA123002663B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		17A9614F2B7FA123002663B2 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A9614C2B7FA123002663B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		17A961522B7FA155002663B2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A961512B7FA155002663B2 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			productName = Kingfisher;
+		};
+		17A961552B7FA269002663B2 /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A961542B7FA269002663B2 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */;
+			productName = BSImagePicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF60BA0F247EA18E00B0B1A8 /* Project object */;
 }

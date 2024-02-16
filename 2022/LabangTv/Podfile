@@ -2,14 +2,19 @@
 # platform :ios, '9.0'
 
 target 'LabangTv' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-pod 'Firebase/Analytics'
-pod 'Firebase/Messaging'
-pod 'Kingfisher', '~> 4.0'
-pod 'libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v3.0.5'
-
   # Pods for LabangTv
+  pod 'libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v3.0.5'
+
+
+end
+
+target 'NotificationServiceExtension' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for NotificationServiceExtension
 
 end
