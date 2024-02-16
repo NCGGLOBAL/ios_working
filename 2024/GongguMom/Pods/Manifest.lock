@@ -1,0 +1,43 @@
+PODS:
+  - GPUImage (0.1.7)
+  - libksygpulive (3.0.4):
+    - libksygpulive/libksygpulive (= 3.0.4)
+  - libksygpulive/base (3.0.4)
+  - libksygpulive/libksygpulive (3.0.4):
+    - GPUImage
+    - libksygpulive/streamerbase
+  - libksygpulive/mediacodec (3.0.4)
+  - libksygpulive/mediacore_enc_base (3.0.4)
+  - libksygpulive/mediacore_enc_lite (3.0.4)
+  - libksygpulive/streamerbase (3.0.4):
+    - libksygpulive/base
+    - libksygpulive/mediacodec
+    - libksygpulive/mediacore_enc_base
+    - libksygpulive/mediacore_enc_lite
+    - libksygpulive/yuv
+  - libksygpulive/yuv (3.0.4)
+
+DEPENDENCIES:
+  - libksygpulive (from `https://github.com/ksvc/KSYLive_iOS.git`, tag `v3.0.5`)
+
+SPEC REPOS:
+  trunk:
+    - GPUImage
+
+EXTERNAL SOURCES:
+  libksygpulive:
+    :git: https://github.com/ksvc/KSYLive_iOS.git
+    :tag: v3.0.5
+
+CHECKOUT OPTIONS:
+  libksygpulive:
+    :git: https://github.com/ksvc/KSYLive_iOS.git
+    :tag: v3.0.5
+
+SPEC CHECKSUMS:
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  libksygpulive: aca3eb30e7a38ee6565feb52feb82ccc0103ce43
+
+PODFILE CHECKSUM: 8a21ae7a0811b7c244201d48410d5522b7021e3d
+
+COCOAPODS: 1.14.3
