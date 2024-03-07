@@ -30,6 +30,18 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+        <key>CFBundlePrimaryIcon</key>
+        <dict>
+            <key>CFBundleIconFiles</key>
+            <array>
+                <string>IOS_icon_152x152</string>
+            </array>
+            <key>UIPrerenderedIcon</key>
+            <true/>
+        </dict>
+    </dict>
 	<key>FacebookAppID</key>
 	<string>597519710746611</string>
 	<key>FacebookDisplayName</key>
@@ -112,7 +124,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen.storyboard</string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

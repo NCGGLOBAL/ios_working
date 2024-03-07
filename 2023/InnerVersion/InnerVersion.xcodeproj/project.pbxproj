@@ -13,6 +13,7 @@
 		17A961452B7F993F002663B2 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 17A961442B7F993F002663B2 /* FirebaseMessaging */; };
 		17A961482B7F9961002663B2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 17A961472B7F9961002663B2 /* Kingfisher */; };
 		17A9614B2B7F997E002663B2 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 17A9614A2B7F997E002663B2 /* BSImagePicker */; };
+		17CAE1F22B9991F800BC5508 /* IOS_icon_152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 17CAE1F12B9991F800BC5508 /* IOS_icon_152x152.png */; };
 		17CB44B12743FB9E0070A77E /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */; };
 		6EF4B6BE561E2B466C6E0DCD /* Pods_InnerVersion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4794BE65E6ECB37379691D6 /* Pods_InnerVersion.framework */; };
 		FF1298C5253829E8000731CE /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1298C4253829E8000731CE /* LiveViewController.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		175F1A81291D307F0095CA5C /* BSImagePicker.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BSImagePicker.xcframework; path = Carthage/Build/BSImagePicker.xcframework; sourceTree = "<group>"; };
+		17CAE1F12B9991F800BC5508 /* IOS_icon_152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IOS_icon_152x152.png; sourceTree = "<group>"; };
 		17CB44B02743FB9E0070A77E /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
 		53B6568B932AE06559E32B29 /* Pods-InnerVersion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InnerVersion.debug.xcconfig"; path = "Target Support Files/Pods-InnerVersion/Pods-InnerVersion.debug.xcconfig"; sourceTree = "<group>"; };
 		54B3C6F8ED7847F80E39E939 /* Pods-InnerVersion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InnerVersion.release.xcconfig"; path = "Target Support Files/Pods-InnerVersion/Pods-InnerVersion.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		FF60BA19247EA18E00B0B1A8 /* InnerVersion */ = {
 			isa = PBXGroup;
 			children = (
+				17CAE1F12B9991F800BC5508 /* IOS_icon_152x152.png */,
 				FFAD294A2494946900E5E559 /* Model */,
 				FFAD29472494943F00E5E559 /* Data */,
 				FF60BA35247EB27700B0B1A8 /* Resources */,
@@ -371,6 +374,7 @@
 				FF60BA4D247EB27700B0B1A8 /* top_back.png in Resources */,
 				FF60BA51247EB27700B0B1A8 /* icon_camerachange.png in Resources */,
 				FF60BA49247EB27700B0B1A8 /* icon_play.png in Resources */,
+				17CAE1F22B9991F800BC5508 /* IOS_icon_152x152.png in Resources */,
 				FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */,
 				FF60BA50247EB27700B0B1A8 /* btn_camera@2x.png in Resources */,
 				FF60BA52247EB27700B0B1A8 /* btn_gallery.png in Resources */,
@@ -622,7 +626,7 @@
 				CODE_SIGN_ENTITLEMENTS = InnerVersion/InnerVersion.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = QU78YJ5M2G;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = InnerVersion/Info.plist;
@@ -631,13 +635,15 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.innerversion;
 				PRODUCT_NAME = InnerVersion;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -651,7 +657,7 @@
 				CODE_SIGN_ENTITLEMENTS = InnerVersion/InnerVersion.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = QU78YJ5M2G;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = InnerVersion/Info.plist;
@@ -660,12 +666,14 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.innerversion;
 				PRODUCT_NAME = InnerVersion;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
