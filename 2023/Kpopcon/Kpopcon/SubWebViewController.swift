@@ -399,6 +399,29 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                     self.uploadPhoto()
                     break
                     
+                case "ACT1038": // 가로보기, 세로보기
+                    let keyType = actionParamObj?["key_type"] as? String
+                    if keyType == "0" {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    } else {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                    let javascript = "\(self.callback)"
+                    // call back!
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        print("result : \(String(describing: result))")
+                        print("error : \(error)")
+                    }
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }

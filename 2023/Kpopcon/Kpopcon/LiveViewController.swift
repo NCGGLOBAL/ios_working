@@ -23,6 +23,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         static let callBackHandlerKey = "ios"
     }
     
+    var callback = ""
+    
     var kit: KSYGPUStreamerKit? = nil
     
     override func viewDidLoad() {
@@ -192,7 +194,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 #endif
                 
                 // callback
-                let callback = dictionary["callBack"] as? String ?? ""
+                callback = dictionary["callBack"] as? String ?? ""
                 #if DEBUG
                 print("callBack : \(callback)")
                 #endif
@@ -356,6 +358,29 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     break
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
+                    break
+                    
+                case "ACT1038": // 가로보기, 세로보기
+                    let keyType = actionParamObj?["key_type"] as? String
+                    if keyType == "0" {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    } else {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                    let javascript = "\(self.callback)"
+                    // call back!
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        print("result : \(String(describing: result))")
+                        print("error : \(error)")
+                    }
                     break
                     
                     default:

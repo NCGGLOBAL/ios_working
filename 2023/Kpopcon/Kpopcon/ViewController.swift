@@ -61,10 +61,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         config.mediaTypesRequiringUserActionForPlayback = .audio
         config.allowsInlineMediaPlayback = true
         
-//        webView = WKWebView(frame: self.view.frame, configuration: config)
-        webView = WKWebView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: self.view.frame.height - UIApplication.shared.statusBarFrame.height))
+        webView = WKWebView(frame: self.view.frame, configuration: config)
+//        webView = WKWebView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: self.view.frame.height - UIApplication.shared.statusBarFrame.height))
         
-//        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
+        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
         // 웹뷰 크기 조정
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -113,18 +113,20 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
+
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { [weak self] context in
-                    // 화면이 회전하는 중에 수행할 작업
-                    if size.width > size.height {
-                        self?.webView.frame.origin.y = 0
-                    } else {
-                        self?.webView.frame.origin.y = UIApplication.shared.statusBarFrame.height
-                    }
-                }, completion: nil)
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        coordinator.animate(alongsideTransition: { [weak self] context in
+//                    // 화면이 회전하는 중에 수행할 작업
+//                    if size.width > size.height {
+//                        self?.webView.frame.origin.y = 0
+//                    } else {
+//                        self?.webView.frame.origin.y = UIApplication.shared.statusBarFrame.height
+//                    }
+//                }, completion: nil)
+//    }
     
     var contentImages = ["bg_swipe1", "bg_swipe2"]
     var pageVC: UIPageViewController!
@@ -521,6 +523,30 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
+                    break
+                    
+                case "ACT1038": // 가로보기, 세로보기
+                    let keyType = actionParamObj?["key_type"] as? String
+                    if keyType == "0" {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    } else {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                    // call back!
+                    let javascript = "\(self.callback)"
+                    // call back!
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        print("result : \(String(describing: result))")
+                        print("error : \(error)")
+                    }
                     break
                     
                     default:
