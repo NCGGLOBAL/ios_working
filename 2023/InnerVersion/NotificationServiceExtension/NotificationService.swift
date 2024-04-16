@@ -2,8 +2,7 @@
 //  NotificationService.swift
 //  NotificationServiceExtension
 //
-//  Created by glediaer on 2020/08/18.
-//  Copyright © 2020 ncgglobal. All rights reserved.
+//  Created by 정진만 on 4/11/24.
 //
 
 import UserNotifications

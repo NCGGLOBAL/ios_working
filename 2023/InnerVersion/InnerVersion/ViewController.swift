@@ -103,9 +103,25 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             self.initWebView(urlString: AppDelegate.HOME_URL)
         } else {
             self.initWebView(urlString: AppDelegate.LANDING_URL)
+            AppDelegate.LANDING_URL = ""
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.changeStatusBarBgColor(bgColor:UIColor.white)
+        if AppDelegate.QR_URL != "" {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+            vc.urlString = AppDelegate.QR_URL
+            self.navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.QR_URL = ""
+        }
+        navigationController?.isNavigationBarHidden = true
+        if AppDelegate.isChangeImage {
+            self.sendImageData()
+            AppDelegate.isChangeImage = false
+        }
     }
     
     var contentImages = ["bg_swipe1", "bg_swipe2"]
@@ -176,22 +192,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         
         return self.getContentVC(atIndex: index)
     }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.changeStatusBarBgColor(bgColor:UIColor(hexCode: "013b96"))
-        if AppDelegate.QR_URL != "" {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.QR_URL
-            self.navigationController?.pushViewController(vc, animated: true)
-            AppDelegate.QR_URL = ""
-        }
-        navigationController?.isNavigationBarHidden = true
-        if AppDelegate.isChangeImage {
-            self.sendImageData()
-            AppDelegate.isChangeImage = false
-        }
-    }
     
     func initWebView(urlString: String) {
         let url = URL(string: urlString)
@@ -246,21 +246,18 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-//                        for key in actionParamObj!.keys {
-//                            print("key : \(key)")
-//                        }
 
-                        let values = Array(arrayLiteral: actionParamObj?["imgArr"])
-
-                        for fchild in values {
+                    if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                        values.forEach { dictionary in
                             let data = ImageData()
-                            data.fileName = fchild?["fileName"] as? String
-                            data.imgUrl = fchild?["imgUrl"] as? String
-                            data.sort = fchild?["sort"] as? String
-                            data.utype = fchild?["utype"] as? Int
+                            let dict = dictionary as? Dictionary<String, AnyObject>
+                            data.fileName = dict?["fileName"] as? String
+                            data.imgUrl = dict?["imgUrl"] as? String
+                            data.sort = dict?["sort"] as? String
+                            data.utype = dict?["utype"] as? Int
 
                             AppDelegate.imageModel.imgArr?.append(data)
-                            
+
                             if data.imgUrl != nil {
                                 let imageFileData = ImageFileData()
                                 imageFileData.fileName = data.fileName
@@ -268,6 +265,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                                 AppDelegate.ImageFileArray.append(imageFileData)
                             }
                         }
+                    }
                         
                         #if DEBUG
                         print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")
@@ -275,7 +273,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectViewController") as! ImageSelectViewController
                         self.navigationController?.pushViewController(vc, animated: true)
-                        break
                     break
                     case "ACT1012": // 사진 임시저장 통신
                         let token = actionParamObj?["token"] as? String
@@ -638,13 +635,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
-        if let url = webView.url {
-            if (url.absoluteString == "https://innerversion.co.kr/") {
-                changeStatusBarBgColor(bgColor: UIColor(hexCode: "013b96"))
-            } else {
-                changeStatusBarBgColor(bgColor: UIColor.white)
-            }
-        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -747,50 +737,9 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             }
         }
     
-//    func showToast(message : String) {
-//            let width_variable:CGFloat = 10
-//            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
-//            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
-//            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-//            toastLabel.textColor = UIColor.white
-//            toastLabel.textAlignment = .center;
-//            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-//            toastLabel.text = message
-//            toastLabel.alpha = 1.0
-//            toastLabel.layer.cornerRadius = 10;
-//            toastLabel.clipsToBounds  =  true
-//            self.view.addSubview(toastLabel)
-//            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-//                toastLabel.alpha = 0.0
-//            }, completion: {(isCompleted) in
-//                toastLabel.removeFromSuperview()
-//            })
-//        }
-    
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
         self.initWebView(urlString: AppDelegate.HOME_URL)
-    }
-}
-
-extension UIColor {
-    
-    convenience init(hexCode: String, alpha: CGFloat = 1.0) {
-        var hexFormatted: String = hexCode.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-        
-        if hexFormatted.hasPrefix("#") {
-            hexFormatted = String(hexFormatted.dropFirst())
-        }
-        
-        assert(hexFormatted.count == 6, "Invalid hex code used.")
-        
-        var rgbValue: UInt64 = 0
-        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
-        
-        self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-                  green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-                  blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-                  alpha: alpha)
     }
 }
 
