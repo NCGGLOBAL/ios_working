@@ -203,21 +203,18 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         AppDelegate.imageModel.token = actionParamObj?["token"] as? String
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-//                        for key in actionParamObj!.keys {
-//                            print("key : \(key)")
-//                        }
 
-                        let values = Array(arrayLiteral: actionParamObj?["imgArr"])
-
-                        for fchild in values {
+                    if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                        values.forEach { dictionary in
                             let data = ImageData()
-                            data.fileName = fchild?["fileName"] as? String
-                            data.imgUrl = fchild?["imgUrl"] as? String
-                            data.sort = fchild?["sort"] as? String
-                            data.utype = fchild?["utype"] as? Int
+                            let dict = dictionary as? Dictionary<String, AnyObject>
+                            data.fileName = dict?["fileName"] as? String
+                            data.imgUrl = dict?["imgUrl"] as? String
+                            data.sort = dict?["sort"] as? String
+                            data.utype = dict?["utype"] as? Int
 
                             AppDelegate.imageModel.imgArr?.append(data)
-                            
+
                             if data.imgUrl != nil {
                                 let imageFileData = ImageFileData()
                                 imageFileData.fileName = data.fileName
@@ -225,6 +222,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                                 AppDelegate.ImageFileArray.append(imageFileData)
                             }
                         }
+                    }
                         
                         #if DEBUG
                         print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")
@@ -232,7 +230,6 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: "imageSelectViewController") as! ImageSelectViewController
                         self.navigationController?.pushViewController(vc, animated: true)
-                        break
                     break
                     case "ACT1012": // 사진 임시저장 통신
                         let token = actionParamObj?["token"] as? String
@@ -415,6 +412,38 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         imagePicker.delegate = self //3
         // imagePicker.allowsEditing = true
         present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                    let imageName = imageUrl.lastPathComponent
+                    print(imageName) // "example.jpg"
+                    var myDict = [String: Any]()
+                    if let imageData = image.pngData() {
+                        let base64String = imageData.base64EncodedString()
+                        myDict["fData"] = base64String
+                        myDict["fName"] = imageName
+                    }
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                            // webView는 UIWebView 또는 WKWebView 객체입니다.
+                            webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                                if let error = error {
+                                    print("Error: \(error.localizedDescription)")
+                                } else {
+                                    print("Result: \(result ?? "")")
+                                }
+                            })
+                        }
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+            }
+            picker.dismiss(animated: true, completion: nil)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {

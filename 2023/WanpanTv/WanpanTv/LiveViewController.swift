@@ -354,7 +354,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     case "ACT1031": // 종료
                         self.navigationController?.popToRootViewController(animated: true)
                     break
-                    
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
                     break
