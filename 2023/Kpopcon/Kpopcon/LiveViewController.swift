@@ -356,6 +356,18 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     case "ACT1031": // 종료
                         self.navigationController?.popToRootViewController(animated: true)
                     break
+                    
+                case "ACT1036": //스트리밍 화면 캡쳐
+                    self.kit?.streamerBase.getSnapshotWithCompletion({ (image) in
+                        if let base64String = image!.toBase64() {
+                            print("Base64 string: \(base64String)")
+                            var dic = Dictionary<String, String>()
+                            dic.updateValue(base64String, forKey: "fData")
+                        } else {
+                            print("Failed to convert image to Base64 string.")
+                        }
+                    })
+                    break
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
                     break
@@ -462,4 +474,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         kit?.streamerBase.startStream(url)
     }
 
+}
+
+extension UIImage {
+    func toBase64() -> String? {
+        guard let imageData = self.pngData() else {
+            return nil
+        }
+        return imageData.base64EncodedString(options: .lineLength64Characters)
+    }
 }

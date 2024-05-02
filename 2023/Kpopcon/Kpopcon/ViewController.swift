@@ -62,18 +62,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
-//        webView = WKWebView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: self.view.frame.height - UIApplication.shared.statusBarFrame.height))
         
         webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.height
-        // 웹뷰 크기 조정
-        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.customUserAgent = userAgent
         
         // self.view = self.webView!
-        self.view.addSubview(webView)
+        self.containerView.addSubview(webView)
         //self.loadAppStoreVersion()
     }
     
@@ -106,27 +102,26 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
         } else {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.LANDING_URL
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.initWebView(urlString: AppDelegate.LANDING_URL)
             AppDelegate.LANDING_URL = ""
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        
-
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        coordinator.animate(alongsideTransition: { [weak self] context in
-//                    // 화면이 회전하는 중에 수행할 작업
-//                    if size.width > size.height {
-//                        self?.webView.frame.origin.y = 0
-//                    } else {
-//                        self?.webView.frame.origin.y = UIApplication.shared.statusBarFrame.height
-//                    }
-//                }, completion: nil)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        if AppDelegate.QR_URL != "" {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
+            vc.urlString = AppDelegate.QR_URL
+            self.navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.QR_URL = ""
+        }
+        navigationController?.isNavigationBarHidden = true
+        if AppDelegate.isChangeImage {
+            self.sendImageData()
+            AppDelegate.isChangeImage = false
+        }
+    }
     
     var contentImages = ["bg_swipe1", "bg_swipe2"]
     var pageVC: UIPageViewController!
@@ -195,21 +190,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         return self.getContentVC(atIndex: index)
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if AppDelegate.QR_URL != "" {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
-            vc.urlString = AppDelegate.QR_URL
-            self.navigationController?.pushViewController(vc, animated: true)
-            AppDelegate.QR_URL = ""
-        }
-        navigationController?.isNavigationBarHidden = true
-        if AppDelegate.isChangeImage {
-            self.sendImageData()
-            AppDelegate.isChangeImage = false
-        }
     }
     
     func initWebView(urlString: String) {
