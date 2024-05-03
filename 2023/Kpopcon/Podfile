@@ -12,7 +12,7 @@ end
 target 'Kpopcon' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'libksygpulive/libksygpulive'
+#  pod 'libksygpulive/libksygpulive'
   # Pods for Kpopcon
   
   post_install do |installer|

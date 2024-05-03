@@ -452,7 +452,6 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
                         if let jsonString = String(data: jsonData, encoding: .utf8) {
                             let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
-                            // webView는 UIWebView 또는 WKWebView 객체입니다.
                             webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
                                 if let error = error {
                                     print("Error: \(error.localizedDescription)")

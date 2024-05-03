@@ -1,32 +1,3 @@
-PODS:
-  - GPUImage (0.1.7)
-  - libksygpulive/base (3.0.4)
-  - libksygpulive/libksygpulive (3.0.4):
-    - GPUImage
-    - libksygpulive/streamerbase
-  - libksygpulive/mediacodec (3.0.4)
-  - libksygpulive/mediacore_enc_base (3.0.4)
-  - libksygpulive/mediacore_enc_lite (3.0.4)
-  - libksygpulive/streamerbase (3.0.4):
-    - libksygpulive/base
-    - libksygpulive/mediacodec
-    - libksygpulive/mediacore_enc_base
-    - libksygpulive/mediacore_enc_lite
-    - libksygpulive/yuv
-  - libksygpulive/yuv (3.0.4)
-
-DEPENDENCIES:
-  - libksygpulive/libksygpulive
-
-SPEC REPOS:
-  trunk:
-    - GPUImage
-    - libksygpulive
-
-SPEC CHECKSUMS:
-  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  libksygpulive: aca3eb30e7a38ee6565feb52feb82ccc0103ce43
-
-PODFILE CHECKSUM: f30678275045e0da362983059275ffa9caa1795c
+PODFILE CHECKSUM: c3b916c893ea2f0b2ecc45851bf05c9f8481aa1e
 
 COCOAPODS: 1.14.3

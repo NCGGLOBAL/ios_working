@@ -45,8 +45,8 @@
 		1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1784C8832BC81967009D9F40 /* GoogleService-Info.plist */; };
 		1784C8962BC81C04009D9F40 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8952BC81C04009D9F40 /* NotificationService.swift */; };
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		97722AEDF6D14E3FED7FE00A /* Pods_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8D7E2339335CE39FED14A2 /* Pods_NotificationServiceExtension.framework */; };
-		CE921008409A02706B52508A /* Pods_Kpopcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570112C8A704C969D327E072 /* Pods_Kpopcon.framework */; };
+		5CFDC39A81D77587DFE24810 /* Pods_Kpopcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC98BE974268CF23B536157 /* Pods_Kpopcon.framework */; };
+		B28DF5100AFF60E5618DCEBD /* Pods_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEA1A29AAD5D3AA2AE2C777 /* Pods_NotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +74,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0DEA1A29AAD5D3AA2AE2C777 /* Pods_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1771CDE92BE518B2009FDC05 /* Kpopcon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kpopcon.entitlements; sourceTree = "<group>"; };
 		1784C82B2BC80DAC009D9F40 /* Kpopcon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kpopcon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,12 +113,11 @@
 		1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C8952BC81C04009D9F40 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1784C8972BC81C04009D9F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38D40594C3E2479BA8B59C94 /* Pods-Kpopcon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kpopcon.release.xcconfig"; path = "Target Support Files/Pods-Kpopcon/Pods-Kpopcon.release.xcconfig"; sourceTree = "<group>"; };
-		3BE3260A503D0F7C73AAF727 /* Pods-Kpopcon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kpopcon.debug.xcconfig"; path = "Target Support Files/Pods-Kpopcon/Pods-Kpopcon.debug.xcconfig"; sourceTree = "<group>"; };
-		570112C8A704C969D327E072 /* Pods_Kpopcon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kpopcon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADEBA62354247840F59D9CB5 /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		FB313337F8A0ED2A64C4C832 /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		FB8D7E2339335CE39FED14A2 /* Pods_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		761EACF05932071BA3E5518F /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		78763B2644F217BE500DB134 /* Pods-Kpopcon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kpopcon.debug.xcconfig"; path = "Target Support Files/Pods-Kpopcon/Pods-Kpopcon.debug.xcconfig"; sourceTree = "<group>"; };
+		8BC98BE974268CF23B536157 /* Pods_Kpopcon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kpopcon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B181B0BDF61BCD124F62B069 /* Pods-Kpopcon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kpopcon.release.xcconfig"; path = "Target Support Files/Pods-Kpopcon/Pods-Kpopcon.release.xcconfig"; sourceTree = "<group>"; };
+		B32557749C6A15740F322894 /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +129,7 @@
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
-				CE921008409A02706B52508A /* Pods_Kpopcon.framework in Frameworks */,
+				5CFDC39A81D77587DFE24810 /* Pods_Kpopcon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,21 +137,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97722AEDF6D14E3FED7FE00A /* Pods_NotificationServiceExtension.framework in Frameworks */,
+				B28DF5100AFF60E5618DCEBD /* Pods_NotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0540AC059B45C8BB21701013 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BC98BE974268CF23B536157 /* Pods_Kpopcon.framework */,
+				0DEA1A29AAD5D3AA2AE2C777 /* Pods_NotificationServiceExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15FEB6F44CF52CE4C9DF9712 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				78763B2644F217BE500DB134 /* Pods-Kpopcon.debug.xcconfig */,
+				B181B0BDF61BCD124F62B069 /* Pods-Kpopcon.release.xcconfig */,
+				761EACF05932071BA3E5518F /* Pods-NotificationServiceExtension.debug.xcconfig */,
+				B32557749C6A15740F322894 /* Pods-NotificationServiceExtension.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		1784C8222BC80DAC009D9F40 = {
 			isa = PBXGroup;
 			children = (
 				1784C82D2BC80DAC009D9F40 /* Kpopcon */,
 				1784C8942BC81C04009D9F40 /* NotificationServiceExtension */,
 				1784C82C2BC80DAC009D9F40 /* Products */,
-				93CE4674B557DEB7E62FA767 /* Pods */,
-				F0E24185871B4FCCED776A4B /* Frameworks */,
+				15FEB6F44CF52CE4C9DF9712 /* Pods */,
+				0540AC059B45C8BB21701013 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +188,7 @@
 		1784C82D2BC80DAC009D9F40 /* Kpopcon */ = {
 			isa = PBXGroup;
 			children = (
+				1771CDE92BE518B2009FDC05 /* Kpopcon.entitlements */,
 				1784C8832BC81967009D9F40 /* GoogleService-Info.plist */,
 				1784C87C2BC817E6009D9F40 /* LiveViewController.swift */,
 				1784C87A2BC8176E009D9F40 /* ImageSelectDetailViewController.swift */,
@@ -244,26 +267,6 @@
 			path = NotificationServiceExtension;
 			sourceTree = "<group>";
 		};
-		93CE4674B557DEB7E62FA767 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3BE3260A503D0F7C73AAF727 /* Pods-Kpopcon.debug.xcconfig */,
-				38D40594C3E2479BA8B59C94 /* Pods-Kpopcon.release.xcconfig */,
-				FB313337F8A0ED2A64C4C832 /* Pods-NotificationServiceExtension.debug.xcconfig */,
-				ADEBA62354247840F59D9CB5 /* Pods-NotificationServiceExtension.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		F0E24185871B4FCCED776A4B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				570112C8A704C969D327E072 /* Pods_Kpopcon.framework */,
-				FB8D7E2339335CE39FED14A2 /* Pods_NotificationServiceExtension.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -276,7 +279,6 @@
 				1784C8282BC80DAC009D9F40 /* Frameworks */,
 				1784C8292BC80DAC009D9F40 /* Resources */,
 				1784C89E2BC81C04009D9F40 /* Embed Foundation Extensions */,
-				95567B882FF19BEC6D37DF0E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -340,9 +342,9 @@
 			);
 			mainGroup = 1784C8222BC80DAC009D9F40;
 			packageReferences = (
-				1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
-				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */,
+				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -412,23 +414,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95567B882FF19BEC6D37DF0E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kpopcon/Pods-Kpopcon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kpopcon/Pods-Kpopcon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kpopcon/Pods-Kpopcon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA3E24A5FD92379AFE6777EC /* [CP] Check Pods Manifest.lock */ = {
@@ -634,14 +619,15 @@
 		};
 		1784C8402BC80DAD009D9F40 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BE3260A503D0F7C73AAF727 /* Pods-Kpopcon.debug.xcconfig */;
+			baseConfigurationReference = 78763B2644F217BE500DB134 /* Pods-Kpopcon.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -655,7 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -669,14 +655,15 @@
 		};
 		1784C8412BC80DAD009D9F40 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38D40594C3E2479BA8B59C94 /* Pods-Kpopcon.release.xcconfig */;
+			baseConfigurationReference = B181B0BDF61BCD124F62B069 /* Pods-Kpopcon.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -690,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -704,7 +691,7 @@
 		};
 		1784C89C2BC81C04009D9F40 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB313337F8A0ED2A64C4C832 /* Pods-NotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 761EACF05932071BA3E5518F /* Pods-NotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -734,7 +721,7 @@
 		};
 		1784C89D2BC81C04009D9F40 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADEBA62354247840F59D9CB5 /* Pods-NotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = B32557749C6A15740F322894 /* Pods-NotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -795,7 +782,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -803,7 +790,7 @@
 				minimumVersion = 7.11.0;
 			};
 		};
-		1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+		1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
 			requirement = {
@@ -811,7 +798,7 @@
 				minimumVersion = 3.3.2;
 			};
 		};
-		1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -824,22 +811,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1784C8732BC816B3009D9F40 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
 			productName = Kingfisher;
 		};
 		1784C8762BC816E6009D9F40 /* BSImagePicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			package = 1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker.git" */;
 			productName = BSImagePicker;
 		};
 		1784C87F2BC81906009D9F40 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAnalytics;
 		};
 		1784C8812BC81906009D9F40 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
