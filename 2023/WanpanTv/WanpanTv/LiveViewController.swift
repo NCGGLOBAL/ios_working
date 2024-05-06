@@ -361,6 +361,25 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             print("Base64 string: \(base64String)")
                             var dic = Dictionary<String, String>()
                             dic.updateValue(base64String, forKey: "fData")
+                            
+                            do {
+                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                                let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                let javascript = "\(callback)('\(stringValue)')"
+                                #if DEBUG
+                                print("jsonData : \(jsonData)")
+                                print("javascript : \(javascript)")
+                                #endif
+                                // call back!
+                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                    #if DEBUG
+                                    print("result : \(String(describing: result))")
+                                    print("error : \(error)")
+                                    #endif
+                                }
+                            } catch let error as NSError {
+                                print(error)
+                            }
                         } else {
                             print("Failed to convert image to Base64 string.")
                         }
