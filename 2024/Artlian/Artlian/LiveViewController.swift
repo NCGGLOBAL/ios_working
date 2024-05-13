@@ -8,8 +8,6 @@
 
 import UIKit
 import WebKit
-import HaishinKit
-import AVFoundation
 //import libksygpulive
 
 class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -26,9 +24,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
 //    var kit: KSYGPUStreamerKit? = nil
-    
-    let connection = RTMPConnection()
-    var stream: RTMPStream? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -218,7 +213,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             })
                         }
                     break
-                    case "ACT1027": // wlive 전, 후면 카메라 제어
+//                    case "ACT1027": // wlive 전, 후면 카메라 제어
 //                        var resultcd = "1"
 //                        if let val = actionParamObj?["key_type"] {
 //                            kit?.switchCamera()
@@ -246,9 +241,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 //                        } catch let error as NSError {
 //                            print(error)
 //                        }
-                    break
+//                    break
 
-                    case "ACT1028": // wlive 마이크 제어
+//                    case "ACT1028": // wlive 마이크 제어
 //                        var resultcd = "1"
 //                        if (actionParamObj?["key_type"]) != nil {
 //                            if (actionParamObj?["key_type"] as? String == "0") {  //0: 마이크 끄기,1: 켜기
@@ -280,8 +275,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 //                        } catch let error as NSError {
 //                            print(error)
 //                        }
-                    break
-                    case "ACT1029": // wlive 이미지필터 제어
+//                    break
+//                    case "ACT1029": // wlive 이미지필터 제어
 //                        var resultcd = "1"
 //                        if let val = actionParamObj?["key_type"] as? Int {
 //                            switch val {
@@ -323,71 +318,41 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 //                        } catch let error as NSError {
 //                            print(error)
 //                        }
-                    break
-                    case "ACT1030": // wlive 스트림키 전달 및 송출
-                        var resultcd = "1"
-                        if let streamUrl = actionParamObj?["stream_url"] as? String {
-                            DispatchQueue.main.async {
-                                self.initStreamer(streamUrl: streamUrl)
-                            }
-                        } else {
-                            resultcd = "0"
-                        }
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-
-                        do {
-                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            #if DEBUG
-                            print("jsonData : \(jsonData)")
-                            print("javascript : \(javascript)")
-                            #endif
-                            // call back!
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                #if DEBUG
-                                print("result : \(String(describing: result))")
-                                print("error : \(error)")
-                                #endif
-                            }
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    break
-                    case "ACT1031": // 종료
-                        self.navigationController?.popToRootViewController(animated: true)
-                    break
-                    
-                case "ACT1036": //스트리밍 화면 캡쳐
-//                    self.kit?.streamerBase.getSnapshotWithCompletion({ (image) in
-//                        if let base64String = image!.toBase64() {
-//                            print("Base64 string: \(base64String)")
-//                            var dic = Dictionary<String, String>()
-//                            dic.updateValue(base64String, forKey: "fData")
-//                            
-//                            do {
-//                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-//                                let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-//                                let javascript = "\(callback)('\(stringValue)')"
-//                                #if DEBUG
-//                                print("jsonData : \(jsonData)")
-//                                print("javascript : \(javascript)")
-//                                #endif
-//                                // call back!
-//                                self.webView.evaluateJavaScript(javascript) { (result, error) in
-//                                    #if DEBUG
-//                                    print("result : \(String(describing: result))")
-//                                    print("error : \(error)")
-//                                    #endif
-//                                }
-//                            } catch let error as NSError {
-//                                print(error)
+//                    break
+//                    case "ACT1030": // wlive 스트림키 전달 및 송출
+//                        var resultcd = "1"
+//                        if let streamUrl = actionParamObj?["stream_url"] as? String {
+//                            DispatchQueue.main.async {
+//                                self.kit?.streamerBase.stopStream()
+//                                self.initStreamer(streamUrl: streamUrl)
 //                            }
 //                        } else {
-//                            print("Failed to convert image to Base64 string.")
+//                            resultcd = "0"
 //                        }
-//                    })
+//                        var dic = Dictionary<String, String>()
+//                        dic.updateValue(resultcd, forKey: "resultcd")
+//
+//                        do {
+//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+//                            let javascript = "\(callback)('\(stringValue)')"
+//                            #if DEBUG
+//                            print("jsonData : \(jsonData)")
+//                            print("javascript : \(javascript)")
+//                            #endif
+//                            // call back!
+//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+//                                #if DEBUG
+//                                print("result : \(String(describing: result))")
+//                                print("error : \(error)")
+//                                #endif
+//                            }
+//                        } catch let error as NSError {
+//                            print(error)
+//                        }
+//                    break
+                    case "ACT1031": // 종료
+                        self.navigationController?.popToRootViewController(animated: true)
                     break
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
@@ -435,13 +400,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     func initCamera() {
-        self.stream = RTMPStream(connection: self.connection)
-        let hkView = MTHKView(frame: view.bounds)
-        hkView.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        hkView.attachStream(stream)
-        
-        // add ViewController#view
-        view.addSubview(hkView)
 //        kit = KSYGPUStreamerKit.init(defaultCfg: ())
 //
 //        kit?.cameraPosition = .front
@@ -458,8 +416,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func initStreamer(streamUrl: String) {
-        self.connection.connect(streamUrl)
-        self.stream?.publish("streamName")
 //        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
 //        kit?.streamerBase.videoInitBitrate = 2048
 //        kit?.streamerBase.videoMaxBitrate = 2500
@@ -481,13 +437,4 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 //        kit?.streamerBase.startStream(url)
     }
 
-}
-
-extension UIImage {
-    func toBase64() -> String? {
-        guard let imageData = self.pngData() else {
-            return nil
-        }
-        return imageData.base64EncodedString(options: .lineLength64Characters)
-    }
 }
