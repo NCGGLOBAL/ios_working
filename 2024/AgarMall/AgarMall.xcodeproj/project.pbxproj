@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171098D62C07526700C8FF1D /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171098D52C07526700C8FF1D /* QRReaderViewController.swift */; };
 		1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */; };
 		1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */; };
 		1784C8332BC80DAC009D9F40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8322BC80DAC009D9F40 /* ViewController.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		171098D52C07526700C8FF1D /* QRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 		1784C82B2BC80DAC009D9F40 /* AgarMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgarMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		1784C82D2BC80DAC009D9F40 /* AgarMall */ = {
 			isa = PBXGroup;
 			children = (
+				171098D52C07526700C8FF1D /* QRReaderViewController.swift */,
 				1784C8832BC81967009D9F40 /* GoogleService-Info.plist */,
 				1784C87C2BC817E6009D9F40 /* LiveViewController.swift */,
 				1784C87A2BC8176E009D9F40 /* ImageSelectDetailViewController.swift */,
@@ -366,6 +369,7 @@
 				1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */,
 				1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */,
 				1784C86F2BC8145F009D9F40 /* SubWebViewController.swift in Sources */,
+				171098D62C07526700C8FF1D /* QRReaderViewController.swift in Sources */,
 				1784C86A2BC81393009D9F40 /* ImageData.swift in Sources */,
 				1784C8792BC81760009D9F40 /* ImageCollectionViewCell.swift in Sources */,
 				1784C8712BC8148B009D9F40 /* ImageSelectViewController.swift in Sources */,
@@ -540,7 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P33347BPKT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AgarMall/Info.plist;
@@ -553,7 +557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creater.agarmall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -571,7 +575,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P33347BPKT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AgarMall/Info.plist;
@@ -584,7 +588,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creater.agarmall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
