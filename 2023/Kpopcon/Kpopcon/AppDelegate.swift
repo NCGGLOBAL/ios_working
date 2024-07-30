@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var imageModel = ImageModel()
     static var isChangeImage = false
     static let openUrlSchemeKakao = "kakaoplus"
+    static var VIDEO_THUMBNAIL_UIImage: UIImage?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

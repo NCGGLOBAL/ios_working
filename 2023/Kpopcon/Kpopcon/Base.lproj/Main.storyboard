@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Video Thumb View Controller-->
+        <scene sceneID="gM9-S5-Nge">
+            <objects>
+                <viewController storyboardIdentifier="VideoThumbViewController" id="Keu-kk-nZR" customClass="VideoThumbViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b9A-2b-qY0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X1u-6w-6KU">
+                                <rect key="frame" x="0.0" y="48" width="414" height="654"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF8-rR-MJX">
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="CdD-QH-Qfj"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="이미지 선택"/>
+                                <connections>
+                                    <action selector="onClickSelectImage:" destination="Keu-kk-nZR" eventType="touchUpInside" id="SbJ-aA-6iM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HGu-hW-Uog"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lF8-rR-MJX" firstAttribute="leading" secondItem="HGu-hW-Uog" secondAttribute="leading" id="54x-qF-NrD"/>
+                            <constraint firstItem="lF8-rR-MJX" firstAttribute="trailing" secondItem="HGu-hW-Uog" secondAttribute="trailing" id="6GP-In-nOp"/>
+                            <constraint firstItem="X1u-6w-6KU" firstAttribute="trailing" secondItem="HGu-hW-Uog" secondAttribute="trailing" id="7PU-35-zR6"/>
+                            <constraint firstItem="lF8-rR-MJX" firstAttribute="top" secondItem="X1u-6w-6KU" secondAttribute="bottom" constant="100" id="ByD-O9-pr3"/>
+                            <constraint firstItem="X1u-6w-6KU" firstAttribute="leading" secondItem="HGu-hW-Uog" secondAttribute="leading" id="Qmi-bB-dVS"/>
+                            <constraint firstItem="X1u-6w-6KU" firstAttribute="top" secondItem="HGu-hW-Uog" secondAttribute="top" id="pkX-P0-oaa"/>
+                            <constraint firstItem="lF8-rR-MJX" firstAttribute="bottom" secondItem="HGu-hW-Uog" secondAttribute="bottom" id="qiX-Bv-XnG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="thumbImageView" destination="X1u-6w-6KU" id="PGb-EG-nqX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HE0-Dc-nbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1957.9710144927537" y="-570.53571428571422"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +109,7 @@
         <!--1장 중 1번째 선택-->
         <scene sceneID="een-tC-Pxa">
             <objects>
-                <viewController storyboardIdentifier="imageSelectDetailViewController" id="xjc-3o-LJo" customClass="ImageSelectDetailViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageSelectDetailViewController" id="xjc-3o-LJo" customClass="ImageSelectDetailViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pPb-VL-aQw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +154,7 @@
         <!--0 / 9-->
         <scene sceneID="q6P-GB-57p">
             <objects>
-                <viewController storyboardIdentifier="imageSelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NN2-QL-X6M" customClass="ImageSelectViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageSelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NN2-QL-X6M" customClass="ImageSelectViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LRc-TD-opF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +172,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Gl0-XE-TXt" customClass="ImageCollectionViewCell" customModule="LabangTv" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Gl0-XE-TXt" customClass="ImageCollectionViewCell" customModule="Kpopcon" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c19-Ge-qd0">
@@ -284,7 +326,7 @@
         <!--Reader View Controller-->
         <scene sceneID="Sbf-Cg-4hN">
             <objects>
-                <viewController id="fdD-VF-3rn" customClass="QRReaderViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fdD-VF-3rn" customClass="QRReaderViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lj6-dj-3FC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,7 +350,7 @@
         <!--Tutorial ContentsVC-->
         <scene sceneID="2mx-Rm-Aa1">
             <objects>
-                <viewController storyboardIdentifier="ContentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sV3-9c-k6G" customClass="TutorialContentsVC" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sV3-9c-k6G" customClass="TutorialContentsVC" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XZS-5m-QdI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,7 +393,7 @@
         <!--Sub Web View Controller-->
         <scene sceneID="zjK-mF-rnf">
             <objects>
-                <viewController storyboardIdentifier="subWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZjZ-jp-6R5" customClass="SubWebViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="subWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZjZ-jp-6R5" customClass="SubWebViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oa0-XQ-RdW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,7 +462,7 @@
         <!--Live View Controller-->
         <scene sceneID="R9W-Vx-lJ0">
             <objects>
-                <viewController storyboardIdentifier="liveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLt-8t-3ae" customClass="LiveViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="liveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLt-8t-3ae" customClass="LiveViewController" customModule="Kpopcon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qIQ-ZN-cdu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
