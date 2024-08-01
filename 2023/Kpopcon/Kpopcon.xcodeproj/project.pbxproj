@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		173AACB92C5A78CE00C79752 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 173AACB82C5A78CE00C79752 /* Toast */; };
 		177213882C4A737E008E583F /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 177213872C4A737E008E583F /* LightCompressor */; };
 		1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */; };
 		1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */; };
@@ -133,6 +134,7 @@
 				177213882C4A737E008E583F /* LightCompressor in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
+				173AACB92C5A78CE00C79752 /* Toast in Frameworks */,
 				5CFDC39A81D77587DFE24810 /* Pods_Kpopcon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +298,7 @@
 				1784C87F2BC81906009D9F40 /* FirebaseAnalytics */,
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				177213872C4A737E008E583F /* LightCompressor */,
+				173AACB82C5A78CE00C79752 /* Toast */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* Kpopcon.app */;
@@ -351,6 +354,7 @@
 				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				177213862C4A737E008E583F /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */,
+				173AACB72C5A78CE00C79752 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -634,7 +638,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -649,7 +653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -671,7 +675,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -686,7 +690,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -793,6 +797,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		173AACB72C5A78CE00C79752 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		177213862C4A737E008E583F /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AbedElazizShe/LightCompressor_iOS.git";
@@ -828,6 +840,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		173AACB82C5A78CE00C79752 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 173AACB72C5A78CE00C79752 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		177213872C4A737E008E583F /* LightCompressor */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 177213862C4A737E008E583F /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */;

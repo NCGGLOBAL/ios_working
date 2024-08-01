@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30H-vX-MTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -78,10 +79,15 @@
                                     <action selector="onClickBackButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Se-ot-NzJ"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="97S-dA-avo">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" systemColor="systemOrangeColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="97S-dA-avo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3SA-NZ-GQT"/>
                             <constraint firstItem="NXO-IL-CXu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Xy-bo-YFj"/>
                             <constraint firstItem="NXO-IL-CXu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="C4S-Ft-pfV"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Dm6-IT-5dA"/>
@@ -89,6 +95,7 @@
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TM9-B7-BzW"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cP3-f2-wnS"/>
                             <constraint firstItem="6C0-vs-P33" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="cXH-Yl-Cxw"/>
+                            <constraint firstItem="97S-dA-avo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p4f-85-KNv"/>
                             <constraint firstItem="xDj-f8-wPh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zPK-yz-GE0"/>
                         </constraints>
                     </view>
@@ -98,6 +105,7 @@
                         <outlet property="backButton" destination="xDj-f8-wPh" id="xhp-8R-vnU"/>
                         <outlet property="containerView" destination="6C0-vs-P33" id="kE2-KL-kn0"/>
                         <outlet property="indicatorView" destination="NXO-IL-CXu" id="gsJ-kn-M09"/>
+                        <outlet property="uploadIndicatorView" destination="97S-dA-avo" id="oiE-p0-dZ6"/>
                         <segue destination="NN2-QL-X6M" kind="show" identifier="imageSelectSegue" id="lrN-cQ-axV"/>
                         <segue destination="fdD-VF-3rn" kind="show" identifier="qrReaderSeque" id="KGW-Rd-nEG"/>
                     </connections>
@@ -506,6 +514,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

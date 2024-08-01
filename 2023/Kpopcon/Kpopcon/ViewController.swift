@@ -18,6 +18,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var uploadIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
     
     var webView: WKWebView!
@@ -568,6 +569,9 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         return
                     }
                     
+                    self.uploadIndicatorView.isHidden = false
+                    self.uploadIndicatorView.startAnimating()
+                    self.showToast(message: "업로드 시작.시간이 걸리니 대기해주세요")
                     let sendUrl = URL(string: url!)
                     
                     self.uploadVideo(videoURL: (self.compressedUrl ?? self.videoUrl)!, to: sendUrl!, token: token!, key: key!) { result in
@@ -577,13 +581,25 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         switch result {
                         case .success(let responseURL):
                             print("Video uploaded successfully. Response URL: \(responseURL)")
+                            
                             dic["result"] = "1"
                             self.sendWebViewEvaluateJavaScript(dic: dic)
+                            
+                            DispatchQueue.main.async {
+                                self.uploadIndicatorView.stopAnimating()
+                                self.showToast(message: "업로드 성공했습니다.")
+                            }
                             break
                         case .failure(let error):
                             print("Failed to upload video: \(error.localizedDescription)")
                             dic["result"] = "-1"
                             self.sendWebViewEvaluateJavaScript(dic: dic)
+                            
+                            DispatchQueue.main.async {
+                                self.uploadIndicatorView.stopAnimating()
+                                self.showToast(message: "업로드 실패했습니다.")
+                            }
+                            break
                         }
                     }
                     break
@@ -881,6 +897,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                print("sendWebViewEvaluateJavaScript jsFunction : \(jsFunction)")
                 DispatchQueue.main.async {
                     self.webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
                         if let error = error {

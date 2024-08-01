@@ -1,5 +1,5 @@
 {
-  "originHash" : "5e2e09e8bc61bafe901e1700c239be309ae9186a9fd455fd11cf272c390a4261",
+  "originHash" : "5657768d8d037be9d05c4d291b1d592f55dc24fcffe8b9bcb8c6a84324796168",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
         "version" : "1.26.0"
+      }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scalessec/Toast-Swift",
+      "state" : {
+        "revision" : "ddccd20d6fb718448d9b179c454c561653fda7d5",
+        "version" : "5.1.1"
       }
     }
   ],
