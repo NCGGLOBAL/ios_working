@@ -642,7 +642,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 self.showToast(message: "영상시간을 2분이내로 줄여주세요")
                 return
             }
-            // 100MB 이상이면 리턴
+            // 300MB 이상이면 리턴
             if (!self.checkVideoFileSize(at: url)) {
                 return
             }
@@ -941,7 +941,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 print("비디오 파일 용량: \(fileSize) bytes")
                 
                 // 예시로 용량 제한을 넘지 않았는지 체크할 수 있습니다.
-                let maxFileSize: Int64 = 100 * 1024 * 1024  // 예시: 100MB (실제로 필요에 따라 달라질 수 있음)
+                let maxFileSize: Int64 = 300 * 1024 * 1024  // 예시: 100MB (실제로 필요에 따라 달라질 수 있음)
                 if fileSize > maxFileSize {
                     self.showToast(message: "영상 용량은 100M미만으로 등록해 주세요.")
                     return false
