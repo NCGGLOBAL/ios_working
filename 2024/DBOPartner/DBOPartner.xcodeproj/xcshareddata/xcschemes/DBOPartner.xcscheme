@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
-               BuildableName = "ShortDealNet.app"
-               BlueprintName = "ShortDealNet"
+               BuildableName = "DBOPartner.app"
+               BlueprintName = "DBOPartner"
                ReferencedContainer = "container:DBOPartner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
-            BuildableName = "ShortDealNet.app"
-            BlueprintName = "ShortDealNet"
+            BuildableName = "DBOPartner.app"
+            BlueprintName = "DBOPartner"
             ReferencedContainer = "container:DBOPartner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
-            BuildableName = "ShortDealNet.app"
-            BlueprintName = "ShortDealNet"
+            BuildableName = "DBOPartner.app"
+            BlueprintName = "DBOPartner"
             ReferencedContainer = "container:DBOPartner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

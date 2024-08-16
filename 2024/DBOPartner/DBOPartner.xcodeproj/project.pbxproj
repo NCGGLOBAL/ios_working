@@ -74,7 +74,7 @@
 
 /* Begin PBXFileReference section */
 		171098D52C07526700C8FF1D /* QRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
-		1784C82B2BC80DAC009D9F40 /* ShortDealNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShortDealNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1784C82B2BC80DAC009D9F40 /* DBOPartner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBOPartner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1784C8322BC80DAC009D9F40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C8952BC81C04009D9F40 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1784C8972BC81C04009D9F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17A5A3D42C6B984400D4D89A /* ShortDealNet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShortDealNet.entitlements; sourceTree = "<group>"; };
+		17A5A3D42C6B984400D4D89A /* DBOPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DBOPartner.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +148,7 @@
 		1784C82C2BC80DAC009D9F40 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1784C82B2BC80DAC009D9F40 /* ShortDealNet.app */,
+				1784C82B2BC80DAC009D9F40 /* DBOPartner.app */,
 				1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -157,7 +157,7 @@
 		1784C82D2BC80DAC009D9F40 /* DBOPartner */ = {
 			isa = PBXGroup;
 			children = (
-				17A5A3D42C6B984400D4D89A /* ShortDealNet.entitlements */,
+				17A5A3D42C6B984400D4D89A /* DBOPartner.entitlements */,
 				171098D52C07526700C8FF1D /* QRReaderViewController.swift */,
 				1784C8832BC81967009D9F40 /* GoogleService-Info.plist */,
 				1784C87C2BC817E6009D9F40 /* LiveViewController.swift */,
@@ -240,9 +240,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1784C82A2BC80DAC009D9F40 /* ShortDealNet */ = {
+		1784C82A2BC80DAC009D9F40 /* DBOPartner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1784C83F2BC80DAD009D9F40 /* Build configuration list for PBXNativeTarget "ShortDealNet" */;
+			buildConfigurationList = 1784C83F2BC80DAD009D9F40 /* Build configuration list for PBXNativeTarget "DBOPartner" */;
 			buildPhases = (
 				1784C8272BC80DAC009D9F40 /* Sources */,
 				1784C8282BC80DAC009D9F40 /* Frameworks */,
@@ -254,7 +254,7 @@
 			dependencies = (
 				1784C8992BC81C04009D9F40 /* PBXTargetDependency */,
 			);
-			name = ShortDealNet;
+			name = DBOPartner;
 			packageProductDependencies = (
 				1784C8732BC816B3009D9F40 /* Kingfisher */,
 				1784C8762BC816E6009D9F40 /* BSImagePicker */,
@@ -262,7 +262,7 @@
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 			);
 			productName = AgarMall;
-			productReference = 1784C82B2BC80DAC009D9F40 /* ShortDealNet.app */;
+			productReference = 1784C82B2BC80DAC009D9F40 /* DBOPartner.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1784C8922BC81C04009D9F40 /* NotificationServiceExtension */ = {
@@ -318,7 +318,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1784C82A2BC80DAC009D9F40 /* ShortDealNet */,
+				1784C82A2BC80DAC009D9F40 /* DBOPartner */,
 				1784C8922BC81C04009D9F40 /* NotificationServiceExtension */,
 			);
 		};
@@ -547,9 +547,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DBOPartner/DBOPartner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TTG5M38R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DBOPartner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -582,9 +582,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DBOPartner/DBOPartner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TTG5M38R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DBOPartner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -613,9 +613,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TTG5M38R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
@@ -641,9 +641,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TTG5M38R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
@@ -677,7 +677,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1784C83F2BC80DAD009D9F40 /* Build configuration list for PBXNativeTarget "ShortDealNet" */ = {
+		1784C83F2BC80DAD009D9F40 /* Build configuration list for PBXNativeTarget "DBOPartner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1784C8402BC80DAD009D9F40 /* Debug */,
