@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCcwjeHHyBRNqz9BKjQWo76-gchUd5uquM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>39549304869</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creator.wellbeinglive</string>
+	<key>PROJECT_ID</key>
+	<string>wellbeinglive-8ec58</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wellbeinglive-8ec58.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:39549304869:ios:9336b5c4ee6531d33affcc</string>
+</dict>
+</plist>
