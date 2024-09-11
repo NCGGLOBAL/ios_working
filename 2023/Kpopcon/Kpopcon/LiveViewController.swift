@@ -8,7 +8,8 @@
 
 import UIKit
 import WebKit
-//import libksygpulive
+import HaishinKit
+import AVFoundation
 
 class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -22,15 +23,16 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private struct Constants {
         static let callBackHandlerKey = "ios"
     }
-    
-    var callback = ""
-    
-//    var kit: KSYGPUStreamerKit? = nil
+        
+    let rtmpConnection = RTMPConnection()
+    var rtmpStream: RTMPStream? = nil
+    var cameraPosition: AVCaptureDevice.Position = .back // 기본 카메라는 후면
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UIApplication.shared.isIdleTimerDisabled = true
+        initCamera()
         
         let contentController = WKUserContentController()
         let config = WKWebViewConfiguration()
@@ -67,7 +69,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
-        initCamera()
         
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -75,8 +76,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
         
-//        kit?.streamerBase.stopStream()
-//        kit?.stopPreview()
+        rtmpStream?.close()
     }
     
     func initWebView() {
@@ -194,7 +194,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 #endif
                 
                 // callback
-                callback = dictionary["callBack"] as? String ?? ""
+                let callback = dictionary["callBack"] as? String ?? ""
                 #if DEBUG
                 print("callBack : \(callback)")
                 #endif
@@ -215,70 +215,77 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             })
                         }
                     break
-//                    case "ACT1027": // wlive 전, 후면 카메라 제어
-//                        var resultcd = "1"
-//                        if let val = actionParamObj?["key_type"] {
-//                            kit?.switchCamera()
-//                        } else {
-//                            resultcd = "0"
-//                        }
-//                        var dic = Dictionary<String, String>()
-//                        dic.updateValue(resultcd, forKey: "resultcd")
-//
-//                        do {
-//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-//                            let javascript = "\(callback)('\(stringValue)')"
-//                            #if DEBUG
-//                            print("jsonData : \(jsonData)")
-//                            print("javascript : \(javascript)")
-//                            #endif
-//                            // call back!
-//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-//                                #if DEBUG
-//                                print("result : \(String(describing: result))")
-//                                print("error : \(error)")
-//                                #endif
-//                            }
-//                        } catch let error as NSError {
-//                            print(error)
-//                        }
-//                    break
-//
-//                    case "ACT1028": // wlive 마이크 제어
-//                        var resultcd = "1"
-//                        if (actionParamObj?["key_type"]) != nil {
-//                            if (actionParamObj?["key_type"] as? String == "0") {  //0: 마이크 끄기,1: 켜기
-//                                kit?.streamerBase.muteStream(true)
-//                            } else  {
-//                                kit?.streamerBase.muteStream(false)
-//                            }
-//                        } else {
-//                            resultcd = "0"
-//                        }
-//                        var dic = Dictionary<String, String>()
-//                        dic.updateValue(resultcd, forKey: "resultcd")
-//
-//                        do {
-//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-//                            let javascript = "\(callback)('\(stringValue)')"
-//                            #if DEBUG
-//                            print("jsonData : \(jsonData)")
-//                            print("javascript : \(javascript)")
-//                            #endif
-//                            // call back!
-//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-//                                #if DEBUG
-//                                print("result : \(String(describing: result))")
-//                                print("error : \(error)")
-//                                #endif
-//                            }
-//                        } catch let error as NSError {
-//                            print(error)
-//                        }
-//                    break
-//                    case "ACT1029": // wlive 이미지필터 제어
+                    case "ACT1027": // wlive 전, 후면 카메라 제어
+                        var resultcd = "1"
+                        if let val = actionParamObj?["key_type"] {
+                            cameraPosition = (cameraPosition == .back) ? .front : .back
+                            let camera = getCameraDevice(for: cameraPosition)
+                            
+                            rtmpStream?.attachCamera(camera) { error, result  in
+                                if let error = error {
+                                    print("Error attaching camera: \(error)")
+                                }
+                            }
+                        } else {
+                            resultcd = "0"
+                        }
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue(resultcd, forKey: "resultcd")
+
+                        do {
+                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            #if DEBUG
+                            print("jsonData : \(jsonData)")
+                            print("javascript : \(javascript)")
+                            #endif
+                            // call back!
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                #if DEBUG
+                                print("result : \(String(describing: result))")
+                                print("error : \(error)")
+                                #endif
+                            }
+                        } catch let error as NSError {
+                            print(error)
+                        }
+                    break
+
+                    case "ACT1028": // wlive 마이크 제어
+                        var resultcd = "1"
+                        if (actionParamObj?["key_type"]) != nil {
+                            if (actionParamObj?["key_type"] as? String == "0") {  //0: 마이크 끄기,1: 켜기
+                                self.detachMicrophone()
+                            } else  {
+                                self.attachMicrophone()
+                            }
+                        } else {
+                            resultcd = "0"
+                        }
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue(resultcd, forKey: "resultcd")
+
+                        do {
+                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            #if DEBUG
+                            print("jsonData : \(jsonData)")
+                            print("javascript : \(javascript)")
+                            #endif
+                            // call back!
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                #if DEBUG
+                                print("result : \(String(describing: result))")
+                                print("error : \(error)")
+                                #endif
+                            }
+                        } catch let error as NSError {
+                            print(error)
+                        }
+                    break
+                    case "ACT1029": // wlive 이미지필터 제어
 //                        var resultcd = "1"
 //                        if let val = actionParamObj?["key_type"] as? Int {
 //                            switch val {
@@ -320,80 +327,82 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 //                        } catch let error as NSError {
 //                            print(error)
 //                        }
-//                    break
-//                    case "ACT1030": // wlive 스트림키 전달 및 송출
-//                        var resultcd = "1"
-//                        if let streamUrl = actionParamObj?["stream_url"] as? String {
-//                            DispatchQueue.main.async {
-//                                self.kit?.streamerBase.stopStream()
-//                                self.initStreamer(streamUrl: streamUrl)
-//                            }
-//                        } else {
-//                            resultcd = "0"
-//                        }
-//                        var dic = Dictionary<String, String>()
-//                        dic.updateValue(resultcd, forKey: "resultcd")
-//
-//                        do {
-//                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-//                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-//                            let javascript = "\(callback)('\(stringValue)')"
-//                            #if DEBUG
-//                            print("jsonData : \(jsonData)")
-//                            print("javascript : \(javascript)")
-//                            #endif
-//                            // call back!
-//                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-//                                #if DEBUG
-//                                print("result : \(String(describing: result))")
-//                                print("error : \(error)")
-//                                #endif
-//                            }
-//                        } catch let error as NSError {
-//                            print(error)
-//                        }
-//                    break
-//                    case "ACT1031": // 종료
-//                        self.navigationController?.popToRootViewController(animated: true)
-//                    break
-//                    
-//                case "ACT1036": //스트리밍 화면 캡쳐
-//                    self.kit?.streamerBase.getSnapshotWithCompletion({ (image) in
-//                        if let base64String = image!.toBase64() {
-//                            print("Base64 string: \(base64String)")
-//                            var dic = Dictionary<String, String>()
-//                            dic.updateValue(base64String, forKey: "fData")
-//                        } else {
-//                            print("Failed to convert image to Base64 string.")
-//                        }
-//                    })
-//                    break
-//                case "ACT1037": // 앨범 열기
-//                    self.uploadPhoto()
-//                    break
-//                    
-//                case "ACT1038": // 가로보기, 세로보기
-//                    let keyType = actionParamObj?["key_type"] as? String
-//                    if keyType == "0" {
-//                        if #available(iOS 16.0, *) {
-//                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-//                        } else {
-//                            // Fallback on earlier versions
-//                        }
-//                    } else {
-//                        if #available(iOS 16.0, *) {
-//                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
-//                        } else {
-//                            // Fallback on earlier versions
-//                        }
-//                    }
-//                    let javascript = "\(self.callback)"
-//                    // call back!
-//                    self.webView.evaluateJavaScript(javascript) { (result, error) in
-//                        print("result : \(String(describing: result))")
-//                        print("error : \(error)")
-//                    }
-//                    break
+                    break
+                    case "ACT1030": // wlive 스트림키 전달 및 송출
+                        var resultcd = "1"
+                        if let streamUrl = actionParamObj?["stream_url"] as? String {
+                            DispatchQueue.main.async {
+                                self.initStreamer(streamUrl: streamUrl)
+                            }
+                        } else {
+                            resultcd = "0"
+                        }
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue(resultcd, forKey: "resultcd")
+
+                        do {
+                          let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            #if DEBUG
+                            print("jsonData : \(jsonData)")
+                            print("javascript : \(javascript)")
+                            #endif
+                            // call back!
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                #if DEBUG
+                                print("result : \(String(describing: result))")
+                                print("error : \(error)")
+                                #endif
+                            }
+                        } catch let error as NSError {
+                            print(error)
+                        }
+                    break
+                    case "ACT1031": // 종료
+                        self.navigationController?.popToRootViewController(animated: true)
+                    break
+                    
+                case "ACT1036": //스트리밍 화면 캡쳐
+                    // 현재 화면의 이미지 캡처
+                    let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
+                    let image = renderer.image { context in
+                        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+                    }
+                    
+                    if image != nil {
+                        if let base64String = image.toBase64() {
+                            print("Base64 string: \(base64String)")
+                            var dic = Dictionary<String, String>()
+                            dic.updateValue(base64String, forKey: "fData")
+                            
+                            do {
+                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                                let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                let javascript = "\(callback)('\(stringValue)')"
+                                #if DEBUG
+                                print("jsonData : \(jsonData)")
+                                print("javascript : \(javascript)")
+                                #endif
+                                // call back!
+                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                    #if DEBUG
+                                    print("result : \(String(describing: result))")
+                                    print("error : \(error)")
+                                    #endif
+                                }
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                        } else {
+                            print("Failed to convert image to Base64 string.")
+                        }
+                    }
+                    
+                    break
+                case "ACT1037": // 앨범 열기
+                    self.uploadPhoto()
+                    break
                     
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
@@ -401,6 +410,33 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             }
         }
     }
+    
+    func attachMicrophone() {
+        let audioDevice = AVCaptureDevice.default(for: .audio)
+        rtmpStream?.attachAudio(audioDevice) { error, result in
+               if let error = error {
+                   print("Error attaching audio: \(error)")
+               }
+           }
+    }
+
+       func detachMicrophone() {
+           rtmpStream?.attachAudio(nil) { error, result in
+               if let error = error {
+                   print("Error detaching audio: \(error)")
+               }
+           }
+       }
+    
+    func getCameraDevice(for position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+            let devices = AVCaptureDevice.DiscoverySession(
+                deviceTypes: [.builtInWideAngleCamera],
+                mediaType: .video,
+                position: .unspecified
+            ).devices
+            
+            return devices.first { $0.position == position }
+        }
     
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
@@ -437,41 +473,46 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     func initCamera() {
-//        kit = KSYGPUStreamerKit.init(defaultCfg: ())
-//
-//        kit?.cameraPosition = .front
-//        kit?.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA
-//        kit?.capturePixelFormat = kCVPixelFormatType_32BGRA
-//
-//        kit?.previewDimension =  self.view.frame.size//self.view.frame.size
-//
-//        kit?.streamDimension = self.view.frame.size
-//
-//        kit?.videoOrientation = .portrait
-//        kit?.previewOrientation = .portrait
-//        kit?.startPreview(self.view)
+        // RTMPConnection과 RTMPStream 설정
+        self.rtmpStream = RTMPStream(connection: rtmpConnection)
+        
+        // 카메라 및 마이크 설정
+//        rtmpStream?.videoSettings = [
+//            .width: 1280,
+//            .height: 720,
+//            .fps: 30
+//        ]
+//        rtmpStream.audioSettings = [
+//            .bitrate: 128000,
+//            .sampleRate: 44100
+//        ]
+        
+        // UI에 AVCaptureVideoPreviewLayer 추가
+        let hkView = MTHKView(frame: view.bounds)
+        hkView.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        hkView.attachStream(rtmpStream)
+        
+        // add ViewController#view
+        self.containerView.addSubview(hkView)
     }
 
     func initStreamer(streamUrl: String) {
-//        kit?.streamerBase.videoCodec = KSYVideoCodec.AUTO
-//        kit?.streamerBase.videoInitBitrate = 2048
-//        kit?.streamerBase.videoMaxBitrate = 2500
-//        kit?.streamerBase.videoMinBitrate = 2000
-//        kit?.streamerBase.audiokBPS = 48
-//        kit?.streamerBase.shouldEnableKSYStatModule = true
-//        kit?.streamerBase.videoFPS = 15
-//        kit?.streamerBase.maxKeyInterval = 3
-//
-//        kit?.videoProcessingCallback = { (buf) -> Void in
-//
-//        }
-//
-//        kit?.streamerBase.logBlock = { (str) -> Void in
-//            //            print(str ?? "")
-//        }
-//
-//        let url = URL(string: streamUrl)
-//        kit?.streamerBase.startStream(url)
+        self.rtmpConnection.connect(streamUrl)
+        self.rtmpStream?.publish("streamName")
+        
+        self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
+            print("attachAudio")
+          if let error {
+            print("attachAudio error")
+          }
+        }
+
+        self.rtmpStream?.attachCamera(AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back), track: 0) { _, error in
+            print("attachCamera")
+          if let error {
+              print("attachCamera error")
+          }
+        }
     }
 
 }

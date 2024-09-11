@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		173AACB92C5A78CE00C79752 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 173AACB82C5A78CE00C79752 /* Toast */; };
 		177213882C4A737E008E583F /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 177213872C4A737E008E583F /* LightCompressor */; };
+		1781135F2C91C9C700476F6E /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1781135E2C91C9C700476F6E /* HaishinKit */; };
 		1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */; };
 		1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */; };
 		1784C8332BC80DAC009D9F40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8322BC80DAC009D9F40 /* ViewController.swift */; };
@@ -135,6 +136,7 @@
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
 				173AACB92C5A78CE00C79752 /* Toast in Frameworks */,
+				1781135F2C91C9C700476F6E /* HaishinKit in Frameworks */,
 				5CFDC39A81D77587DFE24810 /* Pods_Kpopcon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +301,7 @@
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				177213872C4A737E008E583F /* LightCompressor */,
 				173AACB82C5A78CE00C79752 /* Toast */,
+				1781135E2C91C9C700476F6E /* HaishinKit */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* Kpopcon.app */;
@@ -355,6 +358,7 @@
 				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				177213862C4A737E008E583F /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */,
 				173AACB72C5A78CE00C79752 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				1781135D2C91C9C700476F6E /* XCRemoteSwiftPackageReference "HaishinKit" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -638,22 +642,28 @@
 				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kpopcon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KPOPCON;
+				INFOPLIST_KEY_NSCameraUsageDescription = "상품을 등록할 때 촬영할 수 있습니다. 서비스를 위해 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 기반으로 근방의 시장을 검색하여 해당 시장의 상품들을 구매액션 하기 위함입니다";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "유튜브 동영상 촬영 시에 사용됩니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "상품 및 이미지 등록을 위해 사진첩에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -675,22 +685,28 @@
 				CODE_SIGN_ENTITLEMENTS = Kpopcon/Kpopcon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 89Y2J9NPRN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kpopcon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KPOPCON;
+				INFOPLIST_KEY_NSCameraUsageDescription = "상품을 등록할 때 촬영할 수 있습니다. 서비스를 위해 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 기반으로 근방의 시장을 검색하여 해당 시장의 상품들을 구매액션 하기 위함입니다";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "유튜브 동영상 촬영 시에 사용됩니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "상품 및 이미지 등록을 위해 사진첩에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.kpopcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -813,6 +829,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		1781135D2C91C9C700476F6E /* XCRemoteSwiftPackageReference "HaishinKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.3;
+			};
+		};
 		1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -849,6 +873,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 177213862C4A737E008E583F /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */;
 			productName = LightCompressor;
+		};
+		1781135E2C91C9C700476F6E /* HaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1781135D2C91C9C700476F6E /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = HaishinKit;
 		};
 		1784C8732BC816B3009D9F40 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -587,6 +587,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                             
                             DispatchQueue.main.async {
                                 self.uploadIndicatorView.stopAnimating()
+                                self.indicatorView.isHidden = true
                                 self.showToast(message: "업로드 성공했습니다.")
                             }
                             break
@@ -597,6 +598,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                             
                             DispatchQueue.main.async {
                                 self.uploadIndicatorView.stopAnimating()
+                                self.indicatorView.isHidden = true
                                 self.showToast(message: "업로드 실패했습니다.")
                             }
                             break
@@ -762,20 +764,24 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         // 로딩 시작
         self.indicatorView.startAnimating()
+        self.indicatorView.isHidden = false
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // 로딩 에러
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
