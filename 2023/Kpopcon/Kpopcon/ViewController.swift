@@ -83,6 +83,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         
         // self.view = self.webView!
         self.containerView.addSubview(webView)
+
         //self.loadAppStoreVersion()
     }
     
@@ -535,14 +536,16 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     if keyType == "0" {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-//                            self.rotateWebView()
+                            // 웹뷰 크기 조정
+                            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                         } else {
                             // Fallback on earlier versions
                         }
                     } else {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
-//                            self.rotateWebView()
+                            // 웹뷰 크기 조정
+                            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                         } else {
                             // Fallback on earlier versions
                         }
@@ -614,13 +617,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             }
         }
     }
-    
-//    @objc func rotateWebView() {
-//        let rotationAngle: CGFloat = .pi / 2 // 90도 회전
-//                UIView.animate(withDuration: 0.5) {
-//                    self.webView.transform = self.webView.transform.rotated(by: rotationAngle)
-//                }
-//        }
     
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
