@@ -535,12 +535,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     if keyType == "0" {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+//                            self.rotateWebView()
                         } else {
                             // Fallback on earlier versions
                         }
                     } else {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+//                            self.rotateWebView()
                         } else {
                             // Fallback on earlier versions
                         }
@@ -612,6 +614,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             }
         }
     }
+    
+//    @objc func rotateWebView() {
+//        let rotationAngle: CGFloat = .pi / 2 // 90도 회전
+//                UIView.animate(withDuration: 0.5) {
+//                    self.webView.transform = self.webView.transform.rotated(by: rotationAngle)
+//                }
+//        }
     
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
