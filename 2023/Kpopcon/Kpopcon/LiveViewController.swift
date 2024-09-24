@@ -95,20 +95,24 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         // 로딩 시작
         self.indicatorView.startAnimating()
+        self.indicatorView.isHidden = false
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // 로딩 에러
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
