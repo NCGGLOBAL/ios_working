@@ -121,7 +121,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-
+        
+        DispatchQueue.main.async {
+            self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -536,16 +539,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     if keyType == "0" {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-                            // 웹뷰 크기 조정
-                            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                         } else {
                             // Fallback on earlier versions
                         }
                     } else {
                         if #available(iOS 16.0, *) {
                             view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
-                            // 웹뷰 크기 조정
-                            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                         } else {
                             // Fallback on earlier versions
                         }
