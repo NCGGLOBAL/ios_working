@@ -60,6 +60,10 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         }
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
+        
+        DispatchQueue.main.async {
+            self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
     
     func initWebView() {

@@ -73,10 +73,15 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.allowsBackForwardNavigationGestures = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.shouldSupportAllOrientation = false
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
         
         rtmpStream?.close()
+        AppDelegate.shouldSupportAllOrientation = true
     }
     
     func initWebView() {
