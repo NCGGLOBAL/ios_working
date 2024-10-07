@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
+   LastUpgradeVersion = "1540"
+   wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FF8E74CB24EC1D1900B6F92F"
+               BlueprintIdentifier = "1784C8922BC81C04009D9F40"
                BuildableName = "NotificationServiceExtension.appex"
                BlueprintName = "NotificationServiceExtension"
                ReferencedContainer = "container:Banhal.xcodeproj">
@@ -28,7 +30,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
+               BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
                BuildableName = "Banhal.app"
                BlueprintName = "Banhal"
                ReferencedContainer = "container:Banhal.xcodeproj">
@@ -40,9 +42,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -60,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
+            BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
             BuildableName = "Banhal.app"
             BlueprintName = "Banhal"
             ReferencedContainer = "container:Banhal.xcodeproj">
@@ -79,7 +80,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FF60BA16247EA18E00B0B1A8"
+            BlueprintIdentifier = "1784C82A2BC80DAC009D9F40"
             BuildableName = "Banhal.app"
             BlueprintName = "Banhal"
             ReferencedContainer = "container:Banhal.xcodeproj">
