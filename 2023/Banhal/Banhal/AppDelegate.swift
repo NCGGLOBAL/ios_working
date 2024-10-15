@@ -13,7 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
-    static var HOME_URL = "http://banhalshop.co.kr"
+    static var HOME_URL = "https://banhalshop.co.kr"
     static let UPLOAD_URL = AppDelegate.HOME_URL + "/m/app/"
     static let PUSH_REG_URL = AppDelegate.HOME_URL + "/m/app/pushRegister.asp"
     static var LANDING_URL = ""
