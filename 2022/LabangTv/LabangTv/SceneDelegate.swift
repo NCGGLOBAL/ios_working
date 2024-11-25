@@ -1,12 +1,12 @@
 //
 //  SceneDelegate.swift
-//  UnniTv
+//  AgarMall
 //
-//  Created by glediaer on 2020/05/27.
-//  Copyright © 2020 ncgglobal. All rights reserved.
+//  Created by 정진만 on 4/11/24.
 //
 
 import UIKit
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
+        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
