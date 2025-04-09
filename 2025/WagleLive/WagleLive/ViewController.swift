@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import CoreLocation
+import Gifu
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -43,6 +44,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     let MAX_PAGE_COUNT = 2
     var currentSelectedPosition = 0
+    
+    private let gifImage: GIFImageView = {
+            let img = GIFImageView()
+//            img.translatesAutoresizingMaskIntoConstraints = false
+//            img.isUserInteractionEnabled = true
+//            img.contentMode = .scaleAspectFit
+            return img
+        }()
     
     override func loadView() {
         super.loadView()
@@ -98,6 +107,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
 //            self.initTutorial()
 //            ud.set(true, forKey: Constants.TUTORIAL)
 //        }
+        
+        gifImage.animate(withGIFNamed: "splash")
+        gifImage.frame = self.view.frame
+        view.addSubview(gifImage)
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: {[weak self] timer in
+            self?.gifImage.stopAnimatingGIF()
+            self?.gifImage.isHidden = true
+        })
         
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
@@ -644,7 +661,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.indicatorView.stopAnimating()
     }
-    
+        
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
@@ -746,4 +763,5 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         self.initWebView(urlString: AppDelegate.HOME_URL)
     }
 }
+
 
