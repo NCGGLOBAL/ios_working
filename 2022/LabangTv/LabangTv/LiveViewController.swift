@@ -73,12 +73,16 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.allowsBackForwardNavigationGestures = true
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        UIApplication.shared.isIdleTimerDisabled = false
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         rtmpStream?.close()
+        rtmpConnection.close()
+        rtmpStream?.attachCamera(nil)
+        rtmpStream?.attachAudio(nil)
+        
+        UIApplication.shared.isIdleTimerDisabled = false
     }
-    
+
     func initWebView() {
         let url = URL(string: self.urlString)
         var request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
