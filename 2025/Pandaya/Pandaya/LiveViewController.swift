@@ -73,14 +73,46 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.allowsBackForwardNavigationGestures = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // RTMP 연결 및 스트림 재설정
+        if (rtmpStream != nil) {
+            // 카메라, 오디오 다시 attach
+            self.attachCameraDevice()
+            self.attachMicrophone()
+            
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+    }
+
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        rtmpStream?.close()
-        rtmpConnection.close()
-        rtmpStream?.attachCamera(nil)
-        rtmpStream?.attachAudio(nil)
         
-        UIApplication.shared.isIdleTimerDisabled = false
+        if (rtmpStream != nil) {
+            // 카메라, 오디오만 해제 (연결은 유지)
+            rtmpStream?.attachCamera(nil)
+            rtmpStream?.attachAudio(nil)
+            
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        // 리소스 완전 해제
+        if (rtmpStream != nil) {
+            // 스트림 중지 및 연결 해제
+            rtmpStream?.close()
+            rtmpConnection.close()
+            
+            // 카메라/오디오 연결 해제
+            rtmpStream?.attachCamera(nil)
+            rtmpStream?.attachAudio(nil)
+            
+            // 기타 리소스 해제
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
 
     func initWebView() {
@@ -415,6 +447,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
+    func attachCameraDevice() {
+        cameraPosition = (cameraPosition == .back) ? .front : .back
+        let cameraDevice = getCameraDevice(for: cameraPosition)
+        rtmpStream?.attachCamera(cameraDevice)
+    }
+
+    
     func attachMicrophone() {
         let audioDevice = AVCaptureDevice.default(for: .audio)
         rtmpStream?.attachAudio(audioDevice) { error, result in
@@ -424,13 +463,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
            }
     }
 
-       func detachMicrophone() {
-           rtmpStream?.attachAudio(nil) { error, result in
-               if let error = error {
-                   print("Error detaching audio: \(error)")
-               }
+   func detachMicrophone() {
+       rtmpStream?.attachAudio(nil) { error, result in
+           if let error = error {
+               print("Error detaching audio: \(error)")
            }
        }
+   }
     
     func getCameraDevice(for position: AVCaptureDevice.Position) -> AVCaptureDevice? {
             let devices = AVCaptureDevice.DiscoverySession(
