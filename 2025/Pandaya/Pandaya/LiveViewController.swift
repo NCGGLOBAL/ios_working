@@ -540,8 +540,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func initStreamer(streamUrl: String) {
-        self.rtmpConnection.connect(streamUrl)
-        self.rtmpStream?.publish("streamName")
+        let components = streamUrl.components(separatedBy: "/")
+        if components.count > 1 {
+            let streamKey = components.last!
+            let convertStreamUrl = components.dropLast().joined(separator: "/")
+
+            self.rtmpConnection.connect(convertStreamUrl)
+            self.rtmpStream?.publish(streamKey)
+        }
         
         self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
             print("attachAudio")
