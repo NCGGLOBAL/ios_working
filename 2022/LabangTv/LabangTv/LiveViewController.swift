@@ -27,7 +27,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     let rtmpConnection = RTMPConnection()
     var rtmpStream: RTMPStream? = nil
-    var currentCameraPosition: AVCaptureDevice.Position = .back // 기본 카메라는 후면
+    var currentCameraPosition: AVCaptureDevice.Position = .front // 기본 카메라는 후면
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -496,17 +496,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     func initCamera() {
         // RTMPConnection과 RTMPStream 설정
         self.rtmpStream = RTMPStream(connection: rtmpConnection)
-        
-//        self.rtmpStream?.videoSettings = VideoCodecSettings(
-//            videoSize: CGSize(width: 1280, height: 720), // 720p 해상도 설정
-//            bitRate: 2_500_000, // 권장 비트레이트 (2.5 Mbps)
-//            profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
-//            scalingMode: .trim, // 종횡비 유지
-//            maxKeyFrameIntervalDuration: 2
-//        )
-        
-//        self.rtmpStream?.sessionPreset = AVCaptureSession.Preset.high // 모든 기기 호환성 보장
-//        self.rtmpStream?.frameRate = 30 // 60fps는 기종에 따라 불안정[3]
         self.rtmpStream?.videoCapture(for: 0)?.isVideoMirrored = false
         
         // UI에 AVCaptureVideoPreviewLayer 추가
@@ -574,9 +563,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             print("attachAudio" + (error != nil ? " error" : ""))
         }
         
-        // 6. 카메라 장치 연결 (후면 기본)
+        // 6. 카메라 장치 연결 (전면 기본)
         self.rtmpStream?.attachCamera(
-            AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+            AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             track: 0
         ) { _, error in
             print("attachCamera" + (error != nil ? " error" : ""))
