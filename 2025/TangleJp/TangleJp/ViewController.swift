@@ -567,6 +567,21 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 decisionHandler(.cancel)
                 return
             }
+        } else if (url.absoluteString.contains("button-share.zalo.me")) {
+            // 앱 내에서는 사파리로 열도록 안내
+            // 또는 자동으로 사파리에서 열기
+            // 사용자가 실제로 링크를 클릭했는지 확인
+            if navigationAction.navigationType == .linkActivated {
+                if let safariUrl = navigationAction.request.url {
+                    UIApplication.shared.open(safariUrl, options: [:], completionHandler: nil)
+                }
+                decisionHandler(.cancel)
+                return
+            } else {
+                // 페이지 로드나 다른 이유로 호출된 경우 WebView에서 처리
+                decisionHandler(.allow)
+                return
+            }
         }
         
         let urlString = url.absoluteString
