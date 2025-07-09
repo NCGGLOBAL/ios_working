@@ -96,7 +96,7 @@
 		1784C84E2BC81192009D9F40 /* icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play.png; sourceTree = "<group>"; };
 		1784C84F2BC81192009D9F40 /* icon_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_stop.png; sourceTree = "<group>"; };
 		1784C8502BC81192009D9F40 /* top_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_back.png; sourceTree = "<group>"; };
-		1784C8622BC811B5009D9F40 /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = PanTv/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
+		1784C8622BC811B5009D9F40 /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = VicLive/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
 		1784C8642BC81389009D9F40 /* ImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		1784C8672BC81393009D9F40 /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		1784C8682BC81393009D9F40 /* ImageFileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFileData.swift; sourceTree = "<group>"; };
@@ -547,9 +547,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VicLive/VicLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A56SRTN7K5;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VicLive/Info.plist;
@@ -583,9 +583,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VicLive/VicLive.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A56SRTN7K5;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VicLive/Info.plist;
@@ -615,9 +615,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A56SRTN7K5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
@@ -645,9 +645,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A56SRTN7K5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
