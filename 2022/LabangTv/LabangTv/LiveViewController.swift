@@ -71,6 +71,21 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         // Do any additional setup after loading the view.
         //        navigationController?.isNavigationBarHidden = false
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+
+        
         webView.allowsBackForwardNavigationGestures = true
     }
     
@@ -113,6 +128,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             // 기타 리소스 해제
             UIApplication.shared.isIdleTimerDisabled = false
+            
+            NotificationCenter.default.removeObserver(self)
         }
     }
     
@@ -459,6 +476,35 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return devices.first { $0.position == position }
     }
     
+    @objc func appWillEnterForeground() {
+        print("[App State] 포그라운드 진입")
+
+        guard let stream = rtmpStream else { return }
+
+        // 카메라 및 마이크 재연결
+        attachCameraDevice()
+        attachMicrophone()
+
+        // 영상/오디오 수신 및 송출 재개
+        stream.receiveVideo = true
+        stream.receiveAudio = true
+
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+
+    @objc func appDidEnterBackground() {
+        print("[App State] 백그라운드 진입")
+
+        guard let stream = rtmpStream else { return }
+
+        // 리소스 절약을 위해 영상 및 오디오 멈춤 처리
+        stream.receiveVideo = false
+        stream.receiveAudio = false
+
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+
+    
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
@@ -520,56 +566,59 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             self.rtmpConnection.connect(convertStreamUrl)
             self.rtmpStream?.publish(streamKey)
         }
-        
+
         // 2. 비디오 설정
         let bitrate: Int
         if videoBitrateList.count >= 3 {
             // row(low), mid, high 순서로 추출
-            bitrate = videoBitrateList[1] // mid 값 사용
+            bitrate = videoBitrateList[1] // mid 값 사용`
         } else if !videoBitrateList.isEmpty {
             bitrate = videoBitrateList[0] // 기본값으로 첫 번째 요소 사용
         } else {
             bitrate = 2_500_000 // 기본값 (2.5 Mbps)
         }
-        
+
         // 3. 비디오 코덱 설정 - 동적 해상도
         // iPhone 12 Pro Max 특별 처리
-            let isHighEndDevice = UIScreen.main.bounds.height > 2500
-            
-            if isHighEndDevice {
-                // 고해상도 기기: 명시적 720p 설정
-                self.rtmpStream?.sessionPreset = .hd1280x720
-            } else {
-                // 일반 기기: 기존 방식
-                self.rtmpStream?.sessionPreset = .high
-            }
-            
-            // 비디오 설정 (모든 기기 공통)
-            self.rtmpStream?.videoSettings = VideoCodecSettings(
-                videoSize: CGSize(width: 1280, height: 720),
-                bitRate: bitrate,
-                profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
-                scalingMode: .trim
-            )
-        
-        // 프레임 레이트
+        let isHighEndDevice = UIScreen.main.bounds.height > 2500
+
+        if isHighEndDevice {
+            // 고해상도 기기: 명시적 preset
+            self.rtmpStream?.sessionPreset = .hd1280x720
+        } else {
+            self.rtmpStream?.sessionPreset = .high
+        }
+
+        // ✅ 4. 세로 스트리밍 해상도 및 방향 설정
+        self.rtmpStream?.videoSettings = VideoCodecSettings(
+            videoSize: CGSize(width: 720, height: 1280), // 세로 기준 해상도
+            bitRate: bitrate,
+            profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
+            scalingMode: .trim
+        )
+
+        // ✅ 5. 세로 화면 방향 설정 (HaishinKit 지원)
+        self.rtmpStream?.videoOrientation = .portrait
+
+        // 6. 프레임 레이트
         self.rtmpStream?.frameRate = Float64(targetFps)
-        
-        // 디버깅
-        logCurrentVideoSettings()
-        
-        // 5. 오디오 장치 연결
+
+        // 디버깅 필요하면 사용
+        // logCurrentVideoSettings()
+
+        // 7. 오디오 장치 연결
         self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
             print("attachAudio" + (error != nil ? " error" : ""))
         }
-        
-        // 6. 카메라 장치 연결 (전면 기본)
+
+        // 8. 카메라 장치 연결 (전면 기본)
         self.rtmpStream?.attachCamera(
             AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             track: 0
         ) { _, error in
             print("attachCamera" + (error != nil ? " error" : ""))
         }
+
     }
     
     func logCurrentVideoSettings() {
