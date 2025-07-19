@@ -45,6 +45,8 @@
 		1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1784C8832BC81967009D9F40 /* GoogleService-Info.plist */; };
 		1784C8962BC81C04009D9F40 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8952BC81C04009D9F40 /* NotificationService.swift */; };
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17B94C882E2B9AA7000070C6 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B94C872E2B9AA7000070C6 /* QRReaderViewController.swift */; };
+		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C8952BC81C04009D9F40 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1784C8972BC81C04009D9F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17A5A3D32C6B97F700D4D89A /* UnniTv.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UnniTv.entitlements; sourceTree = "<group>"; };
+		17B94C872E2B9AA7000070C6 /* QRReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1784C8822BC81906009D9F40 /* FirebaseMessaging in Frameworks */,
+				17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */,
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
@@ -154,6 +159,7 @@
 		1784C82D2BC80DAC009D9F40 /* UnniTv */ = {
 			isa = PBXGroup;
 			children = (
+				17A5A3D32C6B97F700D4D89A /* UnniTv.entitlements */,
 				1784C8832BC81967009D9F40 /* GoogleService-Info.plist */,
 				1784C87C2BC817E6009D9F40 /* LiveViewController.swift */,
 				1784C87A2BC8176E009D9F40 /* ImageSelectDetailViewController.swift */,
@@ -171,6 +177,7 @@
 				1784C8372BC80DAD009D9F40 /* Assets.xcassets */,
 				1784C8392BC80DAD009D9F40 /* LaunchScreen.storyboard */,
 				1784C83C2BC80DAD009D9F40 /* Info.plist */,
+				17B94C872E2B9AA7000070C6 /* QRReaderViewController.swift */,
 			);
 			path = UnniTv;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 				1784C8762BC816E6009D9F40 /* BSImagePicker */,
 				1784C87F2BC81906009D9F40 /* FirebaseAnalytics */,
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
+				17E4EB642BEA490000BE63FE /* HaishinKit */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* UnniTv.app */;
@@ -308,6 +316,7 @@
 				1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -366,6 +375,7 @@
 				1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */,
 				1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */,
 				1784C86F2BC8145F009D9F40 /* SubWebViewController.swift in Sources */,
+				17B94C882E2B9AA7000070C6 /* QRReaderViewController.swift in Sources */,
 				1784C86A2BC81393009D9F40 /* ImageData.swift in Sources */,
 				1784C8792BC81760009D9F40 /* ImageCollectionViewCell.swift in Sources */,
 				1784C8712BC8148B009D9F40 /* ImageSelectViewController.swift in Sources */,
@@ -466,7 +476,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -523,7 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -539,10 +549,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UnniTv/UnniTv.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnniTv/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -550,11 +562,12 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.unnitv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -572,10 +585,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UnniTv/UnniTv.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnniTv/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -583,11 +598,12 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.unnitv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -604,25 +620,28 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.unnitv.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -631,25 +650,28 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.unnitv.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -710,6 +732,14 @@
 				minimumVersion = 10.24.0;
 			};
 		};
+		17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -732,6 +762,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		17E4EB642BEA490000BE63FE /* HaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = HaishinKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
