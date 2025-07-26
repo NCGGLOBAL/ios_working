@@ -27,7 +27,12 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     let rtmpConnection = RTMPConnection()
     var rtmpStream: RTMPStream? = nil
-    var currentCameraPosition: AVCaptureDevice.Position = .front // 기본 카메라는 후면
+    var currentCameraPosition: AVCaptureDevice.Position = .front
+    
+    // ✅ 추가: 해상도 고정을 위한 설정
+    private let fixedVideoSize = CGSize(width: 720, height: 1280)
+    private var lastStreamUrl: String?
+    private var lastStreamKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +58,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
-        //        webView.frame.size.height = self.view.frame.size.height - UIApplication.shared.statusBarFrame.size.height
         webView.frame.size.height = self.view.frame.size.height
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -61,16 +65,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        // self.view = self.webView!
         self.containerView.addSubview(webView)
         
         self.initWebView()
         if AppDelegate.QR_URL != "" {
             AppDelegate.QR_URL = ""
         }
-        // Do any additional setup after loading the view.
-        //        navigationController?.isNavigationBarHidden = false
         
+        // ✅ 최소한의 알림만 등록
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appWillEnterForeground),
@@ -84,7 +86,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             name: UIApplication.didEnterBackgroundNotification,
             object: nil
         )
-
         
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -92,9 +93,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // RTMP 연결 및 스트림 재설정
+        // ✅ 기존 방식 유지 (프리뷰 보장)
         if (rtmpStream != nil) {
-            // 카메라, 오디오 다시 attach
             self.attachCameraDevice()
             self.attachMicrophone()
             
@@ -102,12 +102,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if (rtmpStream != nil) {
-            // 카메라, 오디오만 해제 (연결은 유지)
+            // ✅ 기존 방식 유지
             rtmpStream?.attachCamera(nil)
             rtmpStream?.attachAudio(nil)
             
@@ -116,21 +115,48 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        // 리소스 완전 해제
         if (rtmpStream != nil) {
-            // 스트림 중지 및 연결 해제
             rtmpStream?.close()
             rtmpConnection.close()
             
-            // 카메라/오디오 연결 해제
             rtmpStream?.attachCamera(nil)
             rtmpStream?.attachAudio(nil)
             
-            // 기타 리소스 해제
             UIApplication.shared.isIdleTimerDisabled = false
             
             NotificationCenter.default.removeObserver(self)
         }
+    }
+    
+    // ✅ 간소화된 백그라운드/포그라운드 처리
+    @objc func appWillEnterForeground() {
+        print("[App State] 포그라운드 진입")
+
+        guard let stream = rtmpStream else { return }
+
+        // 스트리밍 재개
+        stream.receiveVideo = true
+        stream.receiveAudio = true
+        
+        // ✅ RTMP 연결이 끊어진 경우에만 재연결
+        if !rtmpConnection.connected && lastStreamUrl != nil && lastStreamKey != nil {
+            rtmpConnection.connect(lastStreamUrl!)
+            rtmpStream?.publish(lastStreamKey!)
+        }
+
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+
+    @objc func appDidEnterBackground() {
+        print("[App State] 백그라운드 진입")
+
+        guard let stream = rtmpStream else { return }
+
+        // 스트리밍 중지
+        stream.receiveVideo = false
+        stream.receiveAudio = false
+
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     func initWebView() {
@@ -147,17 +173,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        // 로딩 시작
         self.indicatorView.startAnimating()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // 로딩 종료
         self.indicatorView.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        // 로딩 에러
         self.indicatorView.stopAnimating()
     }
     
@@ -228,7 +251,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return nil
     }
     
-    // JS -> Native CALL
     @available(iOS 8.0, *)
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
         print("message.name:\(message.name)")
@@ -237,7 +259,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             if let dictionary = message.body as? Dictionary<String, AnyObject> {
                 let actionCode = dictionary["action_code"] as? String
-                // param
                 let actionParamArray = dictionary["action_param"] as? Array<Any>
                 let actionParamObj = actionParamArray?[0] as? Dictionary<String, AnyObject>
                 
@@ -247,7 +268,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 print("actionParamObj : \(actionParamObj)")
 #endif
                 
-                // callback
                 let callback = dictionary["callBack"] as? String ?? ""
 #if DEBUG
                 print("callBack : \(callback)")
@@ -269,15 +289,18 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         })
                     }
                     break
-                case "ACT1027": // wlive 전, 후면 카메라 제어
+                case "ACT1027": // 전/후면 카메라 제어
                     var resultcd = "1"
                     if let val = actionParamObj?["key_type"] {
                         currentCameraPosition = (currentCameraPosition == .back) ? .front : .back
                         let camera = getCameraDevice(for: currentCameraPosition)
                         
-                        rtmpStream?.attachCamera(camera) { error, result  in
+                        rtmpStream?.attachCamera(camera) { [weak self] error, result in
                             if let error = error {
                                 print("Error attaching camera: \(error)")
+                            } else {
+                                // ✅ 카메라 전환 후 해상도 재적용
+                                self?.applyVideoSettings()
                             }
                         }
                     } else {
@@ -287,14 +310,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     dic.updateValue(resultcd, forKey: "resultcd")
                     
                     do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
                         let javascript = "\(callback)('\(stringValue)')"
 #if DEBUG
                         print("jsonData : \(jsonData)")
                         print("javascript : \(javascript)")
 #endif
-                        // call back!
                         self.webView.evaluateJavaScript(javascript) { (result, error) in
 #if DEBUG
                             print("result : \(String(describing: result))")
@@ -306,10 +328,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     }
                     break
                     
-                case "ACT1028": // wlive 마이크 제어
+                case "ACT1028": // 마이크 제어
                     var resultcd = "1"
                     if (actionParamObj?["key_type"]) != nil {
-                        if (actionParamObj?["key_type"] as? String == "0") {  //0: 마이크 끄기,1: 켜기
+                        if (actionParamObj?["key_type"] as? String == "0") {
                             self.detachMicrophone()
                         } else  {
                             self.attachMicrophone()
@@ -321,14 +343,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     dic.updateValue(resultcd, forKey: "resultcd")
                     
                     do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
                         let javascript = "\(callback)('\(stringValue)')"
 #if DEBUG
                         print("jsonData : \(jsonData)")
                         print("javascript : \(javascript)")
 #endif
-                        // call back!
                         self.webView.evaluateJavaScript(javascript) { (result, error) in
 #if DEBUG
                             print("result : \(String(describing: result))")
@@ -339,23 +360,21 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         print(error)
                     }
                     break
-                case "ACT1029": // wlive 이미지필터 제어
+                case "ACT1029":
                     break
-                case "ACT1030": // wlive 스트림키 전달 및 송출
+                case "ACT1030": // 스트림키 전달 및 송출
                     var resultcd = "1"
                     if let streamUrl = actionParamObj?["stream_url"] as? String {
-                        // 기본값 설정
                         let previewFps = actionParamObj?["previewFps"] as? Int ?? 30
                         let targetFps = actionParamObj?["targetFps"] as? Int ?? 30
                         
-                        // 비트레이트 리스트 처리
                         var videoBitrateList: [Int] = []
                         if let bitrateArray = actionParamObj?["setVideoKBitrate"] as? [Int] {
                             videoBitrateList = bitrateArray
                         } else if let singleBitrate = actionParamObj?["setVideoKBitrate"] as? Int {
-                            videoBitrateList = [singleBitrate] // 단일 값일 경우 배열로 변환
+                            videoBitrateList = [singleBitrate]
                         } else {
-                            videoBitrateList = [2_500_000] // 기본값 (2.5 Mbps)
+                            videoBitrateList = [2_500_000]
                         }
                         
                         DispatchQueue.main.async {
@@ -374,14 +393,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     dic.updateValue(resultcd, forKey: "resultcd")
                     
                     do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                         let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
                         let javascript = "\(callback)('\(stringValue)')"
 #if DEBUG
                         print("jsonData : \(jsonData)")
                         print("javascript : \(javascript)")
 #endif
-                        // call back!
                         self.webView.evaluateJavaScript(javascript) { (result, error) in
 #if DEBUG
                             print("result : \(String(describing: result))")
@@ -392,12 +410,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         print(error)
                     }
                     break
-                case "ACT1031": // 종료
+                case "ACT1031":
                     self.navigationController?.popToRootViewController(animated: true)
                     break
                     
-                case "ACT1036": //스트리밍 화면 캡쳐
-                    // 현재 화면의 이미지 캡처
+                case "ACT1036":
                     let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
                     let image = renderer.image { context in
                         view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
@@ -410,14 +427,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             dic.updateValue(base64String, forKey: "fData")
                             
                             do {
-                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
+                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
                                 let javascript = "\(callback)('\(stringValue)')"
 #if DEBUG
                                 print("jsonData : \(jsonData)")
                                 print("javascript : \(javascript)")
 #endif
-                                // call back!
                                 self.webView.evaluateJavaScript(javascript) { (result, error) in
 #if DEBUG
                                     print("result : \(String(describing: result))")
@@ -433,7 +449,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     }
                     
                     break
-                case "ACT1037": // 앨범 열기
+                case "ACT1037":
                     self.uploadPhoto()
                     break
                     
@@ -446,7 +462,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     func attachCameraDevice() {
         let cameraDevice = getCameraDevice(for: currentCameraPosition)
-        rtmpStream?.attachCamera(cameraDevice)
+        rtmpStream?.attachCamera(cameraDevice) { [weak self] error, result in
+            if let error = error {
+                print("Error attaching camera: \(error)")
+            } else {
+                // ✅ 카메라 연결 후 해상도 재적용
+                self?.applyVideoSettings()
+            }
+        }
     }
     
     func attachMicrophone() {
@@ -476,40 +499,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return devices.first { $0.position == position }
     }
     
-    @objc func appWillEnterForeground() {
-        print("[App State] 포그라운드 진입")
-
-        guard let stream = rtmpStream else { return }
-
-        // 카메라 및 마이크 재연결
-        attachCameraDevice()
-        attachMicrophone()
-
-        // 영상/오디오 수신 및 송출 재개
-        stream.receiveVideo = true
-        stream.receiveAudio = true
-
-        UIApplication.shared.isIdleTimerDisabled = true
-    }
-
-    @objc func appDidEnterBackground() {
-        print("[App State] 백그라운드 진입")
-
-        guard let stream = rtmpStream else { return }
-
-        // 리소스 절약을 위해 영상 및 오디오 멈춤 처리
-        stream.receiveVideo = false
-        stream.receiveAudio = false
-
-        UIApplication.shared.isIdleTimerDisabled = false
-    }
-
-    
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self //3
-        // imagePicker.allowsEditing = true
+        imagePicker.delegate = self
         present(imagePicker, animated: true)
     }
     
@@ -540,139 +533,84 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     func initCamera() {
-        // RTMPConnection과 RTMPStream 설정
         self.rtmpStream = RTMPStream(connection: rtmpConnection)
         self.rtmpStream?.videoCapture(for: 0)?.isVideoMirrored = false
         
-        // UI에 AVCaptureVideoPreviewLayer 추가
         let hkView = MTHKView(frame: view.bounds)
         hkView.videoGravity = AVLayerVideoGravity.resizeAspectFill
         hkView.attachStream(rtmpStream)
         
-        // add ViewController#view
         self.containerView.addSubview(hkView)
     }
     
+    // ✅ 핵심: 해상도 고정 및 설정 적용
     func initStreamer(
         streamUrl: String,
         previewFps: Int,
         targetFps: Int,
         videoBitrateList: [Int]
     ) {
-        // 1. 스트림 URL 처리
+        // 1. 스트림 URL 저장
         let components = streamUrl.components(separatedBy: "/")
         if components.count > 1, let streamKey = components.last {
             let convertStreamUrl = components.dropLast().joined(separator: "/")
+            lastStreamUrl = convertStreamUrl
+            lastStreamKey = streamKey
+            
             self.rtmpConnection.connect(convertStreamUrl)
             self.rtmpStream?.publish(streamKey)
         }
 
-        // 2. 비디오 설정
+        // 2. 비트레이트 설정
         let bitrate: Int
         if videoBitrateList.count >= 3 {
-            // row(low), mid, high 순서로 추출
-            bitrate = videoBitrateList[1] // mid 값 사용`
+            bitrate = videoBitrateList[1]
         } else if !videoBitrateList.isEmpty {
-            bitrate = videoBitrateList[0] // 기본값으로 첫 번째 요소 사용
+            bitrate = videoBitrateList[0]
         } else {
-            bitrate = 2_500_000 // 기본값 (2.5 Mbps)
+            bitrate = 2_500_000
         }
 
-        // 3. 비디오 코덱 설정 - 동적 해상도
-        // iPhone 12 Pro Max 특별 처리
-        let isHighEndDevice = UIScreen.main.bounds.height > 2500
+        // ✅ 3. 해상도 고정 설정
+        applyVideoSettings(bitrate: bitrate)
 
-        if isHighEndDevice {
-            // 고해상도 기기: 명시적 preset
-            self.rtmpStream?.sessionPreset = .hd1280x720
-        } else {
-            self.rtmpStream?.sessionPreset = .high
-        }
-
-        // ✅ 4. 세로 스트리밍 해상도 및 방향 설정
-        self.rtmpStream?.videoSettings = VideoCodecSettings(
-            videoSize: CGSize(width: 720, height: 1280), // 세로 기준 해상도
-            bitRate: bitrate,
-            profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
-            scalingMode: .trim
-        )
-
-        // ✅ 5. 세로 화면 방향 설정 (HaishinKit 지원)
-        self.rtmpStream?.videoOrientation = .portrait
-
-        // 6. 프레임 레이트
+        // 4. 프레임 레이트
         self.rtmpStream?.frameRate = Float64(targetFps)
 
-        // 디버깅 필요하면 사용
-        // logCurrentVideoSettings()
-
-        // 7. 오디오 장치 연결
+        // 5. 오디오/카메라 연결
         self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
             print("attachAudio" + (error != nil ? " error" : ""))
         }
 
-        // 8. 카메라 장치 연결 (전면 기본)
         self.rtmpStream?.attachCamera(
             AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             track: 0
-        ) { _, error in
+        ) { [weak self] _, error in
             print("attachCamera" + (error != nil ? " error" : ""))
+            if error == nil {
+                // ✅ 카메라 연결 성공 후 해상도 재확인
+                self?.applyVideoSettings(bitrate: bitrate)
+            }
         }
-
     }
     
-    func logCurrentVideoSettings() {
-        if let videoSettings = rtmpStream?.videoSettings {
-            print("현재 비디오 설정:")
-            print("- 해상도: \(videoSettings.videoSize)")
-            print("- 비트레이트: \(videoSettings.bitRate)")
-            print("- 프레임레이트: \(rtmpStream?.frameRate ?? 0)")
-        }
+    // ✅ 해상도 설정 전용 함수 (단순하고 확실하게)
+    func applyVideoSettings(bitrate: Int = 2_500_000) {
+        print("해상도 720x1280 고정 적용")
+            
+        // ✅ sessionPreset 설정 없이도 동작함
+        rtmpStream?.videoSettings = VideoCodecSettings(
+            videoSize: fixedVideoSize, // 720x1280 고정 - 이게 핵심!
+            bitRate: bitrate,
+            profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
+            scalingMode: .trim
+        )
         
-        // HaishinKit에서 지원하는 방식으로 세션 정보 확인
-        if let sessionPreset = rtmpStream?.sessionPreset {
-            print("- 세션 프리셋: \(sessionPreset.rawValue)")
-        }
+        rtmpStream?.videoOrientation = .portrait
         
-        // 실제 스트리밍 상태 확인
-//        print("- 스트리밍 상태: \(rtmpStream?.readyState.rawValue ?? "unknown")")
+        print("✅ 해상도 설정 완료: \(fixedVideoSize)")
     }
-
-
-    
-    func getOptimalVideoSize() -> CGSize {
-        let screenBounds = UIScreen.main.bounds
-        let screenScale = UIScreen.main.scale
-        
-        // 실제 픽셀 해상도 계산
-        let pixelWidth = screenBounds.width * screenScale
-        let pixelHeight = screenBounds.height * screenScale
-        
-        // 16:9 비율로 최적화 (스트리밍 표준)
-        let aspectRatio: CGFloat = 16.0 / 9.0
-        
-        var videoWidth: CGFloat
-        var videoHeight: CGFloat
-        
-        if pixelWidth / pixelHeight > aspectRatio {
-            // 화면이 더 넓은 경우 (세로 기준으로 맞춤)
-            videoHeight = min(pixelHeight, 1080) // 최대 1080p
-            videoWidth = videoHeight * aspectRatio
-        } else {
-            // 화면이 더 좁은 경우 (가로 기준으로 맞춤)
-            videoWidth = min(pixelWidth, 1920) // 최대 1920px
-            videoHeight = videoWidth / aspectRatio
-        }
-        
-        // 8의 배수로 맞춤 (인코딩 최적화)
-        videoWidth = floor(videoWidth / 8) * 8
-        videoHeight = floor(videoHeight / 8) * 8
-        
-        return CGSize(width: videoWidth, height: videoHeight)
-    }
-
 }
-
 
 extension UIImage {
     func toBase64() -> String? {
@@ -682,3 +620,4 @@ extension UIImage {
         return imageData.base64EncodedString(options: .lineLength64Characters)
     }
 }
+
