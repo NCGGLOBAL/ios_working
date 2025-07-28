@@ -29,10 +29,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     var rtmpStream: RTMPStream? = nil
     var currentCameraPosition: AVCaptureDevice.Position = .front
     
-    // ✅ 추가: 해상도 고정을 위한 설정
+    // ✅ 해상도 고정을 위한 설정 (타이머 관련 제거)
     private let fixedVideoSize = CGSize(width: 720, height: 1280)
     private var lastStreamUrl: String?
     private var lastStreamKey: String?
+    private var lastAppliedBitrate: Int = 2_500_000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +116,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         if (rtmpStream != nil) {
             rtmpStream?.close()
             rtmpConnection.close()
@@ -128,7 +131,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // ✅ 간소화된 백그라운드/포그라운드 처리
+    // ✅ 단순한 백그라운드/포그라운드 처리
     @objc func appWillEnterForeground() {
         print("[App State] 포그라운드 진입")
 
@@ -299,8 +302,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             if let error = error {
                                 print("Error attaching camera: \(error)")
                             } else {
-                                // ✅ 카메라 전환 후 해상도 재적용
-                                self?.applyVideoSettings()
+                                // ✅ 카메라 전환 후 한 번만 해상도 적용
+                                self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
                             }
                         }
                     } else {
@@ -460,14 +463,15 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
+    // ✅ 카메라 연결 시 단순하게 한 번만 적용
     func attachCameraDevice() {
         let cameraDevice = getCameraDevice(for: currentCameraPosition)
         rtmpStream?.attachCamera(cameraDevice) { [weak self] error, result in
             if let error = error {
                 print("Error attaching camera: \(error)")
             } else {
-                // ✅ 카메라 연결 후 해상도 재적용
-                self?.applyVideoSettings()
+                // 카메라 연결 후 한 번만 해상도 적용
+                self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
             }
         }
     }
@@ -543,7 +547,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         self.containerView.addSubview(hkView)
     }
     
-    // ✅ 핵심: 해상도 고정 및 설정 적용
+    // ✅ 스트리머 초기화 시 확실한 초기 설정
     func initStreamer(
         streamUrl: String,
         previewFps: Int,
@@ -571,42 +575,53 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             bitrate = 2_500_000
         }
 
-        // ✅ 3. 해상도 고정 설정
+        // ✅ 3. 초기 해상도 설정 (한 번만)
         applyVideoSettings(bitrate: bitrate)
 
         // 4. 프레임 레이트
         self.rtmpStream?.frameRate = Float64(targetFps)
 
-        // 5. 오디오/카메라 연결
+        // 5. 오디오 연결
         self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
             print("attachAudio" + (error != nil ? " error" : ""))
         }
 
+        // 6. 카메라 연결
         self.rtmpStream?.attachCamera(
             AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             track: 0
         ) { [weak self] _, error in
             print("attachCamera" + (error != nil ? " error" : ""))
             if error == nil {
-                // ✅ 카메라 연결 성공 후 해상도 재확인
+                // 카메라 연결 후 한 번만 해상도 적용
                 self?.applyVideoSettings(bitrate: bitrate)
             }
         }
     }
     
-    // ✅ 해상도 설정 전용 함수 (단순하고 확실하게)
+    // ✅ 단순하고 확실한 해상도 설정 함수 (한 번만 적용)
     func applyVideoSettings(bitrate: Int = 2_500_000) {
-        print("해상도 720x1280 고정 적용")
-            
-        // ✅ sessionPreset 설정 없이도 동작함
-        rtmpStream?.videoSettings = VideoCodecSettings(
-            videoSize: fixedVideoSize, // 720x1280 고정 - 이게 핵심!
+        guard let stream = rtmpStream else { return }
+        
+        lastAppliedBitrate = bitrate
+        
+        print("🔧 해상도 720x1280 고정 적용")
+        
+        // 1. sessionPreset 설정
+//        if let capture = stream.videoCapture(for: 0) {
+//            capture.setSessionPreset(.hd1280x720)
+//        }
+        
+        // 2. 해상도 고정
+        let videoSettings = VideoCodecSettings(
+            videoSize: fixedVideoSize, // 720x1280 고정
             bitRate: bitrate,
             profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
             scalingMode: .trim
         )
         
-        rtmpStream?.videoOrientation = .portrait
+        stream.videoSettings = videoSettings
+        stream.videoOrientation = .portrait
         
         print("✅ 해상도 설정 완료: \(fixedVideoSize)")
     }
