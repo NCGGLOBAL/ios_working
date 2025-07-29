@@ -198,12 +198,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         guard let url = navigationAction.request.url else { return }
         
         if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
-            UIApplication.shared.openURL(url)
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
             decisionHandler(.cancel)
             return
         } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
                 return
             }
@@ -608,9 +610,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         print("🔧 해상도 720x1280 고정 적용")
         
         // 1. sessionPreset 설정
-//        if let capture = stream.videoCapture(for: 0) {
-//            capture.setSessionPreset(.hd1280x720)
-//        }
+        // HaishinKit 최신버전: 세션 프리셋은 rtmpStream에 설정
+        stream.sessionPreset = .hd1280x720 // 또는 AVCaptureSession.Preset.hd1280x720
         
         // 2. 해상도 고정
         let videoSettings = VideoCodecSettings(

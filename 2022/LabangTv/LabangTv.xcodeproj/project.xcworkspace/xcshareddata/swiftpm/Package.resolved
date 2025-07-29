@@ -1,5 +1,5 @@
 {
-  "originHash" : "afcd43cf88d3ea7d7694ae447b8b72156fa1a86fc5721712ecb6c18f38c893d9",
+  "originHash" : "6f1950945b241e6195b76c666ede3724307b0b8f10e7638c4934b808a636b415",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shogo4405/HaishinKit.swift",
       "state" : {
-        "revision" : "7327e2b2406ad8638abce34c4043128e39423889",
-        "version" : "1.8.0"
+        "revision" : "58a80527cf2330506621ba62d20b482f91b422b4",
+        "version" : "1.9.9"
       }
     },
     {
