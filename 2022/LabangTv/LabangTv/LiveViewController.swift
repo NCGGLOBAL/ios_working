@@ -373,26 +373,26 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 case "ACT1029":
                     var resultcd = "1"
             
-                        if let filterType = actionParamObj?["filter_type"] as? String {
+                        if let filterType = actionParamObj?["key_type"] as? Int {
                             DispatchQueue.main.async {
                                 self.toggleCoreImageFilter(filterType: filterType)
+                                
+                                var dic = Dictionary<String, String>()
+                                dic.updateValue(resultcd, forKey: "resultcd")
+                                
+                                do {
+                                    let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                                    let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                    let javascript = "\(callback)('\(stringValue)')"
+                                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                        // 결과 처리
+                                    }
+                                } catch let error as NSError {
+                                    print("Filter JSON error: \(error)")
+                                }
                             }
                         }
-                        
-                        var dic = Dictionary<String, String>()
-                        dic.updateValue(resultcd, forKey: "resultcd")
-                        dic.updateValue(self.isFilterEnabled ? "1" : "0", forKey: "filter_status")
-                        
-                        do {
-                            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
-                            let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                            let javascript = "\(callback)('\(stringValue)')"
-                            self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                // 결과 처리
-                            }
-                        } catch let error as NSError {
-                            print("Filter JSON error: \(error)")
-                        }
+                    
                     break
                 case "ACT1030": // 스트림키 전달 및 송출
                     var resultcd = "1"
@@ -493,15 +493,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     // ✅ 수정된 toggleCoreImageFilter 함수
-    func toggleCoreImageFilter(filterType: String) {
+    func toggleCoreImageFilter(filterType: Int) {
         guard let stream = rtmpStream else {
             print("❌ RTMPStream이 없습니다.")
-            return
-        }
-        
-        // filterType을 Int로 변환
-        guard let filterTypeInt = Int(filterType) else {
-            print("❌ 잘못된 filterType: \(filterType)")
             return
         }
         
@@ -513,51 +507,51 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         
         // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
-        if filterTypeInt == 0 {
+        if filterType == 0 {
             print("🎭 모든 필터 비활성화")
             return
         }
         
         let filter: CIFilter?
         
-        switch filterTypeInt {
+        switch filterType {
         case 1:
             filter = CIFilter(name: "CIGaussianBlur")
             filter?.setValue(1.0, forKey: kCIInputRadiusKey)
             print("🎭 부드러운 뷰티 필터 적용")
             
-        case 3:
+        case 2:
             filter = CIFilter(name: "CIColorControls")
             filter?.setValue(0.2, forKey: kCIInputBrightnessKey)
             filter?.setValue(1.1, forKey: kCIInputContrastKey)
             print("🎭 피부 화이트닝 필터 적용")
             
-        case 4:
+        case 3:
             filter = CIFilter(name: "CIPhotoEffectInstant")
             print("🎭 일루전 뷰티 필터 적용")
             
-        case 5: // ✅ 수정된 부분
+        case 4: // ✅ 수정된 부분
             filter = CIFilter(name: "CISharpenLuminance")
             filter?.setValue(0.4, forKey: kCIInputSharpnessKey)
             print("🎭 샤프닝 필터 적용 (노이즈 감소 효과)")
             
-        case 6:
+        case 5:
             filter = CIFilter(name: "CIGaussianBlur")
             filter?.setValue(0.8, forKey: kCIInputRadiusKey)
             print("🎭 매끄러운 뷰티 필터 적용")
             
-        case 7:
+        case 6:
             filter = CIFilter(name: "CIGaussianBlur")
             filter?.setValue(1.5, forKey: kCIInputRadiusKey)
             print("🎭 확장 부드러운 필터 적용")
             
-        case 8:
+        case 7:
             filter = CIFilter(name: "CISharpenLuminance")
             filter?.setValue(0.6, forKey: kCIInputSharpnessKey)
             print("🎭 부드럽게 선명한 필터 적용")
             
         default:
-            print("❌ 지원하지 않는 filterType: \(filterTypeInt)")
+            print("❌ 지원하지 않는 filterType: \(filterType)")
             return
         }
         
@@ -574,7 +568,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         currentVideoEffect = videoEffect
         isFilterEnabled = true
-        print("✅ 필터 적용 완료: filterType \(filterTypeInt)")
+        print("✅ 필터 적용 완료: filterType \(filterType)")
     }
 
     
