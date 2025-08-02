@@ -11,6 +11,7 @@ import WebKit
 import HaishinKit
 import AVFoundation
 import VideoToolbox
+import CoreImage
 
 class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -34,6 +35,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var lastStreamUrl: String?
     private var lastStreamKey: String?
     private var lastAppliedBitrate: Int = 2_500_000
+    
+    // ✅ 필터 관련 프로퍼티
+    private var isFilterEnabled: Bool = false
+    private var currentVideoEffect: VideoEffect?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -366,6 +371,28 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                     }
                     break
                 case "ACT1029":
+                    var resultcd = "1"
+            
+                        if let filterType = actionParamObj?["filter_type"] as? String {
+                            DispatchQueue.main.async {
+                                self.toggleCoreImageFilter(filterType: filterType)
+                            }
+                        }
+                        
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue(resultcd, forKey: "resultcd")
+                        dic.updateValue(self.isFilterEnabled ? "1" : "0", forKey: "filter_status")
+                        
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                            let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                // 결과 처리
+                            }
+                        } catch let error as NSError {
+                            print("Filter JSON error: \(error)")
+                        }
                     break
                 case "ACT1030": // 스트림키 전달 및 송출
                     var resultcd = "1"
@@ -464,6 +491,93 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             }
         }
     }
+    
+    // ✅ 수정된 toggleCoreImageFilter 함수
+    func toggleCoreImageFilter(filterType: String) {
+        guard let stream = rtmpStream else {
+            print("❌ RTMPStream이 없습니다.")
+            return
+        }
+        
+        // filterType을 Int로 변환
+        guard let filterTypeInt = Int(filterType) else {
+            print("❌ 잘못된 filterType: \(filterType)")
+            return
+        }
+        
+        // 현재 필터 제거
+        if let currentEffect = currentVideoEffect {
+            stream.unregisterVideoEffect(currentEffect)
+            currentVideoEffect = nil
+            isFilterEnabled = false
+        }
+        
+        // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
+        if filterTypeInt == 0 {
+            print("🎭 모든 필터 비활성화")
+            return
+        }
+        
+        let filter: CIFilter?
+        
+        switch filterTypeInt {
+        case 1:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(1.0, forKey: kCIInputRadiusKey)
+            print("🎭 부드러운 뷰티 필터 적용")
+            
+        case 3:
+            filter = CIFilter(name: "CIColorControls")
+            filter?.setValue(0.2, forKey: kCIInputBrightnessKey)
+            filter?.setValue(1.1, forKey: kCIInputContrastKey)
+            print("🎭 피부 화이트닝 필터 적용")
+            
+        case 4:
+            filter = CIFilter(name: "CIPhotoEffectInstant")
+            print("🎭 일루전 뷰티 필터 적용")
+            
+        case 5: // ✅ 수정된 부분
+            filter = CIFilter(name: "CISharpenLuminance")
+            filter?.setValue(0.4, forKey: kCIInputSharpnessKey)
+            print("🎭 샤프닝 필터 적용 (노이즈 감소 효과)")
+            
+        case 6:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(0.8, forKey: kCIInputRadiusKey)
+            print("🎭 매끄러운 뷰티 필터 적용")
+            
+        case 7:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(1.5, forKey: kCIInputRadiusKey)
+            print("🎭 확장 부드러운 필터 적용")
+            
+        case 8:
+            filter = CIFilter(name: "CISharpenLuminance")
+            filter?.setValue(0.6, forKey: kCIInputSharpnessKey)
+            print("🎭 부드럽게 선명한 필터 적용")
+            
+        default:
+            print("❌ 지원하지 않는 filterType: \(filterTypeInt)")
+            return
+        }
+        
+        // ✅ 필터 적용 (nil 체크 강화)
+        guard let validFilter = filter else {
+            print("❌ 필터 생성 실패")
+            return
+        }
+        
+        let videoEffect = CoreImageVideoEffect(filter: validFilter)
+        
+        // HaishinKit 1.9.9 API 사용
+        stream.registerVideoEffect(videoEffect)
+        
+        currentVideoEffect = videoEffect
+        isFilterEnabled = true
+        print("✅ 필터 적용 완료: filterType \(filterTypeInt)")
+    }
+
+    
     
     // ✅ 카메라 연결 시 단순하게 한 번만 적용
     func attachCameraDevice() {
@@ -627,6 +741,22 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         print("✅ 해상도 설정 완료: \(fixedVideoSize)")
     }
 }
+
+// ✅ VideoEffect 클래스는 그대로 유지
+final class CoreImageVideoEffect: VideoEffect {
+    private let filter: CIFilter
+    
+    init(filter: CIFilter) {
+        self.filter = filter
+        super.init()
+    }
+    
+    override func execute(_ image: CIImage, info: CMSampleBuffer?) -> CIImage {
+        filter.setValue(image, forKey: kCIInputImageKey)
+        return filter.outputImage ?? image
+    }
+}
+
 
 extension UIImage {
     func toBase64() -> String? {
