@@ -311,6 +311,19 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             } else {
                                 // ✅ 카메라 전환 후 한 번만 해상도 적용
                                 self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
+                                
+                                // 카메라 전환 후 미러링 설정 적용
+                                if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
+                                    if self?.currentCameraPosition == .front {
+                                        // 전면 카메라는 기본적으로 미러링 활성화
+                                        videoCapture.isVideoMirrored = true
+                                        print("🔧 전면 카메라로 전환 - 미러링 활성화")
+                                    } else {
+                                        // 후면 카메라는 미러링 비활성화
+                                        videoCapture.isVideoMirrored = false
+                                        print("🔧 후면 카메라로 전환 - 미러링 비활성화")
+                                    }
+                                }
                             }
                         }
                     } else {
@@ -393,6 +406,51 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             }
                         }
                     
+                    break
+                    
+                case "ACT1034": // 카메라 좌우 반전 제어
+                    var resultcd = "1"
+                    if let keyType = actionParamObj?["key_type"] as? String {
+                        DispatchQueue.main.async {
+                            self.toggleCameraMirror(keyType: keyType)
+                            
+                            var dic = Dictionary<String, String>()
+                            dic.updateValue(resultcd, forKey: "resultcd")
+                            
+                            do {
+                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                                let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                let javascript = "\(callback)('\(stringValue)')"
+#if DEBUG
+                                print("ACT1034 jsonData : \(jsonData)")
+                                print("ACT1034 javascript : \(javascript)")
+#endif
+                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+#if DEBUG
+                                    print("ACT1034 result : \(String(describing: result))")
+                                    print("ACT1034 error : \(String(describing: error))")
+#endif
+                                }
+                            } catch let error as NSError {
+                                print("ACT1034 JSON error: \(error)")
+                            }
+                        }
+                    } else {
+                        resultcd = "0"
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue(resultcd, forKey: "resultcd")
+                        
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                            let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                // 결과 처리
+                            }
+                        } catch let error as NSError {
+                            print("ACT1034 JSON error: \(error)")
+                        }
+                    }
                     break
                 case "ACT1030": // 스트림키 전달 및 송출
                     var resultcd = "1"
@@ -582,6 +640,21 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             } else {
                 // 카메라 연결 후 한 번만 해상도 적용
                 self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
+                
+                // 카메라 전환 후 미러링 설정 유지 (전면 카메라일 때만)
+                if self?.currentCameraPosition == .front {
+                    if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
+                        // 전면 카메라는 기본적으로 미러링 활성화 (거울처럼 보이게)
+                        videoCapture.isVideoMirrored = true
+                        print("🔧 전면 카메라 미러링 설정: 활성화")
+                    }
+                } else {
+                    if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
+                        // 후면 카메라는 미러링 비활성화
+                        videoCapture.isVideoMirrored = false
+                        print("🔧 후면 카메라 미러링 설정: 비활성화")
+                    }
+                }
             }
         }
     }
@@ -648,7 +721,12 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     func initCamera() {
         self.rtmpStream = RTMPStream(connection: rtmpConnection)
-        self.rtmpStream?.videoCapture(for: 0)?.isVideoMirrored = false
+        
+        // 초기 카메라 미러링 설정 (기본값: 비활성화)
+        if let videoCapture = self.rtmpStream?.videoCapture(for: 0) {
+            videoCapture.isVideoMirrored = false
+            print("🔧 초기 카메라 미러링 설정: 비활성화")
+        }
         
         let hkView = MTHKView(frame: view.bounds)
         hkView.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -705,7 +783,32 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             if error == nil {
                 // 카메라 연결 후 한 번만 해상도 적용
                 self?.applyVideoSettings(bitrate: bitrate)
+                
+                // 초기 카메라 미러링 설정 (전면 카메라 기본값: 활성화)
+                if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
+                    videoCapture.isVideoMirrored = true
+                    print("🔧 초기 전면 카메라 미러링 설정: 활성화")
+                }
             }
+        }
+    }
+    
+    // ✅ 카메라 좌우 반전 제어 함수
+    func toggleCameraMirror(keyType: String) {
+        guard let stream = rtmpStream else {
+            print("❌ RTMPStream이 없습니다.")
+            return
+        }
+        
+        // key_type이 "0"이면 미러링 비활성화, "1"이면 미러링 활성화
+        let shouldMirror = keyType == "1"
+        
+        // HaishinKit에서 카메라 미러링 설정
+        if let videoCapture = stream.videoCapture(for: 0) {
+            videoCapture.isVideoMirrored = shouldMirror
+            print("🔄 카메라 미러링 \(shouldMirror ? "활성화" : "비활성화") 완료")
+        } else {
+            print("❌ 비디오 캡처를 찾을 수 없습니다.")
         }
     }
     
