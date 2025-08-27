@@ -3,14 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172CA00B2E5F4349007684C4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 172CA00A2E5F4349007684C4 /* FirebaseAnalytics */; };
+		172CA00D2E5F4349007684C4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 172CA00C2E5F4349007684C4 /* FirebaseMessaging */; };
+		172CA0102E5F43B2007684C4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 172CA00F2E5F43B2007684C4 /* Kingfisher */; };
 		17BE0C0F2AA769EE0005003B /* intro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0C2AA769EA0005003B /* intro1.png */; };
 		17BE0C102AA769EE0005003B /* intro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0D2AA769EC0005003B /* intro2.png */; };
 		17BE0C112AA769EE0005003B /* intro3.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BE0C0E2AA769EE0005003B /* intro3.png */; };
-		73F9C58208C89F7B821353BC /* Pods_Momchall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39649EDC5D5ECA56908EE70 /* Pods_Momchall.framework */; };
 		FF4DB5F924BC9B8D0096165D /* IOS_1242x2208_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */; };
 		FF4FA9ED248105040059908A /* SubWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA9EC248105040059908A /* SubWebViewController.swift */; };
 		FF60BA1B247EA18E00B0B1A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF60BA1A247EA18E00B0B1A8 /* AppDelegate.swift */; };
@@ -70,13 +72,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0AA607D2FE8C8E372BA41733 /* Pods-Momchall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momchall.debug.xcconfig"; path = "Target Support Files/Pods-Momchall/Pods-Momchall.debug.xcconfig"; sourceTree = "<group>"; };
 		17BE0C0C2AA769EA0005003B /* intro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro1.png; sourceTree = "<group>"; };
 		17BE0C0D2AA769EC0005003B /* intro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro2.png; sourceTree = "<group>"; };
 		17BE0C0E2AA769EE0005003B /* intro3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro3.png; sourceTree = "<group>"; };
-		99A02381AD82932473950FC0 /* Pods-Momchall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momchall.release.xcconfig"; path = "Target Support Files/Pods-Momchall/Pods-Momchall.release.xcconfig"; sourceTree = "<group>"; };
-		A39649EDC5D5ECA56908EE70 /* Pods_Momchall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momchall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD812789891BFE2EC444D765 /* Pods_UnniTv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnniTv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF4DB5F824BC9B8D0096165D /* IOS_1242x2208_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS_1242x2208_intro.png; path = Momchall/Assets.xcassets/LaunchImage.launchimage/IOS_1242x2208_intro.png; sourceTree = SOURCE_ROOT; };
 		FF4FA9EC248105040059908A /* SubWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubWebViewController.swift; sourceTree = "<group>"; };
 		FF60BA1A247EA18E00B0B1A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,7 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73F9C58208C89F7B821353BC /* Pods_Momchall.framework in Frameworks */,
+				172CA0102E5F43B2007684C4 /* Kingfisher in Frameworks */,
+				172CA00D2E5F4349007684C4 /* FirebaseMessaging in Frameworks */,
+				172CA00B2E5F4349007684C4 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,26 +137,14 @@
 		5104FD419D222AF28E1831AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD812789891BFE2EC444D765 /* Pods_UnniTv.framework */,
-				A39649EDC5D5ECA56908EE70 /* Pods_Momchall.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5B09EBBDB2A5E88A5E27D900 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0AA607D2FE8C8E372BA41733 /* Pods-Momchall.debug.xcconfig */,
-				99A02381AD82932473950FC0 /* Pods-Momchall.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		FF60BA0E247EA18E00B0B1A8 = {
 			isa = PBXGroup;
 			children = (
 				FF60BA19247EA18E00B0B1A8 /* Momchall */,
-				5B09EBBDB2A5E88A5E27D900 /* Pods */,
 				FFC5C737254B1081005BE92F /* NotificationServiceExtension */,
 				5104FD419D222AF28E1831AA /* Frameworks */,
 				FF78E3DD24854469002AFAFF /* Momchall.app */,
@@ -254,11 +242,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF60BA2B247EA19400B0B1A8 /* Build configuration list for PBXNativeTarget "Momchall" */;
 			buildPhases = (
-				C0F6A0E29C2E0CC5B089451F /* [CP] Check Pods Manifest.lock */,
 				FF60BA13247EA18E00B0B1A8 /* Sources */,
 				FF60BA14247EA18E00B0B1A8 /* Frameworks */,
 				FF60BA15247EA18E00B0B1A8 /* Resources */,
-				0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */,
 				FFC5C741254B1082005BE92F /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -316,6 +302,10 @@
 				Base,
 			);
 			mainGroup = FF60BA0E247EA18E00B0B1A8;
+			packageReferences = (
+				172CA0092E5F4349007684C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				172CA00E2E5F4371007684C4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = FF60BA0E247EA18E00B0B1A8;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,48 +355,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0D42B9381D9A962E3D69AC8F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Momchall/Pods-Momchall-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Momchall/Pods-Momchall-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Momchall/Pods-Momchall-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0F6A0E29C2E0CC5B089451F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Momchall-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF60BA13247EA18E00B0B1A8 /* Sources */ = {
@@ -514,7 +462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -568,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -580,7 +528,6 @@
 		};
 		FF60BA2C247EA19400B0B1A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0AA607D2FE8C8E372BA41733 /* Pods-Momchall.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -588,16 +535,17 @@
 				CODE_SIGN_ENTITLEMENTS = Momchall/Momchall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Momchall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal;
 				PRODUCT_NAME = Momchall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -610,7 +558,6 @@
 		};
 		FF60BA2D247EA19400B0B1A8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99A02381AD82932473950FC0 /* Pods-Momchall.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -618,16 +565,17 @@
 				CODE_SIGN_ENTITLEMENTS = Momchall/Momchall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Momchall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal;
 				PRODUCT_NAME = Momchall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -643,16 +591,16 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -668,16 +616,16 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = U9AFN5UKD7;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Momchall.ncgglobal.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -718,6 +666,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		172CA0092E5F4349007684C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.0;
+			};
+		};
+		172CA00E2E5F4371007684C4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		172CA00A2E5F4349007684C4 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 172CA0092E5F4349007684C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		172CA00C2E5F4349007684C4 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 172CA0092E5F4349007684C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		172CA00F2E5F43B2007684C4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 172CA00E2E5F4371007684C4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF60BA0F247EA18E00B0B1A8 /* Project object */;
 }

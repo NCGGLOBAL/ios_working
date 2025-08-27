@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/Momchall.app</string>
+		<key>Architectures</key>
+		<array>
+			<string>arm64</string>
+		</array>
+		<key>CFBundleIdentifier</key>
+		<string>com.Momchall.ncgglobal</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.2.0</string>
+		<key>CFBundleVersion</key>
+		<string>20</string>
+		<key>SigningIdentity</key>
+		<string>Apple Development: Admin MomChall (544BW4278Y)</string>
+		<key>Team</key>
+		<string>U9AFN5UKD7</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2025-08-27T14:03:18Z</date>
+	<key>Name</key>
+	<string>Momchall</string>
+	<key>SchemeName</key>
+	<string>Momchall</string>
+</dict>
+</plist>

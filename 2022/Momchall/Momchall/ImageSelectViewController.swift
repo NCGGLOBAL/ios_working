@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import AVFoundation
+import Photos
 
 class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -24,15 +26,96 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         self.navigationItem.title = "\(AppDelegate.ImageFileArray.count) / 9"
     }
     
+    // MARK: - 권한 요청 함수들
+    
+    func requestCameraPermission(completion: @escaping (Bool) -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            completion(true)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    completion(granted)
+                }
+            }
+        case .denied, .restricted:
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
+    
+    func requestPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized, .limited:
+            completion(true)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { status in
+                DispatchQueue.main.async {
+                    completion(status == .authorized || status == .limited)
+                }
+            }
+        case .denied, .restricted:
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
+    
     func openCamera() {
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: false, completion: nil)
+        requestCameraPermission { [weak self] granted in
+            guard let self = self else { return }
+            
+            if granted {
+                DispatchQueue.main.async {
+                    self.imagePicker.sourceType = .camera
+                    self.present(self.imagePicker, animated: false, completion: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showPermissionAlert(for: "카메라")
+                }
+            }
+        }
     }
     
     // 앨범을 접근하는 함수
     func openLibrary(){
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: false, completion: nil)
+        requestPhotoLibraryPermission { [weak self] granted in
+            guard let self = self else { return }
+            
+            if granted {
+                DispatchQueue.main.async {
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.present(self.imagePicker, animated: false, completion: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showPermissionAlert(for: "사진첩")
+                }
+            }
+        }
+    }
+    
+    func showPermissionAlert(for permission: String) {
+        let alertController = UIAlertController(
+            title: "권한 필요",
+            message: "\(permission) 접근 권한이 필요합니다. 설정에서 권한을 허용해주세요.",
+            preferredStyle: .alert
+        )
+        
+        let settingsAction = UIAlertAction(title: "설정으로 이동", style: .default) { _ in
+            if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -72,31 +155,19 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         
-        let item = AppDelegate.ImageFileArray[indexPath.row]
-        // 이미지 url 변환
-        if item.imgUrl != nil {
-            let url = URL(string: item.imgUrl!)
-            cell.mainImageView.kf.setImage(with: url)
-        } else {
-            cell.mainImageView.image = UIImage(data: item.image!)
+        let imageFileItem = AppDelegate.ImageFileArray[indexPath.row]
+        if let imageData = imageFileItem.image {
+            cell.imageView.image = UIImage(data: imageData)
         }
+        
         return cell
     }
     
-    // size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        // 1. collectionview width 구하기
-        let collectionWidth = collectionView.frame.width
-//        print("collectionWidth : \(collectionWidth)")
-        // 2. cell width 구하기
-        let cellWidth = collectionWidth / 3 - 1
-//        print("cellWidth :  \(cellWidth)")
-
-        let cgSize = CGSize(width: cellWidth, height: cellWidth)
-
+        let width = (collectionView.frame.width - 2) / 3
+        let cgSize = CGSize(width: width, height: width)
         return cgSize
     }
     

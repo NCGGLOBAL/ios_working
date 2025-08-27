@@ -151,7 +151,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Change this to your preferred presentation option
     AppDelegate.HOME_URL = userInfo["url"] as? String ?? AppDelegate.HOME_URL
-    completionHandler([])
+    
+    if #available(iOS 14.0, *) {
+        completionHandler([.banner, .sound, .badge])
+    } else {
+        completionHandler([.alert, .sound, .badge])
+    }
   }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -175,23 +180,22 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 extension AppDelegate : MessagingDelegate {
   // [START refresh_token]
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    print("Firebase registration token: \(fcmToken)")
-    AppDelegate.pushkey = fcmToken
-    let dataDict:[String: String] = ["token": fcmToken]
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+    print("Firebase registration token: \(fcmToken ?? "nil")")
+    AppDelegate.pushkey = fcmToken ?? ""
+    let dataDict:[String: String] = ["token": fcmToken ?? ""]
     NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     self.requestPushSetting()
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
   }
   // [END refresh_token]
-  // [START ios_10_data_message]
-  // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-  // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    print("Received data message: \(remoteMessage.appData)")
-  }
-  // [END ios_10_data_message]
+  
+  // iOS 18.0에서는 MessagingRemoteMessage가 deprecated되었으므로 제거
+  // func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+  //   print("Received data message: \(remoteMessage.appData)")
+  // }
+  
     func requestPushSetting() {
         let defaultConfigObject = URLSessionConfiguration.default
         let defaultSession = URLSession(configuration: defaultConfigObject, delegate: nil, delegateQueue: OperationQueue.main)
