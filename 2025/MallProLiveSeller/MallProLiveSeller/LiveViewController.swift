@@ -18,13 +18,15 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    let urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
+    var urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 webview-type=sub"
     private struct Constants {
         static let callBackHandlerKey = "ios"
     }
+    
+    var currentLiveUrl: URL?
     
     let rtmpConnection = RTMPConnection()
     var rtmpStream: RTMPStream? = nil
@@ -42,6 +44,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let currentLiveUrl = currentLiveUrl,
+           currentLiveUrl.absoluteString.contains("ncglive://make?subject=&screen_type=2") {
+            if let components = URLComponents(url: currentLiveUrl, resolvingAgainstBaseURL: false),
+               let landingUrl = components.queryItems?.first(where: { $0.name == "url" })?.value {
+                urlString = "\(landingUrl)/addon/wlive/TV_live_creator.asp"
+            }
+        }
         
         UIApplication.shared.isIdleTimerDisabled = true
         initCamera()

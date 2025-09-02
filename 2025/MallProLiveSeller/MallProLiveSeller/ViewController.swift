@@ -599,6 +599,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     #endif
         if (url.scheme?.elementsEqual(liveScheme))! {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
+            vc.currentLiveUrl = url
             self.navigationController?.pushViewController(vc, animated: true)
         } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
