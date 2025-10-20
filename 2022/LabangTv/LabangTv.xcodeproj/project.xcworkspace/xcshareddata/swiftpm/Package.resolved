@@ -1,5 +1,5 @@
 {
-  "originHash" : "6f1950945b241e6195b76c666ede3724307b0b8f10e7638c4934b808a636b415",
+  "originHash" : "522b79779fb5adf171ab19a065b957f86b2b0228f47f72448a9c56cdb6487ad2",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -116,6 +116,15 @@
       "state" : {
         "revision" : "43aaef65e0c665daadf848761d560e446d350d3d",
         "version" : "1.22.4"
+      }
+    },
+    {
+      "identity" : "lightcompressor_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AbedElazizShe/LightCompressor_iOS.git",
+      "state" : {
+        "revision" : "3d21a0c8bb653fc00daf11ea82c590aa8d70c50b",
+        "version" : "1.0.0"
       }
     },
     {

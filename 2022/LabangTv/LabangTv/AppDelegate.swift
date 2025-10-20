@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var imageModel = ImageModel()
     static var isChangeImage = false
     static let openUrlSchemeKakao = "kakaoplus"
+    static var VIDEO_THUMBNAIL_UIImage: UIImage?
+    static var shouldSupportAllOrientation = true //화면회전을 잠그고 고정할 목적의 플래그 변수를 추가
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -137,6 +139,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         UIApplication.shared.open(url, options: [:])
         return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if (AppDelegate.shouldSupportAllOrientation == true) {
+            return UIInterfaceOrientationMask.all   //  모든방향 회전 가능
+        }
+        return UIInterfaceOrientationMask.portrait  //  세로방향으로 고정.
     }
 }
 

@@ -45,6 +45,8 @@
 		1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1784C8832BC81967009D9F40 /* GoogleService-Info.plist */; };
 		1784C8962BC81C04009D9F40 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8952BC81C04009D9F40 /* NotificationService.swift */; };
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17C351802EA67081002E103C /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 17C3517F2EA67081002E103C /* LightCompressor */; };
+		17C351822EA67167002E103C /* VideoThumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C351812EA67167002E103C /* VideoThumbViewController.swift */; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +113,7 @@
 		1784C8952BC81C04009D9F40 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1784C8972BC81C04009D9F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A5A3D32C6B97F700D4D89A /* LabangTv.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LabangTv.entitlements; sourceTree = "<group>"; };
+		17C351812EA67167002E103C /* VideoThumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,7 @@
 			files = (
 				1784C8822BC81906009D9F40 /* FirebaseMessaging in Frameworks */,
 				17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */,
+				17C351802EA67081002E103C /* LightCompressor in Frameworks */,
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
@@ -175,6 +179,7 @@
 				1784C8372BC80DAD009D9F40 /* Assets.xcassets */,
 				1784C8392BC80DAD009D9F40 /* LaunchScreen.storyboard */,
 				1784C83C2BC80DAD009D9F40 /* Info.plist */,
+				17C351812EA67167002E103C /* VideoThumbViewController.swift */,
 			);
 			path = LabangTv;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				1784C87F2BC81906009D9F40 /* FirebaseAnalytics */,
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
+				17C3517F2EA67081002E103C /* LightCompressor */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* LabangTv.app */;
@@ -314,6 +320,7 @@
 				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */,
+				17C3517E2EA67081002E103C /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -367,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17C351822EA67167002E103C /* VideoThumbViewController.swift in Sources */,
 				1784C8332BC80DAC009D9F40 /* ViewController.swift in Sources */,
 				1784C86E2BC8145F009D9F40 /* TutorialContentsVC.swift in Sources */,
 				1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */,
@@ -548,7 +556,7 @@
 				CODE_SIGN_ENTITLEMENTS = LabangTv/LabangTv.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -563,7 +571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.8;
+				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -584,7 +592,7 @@
 				CODE_SIGN_ENTITLEMENTS = LabangTv/LabangTv.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -599,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.8;
+				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -616,7 +624,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
@@ -628,7 +636,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.8;
+				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -646,7 +654,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = STUDYL2D7K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
@@ -658,7 +666,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.8;
+				MARKETING_VERSION = 1.3.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creator.labangtv.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -728,6 +736,14 @@
 				minimumVersion = 10.24.0;
 			};
 		};
+		17C3517E2EA67081002E103C /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AbedElazizShe/LightCompressor_iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
@@ -758,6 +774,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		17C3517F2EA67081002E103C /* LightCompressor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17C3517E2EA67081002E103C /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */;
+			productName = LightCompressor;
 		};
 		17E4EB642BEA490000BE63FE /* HaishinKit */ = {
 			isa = XCSwiftPackageProductDependency;

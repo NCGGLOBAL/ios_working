@@ -9,12 +9,16 @@
 import UIKit
 import WebKit
 import CoreLocation
+import LightCompressor
+import MobileCoreServices  // for kUTTypeMovie
+import AVKit
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var uploadIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
     
     var webView: WKWebView!
@@ -43,6 +47,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     let MAX_PAGE_COUNT = 2
     var currentSelectedPosition = 0
+    let VIDEO_LIMIT_TIME: TimeInterval = 2 * 60  // 2분을 초 단위로 변환한 값입니다 (120초)
+    var videoUrl: URL?
+    private var compression: Compression?
+    private var compressedUrl: URL?
     
     override func loadView() {
         super.loadView()
@@ -120,6 +128,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         if AppDelegate.isChangeImage {
             self.sendImageData()
             AppDelegate.isChangeImage = false
+        }
+        
+        if AppDelegate.VIDEO_THUMBNAIL_UIImage != nil {
+            // 썸네일 이미지 업로드
+            self.postThumbImageData()
         }
     }
     
@@ -505,11 +518,151 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     self.uploadPhoto()
                     break
                     
+                case "ACT1039": // 영상 선택후 압축, 썸네일 이미지 전달
+                    let bitrate = actionParamObj?["bitrate"] as? Int
+
+                    self.pickVideo()
+                    break
+                    
+                case "ACT1040": // "영상 파일 업로드"
+                    let url = actionParamObj?["url"] as? String
+                    let key = actionParamObj?["key"] as? String
+                    let token = actionParamObj?["token"] as? String
+                    
+                    if url == nil {
+                        return
+                    }
+                    
+                    self.uploadIndicatorView.isHidden = false
+                    self.uploadIndicatorView.startAnimating()
+                    self.showToast(message: "업로드 시작.시간이 걸리니 대기해주세요")
+                    let sendUrl = URL(string: url!)
+                    
+                    self.uploadVideo(videoURL: (self.compressedUrl ?? self.videoUrl)!, to: sendUrl!, token: token!, key: key!) { result in
+                        
+                        var dic = [String: String]()
+                        
+                        switch result {
+                        case .success(let responseURL):
+                            print("Video uploaded successfully. Response URL: \(responseURL)")
+                            
+                            dic["result"] = "1"
+                            self.sendWebViewEvaluateJavaScript(dic: dic)
+                            
+                            DispatchQueue.main.async {
+                                self.uploadIndicatorView.stopAnimating()
+                                self.indicatorView.isHidden = true
+                                self.showToast(message: "업로드 성공했습니다.")
+                            }
+                            break
+                        case .failure(let error):
+                            print("Failed to upload video: \(error.localizedDescription)")
+                            dic["result"] = "-1"
+                            self.sendWebViewEvaluateJavaScript(dic: dic)
+                            
+                            DispatchQueue.main.async {
+                                self.uploadIndicatorView.stopAnimating()
+                                self.indicatorView.isHidden = true
+                                self.showToast(message: "업로드 실패했습니다.")
+                            }
+                            break
+                        }
+                    }
+                    break
+                    
                     default:
                         print("디폴트를 꼭 해줘야 합니다.")
                 }
             }
         }
+    }
+    
+    func sendWebViewEvaluateJavaScript(dic: Dictionary<String, Any>?) {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                print("sendWebViewEvaluateJavaScript jsFunction : \(jsFunction)")
+                DispatchQueue.main.async {
+                    self.webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                        if let error = error {
+                            print("evaluateJavaScript Error: \(error.localizedDescription)")
+                        } else {
+                            print("evaluateJavaScript Result: \(result ?? "")")
+                        }
+                    })
+                }
+            }
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func uploadVideo(videoURL: URL, to serverURL: URL, token: String, key: String, completion: @escaping (Result<URL, Error>) -> Void) {
+        // 1. 비디오 파일을 Data로 변환
+        guard let videoData = try? Data(contentsOf: videoURL) else {
+            completion(.failure(NSError(domain: "UploadError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to read video data"])))
+            return
+        }
+        
+        // 2. URLRequest 설정
+        var request = URLRequest(url: serverURL)
+        request.httpMethod = "POST"
+        
+        // 3. 멀티파트 요청 설정
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        // 4. 멀티파트 데이터 생성
+        var body = Data()
+        let fileName = videoURL.lastPathComponent
+        let mimeType = "video/mp4" // 업로드할 비디오의 MIME 타입
+
+        // 비디오 파일 데이터
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
+        body.append(videoData)
+        body.append("\r\n".data(using: .utf8)!)
+        
+        // 추가 파라미터 추가
+        let videoParam: [String: String] = [
+            "token": token,
+            "key": key
+        ]
+        
+        for (key, value) in videoParam {
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(value)\r\n".data(using: .utf8)!)
+        }
+        
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        request.httpBody = body
+        
+        // 5. 업로드 시작
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                completion(.failure(NSError(domain: "UploadError", code: 2, userInfo: [NSLocalizedDescriptionKey: "Server error or invalid response"])))
+                return
+            }
+            
+            // 서버 응답에서 URL을 반환한다고 가정
+            guard let data = data, let responseURL = URL(dataRepresentation: data, relativeTo: nil) else {
+                completion(.failure(NSError(domain: "UploadError", code: 3, userInfo: [NSLocalizedDescriptionKey: "Failed to parse server response"])))
+                return
+            }
+            
+            completion(.success(responseURL))
+        }
+        
+        task.resume()
     }
     
     func uploadPhoto() {
@@ -520,37 +673,115 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         present(imagePicker, animated: true)
     }
     
+    func pickVideo() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .savedPhotosAlbum
+        imagePicker.mediaTypes = [kUTTypeMovie as String]  // 필터링하여 동영상만 선택할 수 있습니다.
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                    let imageName = imageUrl.lastPathComponent
-                    print(imageName) // "example.jpg"
-                    var myDict = [String: Any]()
-                    if let imageData = image.pngData() {
-                        let base64String = imageData.base64EncodedString()
-                        myDict["fData"] = base64String
-                        myDict["fName"] = imageName
-                    }
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
-                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-                            let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
-                            // webView는 UIWebView 또는 WKWebView 객체입니다.
-                            webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
-                                if let error = error {
-                                    print("Error: \(error.localizedDescription)")
-                                } else {
-                                    print("Result: \(result ?? "")")
-                                }
-                            })
+        picker.dismiss(animated: true, completion: nil)
+        // 동영상 추출
+        // mediaType과 url을 옵셔널 체이닝을 이용하여 안전하게 추출합니다.
+        if let mediaType = info[.mediaType] as? String,
+           mediaType == kUTTypeMovie as String,
+           let url = info[.mediaURL] as? URL {
+            // AVAsset을 사용하여 동영상 파일의 재생 시간을 가져옵니다.
+            let asset = AVAsset(url: url)
+            let durationInSeconds = CMTimeGetSeconds(asset.duration)
+            // 재생시간 2분 이상 시간은 토스트 노출
+            if (durationInSeconds > VIDEO_LIMIT_TIME) {
+                self.showToast(message: "영상시간을 2분이내로 줄여주세요")
+                return
+            }
+            // 300MB 이상이면 리턴
+            if (!self.checkVideoFileSize(at: url)) {
+                return
+            }
+            self.videoUrl = url
+            // 비디오 썸네일 뷰컨트롤러 이동
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "VideoThumbViewController") as! VideoThumbViewController
+            vc.videoUrl = url
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("선택된 미디어가 동영상이 아닙니다.")
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                    if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                        let imageName = imageUrl.lastPathComponent
+                        print(imageName) // "example.jpg"
+                        var myDict = [String: Any]()
+                        if let imageData = image.pngData() {
+                            let base64String = imageData.base64EncodedString()
+                            myDict["fData"] = base64String
+                            myDict["fName"] = imageName
                         }
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
+                            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                                let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                                webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                                    if let error = error {
+                                        print("Error: \(error.localizedDescription)")
+                                    } else {
+                                        print("Result: \(result ?? "")")
+                                    }
+                                })
+                            }
+                        } catch {
+                            print("Error: \(error.localizedDescription)")
+                        }
                     }
                 }
-            }
-            picker.dismiss(animated: true, completion: nil)
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
     }
+    
+    func checkVideoFileSize(at url: URL) -> Bool {
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            if let fileSize = attributes[.size] as? Int64 {
+                // 파일 사이즈를 바이트 단위로 가져왔습니다. 필요에 따라 다른 단위로 변환할 수 있습니다.
+                print("비디오 파일 용량: \(fileSize) bytes")
+                
+                // 예시로 용량 제한을 넘지 않았는지 체크할 수 있습니다.
+                let maxFileSize: Int64 = 300 * 1024 * 1024  // 예시: 100MB (실제로 필요에 따라 달라질 수 있음)
+                if fileSize > maxFileSize {
+                    self.showToast(message: "영상 용량은 100M미만으로 등록해 주세요.")
+                    return false
+                } else {
+                    print("파일 크기가 허용된 최대 용량 내에 있습니다.")
+                }
+            } else {
+                print("파일 크기를 가져올 수 없습니다.")
+            }
+        } catch {
+            print("파일 속성을 가져오는 도중 에러가 발생했습니다: \(error.localizedDescription)")
+        }
+        return true
+    }
+    
+    func showToast(message : String) {
+            let width_variable:CGFloat = 10
+            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
+            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
+            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            toastLabel.textColor = UIColor.white
+            toastLabel.textAlignment = .center;
+            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+            toastLabel.text = message
+            toastLabel.alpha = 1.0
+            toastLabel.layer.cornerRadius = 10;
+            toastLabel.clipsToBounds  =  true
+            self.view.addSubview(toastLabel)
+            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+                toastLabel.alpha = 0.0
+            }, completion: {(isCompleted) in
+                toastLabel.removeFromSuperview()
+            })
+        }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
@@ -721,25 +952,127 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             }
     }
     
-//    func showToast(message : String) {
-//            let width_variable:CGFloat = 10
-//            let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-150, width: view.frame.size.width-2*width_variable, height: 35))
-//            // 뷰가 위치할 위치를 지정해준다. 여기서는 아래로부터 100만큼 떨어져있고, 너비는 양쪽에 10만큼 여백을 가지며, 높이는 35로
-//            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-//            toastLabel.textColor = UIColor.white
-//            toastLabel.textAlignment = .center;
-//            toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-//            toastLabel.text = message
-//            toastLabel.alpha = 1.0
-//            toastLabel.layer.cornerRadius = 10;
-//            toastLabel.clipsToBounds  =  true
-//            self.view.addSubview(toastLabel)
-//            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-//                toastLabel.alpha = 0.0
-//            }, completion: {(isCompleted) in
-//                toastLabel.removeFromSuperview()
-//            })
-//        }
+    func postThumbImageData() {
+        do {
+            if let imageData = AppDelegate.VIDEO_THUMBNAIL_UIImage!.pngData() {
+                let base64String = imageData.base64EncodedString()
+                
+                // 결과 출력
+                print("썸네일 데이터를 Base64 문자열로 변환:")
+                print(base64String)
+                
+                var myDict = [String: Any]()
+                do {
+                    myDict["type"] = "0"
+                    myDict["thumbData"] = base64String
+                    
+                    let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
+                    if let jsonString = String(data: jsonData, encoding: .utf8) {
+                        let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                        print("jsFunction: \(jsFunction)")
+                        webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                            if let error = error {
+                                print("비디오 썸네일 업로드 실패 Error: \(error.localizedDescription)")
+                            } else {
+                                print("비디오 썸네일 업로드 완료 Result: \(result ?? "")")
+                                self.checkArchveVidio()
+                            }
+                        })
+                    }
+                } catch {
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+        } catch {
+            print("썸네일 데이터를 가져오는 도중 오류 발생: \(error)")
+        }
+    }
+    
+    func checkArchveVidio() {
+        // 압축여부 체크
+        print("checkArchveVidio 함수 시작")
+        let asset = AVAsset(url: self.videoUrl!)
+            let track = asset.tracks(withMediaType: .video).first
+            
+            if let track = track {
+                let size = track.naturalSize
+                var width = size.width
+                var height = size.height
+                print("비디오 해상도: \(width) x \(height)")
+                var dic = [String: String]()
+                dic["type"] = "1"
+                if (width > height) { // 가로영상
+                    print("가로영상")
+                    if height > 720 {
+                        width = width * 720 / height
+                        height = 720
+                    } else {
+                        self.sendWebViewEvaluateJavaScript(dic: dic)
+                        return
+                    }
+                } else {    // 세로 영상
+                    print("세로 영상")
+                    if width > 720 {
+                        height = height * 720 / height
+                        width = 720
+                    } else {
+                        self.sendWebViewEvaluateJavaScript(dic: dic)
+                        return
+                    }
+                }
+                
+                // 비디오 파일 압축
+                // https://github.com/AbedElazizShe/LightCompressor_iOS
+                self.videoArchive()
+            } else {
+                print("비디오 트랙을 찾을 수 없습니다.")
+            }
+    }
+    
+    func videoArchive() {
+        // Declare destination path and remove anything exists in it
+        let destinationPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("compressed.mp4")
+        try? FileManager.default.removeItem(at: destinationPath)
+        
+        let videoCompressor = LightCompressor()
+        
+        self.compression = videoCompressor.compressVideo(videos: [.init(source: self.videoUrl!, destination: destinationPath, configuration: .init(quality: VideoQuality.very_high, videoBitrateInMbps: 5, disableAudio: false, keepOriginalResolution: false, videoSize: CGSize(width: 360, height: 480) ))],
+                                                   progressQueue: .main,
+                                                   progressHandler: { progress in
+                                                    DispatchQueue.main.async { [unowned self] in
+                                                    }},
+                                                   
+                                                   completion: {[weak self] result in
+                                                    guard let `self` = self else { return }
+                                                    
+                                                    switch result {
+                                                        
+                                                    case .onSuccess(let index, let path):
+                                                        self.compressedUrl = path
+
+                                                        print("비디오 압축 onSuccess : \(self.compressedUrl)")
+                                                        var dic = [String: Any]()
+                                                        dic["type"] = "1"
+                                                    
+                                                        self.sendWebViewEvaluateJavaScript(dic: dic)
+                                                        
+                                                        break
+                                                        
+                                                    case .onStart:
+                                                        print("비디오 압축 onStart")
+                                                        break
+                                                        
+                                                    case .onFailure(let index, let error):
+                                                        print("비디오 압축 onFailure")
+                                                        break
+                                                        
+                                                    case .onCancelled:
+                                                        print("---------------------------")
+                                                        print("비디오 압축 Cancelled")
+                                                        print("---------------------------")
+                                                    }
+        })
+    }
     
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
