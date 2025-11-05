@@ -30,8 +30,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     var rtmpStream: RTMPStream? = nil
     var currentCameraPosition: AVCaptureDevice.Position = .front
     
-    // ✅ 해상도 고정을 위한 설정 (타이머 관련 제거)
-    private let fixedVideoSize = CGSize(width: 720, height: 1280)
+    // ✅ 카메라 해상도 (카메라 사양에 맞게 동적으로 설정)
+    private var cameraVideoSize: CGSize = CGSize(width: 1080, height: 1920) // 기본값
     private var lastStreamUrl: String?
     private var lastStreamKey: String?
     private var lastAppliedBitrate: Int = 2_500_000
@@ -461,10 +461,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         var videoBitrateList: [Int] = []
                         if let bitrateArray = actionParamObj?["setVideoKBitrate"] as? [Int] {
                             videoBitrateList = bitrateArray
+                            print("📊 ACT1030 - setVideoKBitrate 배열 수신: \(bitrateArray) kbps")
                         } else if let singleBitrate = actionParamObj?["setVideoKBitrate"] as? Int {
                             videoBitrateList = [singleBitrate]
+                            print("📊 ACT1030 - setVideoKBitrate 단일값 수신: \(singleBitrate) kbps")
                         } else {
                             videoBitrateList = [2_500_000]
+                            print("📊 ACT1030 - setVideoKBitrate 기본값 사용: 2500 kbps")
                         }
                         
                         DispatchQueue.main.async {
@@ -686,6 +689,39 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return devices.first { $0.position == position }
     }
     
+    // ✅ 카메라가 지원하는 최대 해상도 가져오기 (1280보다 높은 해상도, 세로 방향)
+    func getMaxSupportedVideoSize(for cameraDevice: AVCaptureDevice?) -> CGSize {
+        guard let device = cameraDevice else {
+            // 기본값 반환 (1080p 세로)
+            return CGSize(width: 1080, height: 1920)
+        }
+        
+        // 카메라가 지원하는 모든 포맷 중에서 최대 해상도 찾기
+        var maxSize = CGSize(width: 720, height: 1280)
+        
+        for format in device.formats {
+            let dimensions = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
+            let width = Int(dimensions.width)
+            let height = Int(dimensions.height)
+            
+            // 세로 방향 스트리밍이므로:
+            // 1. 높이가 가로보다 커야 함 (height > width)
+            // 2. 높이가 1280보다 커야 함
+            // 3. 현재 최대값보다 높이가 커야 함
+            if height > width && height > 1280 && height > Int(maxSize.height) {
+                maxSize = CGSize(width: width, height: height)
+            }
+        }
+        
+        // 1280보다 높은 세로 방향 해상도를 찾지 못한 경우 기본값 사용
+        if maxSize.height <= 1280 || maxSize.width >= maxSize.height {
+            maxSize = CGSize(width: 1080, height: 1920)
+        }
+        
+        print("📷 카메라 최대 지원 해상도 (세로 방향): \(Int(maxSize.width))x\(Int(maxSize.height))")
+        return maxSize
+    }
+    
     func uploadPhoto() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
@@ -753,15 +789,25 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             self.rtmpStream?.publish(streamKey)
         }
 
-        // 2. 비트레이트 설정
+        // 2. 비트레이트 설정 (setVideoKBitrate는 kbps 단위이므로 bps로 변환 필요)
+        // iOS VideoCodecSettings는 bps (bits per second) 단위를 받음
         let bitrate: Int
         if videoBitrateList.count >= 3 {
-            bitrate = videoBitrateList[1]
+            // 배열의 경우 중간값 사용
+            let selectedKbps = videoBitrateList[1]
+            bitrate = selectedKbps * 1000  // kbps를 bps로 변환
+            print("📊 비트레이트 배열 [\(videoBitrateList[0]), \(videoBitrateList[1]), \(videoBitrateList[2])] kbps 중 중간값 \(selectedKbps) kbps 선택 → \(bitrate) bps")
         } else if !videoBitrateList.isEmpty {
-            bitrate = videoBitrateList[0]
+            // 단일 값의 경우 첫 번째 값 사용
+            let selectedKbps = videoBitrateList[0]
+            bitrate = selectedKbps * 1000  // kbps를 bps로 변환
+            print("📊 비트레이트 단일값 \(selectedKbps) kbps → \(bitrate) bps")
         } else {
-            bitrate = 2_500_000
+            bitrate = 2_500_000  // 기본값 (2.5Mbps = 2,500,000 bps)
+            print("📊 비트레이트 기본값 2500 kbps → 2500000 bps")
         }
+        
+        print("🔧 최종 비트레이트 설정: \(bitrate) bps (\(Double(bitrate) / 1_000_000) Mbps)")
 
         // ✅ 3. 초기 해상도 설정 (한 번만)
         applyVideoSettings(bitrate: bitrate)
@@ -812,21 +858,33 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // ✅ 단순하고 확실한 해상도 설정 함수 (한 번만 적용)
+    // ✅ 카메라 사양에 맞게 해상도 설정 (카메라가 지원하는 최대 해상도 사용)
     func applyVideoSettings(bitrate: Int = 2_500_000) {
         guard let stream = rtmpStream else { return }
         
         lastAppliedBitrate = bitrate
         
-        print("🔧 해상도 720x1280 고정 적용")
+        // 카메라 디바이스 가져오기
+        let cameraDevice = getCameraDevice(for: currentCameraPosition)
         
-        // 1. sessionPreset 설정
-        // HaishinKit 최신버전: 세션 프리셋은 rtmpStream에 설정
-        stream.sessionPreset = .hd1280x720 // 또는 AVCaptureSession.Preset.hd1280x720
+        // 카메라가 지원하는 최대 해상도 가져오기
+        cameraVideoSize = getMaxSupportedVideoSize(for: cameraDevice)
         
-        // 2. 해상도 고정
+        print("🔧 해상도 \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height)) 적용 (카메라 사양 기준)")
+        
+        // 1. sessionPreset 설정 (카메라 해상도에 맞게)
+        // 세로 방향이므로 높이를 기준으로 세션 프리셋 선택
+        if cameraVideoSize.height >= 1920 {
+            stream.sessionPreset = .hd1920x1080
+        } else if cameraVideoSize.height >= 1280 {
+            stream.sessionPreset = .hd1280x720
+        } else {
+            stream.sessionPreset = .hd1280x720 // 기본값
+        }
+        
+        // 2. 해상도 설정 (카메라 사양에 맞게)
         let videoSettings = VideoCodecSettings(
-            videoSize: fixedVideoSize, // 720x1280 고정
+            videoSize: cameraVideoSize, // 카메라가 지원하는 최대 해상도
             bitRate: bitrate,
             profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
             scalingMode: .trim
@@ -835,7 +893,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         stream.videoSettings = videoSettings
         stream.videoOrientation = .portrait
         
-        print("✅ 해상도 설정 완료: \(fixedVideoSize)")
+        print("✅ 해상도 설정 완료: \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height))")
     }
 }
 
