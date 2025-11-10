@@ -757,6 +757,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     func initCamera() {
         self.rtmpStream = RTMPStream(connection: rtmpConnection)
+        currentCameraPosition = .front
         
         // 초기 카메라 미러링 설정 (기본값: 비활성화)
         if let videoCapture = self.rtmpStream?.videoCapture(for: 0) {
@@ -821,8 +822,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
 
         // 6. 카메라 연결
+        let cameraDevice = getCameraDevice(for: currentCameraPosition)
         self.rtmpStream?.attachCamera(
-            AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
+            cameraDevice,
             track: 0
         ) { [weak self] _, error in
             print("attachCamera" + (error != nil ? " error" : ""))
@@ -832,8 +834,13 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 
                 // 초기 카메라 미러링 설정 (전면 카메라 기본값: 활성화)
                 if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
-                    videoCapture.isVideoMirrored = true
-                    print("🔧 초기 전면 카메라 미러링 설정: 활성화")
+                    if self?.currentCameraPosition == .front {
+                        videoCapture.isVideoMirrored = true
+                        print("🔧 초기 전면 카메라 미러링 설정: 활성화")
+                    } else {
+                        videoCapture.isVideoMirrored = false
+                        print("🔧 초기 후면 카메라 미러링 설정: 비활성화")
+                    }
                 }
             }
         }
