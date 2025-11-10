@@ -39,7 +39,11 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         config.userContentController = contentController
         config.preferences = preferences
         config.processPool = uniqueProcessPool
-        config.mediaPlaybackRequiresUserAction = false
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = []
+        } else {
+            config.mediaPlaybackRequiresUserAction = false
+        }
         config.allowsInlineMediaPlayback = true
         for (cookie) in cookies {
             config.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: nil)
@@ -60,6 +64,10 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         }
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
+        
+        DispatchQueue.main.async {
+            self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
     
     func initWebView() {
@@ -397,6 +405,29 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                     
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
+                    break
+                    
+                case "ACT1038": // 가로보기, 세로보기
+                    let keyType = actionParamObj?["key_type"] as? String
+                    if keyType == "0" {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    } else {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                    let javascript = "\(self.callback)"
+                    // call back!
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        print("result : \(String(describing: result))")
+                        print("error : \(error)")
+                    }
                     break
                     
                     default:

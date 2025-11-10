@@ -57,7 +57,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         config.userContentController = contentController
         config.preferences = preferences
         config.processPool = uniqueProcessPool
-        config.mediaPlaybackRequiresUserAction = false
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = []
+        } else {
+            config.mediaPlaybackRequiresUserAction = false
+        }
         config.allowsInlineMediaPlayback = true
         for (cookie) in cookies {
             config.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: nil)

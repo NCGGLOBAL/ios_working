@@ -72,7 +72,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
-        config.mediaTypesRequiringUserActionForPlayback = .audio
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = []
+        } else {
+            config.mediaPlaybackRequiresUserAction = false
+        }
         config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
@@ -123,6 +127,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
+        DispatchQueue.main.async {
+            self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -524,6 +532,30 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     
                 case "ACT1037": // 앨범 열기
                     self.uploadPhoto()
+                    break
+                    
+                case "ACT1038": // 가로보기, 세로보기
+                    let keyType = actionParamObj?["key_type"] as? String
+                    if keyType == "0" {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    } else {
+                        if #available(iOS 16.0, *) {
+                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                    // call back!
+                    let javascript = "\(self.callback)"
+                    // call back!
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        print("result : \(String(describing: result))")
+                        print("error : \(error)")
+                    }
                     break
                     
                 case "ACT1039": // 영상 선택후 압축, 썸네일 이미지 전달
