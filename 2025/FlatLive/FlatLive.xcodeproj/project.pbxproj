@@ -49,6 +49,7 @@
 		17C351802EA67081002E103C /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 17C3517F2EA67081002E103C /* LightCompressor */; };
 		17C351822EA67167002E103C /* VideoThumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C351812EA67167002E103C /* VideoThumbViewController.swift */; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
+		17EC67472EC37F7D00285D0D /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17EC67462EC37F7D00285D0D /* splash.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		1784C8972BC81C04009D9F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A5A3D32C6B97F700D4D89A /* FlatLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlatLive.entitlements; sourceTree = "<group>"; };
 		17C351812EA67167002E103C /* VideoThumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbViewController.swift; sourceTree = "<group>"; };
+		17EC67462EC37F7D00285D0D /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 		1784C8512BC81192009D9F40 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				17EC67462EC37F7D00285D0D /* splash.gif */,
 				1784C8622BC811B5009D9F40 /* IOS_1242x2208_intro.png */,
 				1784C8422BC81192009D9F40 /* btn_camera.png */,
 				1784C8432BC81192009D9F40 /* btn_camera@2x.png */,
@@ -359,6 +362,7 @@
 				1784C85C2BC81192009D9F40 /* icon_del.png in Resources */,
 				1784C85E2BC81192009D9F40 /* icon_del@3x.png in Resources */,
 				1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */,
+				17EC67472EC37F7D00285D0D /* splash.gif in Resources */,
 				1784C85F2BC81192009D9F40 /* icon_play.png in Resources */,
 				1784C85D2BC81192009D9F40 /* icon_del@2x.png in Resources */,
 			);
