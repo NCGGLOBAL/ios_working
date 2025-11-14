@@ -460,6 +460,49 @@
             </objects>
             <point key="canvasLocation" x="3582.608695652174" y="95.758928571428569"/>
         </scene>
+        <!--Video Thumb View Controller-->
+        <scene sceneID="7rt-We-4zV">
+            <objects>
+                <viewController storyboardIdentifier="VideoThumbViewController" id="hjm-9R-exW" customClass="VideoThumbViewController" customModule="FlatLive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cep-dc-MbW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-Nj-BNH">
+                                <rect key="frame" x="0.0" y="96" width="414" height="572"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDU-kW-kAY">
+                                <rect key="frame" x="0.0" y="768" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="lxu-er-nbT"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="이미지 선택"/>
+                                <connections>
+                                    <action selector="onClickSelectImage:" destination="hjm-9R-exW" eventType="touchUpInside" id="eq1-V9-g9Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cuG-Yr-qrD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iDU-kW-kAY" firstAttribute="trailing" secondItem="cuG-Yr-qrD" secondAttribute="trailing" id="1yM-Uh-NqK"/>
+                            <constraint firstItem="iDU-kW-kAY" firstAttribute="top" secondItem="9dj-Nj-BNH" secondAttribute="bottom" constant="100" id="Kex-Pk-hcR"/>
+                            <constraint firstItem="9dj-Nj-BNH" firstAttribute="trailing" secondItem="cuG-Yr-qrD" secondAttribute="trailing" id="azw-2j-aP0"/>
+                            <constraint firstItem="iDU-kW-kAY" firstAttribute="bottom" secondItem="cuG-Yr-qrD" secondAttribute="bottom" id="gNM-j1-IaW"/>
+                            <constraint firstItem="iDU-kW-kAY" firstAttribute="leading" secondItem="cuG-Yr-qrD" secondAttribute="leading" id="k9I-xA-zwc"/>
+                            <constraint firstItem="9dj-Nj-BNH" firstAttribute="leading" secondItem="cuG-Yr-qrD" secondAttribute="leading" id="pX6-C3-UcS"/>
+                            <constraint firstItem="9dj-Nj-BNH" firstAttribute="top" secondItem="cuG-Yr-qrD" secondAttribute="top" id="yLJ-M1-HiF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="thumbImageView" destination="9dj-Nj-BNH" id="1qX-Ql-8nK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MsQ-4t-QiG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1957.9710144927537" y="-570.53571428571422"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btn_camera.png" width="72" height="51"/>
