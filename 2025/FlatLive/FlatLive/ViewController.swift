@@ -137,7 +137,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         if AppDelegate.QR_URL != "" {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
             vc.urlString = AppDelegate.QR_URL
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.uniqueProcessPool = self.uniqueProcessPool
+            WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
+                (cookies) in
+                vc.cookies = cookies
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
             AppDelegate.QR_URL = ""
         }
         navigationController?.isNavigationBarHidden = true
@@ -870,7 +875,12 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     #endif
         if (url.scheme?.elementsEqual(liveScheme))! {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.uniqueProcessPool = self.uniqueProcessPool
+            WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
+                (cookies) in
+                vc.cookies = cookies
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
         } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
