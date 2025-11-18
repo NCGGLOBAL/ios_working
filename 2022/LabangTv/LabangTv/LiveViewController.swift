@@ -40,6 +40,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var isFilterEnabled: Bool = false
     private var currentVideoEffect: VideoEffect?
     
+    var callback = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -278,7 +280,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 print("actionParamObj : \(actionParamObj)")
 #endif
                 
-                let callback = dictionary["callBack"] as? String ?? ""
+                callback = dictionary["callBack"] as? String ?? ""
 #if DEBUG
                 print("callBack : \(callback)")
 #endif
@@ -396,7 +398,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                                 do {
                                     let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                                     let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                    let javascript = "\(callback)('\(stringValue)')"
+                                    let javascript = "\(self.callback)('\(stringValue)')"
                                     self.webView.evaluateJavaScript(javascript) { (result, error) in
                                         // 결과 처리
                                     }
@@ -420,7 +422,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             do {
                                 let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                let javascript = "\(callback)('\(stringValue)')"
+                                let javascript = "\(self.callback)('\(stringValue)')"
 #if DEBUG
                                 print("ACT1034 jsonData : \(jsonData)")
                                 print("ACT1034 javascript : \(javascript)")
@@ -727,6 +729,38 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                    let imageName = imageUrl.lastPathComponent
+                    print(imageName) // "example.jpg"
+                    var myDict = [String: Any]()
+                    if let imageData = image.pngData() {
+                        let base64String = imageData.base64EncodedString()
+                        myDict["fData"] = base64String
+                        myDict["fName"] = imageName
+                    }
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                            // webView는 UIWebView 또는 WKWebView 객체입니다.
+                            webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
+                                if let error = error {
+                                    print("Error: \(error.localizedDescription)")
+                                } else {
+                                    print("Result: \(result ?? "")")
+                                }
+                            })
+                        }
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+            }
+            picker.dismiss(animated: true, completion: nil)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
