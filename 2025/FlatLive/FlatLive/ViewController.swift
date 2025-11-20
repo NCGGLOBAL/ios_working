@@ -52,6 +52,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     var videoUrl: URL?
     private var compression: Compression?
     private var compressedUrl: URL?
+    private var targetVideoSize: CGSize = CGSize(width: 360, height: 480) // 압축할 해상도
     
     private let gifImage: GIFImageView = {
             let img = GIFImageView()
@@ -792,9 +793,9 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 print("비디오 파일 용량: \(fileSize) bytes")
                 
                 // 예시로 용량 제한을 넘지 않았는지 체크할 수 있습니다.
-                let maxFileSize: Int64 = 300 * 1024 * 1024  // 예시: 100MB (실제로 필요에 따라 달라질 수 있음)
+                let maxFileSize: Int64 = 300 * 1024 * 1024  // 300MB
                 if fileSize > maxFileSize {
-                    self.showToast(message: "영상 용량은 100M미만으로 등록해 주세요.")
+                    self.showToast(message: "영상 용량은 300M미만으로 등록해 주세요.")
                     return false
                 } else {
                     print("파일 크기가 허용된 최대 용량 내에 있습니다.")
@@ -1042,7 +1043,16 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         // 압축여부 체크
         print("checkArchveVidio 함수 시작")
         let asset = AVAsset(url: self.videoUrl!)
-            let track = asset.tracks(withMediaType: .video).first
+        
+        // ✅ 원본 비디오의 오디오 트랙 확인
+        let audioTracks = asset.tracks(withMediaType: .audio)
+        if audioTracks.isEmpty {
+            print("⚠️ 경고: 원본 비디오에 오디오 트랙이 없습니다!")
+        } else {
+            print("✅ 원본 비디오에 오디오 트랙 \(audioTracks.count)개 포함됨")
+        }
+        
+        let track = asset.tracks(withMediaType: .video).first
             
             if let track = track {
                 let size = track.naturalSize
@@ -1063,13 +1073,17 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                 } else {    // 세로 영상
                     print("세로 영상")
                     if width > 720 {
-                        height = height * 720 / height
+                        height = height * 720 / width
                         width = 720
                     } else {
                         self.sendWebViewEvaluateJavaScript(dic: dic)
                         return
                     }
                 }
+                
+                // 계산된 해상도 저장
+                self.targetVideoSize = CGSize(width: width, height: height)
+                print("압축할 해상도: \(width) x \(height)")
                 
                 // 비디오 파일 압축
                 // https://github.com/AbedElazizShe/LightCompressor_iOS
@@ -1086,7 +1100,10 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         
         let videoCompressor = LightCompressor()
         
-        self.compression = videoCompressor.compressVideo(videos: [.init(source: self.videoUrl!, destination: destinationPath, configuration: .init(quality: VideoQuality.very_high, videoBitrateInMbps: 5, disableAudio: false, keepOriginalResolution: false, videoSize: CGSize(width: 360, height: 480) ))],
+        // ✅ 음성 포함 압축 설정 (disableAudio: false)
+        // ✅ 계산된 해상도 사용
+        print("비디오 압축 시작 - 해상도: \(Int(targetVideoSize.width))x\(Int(targetVideoSize.height)), 음성 포함: true")
+        self.compression = videoCompressor.compressVideo(videos: [.init(source: self.videoUrl!, destination: destinationPath, configuration: .init(quality: VideoQuality.very_high, videoBitrateInMbps: 5, disableAudio: false, keepOriginalResolution: false, videoSize: targetVideoSize))],
                                                    progressQueue: .main,
                                                    progressHandler: { progress in
                                                     DispatchQueue.main.async { [unowned self] in
@@ -1101,6 +1118,16 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                                                         self.compressedUrl = path
 
                                                         print("비디오 압축 onSuccess : \(self.compressedUrl)")
+                                                        
+                                                        // ✅ 압축된 비디오에 오디오 트랙이 있는지 확인
+                                                        let compressedAsset = AVAsset(url: path)
+                                                        let audioTracks = compressedAsset.tracks(withMediaType: .audio)
+                                                        if audioTracks.isEmpty {
+                                                            print("⚠️ 경고: 압축된 비디오에 오디오 트랙이 없습니다!")
+                                                        } else {
+                                                            print("✅ 압축된 비디오에 오디오 트랙 \(audioTracks.count)개 포함됨")
+                                                        }
+                                                        
                                                         var dic = [String: Any]()
                                                         dic["type"] = "1"
                                                     
