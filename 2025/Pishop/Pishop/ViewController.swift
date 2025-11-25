@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  FlatLive
+//  UnniTv
 //
 //  Created by glediaer on 2020/05/27.
 //  Copyright © 2020 ncgglobal. All rights reserved.
@@ -12,7 +12,6 @@ import CoreLocation
 import LightCompressor
 import MobileCoreServices  // for kUTTypeMovie
 import AVKit
-import Gifu
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -53,11 +52,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     private var compression: Compression?
     private var compressedUrl: URL?
     
-    private let gifImage: GIFImageView = {
-            let img = GIFImageView()
-            return img
-        }()
-    
     override func loadView() {
         super.loadView()
         
@@ -72,11 +66,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         config.processPool = uniqueProcessPool
         config.userContentController = contentController
         config.preferences = preferences
-        if #available(iOS 10.0, *) {
-            config.mediaTypesRequiringUserActionForPlayback = []
-        } else {
-            config.mediaPlaybackRequiresUserAction = false
-        }
+        config.mediaTypesRequiringUserActionForPlayback = .audio
         config.allowsInlineMediaPlayback = true
         
         webView = WKWebView(frame: self.view.frame, configuration: config)
@@ -92,7 +82,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     }
     
     func loadAppStoreVersion() -> String {
-        let bundleID = "com.creator.flatlive"
+        let bundleID = "com.creator.pishop"
         let appStoreUrl = "http://itunes.apple.com/lookup?bundleId=\(bundleID)"
         guard let url = URL(string: appStoreUrl),
               let data = try? Data(contentsOf: url),
@@ -111,13 +101,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gifImage.animate(withGIFNamed: "splash")
-        gifImage.frame = self.view.frame
-        view.addSubview(gifImage)
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: {[weak self] timer in
-            self?.gifImage.stopAnimatingGIF()
-            self?.gifImage.isHidden = true
-        })
+//        let ud = UserDefaults.standard
+//        if ud.bool(forKey: Constants.TUTORIAL) == false {
+//            self.initTutorial()
+//            ud.set(true, forKey: Constants.TUTORIAL)
+//        }
         
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)
@@ -127,10 +115,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         }
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        
-        DispatchQueue.main.async {
-            self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -539,30 +523,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     self.uploadPhoto()
                     break
                     
-                case "ACT1038": // 가로보기, 세로보기
-                    let keyType = actionParamObj?["key_type"] as? String
-                    if keyType == "0" {
-                        if #available(iOS 16.0, *) {
-                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-                        } else {
-                            // Fallback on earlier versions
-                        }
-                    } else {
-                        if #available(iOS 16.0, *) {
-                            view.window?.windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
-                        } else {
-                            // Fallback on earlier versions
-                        }
-                    }
-                    // call back!
-                    let javascript = "\(self.callback)"
-                    // call back!
-                    self.webView.evaluateJavaScript(javascript) { (result, error) in
-                        print("result : \(String(describing: result))")
-                        print("error : \(error)")
-                    }
-                    break
-                    
                 case "ACT1039": // 영상 선택후 압축, 썸네일 이미지 전달
                     let bitrate = actionParamObj?["bitrate"] as? Int
 
@@ -765,7 +725,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         do {
                             let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
                             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                                let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
+                                let jsFunction = "\(self.callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
                                 webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
                                     if let error = error {
                                         print("Error: \(error.localizedDescription)")
