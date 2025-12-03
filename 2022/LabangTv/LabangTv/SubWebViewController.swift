@@ -104,6 +104,14 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
             UIApplication.shared.openURL(url)
             decisionHandler(.cancel)
             return
+        } else if url.scheme?.lowercased() == "tel" {
+            // tel: 스키마 처리 (전화 연결)
+            print("tel: 스키마 감지 - 전화 연결: \(url.absoluteString)")
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            decisionHandler(.cancel)
+            return
         } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.openURL(url)
