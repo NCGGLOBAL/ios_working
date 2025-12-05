@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1742B2B52EE2BC6E00CBB185 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1742B2B42EE2BC6E00CBB185 /* QRReaderViewController.swift */; };
 		1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */; };
 		1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */; };
 		1784C8332BC80DAC009D9F40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8322BC80DAC009D9F40 /* ViewController.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1742B2B42EE2BC6E00CBB185 /* QRReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 		1784C82B2BC80DAC009D9F40 /* LabangTv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LabangTv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		1784C82D2BC80DAC009D9F40 /* LabangTv */ = {
 			isa = PBXGroup;
 			children = (
+				1742B2B42EE2BC6E00CBB185 /* QRReaderViewController.swift */,
 				17A5A3D32C6B97F700D4D89A /* LabangTv.entitlements */,
 				1784C8832BC81967009D9F40 /* GoogleService-Info.plist */,
 				1784C87C2BC817E6009D9F40 /* LiveViewController.swift */,
@@ -386,6 +389,7 @@
 				1784C8662BC81389009D9F40 /* ImageModel.swift in Sources */,
 				1784C87B2BC8176E009D9F40 /* ImageSelectDetailViewController.swift in Sources */,
 				1784C87D2BC817E6009D9F40 /* LiveViewController.swift in Sources */,
+				1742B2B52EE2BC6E00CBB185 /* QRReaderViewController.swift in Sources */,
 				1784C86B2BC81393009D9F40 /* ImageFileData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
