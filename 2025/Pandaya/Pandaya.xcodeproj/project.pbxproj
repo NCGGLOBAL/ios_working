@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1745000A2F07AD2B003FB767 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 174500092F07AD2B003FB767 /* Gifu */; };
+		1745000C2F07ADB0003FB767 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1745000B2F07ADB0003FB767 /* splash.gif */; };
 		1784C82F2BC80DAC009D9F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */; };
 		1784C8312BC80DAC009D9F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */; };
 		1784C8332BC80DAC009D9F40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8322BC80DAC009D9F40 /* ViewController.swift */; };
@@ -73,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1745000B2F07ADB0003FB767 /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
 		1784C82B2BC80DAC009D9F40 /* Pandaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandaya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1784C82E2BC80DAC009D9F40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1784C8302BC80DAC009D9F40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
+				1745000A2F07AD2B003FB767 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +186,7 @@
 		1784C8512BC81192009D9F40 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				1745000B2F07ADB0003FB767 /* splash.gif */,
 				1784C8622BC811B5009D9F40 /* IOS_1242x2208_intro.png */,
 				1784C8422BC81192009D9F40 /* btn_camera.png */,
 				1784C8432BC81192009D9F40 /* btn_camera@2x.png */,
@@ -260,6 +265,7 @@
 				1784C87F2BC81906009D9F40 /* FirebaseAnalytics */,
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
+				174500092F07AD2B003FB767 /* Gifu */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* Pandaya.app */;
@@ -314,6 +320,7 @@
 				1784C8752BC816E6009D9F40 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */,
+				174500082F07AD2B003FB767 /* XCRemoteSwiftPackageReference "Gifu" */,
 			);
 			productRefGroup = 1784C82C2BC80DAC009D9F40 /* Products */;
 			projectDirPath = "";
@@ -348,6 +355,7 @@
 				1784C85C2BC81192009D9F40 /* icon_del.png in Resources */,
 				1784C85E2BC81192009D9F40 /* icon_del@3x.png in Resources */,
 				1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */,
+				1745000C2F07ADB0003FB767 /* splash.gif in Resources */,
 				1784C85F2BC81192009D9F40 /* icon_play.png in Resources */,
 				1784C85D2BC81192009D9F40 /* icon_del@2x.png in Resources */,
 			);
@@ -704,6 +712,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		174500082F07AD2B003FB767 /* XCRemoteSwiftPackageReference "Gifu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaishin/Gifu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.1;
+			};
+		};
 		1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -739,6 +755,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		174500092F07AD2B003FB767 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 174500082F07AD2B003FB767 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
 		1784C8732BC816B3009D9F40 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1784C8722BC816B3009D9F40 /* XCRemoteSwiftPackageReference "Kingfisher" */;

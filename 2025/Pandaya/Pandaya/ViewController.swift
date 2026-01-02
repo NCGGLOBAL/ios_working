@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import CoreLocation
+import Gifu
 
 class ViewController: UIViewController, WKUIDelegate,
 WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -43,6 +44,11 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     let MAX_PAGE_COUNT = 2
     var currentSelectedPosition = 0
+    
+    private let gifImage: GIFImageView = {
+            let img = GIFImageView()
+            return img
+        }()
     
     override func loadView() {
         super.loadView()
@@ -98,6 +104,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
 //            self.initTutorial()
 //            ud.set(true, forKey: Constants.TUTORIAL)
 //        }
+        
+        gifImage.animate(withGIFNamed: "splash")
+        gifImage.frame = self.view.frame
+        view.addSubview(gifImage)
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: {[weak self] timer in
+            self?.gifImage.stopAnimatingGIF()
+            self?.gifImage.isHidden = true
+        })
         
         if AppDelegate.LANDING_URL == "" {
             self.initWebView(urlString: AppDelegate.HOME_URL)

@@ -1,5 +1,5 @@
 {
-  "originHash" : "afcd43cf88d3ea7d7694ae447b8b72156fa1a86fc5721712ecb6c18f38c893d9",
+  "originHash" : "f354f9262e6fcc987a003a0d473ff43dfdf09c98aa86180d928f30913ea813b4",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "42eae77a0af79e9c3f41df04a23c76f05cfdda77",
         "version" : "10.24.0"
+      }
+    },
+    {
+      "identity" : "gifu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kaishin/Gifu.git",
+      "state" : {
+        "revision" : "46434cd816f035271beb16d80f7bc91381cbd8e4",
+        "version" : "3.5.1"
       }
     },
     {
