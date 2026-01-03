@@ -562,12 +562,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // ✅ 수정된 toggleCoreImageFilter 함수
-    // TODO: HaishinKit 2.2.3에서 VideoEffect 등록 방법 확인 필요
+    // ✅ 수정된 toggleCoreImageFilter 함수 (HaishinKit 2.2.3)
     func toggleCoreImageFilter(filterType: Int) {
-        print("⚠️ VideoEffect 기능은 HaishinKit 2.2.3 마이그레이션 중입니다. 현재는 비활성화되어 있습니다.")
-        // TODO: MediaMixer를 통한 VideoEffect 등록 방법 확인 후 구현
-        /*
         guard let mixer = mediaMixer else {
             print("❌ MediaMixer가 없습니다.")
             return
@@ -575,9 +571,19 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         // 현재 필터 제거
         if let currentEffect = currentVideoEffect {
-            // TODO: MediaMixer를 통한 VideoEffect 제거 방법 확인
+            Task { @ScreenActor in
+                _ = mixer.screen.unregisterVideoEffect(currentEffect)
+            }
             currentVideoEffect = nil
             isFilterEnabled = false
+            
+            // 필터가 없으면 passthrough 모드로 변경 (성능 최적화)
+            Task {
+                var settings = await mixer.videoMixerSettings
+                settings.mode = .passthrough
+                await mixer.setVideoMixerSettings(settings)
+                print("🎭 필터 제거: passthrough 모드로 변경")
+            }
         }
         
         // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
@@ -586,8 +592,75 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             return
         }
         
-        // TODO: VideoEffect 등록 구현
-        */
+        // 필터를 사용하려면 offscreen 모드로 변경 필요
+        Task {
+            var settings = await mixer.videoMixerSettings
+            if settings.mode != .offscreen {
+                settings.mode = .offscreen
+                await mixer.setVideoMixerSettings(settings)
+                print("🎭 offscreen 모드로 변경 (필터 적용을 위해)")
+            }
+        }
+        
+        let filter: CIFilter?
+        
+        switch filterType {
+        case 1:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(1.0, forKey: kCIInputRadiusKey)
+            print("🎭 부드러운 뷰티 필터 적용")
+            
+        case 2:
+            filter = CIFilter(name: "CIColorControls")
+            filter?.setValue(0.2, forKey: kCIInputBrightnessKey)
+            filter?.setValue(1.1, forKey: kCIInputContrastKey)
+            print("🎭 피부 화이트닝 필터 적용")
+            
+        case 3:
+            filter = CIFilter(name: "CIPhotoEffectInstant")
+            print("🎭 일루전 뷰티 필터 적용")
+            
+        case 4:
+            filter = CIFilter(name: "CISharpenLuminance")
+            filter?.setValue(0.4, forKey: kCIInputSharpnessKey)
+            print("🎭 샤프닝 필터 적용 (노이즈 감소 효과)")
+            
+        case 5:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(0.8, forKey: kCIInputRadiusKey)
+            print("🎭 매끄러운 뷰티 필터 적용")
+            
+        case 6:
+            filter = CIFilter(name: "CIGaussianBlur")
+            filter?.setValue(1.5, forKey: kCIInputRadiusKey)
+            print("🎭 확장 부드러운 필터 적용")
+            
+        case 7:
+            filter = CIFilter(name: "CISharpenLuminance")
+            filter?.setValue(0.6, forKey: kCIInputSharpnessKey)
+            print("🎭 부드럽게 선명한 필터 적용")
+            
+        default:
+            print("❌ 지원하지 않는 filterType: \(filterType)")
+            return
+        }
+        
+        // ✅ 필터 적용 (nil 체크 강화)
+        guard let validFilter = filter else {
+            print("❌ 필터 생성 실패")
+            return
+        }
+        
+        let videoEffect = CoreImageVideoEffect(filter: validFilter)
+        
+        // HaishinKit 2.2.3: MediaMixer.screen.registerVideoEffect 사용
+        Task { @ScreenActor in
+            _ = mixer.screen.registerVideoEffect(videoEffect)
+        }
+        
+        currentVideoEffect = videoEffect
+        isFilterEnabled = true
+        print("✅ 필터 적용 완료: filterType \(filterType)")
     }
 
     
