@@ -1,5 +1,5 @@
 {
-  "originHash" : "f354f9262e6fcc987a003a0d473ff43dfdf09c98aa86180d928f30913ea813b4",
+  "originHash" : "c01cf4a05d920f0b67dc6992201e38208759fc22dce0c664d9e91e63c0e5ba62",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shogo4405/HaishinKit.swift",
       "state" : {
-        "revision" : "7327e2b2406ad8638abce34c4043128e39423889",
-        "version" : "1.8.0"
+        "revision" : "47f4593c790b2af38d1607a9b44be3f4fad5076a",
+        "version" : "2.2.3"
       }
     },
     {
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shogo4405/Logboard.git",
       "state" : {
-        "revision" : "272976e1f3e8873e60ffe4b08fe50df48a93751b",
-        "version" : "2.5.0"
+        "revision" : "8f41c63afb903040b77049ee2efa8c257b8c0d50",
+        "version" : "2.6.0"
       }
     },
     {

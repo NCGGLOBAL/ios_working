@@ -48,6 +48,7 @@
 		1784C8962BC81C04009D9F40 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8952BC81C04009D9F40 /* NotificationService.swift */; };
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
+		17E4EB672BEA490000BE6400 /* RTMPHaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB662BEA490000BE63FF /* RTMPHaishinKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
 				1745000A2F07AD2B003FB767 /* Gifu in Frameworks */,
+				17E4EB672BEA490000BE6400 /* RTMPHaishinKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +267,7 @@
 				1784C87F2BC81906009D9F40 /* FirebaseAnalytics */,
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
+				17E4EB662BEA490000BE63FF /* RTMPHaishinKit */,
 				174500092F07AD2B003FB767 /* Gifu */,
 			);
 			productName = AgarMall;
@@ -749,7 +752,7 @@
 			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
+				minimumVersion = 2.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -784,6 +787,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
 			productName = HaishinKit;
+		};
+		17E4EB662BEA490000BE63FF /* RTMPHaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = RTMPHaishinKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
