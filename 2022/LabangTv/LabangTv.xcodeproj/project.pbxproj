@@ -46,6 +46,7 @@
 		1784C8842BC81967009D9F40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1784C8832BC81967009D9F40 /* GoogleService-Info.plist */; };
 		1784C8962BC81C04009D9F40 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784C8952BC81C04009D9F40 /* NotificationService.swift */; };
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17BD4AC92F0A6F790021489A /* RTMPHaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17BD4AC82F0A6F790021489A /* RTMPHaishinKit */; };
 		17C351802EA67081002E103C /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 17C3517F2EA67081002E103C /* LightCompressor */; };
 		17C351822EA67167002E103C /* VideoThumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C351812EA67167002E103C /* VideoThumbViewController.swift */; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
@@ -128,6 +129,7 @@
 				17C351802EA67081002E103C /* LightCompressor in Frameworks */,
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
+				17BD4AC92F0A6F790021489A /* RTMPHaishinKit in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +149,7 @@
 			children = (
 				1784C82D2BC80DAC009D9F40 /* LabangTv */,
 				1784C8942BC81C04009D9F40 /* NotificationServiceExtension */,
+				17BD4AC72F0A6F790021489A /* Frameworks */,
 				1784C82C2BC80DAC009D9F40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -244,6 +247,13 @@
 			path = NotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		17BD4AC72F0A6F790021489A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,6 +279,7 @@
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
 				17C3517F2EA67081002E103C /* LightCompressor */,
+				17BD4AC82F0A6F790021489A /* RTMPHaishinKit */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* LabangTv.app */;
@@ -753,7 +764,7 @@
 			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
+				minimumVersion = 2.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -778,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1784C87E2BC81906009D9F40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		17BD4AC82F0A6F790021489A /* RTMPHaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = RTMPHaishinKit;
 		};
 		17C3517F2EA67081002E103C /* LightCompressor */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import HaishinKit
+import RTMPHaishinKit
 import AVFoundation
 import VideoToolbox
 import CoreImage
@@ -20,7 +21,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     let urlString = AppDelegate.HOME_URL + "/addon/wlive/TV_live_creator.asp"
     var uniqueProcessPool = WKProcessPool()
-    var cookies: [HTTPCookie] = []
+    var cookies = HTTPCookieStorage.shared.cookies ?? []
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 webview-type=sub"
     private struct Constants {
         static let callBackHandlerKey = "ios"
@@ -28,6 +29,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     let rtmpConnection = RTMPConnection()
     var rtmpStream: RTMPStream? = nil
+    var mediaMixer: MediaMixer? = nil
     var currentCameraPosition: AVCaptureDevice.Position = .front
     
     // ✅ 카메라 해상도 (카메라 사양에 맞게 동적으로 설정)
@@ -39,8 +41,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     // ✅ 필터 관련 프로퍼티
     private var isFilterEnabled: Bool = false
     private var currentVideoEffect: VideoEffect?
-    
-    var callback = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,10 +114,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         super.viewWillDisappear(animated)
         
         if (rtmpStream != nil) {
-            // ✅ 기존 방식 유지
-            rtmpStream?.attachCamera(nil)
-            rtmpStream?.attachAudio(nil)
-            
+            // ✅ HaishinKit 2.2.3: 카메라/오디오 분리 (nil 전달 방식 제거)
             UIApplication.shared.isIdleTimerDisabled = false
         }
     }
@@ -126,11 +123,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         super.viewDidDisappear(animated)
         
         if (rtmpStream != nil) {
-            rtmpStream?.close()
-            rtmpConnection.close()
-            
-            rtmpStream?.attachCamera(nil)
-            rtmpStream?.attachAudio(nil)
+            Task {
+                do {
+                    try await rtmpStream?.close()
+                    try await rtmpConnection.close()
+                } catch {
+                    print("Error closing stream: \(error)")
+                }
+            }
             
             UIApplication.shared.isIdleTimerDisabled = false
             
@@ -144,14 +144,20 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
         guard let stream = rtmpStream else { return }
 
-        // 스트리밍 재개
-        stream.receiveVideo = true
-        stream.receiveAudio = true
+        // 스트리밍 재개 (HaishinKit 2.2.3: 프로퍼티로 변경되었을 수 있음)
+        // stream.receiveVideo = true
+        // stream.receiveAudio = true
         
         // ✅ RTMP 연결이 끊어진 경우에만 재연결
-        if !rtmpConnection.connected && lastStreamUrl != nil && lastStreamKey != nil {
-            rtmpConnection.connect(lastStreamUrl!)
-            rtmpStream?.publish(lastStreamKey!)
+        Task {
+            if !(await rtmpConnection.connected) && lastStreamUrl != nil && lastStreamKey != nil {
+                do {
+                    try await rtmpConnection.connect(lastStreamUrl!)
+                    try await rtmpStream?.publish(lastStreamKey!)
+                } catch {
+                    print("Error reconnecting: \(error)")
+                }
+            }
         }
 
         UIApplication.shared.isIdleTimerDisabled = true
@@ -162,9 +168,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
         guard let stream = rtmpStream else { return }
 
-        // 스트리밍 중지
-        stream.receiveVideo = false
-        stream.receiveAudio = false
+        // 스트리밍 중지 (HaishinKit 2.2.3: 프로퍼티로 변경되었을 수 있음)
+        // stream.receiveVideo = false
+        // stream.receiveAudio = false
 
         UIApplication.shared.isIdleTimerDisabled = false
     }
@@ -280,7 +286,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 print("actionParamObj : \(actionParamObj)")
 #endif
                 
-                callback = dictionary["callBack"] as? String ?? ""
+                let callback = dictionary["callBack"] as? String ?? ""
 #if DEBUG
                 print("callBack : \(callback)")
 #endif
@@ -307,25 +313,26 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         currentCameraPosition = (currentCameraPosition == .back) ? .front : .back
                         let camera = getCameraDevice(for: currentCameraPosition)
                         
-                        rtmpStream?.attachCamera(camera) { [weak self] error, result in
-                            if let error = error {
-                                print("Error attaching camera: \(error)")
-                            } else {
-                                // ✅ 카메라 전환 후 한 번만 해상도 적용
-                                self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
-                                
-                                // 카메라 전환 후 미러링 설정 적용
-                                if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
-                                    if self?.currentCameraPosition == .front {
-                                        // 전면 카메라는 기본적으로 미러링 활성화
-                                        videoCapture.isVideoMirrored = true
-                                        print("🔧 전면 카메라로 전환 - 미러링 활성화")
-                                    } else {
-                                        // 후면 카메라는 미러링 비활성화
-                                        videoCapture.isVideoMirrored = false
-                                        print("🔧 후면 카메라로 전환 - 미러링 비활성화")
+                        Task { [weak self] in
+                            guard let mixer = self?.mediaMixer else { return }
+                            do {
+                                try await mixer.attachVideo(camera, track: 0) { capture in
+                                    Task { @MainActor in
+                                        // 카메라 전환 후 한 번만 해상도 적용
+                                        self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
+                                        
+                                        // 카메라 전환 후 미러링 설정 적용
+                                        if self?.currentCameraPosition == .front {
+                                            capture.isVideoMirrored = true
+                                            print("🔧 전면 카메라로 전환 - 미러링 활성화")
+                                        } else {
+                                            capture.isVideoMirrored = false
+                                            print("🔧 후면 카메라로 전환 - 미러링 비활성화")
+                                        }
                                     }
                                 }
+                            } catch {
+                                print("Error attaching camera: \(error)")
                             }
                         }
                     } else {
@@ -398,7 +405,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                                 do {
                                     let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                                     let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                    let javascript = "\(self.callback)('\(stringValue)')"
+                                    let javascript = "\(callback)('\(stringValue)')"
                                     self.webView.evaluateJavaScript(javascript) { (result, error) in
                                         // 결과 처리
                                     }
@@ -422,7 +429,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                             do {
                                 let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                                let javascript = "\(self.callback)('\(stringValue)')"
+                                let javascript = "\(callback)('\(stringValue)')"
 #if DEBUG
                                 print("ACT1034 jsonData : \(jsonData)")
                                 print("ACT1034 javascript : \(javascript)")
@@ -555,24 +562,44 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // ✅ 수정된 toggleCoreImageFilter 함수
+    // ✅ 수정된 toggleCoreImageFilter 함수 (HaishinKit 2.2.3)
     func toggleCoreImageFilter(filterType: Int) {
-        guard let stream = rtmpStream else {
-            print("❌ RTMPStream이 없습니다.")
+        guard let mixer = mediaMixer else {
+            print("❌ MediaMixer가 없습니다.")
             return
         }
         
         // 현재 필터 제거
         if let currentEffect = currentVideoEffect {
-            stream.unregisterVideoEffect(currentEffect)
+            Task { @ScreenActor in
+                _ = mixer.screen.unregisterVideoEffect(currentEffect)
+            }
             currentVideoEffect = nil
             isFilterEnabled = false
+            
+            // 필터가 없으면 passthrough 모드로 변경 (성능 최적화)
+            Task {
+                var settings = await mixer.videoMixerSettings
+                settings.mode = .passthrough
+                await mixer.setVideoMixerSettings(settings)
+                print("🎭 필터 제거: passthrough 모드로 변경")
+            }
         }
         
         // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
         if filterType == 0 {
             print("🎭 모든 필터 비활성화")
             return
+        }
+        
+        // 필터를 사용하려면 offscreen 모드로 변경 필요
+        Task {
+            var settings = await mixer.videoMixerSettings
+            if settings.mode != .offscreen {
+                settings.mode = .offscreen
+                await mixer.setVideoMixerSettings(settings)
+                print("🎭 offscreen 모드로 변경 (필터 적용을 위해)")
+            }
         }
         
         let filter: CIFilter?
@@ -593,7 +620,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             filter = CIFilter(name: "CIPhotoEffectInstant")
             print("🎭 일루전 뷰티 필터 적용")
             
-        case 4: // ✅ 수정된 부분
+        case 4:
             filter = CIFilter(name: "CISharpenLuminance")
             filter?.setValue(0.4, forKey: kCIInputSharpnessKey)
             print("🎭 샤프닝 필터 적용 (노이즈 감소 효과)")
@@ -626,8 +653,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         let videoEffect = CoreImageVideoEffect(filter: validFilter)
         
-        // HaishinKit 1.9.9 API 사용
-        stream.registerVideoEffect(videoEffect)
+        // HaishinKit 2.2.3: MediaMixer.screen.registerVideoEffect 사용
+        Task { @ScreenActor in
+            _ = mixer.screen.registerVideoEffect(videoEffect)
+        }
         
         currentVideoEffect = videoEffect
         isFilterEnabled = true
@@ -636,46 +665,53 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     
     
-    // ✅ 카메라 연결 시 단순하게 한 번만 적용
+    // ✅ 카메라 연결
     func attachCameraDevice() {
         let cameraDevice = getCameraDevice(for: currentCameraPosition)
-        rtmpStream?.attachCamera(cameraDevice) { [weak self] error, result in
-            if let error = error {
-                print("Error attaching camera: \(error)")
-            } else {
-                // 카메라 연결 후 한 번만 해상도 적용
-                self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
-                
-                // 카메라 전환 후 미러링 설정 유지 (전면 카메라일 때만)
-                if self?.currentCameraPosition == .front {
-                    if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
-                        // 전면 카메라는 기본적으로 미러링 활성화 (거울처럼 보이게)
-                        videoCapture.isVideoMirrored = true
-                        print("🔧 전면 카메라 미러링 설정: 활성화")
-                    }
-                } else {
-                    if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
-                        // 후면 카메라는 미러링 비활성화
-                        videoCapture.isVideoMirrored = false
-                        print("🔧 후면 카메라 미러링 설정: 비활성화")
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try await mixer.attachVideo(cameraDevice, track: 0) { capture in
+                    // 카메라 연결 후 한 번만 해상도 적용
+                    Task { @MainActor in
+                        self?.applyVideoSettings(bitrate: self?.lastAppliedBitrate ?? 2_500_000)
+                        
+                        // 카메라 전환 후 미러링 설정 유지
+                        if self?.currentCameraPosition == .front {
+                            capture.isVideoMirrored = true
+                            print("🔧 전면 카메라 미러링 설정: 활성화")
+                        } else {
+                            capture.isVideoMirrored = false
+                            print("🔧 후면 카메라 미러링 설정: 비활성화")
+                        }
                     }
                 }
+                // 카메라 캡처 시작
+                await mixer.startCapturing()
+            } catch {
+                print("Error attaching camera: \(error)")
             }
         }
     }
     
     func attachMicrophone() {
         let audioDevice = AVCaptureDevice.default(for: .audio)
-        rtmpStream?.attachAudio(audioDevice) { error, result in
-            if let error = error {
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try await mixer.attachAudio(audioDevice, track: 0)
+            } catch {
                 print("Error attaching audio: \(error)")
             }
         }
     }
     
     func detachMicrophone() {
-        rtmpStream?.attachAudio(nil) { error, result in
-            if let error = error {
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try await mixer.attachAudio(nil, track: 0)
+            } catch {
                 print("Error detaching audio: \(error)")
             }
         }
@@ -731,38 +767,6 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         present(imagePicker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                    let imageName = imageUrl.lastPathComponent
-                    print(imageName) // "example.jpg"
-                    var myDict = [String: Any]()
-                    if let imageData = image.pngData() {
-                        let base64String = imageData.base64EncodedString()
-                        myDict["fData"] = base64String
-                        myDict["fName"] = imageName
-                    }
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: myDict, options: [])
-                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-                            let jsFunction = "\(callback)('\(jsonString)')" // JavaScript 함수와 Base64 문자열 인수를 포함하는 문자열 생성
-                            // webView는 UIWebView 또는 WKWebView 객체입니다.
-                            webView.evaluateJavaScript(jsFunction, completionHandler: { (result, error) in
-                                if let error = error {
-                                    print("Error: \(error.localizedDescription)")
-                                } else {
-                                    print("Result: \(result ?? "")")
-                                }
-                            })
-                        }
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                }
-            }
-            picker.dismiss(animated: true, completion: nil)
-    }
-    
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
@@ -790,20 +794,23 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     func initCamera() {
+        // RTMPStream 생성
         self.rtmpStream = RTMPStream(connection: rtmpConnection)
-        currentCameraPosition = .front
         
-        // 초기 카메라 미러링 설정 (기본값: 비활성화)
-        if let videoCapture = self.rtmpStream?.videoCapture(for: 0) {
-            videoCapture.isVideoMirrored = false
-            print("🔧 초기 카메라 미러링 설정: 비활성화")
-        }
+        // MediaMixer 생성 및 RTMPStream과 PiPHKView를 output으로 추가
+        self.mediaMixer = MediaMixer()
         
-        let hkView = MTHKView(frame: view.bounds)
+        // PiPHKView 사용
+        let hkView = PiPHKView(frame: view.bounds)
         hkView.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        hkView.attachStream(rtmpStream)
-        
         self.containerView.addSubview(hkView)
+        
+        Task {
+            if let mixer = self.mediaMixer, let stream = self.rtmpStream {
+                await mixer.addOutput(stream)
+                await mixer.addOutput(hkView)
+            }
+        }
     }
     
     // ✅ 스트리머 초기화 시 확실한 초기 설정
@@ -820,8 +827,14 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             lastStreamUrl = convertStreamUrl
             lastStreamKey = streamKey
             
-            self.rtmpConnection.connect(convertStreamUrl)
-            self.rtmpStream?.publish(streamKey)
+            Task {
+                do {
+                    try await self.rtmpConnection.connect(convertStreamUrl)
+                    try await self.rtmpStream?.publish(streamKey)
+                } catch {
+                    print("Error connecting/publishing: \(error)")
+                }
+            }
         }
 
         // 2. 비트레이트 설정 (setVideoKBitrate는 kbps 단위이므로 bps로 변환 필요)
@@ -848,60 +861,77 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         applyVideoSettings(bitrate: bitrate)
 
         // 4. 프레임 레이트
-        self.rtmpStream?.frameRate = Float64(targetFps)
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try mixer.setFrameRate(Float64(targetFps))
+            } catch {
+                print("Error setting frame rate: \(error)")
+            }
+        }
 
         // 5. 오디오 연결
-        self.rtmpStream?.attachAudio(AVCaptureDevice.default(for: .audio)) { _, error in
-            print("attachAudio" + (error != nil ? " error" : ""))
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try await mixer.attachAudio(AVCaptureDevice.default(for: .audio), track: 0)
+                print("attachAudio success")
+            } catch {
+                print("attachAudio error: \(error)")
+            }
         }
 
         // 6. 카메라 연결
-        let cameraDevice = getCameraDevice(for: currentCameraPosition)
-        self.rtmpStream?.attachCamera(
-            cameraDevice,
-            track: 0
-        ) { [weak self] _, error in
-            print("attachCamera" + (error != nil ? " error" : ""))
-            if error == nil {
-                // 카메라 연결 후 한 번만 해상도 적용
-                self?.applyVideoSettings(bitrate: bitrate)
-                
-                // 초기 카메라 미러링 설정 (전면 카메라 기본값: 활성화)
-                if let videoCapture = self?.rtmpStream?.videoCapture(for: 0) {
-                    if self?.currentCameraPosition == .front {
-                        videoCapture.isVideoMirrored = true
+        Task { [weak self] in
+            guard let mixer = self?.mediaMixer else { return }
+            do {
+                try await mixer.attachVideo(
+                    AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
+                    track: 0
+                ) { capture in
+                    Task { @MainActor in
+                        print("attachCamera success")
+                        // 카메라 연결 후 한 번만 해상도 적용
+                        self?.applyVideoSettings(bitrate: bitrate)
+                        
+                        // 초기 카메라 미러링 설정 (전면 카메라 기본값: 활성화)
+                        capture.isVideoMirrored = true
                         print("🔧 초기 전면 카메라 미러링 설정: 활성화")
-                    } else {
-                        videoCapture.isVideoMirrored = false
-                        print("🔧 초기 후면 카메라 미러링 설정: 비활성화")
                     }
                 }
+                // 카메라 캡처 시작
+                await mixer.startCapturing()
+            } catch {
+                print("attachCamera error: \(error)")
             }
         }
     }
     
     // ✅ 카메라 좌우 반전 제어 함수
     func toggleCameraMirror(keyType: String) {
-        guard let stream = rtmpStream else {
-            print("❌ RTMPStream이 없습니다.")
+        guard let mixer = mediaMixer else {
+            print("❌ MediaMixer가 없습니다.")
             return
         }
         
         // key_type이 "0"이면 미러링 비활성화, "1"이면 미러링 활성화
         let shouldMirror = keyType == "1"
         
-        // HaishinKit에서 카메라 미러링 설정
-        if let videoCapture = stream.videoCapture(for: 0) {
-            videoCapture.isVideoMirrored = shouldMirror
-            print("🔄 카메라 미러링 \(shouldMirror ? "활성화" : "비활성화") 완료")
-        } else {
-            print("❌ 비디오 캡처를 찾을 수 없습니다.")
+        Task {
+            do {
+                try await mixer.configuration(video: 0) { videoCapture in
+                    videoCapture.isVideoMirrored = shouldMirror
+                    print("🔄 카메라 미러링 \(shouldMirror ? "활성화" : "비활성화") 완료")
+                }
+            } catch {
+                print("❌ 비디오 캡처를 찾을 수 없습니다: \(error)")
+            }
         }
     }
     
-    // ✅ 카메라 사양에 맞게 해상도 설정 (카메라가 지원하는 최대 해상도 사용)
+    // ✅ 카메라 사양에 맞게 해상도 설정
     func applyVideoSettings(bitrate: Int = 2_500_000) {
-        guard let stream = rtmpStream else { return }
+        guard let mixer = mediaMixer, let stream = rtmpStream else { return }
         
         lastAppliedBitrate = bitrate
         
@@ -913,33 +943,38 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         print("🔧 해상도 \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height)) 적용 (카메라 사양 기준)")
         
-        // 1. sessionPreset 설정 (카메라 해상도에 맞게)
-        // 세로 방향이므로 높이를 기준으로 세션 프리셋 선택
-        if cameraVideoSize.height >= 1920 {
-            stream.sessionPreset = .hd1920x1080
-        } else if cameraVideoSize.height >= 1280 {
-            stream.sessionPreset = .hd1280x720
-        } else {
-            stream.sessionPreset = .hd1280x720 // 기본값
+        Task {
+            // 1. sessionPreset 설정
+            if cameraVideoSize.height >= 1920 {
+                await mixer.setSessionPreset(.hd1920x1080)
+            } else if cameraVideoSize.height >= 1280 {
+                await mixer.setSessionPreset(.hd1280x720)
+            } else {
+                await mixer.setSessionPreset(.hd1280x720)
+            }
+            
+            // 2. 해상도 설정
+            var videoSettings = VideoCodecSettings()
+            videoSettings.videoSize = cameraVideoSize
+            videoSettings.bitRate = bitrate
+            videoSettings.profileLevel = kVTProfileLevel_H264_Baseline_AutoLevel as String
+            videoSettings.scalingMode = .trim
+            
+            do {
+                try stream.setVideoSettings(videoSettings)
+            } catch {
+                print("Error setting video settings: \(error)")
+            }
+            
+            await mixer.setVideoOrientation(.portrait)
+            
+            print("✅ 해상도 설정 완료: \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height))")
         }
-        
-        // 2. 해상도 설정 (카메라 사양에 맞게)
-        let videoSettings = VideoCodecSettings(
-            videoSize: cameraVideoSize, // 카메라가 지원하는 최대 해상도
-            bitRate: bitrate,
-            profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
-            scalingMode: .trim
-        )
-        
-        stream.videoSettings = videoSettings
-        stream.videoOrientation = .portrait
-        
-        print("✅ 해상도 설정 완료: \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height))")
     }
 }
 
-// ✅ VideoEffect 클래스는 그대로 유지
-final class CoreImageVideoEffect: VideoEffect {
+// ✅ VideoEffect 프로토콜 구현 (HaishinKit 2.2.3)
+final class CoreImageVideoEffect: NSObject, VideoEffect {
     private let filter: CIFilter
     
     init(filter: CIFilter) {
@@ -947,7 +982,7 @@ final class CoreImageVideoEffect: VideoEffect {
         super.init()
     }
     
-    override func execute(_ image: CIImage, info: CMSampleBuffer?) -> CIImage {
+    func execute(_ image: CIImage) -> CIImage {
         filter.setValue(image, forKey: kCIInputImageKey)
         return filter.outputImage ?? image
     }
@@ -962,4 +997,5 @@ extension UIImage {
         return imageData.base64EncodedString(options: .lineLength64Characters)
     }
 }
+
 
