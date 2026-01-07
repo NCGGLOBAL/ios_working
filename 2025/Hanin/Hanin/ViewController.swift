@@ -24,7 +24,6 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     let kKeyOfWebActionParams = "action_param"
     let kKeyOfWebActionCallback = "callBack"
     let bridgeName = "ios"
-    let liveScheme = "ncglive"
     
     var callback = ""
     
@@ -597,10 +596,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
     #endif
-        if (url.scheme?.elementsEqual(liveScheme))! {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
+        if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
             if (urlString.contains("pf.kakao.com") ||
