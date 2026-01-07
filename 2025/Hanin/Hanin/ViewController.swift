@@ -30,7 +30,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     let uniqueProcessPool = WKProcessPool()
     var locationManager: CLLocationManager!
     
-    var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
+    var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","kakaolink://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
         "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://","com.wooricard.wcard://","newsmartpib://"]
     
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1"
@@ -562,7 +562,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             return
         } else if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
                 return
             }
@@ -579,10 +579,16 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             
             print("#해당 앱 스킴 등록 여부 ->  ", app_pass_yn)
 
-            if(app_pass_yn){ UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)}
-            else{noAppDialog()}
-            
-            break;
+            if(app_pass_yn){ 
+                UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
+                decisionHandler(.cancel)
+                return
+            }
+            else{
+                noAppDialog()
+                decisionHandler(.cancel)
+                return
+            }
         }
 
         defer {
