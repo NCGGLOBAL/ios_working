@@ -417,43 +417,6 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="95.758928571428569"/>
         </scene>
-        <!--Live View Controller-->
-        <scene sceneID="R9W-Vx-lJ0">
-            <objects>
-                <viewController storyboardIdentifier="liveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLt-8t-3ae" customClass="LiveViewController" customModule="LabangTv" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qIQ-ZN-cdu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvH-Pr-WXD">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wor-IW-eZA">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="zgX-q9-Efr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="top" secondItem="qIQ-ZN-cdu" secondAttribute="top" id="KeL-at-gD8"/>
-                            <constraint firstItem="Wor-IW-eZA" firstAttribute="centerX" secondItem="qIQ-ZN-cdu" secondAttribute="centerX" id="L1r-Va-eDW"/>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="trailing" secondItem="zgX-q9-Efr" secondAttribute="trailing" id="Wpv-Hb-vRo"/>
-                            <constraint firstAttribute="bottom" secondItem="bvH-Pr-WXD" secondAttribute="bottom" id="aKh-di-k6E"/>
-                            <constraint firstItem="bvH-Pr-WXD" firstAttribute="leading" secondItem="zgX-q9-Efr" secondAttribute="leading" id="bzd-HM-2zT"/>
-                            <constraint firstItem="Wor-IW-eZA" firstAttribute="centerY" secondItem="qIQ-ZN-cdu" secondAttribute="centerY" id="nBn-T5-AAu"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="7DH-Uu-xXT"/>
-                    <connections>
-                        <outlet property="containerView" destination="bvH-Pr-WXD" id="vco-ij-vRA"/>
-                        <outlet property="indicatorView" destination="Wor-IW-eZA" id="O8k-vK-iRE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qg7-8E-EQ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3582.608695652174" y="95.758928571428569"/>
-        </scene>
     </scenes>
     <resources>
         <image name="btn_camera.png" width="72" height="51"/>

@@ -24,14 +24,13 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     let kKeyOfWebActionParams = "action_param"
     let kKeyOfWebActionCallback = "callBack"
     let bridgeName = "ios"
-    let liveScheme = "ncglive"
     
     var callback = ""
     
     let uniqueProcessPool = WKProcessPool()
     var locationManager: CLLocationManager!
     
-    var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
+    var app_scheme_arr : Array<String> = ["itms-appss://","ispmobile://","payco://","kakaotalk://","kakaolink://","shinsegaeeasypayment://","lpayapp://","kb-acp://","hdcardappcardansimclick://","shinhan-sr-ansimclick://","lotteappcard://","cloudpay://","hanawalletmembers://","nhallonepayansimclick://","citimobileapp://","wooripay://","shinhan-sr-ansimclick-naverpay://","shinhan-sr-ansimclick-payco://","mpocket.online.ansimclick://",
         "kftc-bankpay://","lguthepay-xpay://","SmartBank2WB://","kb-bankpay://","nhb-bankpay://","mg-bankpay://","kn-bankpay://","com.wooricard.wcard://","newsmartpib://"]
     
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1"
@@ -597,10 +596,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
         print("url absoluteString: \(url.absoluteString)")
         print("url scheme: \(url.scheme)")
     #endif
-        if (url.scheme?.elementsEqual(liveScheme))! {
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "liveViewController") as! LiveViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
+        if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
             if (urlString.contains("pf.kakao.com") ||
