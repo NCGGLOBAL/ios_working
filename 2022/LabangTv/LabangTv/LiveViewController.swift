@@ -636,11 +636,10 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             switch filterType {
             case 1:
-                // 🔴 테스트용: 빨간색 필터 (프리뷰 확인용) - CIColorMonochrome 사용
-                filter = CIFilter(name: "CIColorMonochrome")
-                filter?.setValue(CIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0), forKey: kCIInputColorKey) // 빨간색
+                // 🟤 세피아 필터 (빈티지 느낌 - 프리뷰/스트리밍 확인용)
+                filter = CIFilter(name: "CISepiaTone")
                 filter?.setValue(1.0, forKey: kCIInputIntensityKey) // 최대 강도
-                print("🔴 빨간색 필터 적용 (프리뷰 테스트용)")
+                print("🟤 세피아 필터 적용 (빈티지 효과)")
                 
             case 2:
                 filter = CIFilter(name: "CIColorControls")
