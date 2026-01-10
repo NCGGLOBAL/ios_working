@@ -42,9 +42,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var lastStreamKey: String?
     private var lastAppliedBitrate: Int = 2_500_000
     
-    // ✅ 필터 관련 프로퍼티 (TODO: HaishinKit 2.0.0 VideoEffect 마이그레이션 필요)
-    // private var isFilterEnabled: Bool = false
-    // private var currentVideoEffect: VideoEffect?
+    // ✅ 필터 관련 프로퍼티 (HaishinKit 2.2.3에서 정상 작동 확인)
+    private var isFilterEnabled: Bool = false
+    private var currentVideoEffect: VideoEffect?
     
     // ✅ Combine cancellables
     private var cancellables: Set<AnyCancellable> = []
@@ -412,27 +412,12 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         print(error)
                     }
                     break
-                case "ACT1029": // TODO: HaishinKit 2.0.0 VideoEffect 마이그레이션 필요
+                case "ACT1029": // ✅ HaishinKit 2.2.3: VideoEffect 필터 기능 활성화
                     var resultcd = "1"
-                    print("⚠️ ACT1029 필터 기능은 현재 비활성화 상태입니다 (HaishinKit 2.0.0 마이그레이션 필요)")
                     
-                    var dic = Dictionary<String, String>()
-                    dic.updateValue(resultcd, forKey: "resultcd")
-                    
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
-                        let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
-                        let javascript = "\(callback)('\(stringValue)')"
-                        self.webView.evaluateJavaScript(javascript) { (result, error) in
-                            // 결과 처리
-                        }
-                    } catch let error as NSError {
-                        print("ACT1029 JSON error: \(error)")
-                    }
-                    
-                    /*
-                    // TODO: VideoEffect 마이그레이션 후 복원
                     if let filterType = actionParamObj?["key_type"] as? Int {
+                        print("🎨 ACT1029 필터 요청: filterType = \(filterType)")
+                        
                         DispatchQueue.main.async {
                             self.toggleCoreImageFilter(filterType: filterType)
                             
@@ -444,14 +429,30 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                                 let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
                                 let javascript = "\(self.callback)('\(stringValue)')"
                                 self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                    // 결과 처리
+                                    print("ACT1029 result : \(String(describing: result))")
+                                    print("ACT1029 error : \(String(describing: error))")
                                 }
                             } catch let error as NSError {
-                                print("Filter JSON error: \(error)")
+                                print("❌ ACT1029 JSON error: \(error)")
                             }
                         }
+                    } else {
+                        print("⚠️ ACT1029: key_type이 없습니다")
+                        
+                        var dic = Dictionary<String, String>()
+                        dic.updateValue("0", forKey: "resultcd")
+                        
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                            let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                            let javascript = "\(callback)('\(stringValue)')"
+                            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                // 결과 처리
+                            }
+                        } catch let error as NSError {
+                            print("❌ ACT1029 JSON error: \(error)")
+                        }
                     }
-                    */
                     
                     break
                     
@@ -600,25 +601,25 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // TODO: HaishinKit 2.0.0 VideoEffect 마이그레이션 필요
-    /*
+    // ✅ HaishinKit 2.2.3: VideoEffect를 사용한 필터 기능
     func toggleCoreImageFilter(filterType: Int) {
-        guard rtmpStream != nil else {
-            print("❌ RTMPStream이 없습니다.")
+        guard hkView != nil else {
+            print("❌ MTHKView가 없습니다.")
             return
         }
         
-        Task {
+        Task { @MainActor in
             // 현재 필터 제거
             if let currentEffect = currentVideoEffect {
-                await rtmpStream.unregisterVideoEffect(currentEffect)
+                let removed = hkView.unregisterVideoEffect(currentEffect)
                 currentVideoEffect = nil
                 isFilterEnabled = false
+                print("🎭 이전 필터 제거됨: \(removed)")
             }
             
             // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
             if filterType == 0 {
-                print("🎭 모든 필터 비활성화")
+                print("🎭 모든 필터 비활성화 완료")
                 return
             }
             
@@ -626,9 +627,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             switch filterType {
             case 1:
-                filter = CIFilter(name: "CIGaussianBlur")
-                filter?.setValue(1.0, forKey: kCIInputRadiusKey)
-                print("🎭 부드러운 뷰티 필터 적용")
+                // 🔴 테스트용: 빨간색 필터 (프리뷰 확인용) - CIColorMonochrome 사용
+                filter = CIFilter(name: "CIColorMonochrome")
+                filter?.setValue(CIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0), forKey: kCIInputColorKey) // 빨간색
+                filter?.setValue(1.0, forKey: kCIInputIntensityKey) // 최대 강도
+                print("🔴 빨간색 필터 적용 (프리뷰 테스트용)")
                 
             case 2:
                 filter = CIFilter(name: "CIColorControls")
@@ -672,15 +675,19 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             let videoEffect = CoreImageVideoEffect(filter: validFilter)
             
-            // HaishinKit 2.0.0: async API 사용
-            await rtmpStream.registerVideoEffect(videoEffect)
+            // HaishinKit 2.2.3: MTHKView.registerVideoEffect 사용
+            let registered = hkView.registerVideoEffect(videoEffect)
             
-            currentVideoEffect = videoEffect
-            isFilterEnabled = true
-            print("✅ 필터 적용 완료: filterType \(filterType)")
+            if registered {
+                currentVideoEffect = videoEffect
+                isFilterEnabled = true
+                print("✅ 필터 적용 완료: filterType \(filterType)")
+            } else {
+                print("❌ 필터 등록 실패 (이미 등록되어 있음)")
+            }
         }
     }
-    */
+
 
     
     
@@ -1025,8 +1032,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 }
 
-// TODO: HaishinKit 2.0.0 VideoEffect 프로토콜 변경에 따라 재구현 필요
-/*
+// ✅ HaishinKit 2.2.3 VideoEffect 구현
 final class CoreImageVideoEffect: VideoEffect {
     let filter: CIFilter
     
@@ -1039,7 +1045,6 @@ final class CoreImageVideoEffect: VideoEffect {
         return filter.outputImage ?? image
     }
 }
-*/
 
 
 extension UIImage {
