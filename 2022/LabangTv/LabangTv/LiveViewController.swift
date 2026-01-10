@@ -603,19 +603,28 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     // ✅ HaishinKit 2.2.3: VideoEffect를 사용한 필터 기능
     func toggleCoreImageFilter(filterType: Int) {
-        guard hkView != nil else {
-            print("❌ MTHKView가 없습니다.")
+        guard hkView != nil, mixer != nil else {
+            print("❌ MTHKView 또는 MediaMixer가 없습니다.")
             return
         }
         
         Task { @MainActor in
-            // 현재 필터 제거
+            // 현재 필터 제거 (프리뷰)
             if let currentEffect = currentVideoEffect {
-                let removed = hkView.unregisterVideoEffect(currentEffect)
-                currentVideoEffect = nil
-                isFilterEnabled = false
-                print("🎭 이전 필터 제거됨: \(removed)")
+                let removedPreview = hkView.unregisterVideoEffect(currentEffect)
+                print("🎭 프리뷰 필터 제거됨: \(removedPreview)")
             }
+            
+            // 현재 필터 제거 (스트리밍)
+            if let currentEffect = currentVideoEffect {
+                Task { @ScreenActor in
+                    let removedStream = mixer.screen.unregisterVideoEffect(currentEffect)
+                    print("🎭 스트리밍 필터 제거됨: \(removedStream)")
+                }
+            }
+            
+            currentVideoEffect = nil
+            isFilterEnabled = false
             
             // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
             if filterType == 0 {
@@ -675,13 +684,20 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             let videoEffect = CoreImageVideoEffect(filter: validFilter)
             
-            // HaishinKit 2.2.3: MTHKView.registerVideoEffect 사용
-            let registered = hkView.registerVideoEffect(videoEffect)
+            // HaishinKit 2.2.3: 프리뷰에 필터 적용 (MTHKView)
+            let registeredPreview = hkView.registerVideoEffect(videoEffect)
+            print("📱 프리뷰 필터 등록: \(registeredPreview)")
             
-            if registered {
+            // HaishinKit 2.2.3: 스트리밍에 필터 적용 (MediaMixer.screen)
+            Task { @ScreenActor in
+                let registeredStream = mixer.screen.registerVideoEffect(videoEffect)
+                print("📡 스트리밍 필터 등록: \(registeredStream)")
+            }
+            
+            if registeredPreview {
                 currentVideoEffect = videoEffect
                 isFilterEnabled = true
-                print("✅ 필터 적용 완료: filterType \(filterType)")
+                print("✅ 필터 적용 완료: filterType \(filterType) (프리뷰 + 스트리밍)")
             } else {
                 print("❌ 필터 등록 실패 (이미 등록되어 있음)")
             }
@@ -855,6 +871,12 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         mixer = MediaMixer()
         rtmpConnection = RTMPConnection()
         rtmpStream = RTMPStream(connection: rtmpConnection)
+        
+        // ✅ HaishinKit 2.2.3: VideoEffect를 위해 offscreen 모드 설정 (필수!)
+        var videoSettings = VideoMixerSettings()
+        videoSettings.mode = .offscreen  // passthrough 대신 offscreen 사용
+        mixer.setVideoMixerSettings(videoSettings)
+        print("✅ VideoMixerSettings: offscreen 모드 설정 완료 (필터 적용 가능)")
         
         currentCameraPosition = .front
         
