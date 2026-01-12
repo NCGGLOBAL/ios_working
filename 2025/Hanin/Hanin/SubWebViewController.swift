@@ -19,6 +19,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     var urlString = ""
     var uniqueProcessPool = WKProcessPool()
     var cookies = HTTPCookieStorage.shared.cookies ?? []
+    var showCloseButton = false // ACT1015로 열린 경우 닫기 버튼 표시 플래그
     let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 webview-type=sub"
     private struct Constants {
         static let callBackHandlerKey = "ios"
@@ -58,6 +59,12 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         if AppDelegate.QR_URL != "" {
             AppDelegate.QR_URL = ""
         }
+        // ACT1015로 열린 경우 닫기 버튼 표시
+        if showCloseButton {
+            self.backButton.isHidden = false
+            // 버튼을 최상위 레이어로 올려서 웹뷰 위에 표시되도록 함
+            self.view.bringSubviewToFront(self.backButton)
+        }
         // Do any additional setup after loading the view.
 //        navigationController?.isNavigationBarHidden = false
     }
@@ -83,6 +90,11 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩 종료
         self.indicatorView.stopAnimating()
+        // ACT1015로 열린 경우 웹뷰 로딩 후에도 닫기 버튼이 위에 표시되도록 함
+        if showCloseButton {
+            self.backButton.isHidden = false
+            self.view.bringSubviewToFront(self.backButton)
+        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -146,16 +158,23 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
         if (url.scheme?.elementsEqual(AppDelegate.openUrlSchemeKakao))! {
             UIApplication.shared.openURL(url)
         } else {
-            if (urlString.contains("pf.kakao.com") ||
-                urlString.contains("nid.naver.com") ||
-                urlString.contains("m.facebook.com") ||
-                urlString.contains("api.instagram.com") ||
-                urlString.contains("band.us") ||
-                urlString.contains("twitter.com") ||
-                urlString.contains("accounts.kakao.com")) {
+            // ACT1015로 열린 경우에는 항상 닫기 버튼 표시
+            if showCloseButton {
                 self.backButton.isHidden = false
+                self.view.bringSubviewToFront(self.backButton)
             } else {
-                self.backButton.isHidden = true
+                if (urlString.contains("pf.kakao.com") ||
+                    urlString.contains("nid.naver.com") ||
+                    urlString.contains("m.facebook.com") ||
+                    urlString.contains("api.instagram.com") ||
+                    urlString.contains("band.us") ||
+                    urlString.contains("twitter.com") ||
+                    urlString.contains("accounts.kakao.com")) {
+                    self.backButton.isHidden = false
+                    self.view.bringSubviewToFront(self.backButton)
+                } else {
+                    self.backButton.isHidden = true
+                }
             }
         }
     }
@@ -360,6 +379,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                             let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
                             vc.urlString = requestUrl
                             vc.uniqueProcessPool = self.uniqueProcessPool
+                            vc.showCloseButton = true // ACT1015로 열린 경우 닫기 버튼 표시
                             WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
                                 (cookies) in
                                 vc.cookies = cookies

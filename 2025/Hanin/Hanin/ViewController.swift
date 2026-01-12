@@ -426,6 +426,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                             let vc = self.storyboard!.instantiateViewController(withIdentifier: "subWebViewController") as! SubWebViewController
                             vc.urlString = requestUrl
                             vc.uniqueProcessPool = self.uniqueProcessPool
+                            vc.showCloseButton = true // ACT1015로 열린 경우 닫기 버튼 표시
                             WKWebsiteDataStore.default().httpCookieStore.getAllCookies({
                                 (cookies) in
                                 vc.cookies = cookies
