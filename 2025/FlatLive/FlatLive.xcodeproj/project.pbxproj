@@ -48,6 +48,7 @@
 		17BE12EE2EC0C4E50053CC64 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 17BE12ED2EC0C4E50053CC64 /* Gifu */; };
 		17C351802EA67081002E103C /* LightCompressor in Frameworks */ = {isa = PBXBuildFile; productRef = 17C3517F2EA67081002E103C /* LightCompressor */; };
 		17C351822EA67167002E103C /* VideoThumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C351812EA67167002E103C /* VideoThumbViewController.swift */; };
+		17E17AF72F16799E001DB0D5 /* RTMPHaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E17AF62F16799E001DB0D5 /* RTMPHaishinKit */; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
 		17EC67472EC37F7D00285D0D /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17EC67462EC37F7D00285D0D /* splash.gif */; };
 /* End PBXBuildFile section */
@@ -129,6 +130,7 @@
 				17C351802EA67081002E103C /* LightCompressor in Frameworks */,
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
+				17E17AF72F16799E001DB0D5 /* RTMPHaishinKit in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
 				17BE12EE2EC0C4E50053CC64 /* Gifu in Frameworks */,
 			);
@@ -149,6 +151,7 @@
 			children = (
 				1784C82D2BC80DAC009D9F40 /* FlatLive */,
 				1784C8942BC81C04009D9F40 /* NotificationServiceExtension */,
+				17E17AF52F16799E001DB0D5 /* Frameworks */,
 				1784C82C2BC80DAC009D9F40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -246,6 +249,13 @@
 			path = NotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		17E17AF52F16799E001DB0D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -272,6 +282,7 @@
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
 				17C3517F2EA67081002E103C /* LightCompressor */,
 				17BE12ED2EC0C4E50053CC64 /* Gifu */,
+				17E17AF62F16799E001DB0D5 /* RTMPHaishinKit */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* FlatLive.app */;
@@ -574,7 +585,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -610,7 +621,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,7 +649,7 @@
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -668,7 +679,7 @@
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -765,7 +776,7 @@
 			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
+				minimumVersion = 2.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -800,6 +811,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 17C3517E2EA67081002E103C /* XCRemoteSwiftPackageReference "LightCompressor_iOS" */;
 			productName = LightCompressor;
+		};
+		17E17AF62F16799E001DB0D5 /* RTMPHaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = RTMPHaishinKit;
 		};
 		17E4EB642BEA490000BE63FE /* HaishinKit */ = {
 			isa = XCSwiftPackageProductDependency;
