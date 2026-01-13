@@ -47,6 +47,7 @@
 		1784C89A2BC81C04009D9F40 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1784C8932BC81C04009D9F40 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1789CD9A2D9C1DF400D980ED /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1789CD992D9C1DF400D980ED /* Gifu */; };
 		1789CD9C2D9C1EBA00D980ED /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1789CD9B2D9C1EBA00D980ED /* splash.gif */; };
+		17E17AF42F16744D001DB0D5 /* RTMPHaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E17AF32F16744D001DB0D5 /* RTMPHaishinKit */; };
 		17E4EB652BEA490000BE63FE /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17E4EB642BEA490000BE63FE /* HaishinKit */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,7 @@
 				1784C8742BC816B3009D9F40 /* Kingfisher in Frameworks */,
 				1784C8772BC816E6009D9F40 /* BSImagePicker in Frameworks */,
 				1784C8802BC81906009D9F40 /* FirebaseAnalytics in Frameworks */,
+				17E17AF42F16744D001DB0D5 /* RTMPHaishinKit in Frameworks */,
 				1789CD9A2D9C1DF400D980ED /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +147,7 @@
 			children = (
 				1784C82D2BC80DAC009D9F40 /* WagleLive */,
 				1784C8942BC81C04009D9F40 /* NotificationServiceExtension */,
+				17E17AF22F16744D001DB0D5 /* Frameworks */,
 				1784C82C2BC80DAC009D9F40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -241,6 +244,13 @@
 			path = NotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		17E17AF22F16744D001DB0D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,6 +276,7 @@
 				1784C8812BC81906009D9F40 /* FirebaseMessaging */,
 				17E4EB642BEA490000BE63FE /* HaishinKit */,
 				1789CD992D9C1DF400D980ED /* Gifu */,
+				17E17AF32F16744D001DB0D5 /* RTMPHaishinKit */,
 			);
 			productName = AgarMall;
 			productReference = 1784C82B2BC80DAC009D9F40 /* WagleLive.app */;
@@ -763,7 +774,7 @@
 			repositoryURL = "https://github.com/shogo4405/HaishinKit.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
+				minimumVersion = 2.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -793,6 +804,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1789CD982D9C1DF400D980ED /* XCRemoteSwiftPackageReference "Gifu" */;
 			productName = Gifu;
+		};
+		17E17AF32F16744D001DB0D5 /* RTMPHaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17E4EB632BEA490000BE63FE /* XCRemoteSwiftPackageReference "HaishinKit" */;
+			productName = RTMPHaishinKit;
 		};
 		17E4EB642BEA490000BE63FE /* HaishinKit */ = {
 			isa = XCSwiftPackageProductDependency;
