@@ -36,8 +36,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     
     var currentCameraPosition: AVCaptureDevice.Position = .front
     
-    // ✅ 카메라 해상도 (카메라 사양에 맞게 동적으로 설정)
-    private var cameraVideoSize: CGSize = CGSize(width: 1080, height: 1920) // 기본값
+    // ✅ 카메라 해상도 (720p HD 화질)
+    private var cameraVideoSize: CGSize = CGSize(width: 720, height: 1280) // offscreen 모드
     private var lastStreamUrl: String?
     private var lastStreamKey: String?
     private var lastAppliedBitrate: Int = 2_500_000
@@ -45,6 +45,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     // ✅ 필터 관련 프로퍼티 (HaishinKit 2.2.3에서 정상 작동 확인)
     private var isFilterEnabled: Bool = false
     private var currentVideoEffect: VideoEffect?
+    private var filterTask: Task<Void, Never>? // 필터 적용 Task 관리
     
     // ✅ Combine cancellables
     private var cancellables: Set<AnyCancellable> = []
@@ -601,34 +602,43 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
     }
     
-    // ✅ HaishinKit 2.2.3: VideoEffect를 사용한 필터 기능
+    // ✅ HaishinKit 2.2.3: VideoEffect를 사용한 필터 기능 (메모리 최적화)
     func toggleCoreImageFilter(filterType: Int) {
         guard hkView != nil, mixer != nil else {
             print("❌ MTHKView 또는 MediaMixer가 없습니다.")
             return
         }
         
-        Task { @MainActor in
-            // 현재 필터 제거 (프리뷰)
+        // ✅ 이전 필터 적용 Task 취소 (중복 방지)
+        filterTask?.cancel()
+        
+        filterTask = Task { @MainActor in
+            // ✅ 1단계: 현재 필터 완전히 제거
             if let currentEffect = currentVideoEffect {
                 let removedPreview = hkView.unregisterVideoEffect(currentEffect)
                 print("🎭 프리뷰 필터 제거됨: \(removedPreview)")
-            }
-            
-            // 현재 필터 제거 (스트리밍)
-            if let currentEffect = currentVideoEffect {
+                
                 Task { @ScreenActor in
                     let removedStream = mixer.screen.unregisterVideoEffect(currentEffect)
                     print("🎭 스트리밍 필터 제거됨: \(removedStream)")
                 }
+                
+                // ✅ 메모리 정리 대기 (CMBufferQueue 안정화)
+                try? await Task.sleep(nanoseconds: 50_000_000) // 50ms
             }
             
             currentVideoEffect = nil
             isFilterEnabled = false
             
-            // KSY_FILTER_BEAUTY_DISABLE (0) - 필터 비활성화
+            // ✅ 2단계: 필터 0번이면 여기서 종료 (비활성화)
             if filterType == 0 {
                 print("🎭 모든 필터 비활성화 완료")
+                return
+            }
+            
+            // ✅ 3단계: Task 취소 확인
+            if Task.isCancelled {
+                print("⚠️ 필터 적용 취소됨")
                 return
             }
             
@@ -636,40 +646,84 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             
             switch filterType {
             case 1:
-                // 🟤 세피아 필터 (빈티지 느낌 - 프리뷰/스트리밍 확인용)
-                filter = CIFilter(name: "CISepiaTone")
-                filter?.setValue(1.0, forKey: kCIInputIntensityKey) // 최대 강도
-                print("🟤 세피아 필터 적용 (빈티지 효과)")
-                
-            case 2:
-                filter = CIFilter(name: "CIColorControls")
-                filter?.setValue(0.2, forKey: kCIInputBrightnessKey)
-                filter?.setValue(1.1, forKey: kCIInputContrastKey)
-                print("🎭 피부 화이트닝 필터 적용")
-                
-            case 3:
-                filter = CIFilter(name: "CIPhotoEffectInstant")
-                print("🎭 일루전 뷰티 필터 적용")
-                
-            case 4:
-                filter = CIFilter(name: "CISharpenLuminance")
-                filter?.setValue(0.4, forKey: kCIInputSharpnessKey)
-                print("🎭 샤프닝 필터 적용 (노이즈 감소 효과)")
-                
-            case 5:
-                filter = CIFilter(name: "CIGaussianBlur")
-                filter?.setValue(0.8, forKey: kCIInputRadiusKey)
-                print("🎭 매끄러운 뷰티 필터 적용")
-                
-            case 6:
+                // KSY_FILTER_BEAUTY_SOFT - 부드러운 뷰티 (뽀샤시)
                 filter = CIFilter(name: "CIGaussianBlur")
                 filter?.setValue(1.5, forKey: kCIInputRadiusKey)
-                print("🎭 확장 부드러운 필터 적용")
+                print("🎭 [1] BEAUTY_SOFT - 부드러운 뷰티 (뽀샤시)")
+                
+            case 2:
+                // KSY_FILTER_BEAUTY_SKINWHITEN - 피부 화이트닝 (밝고 맑게)
+                filter = CIFilter(name: "CIColorControls")
+                filter?.setValue(0.3, forKey: kCIInputBrightnessKey)
+                filter?.setValue(1.15, forKey: kCIInputContrastKey)
+                filter?.setValue(1.05, forKey: kCIInputSaturationKey)
+                print("🎭 [2] BEAUTY_SKINWHITEN - 피부 화이트닝")
+                
+            case 3:
+                // KSY_FILTER_BEAUTY_ILLUSION - 일루전 뷰티 (분위기)
+                filter = CIFilter(name: "CIPhotoEffectInstant")
+                print("🎭 [3] BEAUTY_ILLUSION - 일루전 뷰티")
+                
+            case 4:
+                // KSY_FILTER_BEAUTY_DENOISE - 노이즈 제거 (깨끗하게)
+                filter = CIFilter(name: "CINoiseReduction")
+                filter?.setValue(0.03, forKey: "inputNoiseLevel")
+                filter?.setValue(0.5, forKey: "inputSharpness")
+                print("🎭 [4] BEAUTY_DENOISE - 노이즈 제거")
+                
+            case 5:
+                // KSY_FILTER_BEAUTY_SMOOTH - 매끄러운 (뽀얗게)
+                filter = CIFilter(name: "CIGaussianBlur")
+                filter?.setValue(2.0, forKey: kCIInputRadiusKey)
+                print("🎭 [5] BEAUTY_SMOOTH - 매끄러운 필터")
+                
+            case 6:
+                // KSY_FILTER_BEAUTY_SOFT_EXT - 확장 부드러움 (극강 뽀샤시)
+                filter = CIFilter(name: "CIGaussianBlur")
+                filter?.setValue(3.0, forKey: kCIInputRadiusKey)
+                print("🎭 [6] BEAUTY_SOFT_EXT - 확장 부드러움")
                 
             case 7:
+                // KSY_FILTER_BEAUTY_SOFT_SHARPEN - 부드럽게 선명한 (균형)
                 filter = CIFilter(name: "CISharpenLuminance")
-                filter?.setValue(0.6, forKey: kCIInputSharpnessKey)
-                print("🎭 부드럽게 선명한 필터 적용")
+                filter?.setValue(0.5, forKey: kCIInputSharpnessKey)
+                print("🎭 [7] BEAUTY_SOFT_SHARPEN - 부드럽게 선명한")
+                
+            case 8:
+                // KSY_FILTER_BEAUTY_PRO - 뷰티 프로 (자연스러운 뷰티)
+                filter = CIFilter(name: "CIColorControls")
+                filter?.setValue(0.25, forKey: kCIInputBrightnessKey)
+                filter?.setValue(1.1, forKey: kCIInputContrastKey)
+                filter?.setValue(1.1, forKey: kCIInputSaturationKey)
+                print("🎭 [8] BEAUTY_PRO - 뷰티 프로")
+                
+            case 9:
+                // KSY_FILTER_BEAUTY_PRO1 - 뷰티 프로1 (화사하게)
+                filter = CIFilter(name: "CIColorControls")
+                filter?.setValue(0.35, forKey: kCIInputBrightnessKey)
+                filter?.setValue(1.15, forKey: kCIInputContrastKey)
+                filter?.setValue(1.15, forKey: kCIInputSaturationKey)
+                print("🎭 [9] BEAUTY_PRO1 - 뷰티 프로1 (화사)")
+                
+            case 10:
+                // KSY_FILTER_BEAUTY_PRO2 - 뷰티 프로2 (뽀얗게)
+                filter = CIFilter(name: "CIGaussianBlur")
+                filter?.setValue(2.5, forKey: kCIInputRadiusKey)
+                print("🎭 [10] BEAUTY_PRO2 - 뷰티 프로2 (뽀얗게)")
+                
+            case 11:
+                // KSY_FILTER_BEAUTY_PRO3 - 뷰티 프로3 (맑고 선명하게)
+                filter = CIFilter(name: "CISharpenLuminance")
+                filter?.setValue(0.7, forKey: kCIInputSharpnessKey)
+                print("🎭 [11] BEAUTY_PRO3 - 뷰티 프로3 (선명)")
+                
+            case 12:
+                // KSY_FILTER_BEAUTY_PRO4 - 뷰티 프로4 (종합 최강 뷰티)
+                filter = CIFilter(name: "CIColorControls")
+                filter?.setValue(0.3, forKey: kCIInputBrightnessKey)
+                filter?.setValue(1.25, forKey: kCIInputContrastKey)
+                filter?.setValue(1.2, forKey: kCIInputSaturationKey)
+                print("🎭 [12] BEAUTY_PRO4 - 뷰티 프로4 (최강)")
                 
             default:
                 print("❌ 지원하지 않는 filterType: \(filterType)")
@@ -681,14 +735,21 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 return
             }
             
+            // ✅ 4단계: Task 취소 확인
+            if Task.isCancelled {
+                print("⚠️ 필터 적용 취소됨")
+                return
+            }
+            
             let videoEffect = CoreImageVideoEffect(filter: validFilter)
             
-            // HaishinKit 2.2.3: 프리뷰에 필터 적용 (MTHKView)
+            // ✅ 5단계: 프리뷰에 필터 적용 (메모리 안정화 후)
             let registeredPreview = hkView.registerVideoEffect(videoEffect)
             print("📱 프리뷰 필터 등록: \(registeredPreview)")
             
-            // HaishinKit 2.2.3: 스트리밍에 필터 적용 (MediaMixer.screen)
+            // ✅ 6단계: 스트리밍에 필터 적용 (약간의 딜레이로 메모리 분산)
             Task { @ScreenActor in
+                try? await Task.sleep(nanoseconds: 30_000_000) // 30ms 대기
                 let registeredStream = mixer.screen.registerVideoEffect(videoEffect)
                 print("📡 스트리밍 필터 등록: \(registeredStream)")
             }
@@ -696,7 +757,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             if registeredPreview {
                 currentVideoEffect = videoEffect
                 isFilterEnabled = true
-                print("✅ 필터 적용 완료: filterType \(filterType) (프리뷰 + 스트리밍)")
+                print("✅ 필터 적용 완료: filterType \(filterType) (메모리 최적화)")
             } else {
                 print("❌ 필터 등록 실패 (이미 등록되어 있음)")
             }
@@ -767,36 +828,17 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return devices.first { $0.position == position }
     }
     
-    // ✅ 카메라가 지원하는 최대 해상도 가져오기 (1280보다 높은 해상도, 세로 방향)
+    // ✅ 카메라가 지원하는 최대 해상도 가져오기 (720p HD)
     func getMaxSupportedVideoSize(for cameraDevice: AVCaptureDevice?) -> CGSize {
         guard let device = cameraDevice else {
-            // 기본값 반환 (1080p 세로)
-            return CGSize(width: 1080, height: 1920)
+            // 기본값 반환 (720p HD)
+            return CGSize(width: 720, height: 1280)
         }
         
-        // 카메라가 지원하는 모든 포맷 중에서 최대 해상도 찾기
-        var maxSize = CGSize(width: 720, height: 1280)
+        // ✅ 720p HD 화질
+        let maxSize = CGSize(width: 720, height: 1280)
         
-        for format in device.formats {
-            let dimensions = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
-            let width = Int(dimensions.width)
-            let height = Int(dimensions.height)
-            
-            // 세로 방향 스트리밍이므로:
-            // 1. 높이가 가로보다 커야 함 (height > width)
-            // 2. 높이가 1280보다 커야 함
-            // 3. 현재 최대값보다 높이가 커야 함
-            if height > width && height > 1280 && height > Int(maxSize.height) {
-                maxSize = CGSize(width: width, height: height)
-            }
-        }
-        
-        // 1280보다 높은 세로 방향 해상도를 찾지 못한 경우 기본값 사용
-        if maxSize.height <= 1280 || maxSize.width >= maxSize.height {
-            maxSize = CGSize(width: 1080, height: 1920)
-        }
-        
-        print("📷 카메라 최대 지원 해상도 (세로 방향): \(Int(maxSize.width))x\(Int(maxSize.height))")
+        print("📷 카메라 해상도 (720p HD): \(Int(maxSize.width))x\(Int(maxSize.height))")
         return maxSize
     }
     
@@ -871,11 +913,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         rtmpConnection = RTMPConnection()
         rtmpStream = RTMPStream(connection: rtmpConnection)
         
-        // ✅ HaishinKit 2.2.3: VideoEffect를 위해 offscreen 모드 설정 (필수!)
+        // ✅ HaishinKit 2.2.3: offscreen 모드로 스트리밍에도 필터 전송
         var videoSettings = VideoMixerSettings()
-        videoSettings.mode = .offscreen  // passthrough 대신 offscreen 사용
+        videoSettings.mode = .offscreen  // 스트리밍 필터 전송을 위해 필수
         mixer.setVideoMixerSettings(videoSettings)
-        print("✅ VideoMixerSettings: offscreen 모드 설정 완료 (필터 적용 가능)")
+        print("✅ VideoMixerSettings: offscreen 모드 (720p HD)")
         
         currentCameraPosition = .front
         
@@ -1017,18 +1059,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         print("🔧 해상도 \(Int(cameraVideoSize.width))x\(Int(cameraVideoSize.height)) 적용 (카메라 사양 기준)")
         
-        // 1. sessionPreset 설정 (카메라 해상도에 맞게)
-        // 세로 방향이므로 높이를 기준으로 세션 프리셋 선택
-        let preset: AVCaptureSession.Preset
-        if cameraVideoSize.height >= 1920 {
-            preset = .hd1920x1080
-        } else if cameraVideoSize.height >= 1280 {
-            preset = .hd1280x720
-        } else {
-            preset = .hd1280x720 // 기본값
-        }
-        
-        await mixer.setSessionPreset(preset)
+        // 1. sessionPreset 설정 (720p HD)
+        await mixer.setSessionPreset(.hd1280x720)
         
         // 2. 해상도 설정 (카메라 사양에 맞게)
         let videoSettings = VideoCodecSettings(
