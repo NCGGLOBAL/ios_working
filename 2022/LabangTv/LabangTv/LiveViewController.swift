@@ -46,6 +46,75 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var isFilterEnabled: Bool = false
     private var currentVideoEffect: VideoEffect?
     private var filterTask: Task<Void, Never>? // 필터 적용 Task 관리
+    private var sliderUpdateWorkItem: DispatchWorkItem?
+    private var customFilterPanel: UIView?
+    private var brightnessSlider: UISlider?
+    private var saturationSlider: UISlider?
+    private var contrastSlider: UISlider?
+    private var blurSlider: UISlider?
+    private var sharpenSlider: UISlider?
+    private var noiseSlider: UISlider?
+    private var sliderValueLabels: [ObjectIdentifier: UILabel] = [:]
+    private var sliderStepValues: [ObjectIdentifier: Float] = [:]
+    private var arrowButtonTargets: [ObjectIdentifier: UISlider] = [:]
+    private var sliderProgressViews: [ObjectIdentifier: UIProgressView] = [:]
+    private var customAdjustEffect: CustomAdjustVideoEffect?
+    private var lastCustomOptions: CustomFilterOptions?
+    private var isUpdatingFilterUI: Bool = false
+
+    // ✅ 커스텀 필터 옵션 (ACT1029, key_type=99)
+    fileprivate struct CustomFilterOptions: CustomStringConvertible, Equatable {
+        let brightness: Double
+        let saturation: Double
+        let contrast: Double
+        let blur: Double
+        let sharpen: Double
+        let noise: Double
+
+        init?(dictionary: [String: Any]) {
+            let normalized = dictionary.reduce(into: [String: Any]()) { result, item in
+                result[item.key.lowercased()] = item.value
+            }
+
+            func value(_ key: String) -> Double? {
+                return Self.parseDouble(normalized[key])
+            }
+
+            brightness = Self.clamp(value("brightness") ?? 0.0, min: -1.0, max: 1.0)
+            saturation = Self.clamp(value("saturation") ?? 1.0, min: 0.0, max: 2.0)
+            contrast = Self.clamp(value("contrast") ?? 1.0, min: 0.0, max: 4.0)
+            blur = Self.clamp(value("blur") ?? 0.0, min: 0.0, max: 20.0)
+            sharpen = Self.clamp(value("sharpen") ?? 0.0, min: 0.0, max: 2.0)
+            noise = Self.clamp(value("noise") ?? 0.0, min: 0.0, max: 1.0)
+        }
+
+        private static func parseDouble(_ value: Any?) -> Double? {
+            if let number = value as? NSNumber {
+                return number.doubleValue
+            }
+            if let string = value as? String {
+                return Double(string)
+            }
+            return nil
+        }
+
+        private static func clamp(_ value: Double, min: Double, max: Double) -> Double {
+            return Swift.max(min, Swift.min(max, value))
+        }
+
+        var description: String {
+            return "brightness=\(brightness), saturation=\(saturation), contrast=\(contrast), blur=\(blur), sharpen=\(sharpen), noise=\(noise)"
+        }
+
+        func isNearlyEqual(to other: CustomFilterOptions, epsilon: Double = 0.0001) -> Bool {
+            return abs(brightness - other.brightness) < epsilon &&
+                abs(saturation - other.saturation) < epsilon &&
+                abs(contrast - other.contrast) < epsilon &&
+                abs(blur - other.blur) < epsilon &&
+                abs(sharpen - other.sharpen) < epsilon &&
+                abs(noise - other.noise) < epsilon
+        }
+    }
     
     // ✅ Combine cancellables
     private var cancellables: Set<AnyCancellable> = []
@@ -89,6 +158,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         if AppDelegate.QR_URL != "" {
             AppDelegate.QR_URL = ""
         }
+
+        setupCustomFilterUI()
         
         // ✅ 최소한의 알림만 등록
         NotificationCenter.default.addObserver(
@@ -107,7 +178,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         webView.allowsBackForwardNavigationGestures = true
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -416,11 +487,33 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 case "ACT1029": // ✅ HaishinKit 2.2.3: VideoEffect 필터 기능 활성화
                     var resultcd = "1"
                     
-                    if let filterType = actionParamObj?["key_type"] as? Int {
+                    let filterType: Int?
+                    if let keyTypeInt = actionParamObj?["key_type"] as? Int {
+                        filterType = keyTypeInt
+                    } else if let keyTypeString = actionParamObj?["key_type"] as? String,
+                              let keyTypeInt = Int(keyTypeString) {
+                        filterType = keyTypeInt
+                    } else {
+                        filterType = nil
+                    }
+
+                    if let filterType = filterType {
                         print("🎨 ACT1029 필터 요청: filterType = \(filterType)")
                         
                         DispatchQueue.main.async {
-                            self.toggleCoreImageFilter(filterType: filterType)
+                            var customOptions: CustomFilterOptions?
+
+                            var appliedFilterType = filterType
+
+                            if filterType == 99 {
+                                if let options = actionParamObj?["options"] as? [String: Any] {
+                                    customOptions = CustomFilterOptions(dictionary: options)
+                                } else {
+                                    print("⚠️ ACT1029: options가 없습니다 (custom filter)")
+                                }
+                            }
+
+                            self.toggleCoreImageFilter(filterType: appliedFilterType, options: customOptions)
                             
                             var dic = Dictionary<String, String>()
                             dic.updateValue(resultcd, forKey: "resultcd")
@@ -603,7 +696,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
     
     // ✅ HaishinKit 2.2.3: VideoEffect를 사용한 필터 기능 (메모리 최적화)
-    func toggleCoreImageFilter(filterType: Int) {
+    fileprivate func toggleCoreImageFilter(filterType: Int, options: CustomFilterOptions? = nil) {
         guard hkView != nil, mixer != nil else {
             print("❌ MTHKView 또는 MediaMixer가 없습니다.")
             return
@@ -633,6 +726,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             // ✅ 2단계: 필터 0번이면 여기서 종료 (비활성화)
             if filterType == 0 {
                 print("🎭 모든 필터 비활성화 완료")
+                if let defaults = defaultCustomOptions() {
+                    updateCustomFilterUI(with: defaults)
+                }
                 return
             }
             
@@ -642,7 +738,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 return
             }
             
-            let filter: CIFilter?
+            var filter: CIFilter?
+            var videoEffect: VideoEffect?
+            var presetOptions: CustomFilterOptions?
             
             switch filterType {
             case 1:
@@ -650,6 +748,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter = CIFilter(name: "CIGaussianBlur")
                 filter?.setValue(1.5, forKey: kCIInputRadiusKey)
                 print("🎭 [1] BEAUTY_SOFT - 부드러운 뷰티 (뽀샤시)")
+                presetOptions = CustomFilterOptions(dictionary: ["blur": 1.5])
                 
             case 2:
                 // KSY_FILTER_BEAUTY_SKINWHITEN - 피부 화이트닝 (밝고 맑게)
@@ -658,11 +757,17 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter?.setValue(1.15, forKey: kCIInputContrastKey)
                 filter?.setValue(1.05, forKey: kCIInputSaturationKey)
                 print("🎭 [2] BEAUTY_SKINWHITEN - 피부 화이트닝")
+                presetOptions = CustomFilterOptions(dictionary: [
+                    "brightness": 0.3,
+                    "contrast": 1.15,
+                    "saturation": 1.05
+                ])
                 
             case 3:
                 // KSY_FILTER_BEAUTY_ILLUSION - 일루전 뷰티 (분위기)
                 filter = CIFilter(name: "CIPhotoEffectInstant")
                 print("🎭 [3] BEAUTY_ILLUSION - 일루전 뷰티")
+                presetOptions = defaultCustomOptions()
                 
             case 4:
                 // KSY_FILTER_BEAUTY_DENOISE - 노이즈 제거 (깨끗하게)
@@ -670,24 +775,31 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter?.setValue(0.03, forKey: "inputNoiseLevel")
                 filter?.setValue(0.5, forKey: "inputSharpness")
                 print("🎭 [4] BEAUTY_DENOISE - 노이즈 제거")
+                presetOptions = CustomFilterOptions(dictionary: [
+                    "noise": 0.03,
+                    "sharpen": 0.5
+                ])
                 
             case 5:
                 // KSY_FILTER_BEAUTY_SMOOTH - 매끄러운 (뽀얗게)
                 filter = CIFilter(name: "CIGaussianBlur")
                 filter?.setValue(2.0, forKey: kCIInputRadiusKey)
                 print("🎭 [5] BEAUTY_SMOOTH - 매끄러운 필터")
+                presetOptions = CustomFilterOptions(dictionary: ["blur": 2.0])
                 
             case 6:
                 // KSY_FILTER_BEAUTY_SOFT_EXT - 확장 부드러움 (극강 뽀샤시)
                 filter = CIFilter(name: "CIGaussianBlur")
                 filter?.setValue(3.0, forKey: kCIInputRadiusKey)
                 print("🎭 [6] BEAUTY_SOFT_EXT - 확장 부드러움")
+                presetOptions = CustomFilterOptions(dictionary: ["blur": 3.0])
                 
             case 7:
                 // KSY_FILTER_BEAUTY_SOFT_SHARPEN - 부드럽게 선명한 (균형)
                 filter = CIFilter(name: "CISharpenLuminance")
                 filter?.setValue(0.5, forKey: kCIInputSharpnessKey)
                 print("🎭 [7] BEAUTY_SOFT_SHARPEN - 부드럽게 선명한")
+                presetOptions = CustomFilterOptions(dictionary: ["sharpen": 0.5])
                 
             case 8:
                 // KSY_FILTER_BEAUTY_PRO - 뷰티 프로 (자연스러운 뷰티)
@@ -696,6 +808,11 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter?.setValue(1.1, forKey: kCIInputContrastKey)
                 filter?.setValue(1.1, forKey: kCIInputSaturationKey)
                 print("🎭 [8] BEAUTY_PRO - 뷰티 프로")
+                presetOptions = CustomFilterOptions(dictionary: [
+                    "brightness": 0.25,
+                    "contrast": 1.1,
+                    "saturation": 1.1
+                ])
                 
             case 9:
                 // KSY_FILTER_BEAUTY_PRO1 - 뷰티 프로1 (화사하게)
@@ -704,18 +821,25 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter?.setValue(1.15, forKey: kCIInputContrastKey)
                 filter?.setValue(1.15, forKey: kCIInputSaturationKey)
                 print("🎭 [9] BEAUTY_PRO1 - 뷰티 프로1 (화사)")
+                presetOptions = CustomFilterOptions(dictionary: [
+                    "brightness": 0.35,
+                    "contrast": 1.15,
+                    "saturation": 1.15
+                ])
                 
             case 10:
                 // KSY_FILTER_BEAUTY_PRO2 - 뷰티 프로2 (뽀얗게)
                 filter = CIFilter(name: "CIGaussianBlur")
                 filter?.setValue(2.5, forKey: kCIInputRadiusKey)
                 print("🎭 [10] BEAUTY_PRO2 - 뷰티 프로2 (뽀얗게)")
+                presetOptions = CustomFilterOptions(dictionary: ["blur": 2.5])
                 
             case 11:
                 // KSY_FILTER_BEAUTY_PRO3 - 뷰티 프로3 (맑고 선명하게)
                 filter = CIFilter(name: "CISharpenLuminance")
                 filter?.setValue(0.7, forKey: kCIInputSharpnessKey)
                 print("🎭 [11] BEAUTY_PRO3 - 뷰티 프로3 (선명)")
+                presetOptions = CustomFilterOptions(dictionary: ["sharpen": 0.7])
                 
             case 12:
                 // KSY_FILTER_BEAUTY_PRO4 - 뷰티 프로4 (종합 최강 뷰티)
@@ -724,15 +848,43 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 filter?.setValue(1.25, forKey: kCIInputContrastKey)
                 filter?.setValue(1.2, forKey: kCIInputSaturationKey)
                 print("🎭 [12] BEAUTY_PRO4 - 뷰티 프로4 (최강)")
+                presetOptions = CustomFilterOptions(dictionary: [
+                    "brightness": 0.3,
+                    "contrast": 1.25,
+                    "saturation": 1.2
+                ])
+
+            case 99:
+                // ✅ 커스텀 필터 (options 기반)
+                guard let options = options else {
+                    print("⚠️ 커스텀 필터 옵션이 없습니다.")
+                    return
+                }
+                if let existing = customAdjustEffect {
+                    existing.updateOptions(options)
+                    videoEffect = existing
+                } else {
+                    let effect = CustomAdjustVideoEffect(options: options)
+                    customAdjustEffect = effect
+                    videoEffect = effect
+                }
+                print("🎛️ [99] CUSTOM_FILTER 적용: \(options)")
                 
             default:
                 print("❌ 지원하지 않는 filterType: \(filterType)")
                 return
             }
-            
-            guard let validFilter = filter else {
-                print("❌ 필터 생성 실패")
-                return
+
+            if let appliedOptions = options ?? presetOptions {
+                updateCustomFilterUI(with: appliedOptions)
+            }
+
+            if videoEffect == nil {
+                guard let validFilter = filter else {
+                    print("❌ 필터 생성 실패")
+                    return
+                }
+                videoEffect = CoreImageVideoEffect(filter: validFilter)
             }
             
             // ✅ 4단계: Task 취소 확인
@@ -740,22 +892,24 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 print("⚠️ 필터 적용 취소됨")
                 return
             }
-            
-            let videoEffect = CoreImageVideoEffect(filter: validFilter)
+            guard let finalEffect = videoEffect else {
+                print("❌ 필터 적용 실패 (VideoEffect 없음)")
+                return
+            }
             
             // ✅ 5단계: 프리뷰에 필터 적용 (메모리 안정화 후)
-            let registeredPreview = hkView.registerVideoEffect(videoEffect)
+            let registeredPreview = hkView.registerVideoEffect(finalEffect)
             print("📱 프리뷰 필터 등록: \(registeredPreview)")
             
             // ✅ 6단계: 스트리밍에 필터 적용 (약간의 딜레이로 메모리 분산)
             Task { @ScreenActor in
                 try? await Task.sleep(nanoseconds: 30_000_000) // 30ms 대기
-                let registeredStream = mixer.screen.registerVideoEffect(videoEffect)
+                let registeredStream = mixer.screen.registerVideoEffect(finalEffect)
                 print("📡 스트리밍 필터 등록: \(registeredStream)")
             }
             
             if registeredPreview {
-                currentVideoEffect = videoEffect
+                currentVideoEffect = finalEffect
                 isFilterEnabled = true
                 print("✅ 필터 적용 완료: filterType \(filterType) (메모리 최적화)")
             } else {
@@ -940,6 +1094,339 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         
         print("✅ MediaMixer, RTMPStream, MTHKView 초기화 완료")
     }
+
+    // ✅ 커스텀 필터 UI (프리뷰 위 슬라이더)
+    private func setupCustomFilterUI() {
+        let panel = UIView()
+        panel.translatesAutoresizingMaskIntoConstraints = false
+        panel.backgroundColor = UIColor.black.withAlphaComponent(0.55)
+        panel.layer.cornerRadius = 10
+        panel.clipsToBounds = true
+
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        let (brightnessRow, brightness) = makeSliderRow(
+            title: "Brightness",
+            min: -1.0,
+            max: 1.0,
+            value: 0.0
+        )
+        let (saturationRow, saturation) = makeSliderRow(
+            title: "Saturation",
+            min: 0.0,
+            max: 2.0,
+            value: 1.0
+        )
+        let (contrastRow, contrast) = makeSliderRow(
+            title: "Contrast",
+            min: 0.0,
+            max: 4.0,
+            value: 1.0
+        )
+        let (blurRow, blur) = makeSliderRow(
+            title: "Blur",
+            min: 0.0,
+            max: 20.0,
+            value: 0.0
+        )
+        let (sharpenRow, sharpen) = makeSliderRow(
+            title: "Sharpen",
+            min: 0.0,
+            max: 2.0,
+            value: 0.0
+        )
+        let (noiseRow, noise) = makeSliderRow(
+            title: "Noise",
+            min: 0.0,
+            max: 1.0,
+            value: 0.0
+        )
+
+        [brightnessRow, saturationRow, contrastRow, blurRow, sharpenRow, noiseRow].forEach {
+            stack.addArrangedSubview($0)
+        }
+
+        panel.addSubview(stack)
+        view.addSubview(panel)
+
+        NSLayoutConstraint.activate([
+            panel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
+            panel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            panel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+
+            stack.leadingAnchor.constraint(equalTo: panel.leadingAnchor, constant: 12),
+            stack.trailingAnchor.constraint(equalTo: panel.trailingAnchor, constant: -12),
+            stack.topAnchor.constraint(equalTo: panel.topAnchor, constant: 12),
+            stack.bottomAnchor.constraint(equalTo: panel.bottomAnchor, constant: -12)
+        ])
+
+        brightnessSlider = brightness
+        saturationSlider = saturation
+        contrastSlider = contrast
+        blurSlider = blur
+        sharpenSlider = sharpen
+        noiseSlider = noise
+        customFilterPanel = panel
+    }
+
+    private func makeSliderRow(title: String, min: Float, max: Float, value: Float) -> (UIStackView, UISlider) {
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        titleLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+
+        let rangeLabel = UILabel()
+        rangeLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+        rangeLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        rangeLabel.textAlignment = .center
+        rangeLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        rangeLabel.text = String(format: "%.2f~%.2f", min, max)
+
+        let slider = UISlider()
+        slider.minimumValue = min
+        slider.maximumValue = max
+        slider.value = value
+        slider.isHidden = true
+
+        let valueLabel = UILabel()
+        valueLabel.textColor = .white
+        valueLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        valueLabel.textAlignment = .right
+        valueLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        valueLabel.text = String(format: "%.2f", value)
+
+        let progress = UIProgressView(progressViewStyle: .default)
+        progress.trackTintColor = UIColor.white.withAlphaComponent(0.2)
+        progress.progressTintColor = UIColor.systemGreen
+        progress.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        progress.progress = normalizedProgress(value: value, min: min, max: max)
+
+        let minusButton = UIButton(type: .system)
+        minusButton.setTitle("◀", for: .normal)
+        minusButton.tintColor = .white
+        minusButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        minusButton.backgroundColor = UIColor.white.withAlphaComponent(0.15)
+        minusButton.layer.cornerRadius = 4
+        minusButton.clipsToBounds = true
+        minusButton.widthAnchor.constraint(equalToConstant: 28).isActive = true
+        minusButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        minusButton.tag = -1
+        minusButton.addTarget(self, action: #selector(onArrowButtonTapped(_:)), for: .touchUpInside)
+
+        let plusButton = UIButton(type: .system)
+        plusButton.setTitle("▶", for: .normal)
+        plusButton.tintColor = .white
+        plusButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        plusButton.backgroundColor = UIColor.white.withAlphaComponent(0.15)
+        plusButton.layer.cornerRadius = 4
+        plusButton.clipsToBounds = true
+        plusButton.widthAnchor.constraint(equalToConstant: 28).isActive = true
+        plusButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        plusButton.tag = 1
+        plusButton.addTarget(self, action: #selector(onArrowButtonTapped(_:)), for: .touchUpInside)
+
+        sliderValueLabels[ObjectIdentifier(slider)] = valueLabel
+        sliderProgressViews[ObjectIdentifier(slider)] = progress
+        arrowButtonTargets[ObjectIdentifier(minusButton)] = slider
+        arrowButtonTargets[ObjectIdentifier(plusButton)] = slider
+
+        let row = UIStackView(arrangedSubviews: [titleLabel, rangeLabel, progress, minusButton, valueLabel, plusButton])
+        row.axis = .horizontal
+        row.spacing = 8
+        row.alignment = .center
+        return (row, slider)
+    }
+
+    @objc private func onCustomSliderChanged(_ sender: UISlider) {
+        let step = stepForSlider(sender)
+        let snappedValue = snapValue(sender.value, step: step)
+        if sender.value != snappedValue {
+            sender.value = snappedValue
+        }
+        if let label = sliderValueLabels[ObjectIdentifier(sender)] {
+            label.text = String(format: "%.2f", sender.value)
+        }
+        if let progress = sliderProgressViews[ObjectIdentifier(sender)] {
+            progress.progress = normalizedProgress(value: sender.value, min: sender.minimumValue, max: sender.maximumValue)
+        }
+        scheduleCustomFilterUpdate()
+    }
+
+    @objc private func onArrowButtonTapped(_ sender: UIButton) {
+        guard let slider = arrowButtonTargets[ObjectIdentifier(sender)] else {
+            return
+        }
+        let step = stepForSlider(slider)
+        let delta = step * Float(sender.tag)
+        let newValue = snapValue(slider.value + delta, step: step)
+        slider.value = min(slider.maximumValue, max(slider.minimumValue, newValue))
+
+        if let label = sliderValueLabels[ObjectIdentifier(slider)] {
+            label.text = String(format: "%.2f", slider.value)
+        }
+        if let progress = sliderProgressViews[ObjectIdentifier(slider)] {
+            progress.progress = normalizedProgress(value: slider.value, min: slider.minimumValue, max: slider.maximumValue)
+        }
+        scheduleCustomFilterUpdate()
+    }
+
+    private func stepForSlider(_ slider: UISlider) -> Float {
+        switch slider {
+        case brightnessSlider:
+            return 0.05
+        case saturationSlider:
+            return 0.05
+        case contrastSlider:
+            return 0.1
+        case blurSlider:
+            return 0.5
+        case sharpenSlider:
+            return 0.05
+        case noiseSlider:
+            return 0.01
+        default:
+            return 0.05
+        }
+    }
+
+    private func snapValue(_ value: Float, step: Float) -> Float {
+        guard step > 0 else { return value }
+        return (value / step).rounded() * step
+    }
+
+    private func normalizedProgress(value: Float, min: Float, max: Float) -> Float {
+        guard max > min else { return 0 }
+        return (value - min) / (max - min)
+    }
+
+    private func defaultCustomOptions() -> CustomFilterOptions? {
+        return CustomFilterOptions(dictionary: [
+            "brightness": 0.0,
+            "saturation": 1.0,
+            "contrast": 1.0,
+            "blur": 0.0,
+            "sharpen": 0.0,
+            "noise": 0.0
+        ])
+    }
+
+    private func updateCustomFilterUI(with options: CustomFilterOptions) {
+        isUpdatingFilterUI = true
+        defer { isUpdatingFilterUI = false }
+
+        if let slider = brightnessSlider {
+            slider.value = Float(options.brightness)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+        if let slider = saturationSlider {
+            slider.value = Float(options.saturation)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+        if let slider = contrastSlider {
+            slider.value = Float(options.contrast)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+        if let slider = blurSlider {
+            slider.value = Float(options.blur)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+        if let slider = sharpenSlider {
+            slider.value = Float(options.sharpen)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+        if let slider = noiseSlider {
+            slider.value = Float(options.noise)
+            sliderValueLabels[ObjectIdentifier(slider)]?.text = String(format: "%.2f", slider.value)
+            sliderProgressViews[ObjectIdentifier(slider)]?.progress = normalizedProgress(
+                value: slider.value,
+                min: slider.minimumValue,
+                max: slider.maximumValue
+            )
+        }
+    }
+
+    private func scheduleCustomFilterUpdate() {
+        sliderUpdateWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            self?.applyCustomFilterFromSliders()
+        }
+        sliderUpdateWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.12, execute: workItem)
+    }
+
+    private func applyCustomFilterFromSliders() {
+        if isUpdatingFilterUI {
+            return
+        }
+        guard
+            let brightness = brightnessSlider?.value,
+            let saturation = saturationSlider?.value,
+            let contrast = contrastSlider?.value,
+            let blur = blurSlider?.value,
+            let sharpen = sharpenSlider?.value,
+            let noise = noiseSlider?.value
+        else {
+            return
+        }
+
+        let optionsDict: [String: Any] = [
+            "brightness": brightness,
+            "saturation": saturation,
+            "contrast": contrast,
+            "blur": blur,
+            "sharpen": sharpen,
+            "noise": noise
+        ]
+
+        guard let options = CustomFilterOptions(dictionary: optionsDict) else {
+            print("⚠️ 커스텀 필터 옵션 파싱 실패")
+            return
+        }
+
+        if let last = lastCustomOptions, last.isNearlyEqual(to: options) {
+            return
+        }
+        lastCustomOptions = options
+
+        if let current = customAdjustEffect, currentVideoEffect === current {
+            current.updateOptions(options)
+            return
+        }
+
+        let effect = CustomAdjustVideoEffect(options: options)
+        customAdjustEffect = effect
+        toggleCoreImageFilter(filterType: 99, options: options)
+    }
     
     // ✅ HaishinKit 2.0.0: async/await로 스트리머 초기화
     func initStreamer(
@@ -1096,6 +1583,70 @@ final class CoreImageVideoEffect: VideoEffect {
     func execute(_ image: CIImage) -> CIImage {
         filter.setValue(image, forKey: kCIInputImageKey)
         return filter.outputImage ?? image
+    }
+}
+
+// ✅ 커스텀 파라미터 기반 VideoEffect (ACT1029: key_type=99)
+final class CustomAdjustVideoEffect: VideoEffect {
+    private var options: LiveViewController.CustomFilterOptions
+
+    fileprivate init(options: LiveViewController.CustomFilterOptions) {
+        self.options = options
+    }
+
+    fileprivate func updateOptions(_ options: LiveViewController.CustomFilterOptions) {
+        self.options = options
+    }
+
+    func execute(_ image: CIImage) -> CIImage {
+        var currentImage = image
+
+        // 1) Blur
+        if options.blur > 0 {
+            if let blurFilter = CIFilter(name: "CIGaussianBlur") {
+                blurFilter.setValue(currentImage, forKey: kCIInputImageKey)
+                blurFilter.setValue(options.blur, forKey: kCIInputRadiusKey)
+                if let output = blurFilter.outputImage {
+                    currentImage = output
+                }
+            }
+        }
+
+        // 2) Noise reduction
+        if options.noise > 0 {
+            if let noiseFilter = CIFilter(name: "CINoiseReduction") {
+                noiseFilter.setValue(currentImage, forKey: kCIInputImageKey)
+                noiseFilter.setValue(options.noise, forKey: "inputNoiseLevel")
+                noiseFilter.setValue(options.sharpen, forKey: "inputSharpness")
+                if let output = noiseFilter.outputImage {
+                    currentImage = output
+                }
+            }
+        }
+
+        // 3) Color controls (brightness/contrast/saturation)
+        if let colorFilter = CIFilter(name: "CIColorControls") {
+            colorFilter.setValue(currentImage, forKey: kCIInputImageKey)
+            colorFilter.setValue(options.brightness, forKey: kCIInputBrightnessKey)
+            colorFilter.setValue(options.contrast, forKey: kCIInputContrastKey)
+            colorFilter.setValue(options.saturation, forKey: kCIInputSaturationKey)
+            if let output = colorFilter.outputImage {
+                currentImage = output
+            }
+        }
+
+        // 4) Sharpen
+        if options.sharpen > 0 {
+            if let sharpenFilter = CIFilter(name: "CISharpenLuminance") {
+                sharpenFilter.setValue(currentImage, forKey: kCIInputImageKey)
+                sharpenFilter.setValue(options.sharpen, forKey: kCIInputSharpnessKey)
+                if let output = sharpenFilter.outputImage {
+                    currentImage = output
+                }
+            }
+        }
+
+        return currentImage
     }
 }
 
