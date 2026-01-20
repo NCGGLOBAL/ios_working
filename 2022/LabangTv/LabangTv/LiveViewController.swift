@@ -61,6 +61,8 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var customAdjustEffect: CustomAdjustVideoEffect?
     private var lastCustomOptions: CustomFilterOptions?
     private var isUpdatingFilterUI: Bool = false
+    private var panelPanStartFrame: CGRect = .zero
+    private var panelPanStartTransform: CGAffineTransform = .identity
 
     // ✅ 커스텀 필터 옵션 (ACT1029, key_type=99)
     fileprivate struct CustomFilterOptions: CustomStringConvertible, Equatable {
@@ -1155,7 +1157,7 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         NSLayoutConstraint.activate([
             panel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
             panel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12),
-            panel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            panel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
 
             stack.leadingAnchor.constraint(equalTo: panel.leadingAnchor, constant: 12),
             stack.trailingAnchor.constraint(equalTo: panel.trailingAnchor, constant: -12),
@@ -1170,6 +1172,9 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         sharpenSlider = sharpen
         noiseSlider = noise
         customFilterPanel = panel
+
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(onCustomFilterPanelPanned(_:)))
+        panel.addGestureRecognizer(panGesture)
     }
 
     private func makeSliderRow(title: String, min: Float, max: Float, value: Float) -> (UIStackView, UISlider) {
@@ -1373,6 +1378,37 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                 max: slider.maximumValue
             )
         }
+    }
+
+    @objc private func onCustomFilterPanelPanned(_ gesture: UIPanGestureRecognizer) {
+        guard let panel = customFilterPanel else { return }
+        let translation = gesture.translation(in: view)
+
+        if gesture.state == .began {
+            panelPanStartFrame = panel.frame
+            panelPanStartTransform = panel.transform
+        }
+
+        let safeFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 8, dy: 8)
+        var newFrame = panelPanStartFrame.offsetBy(dx: translation.x, dy: translation.y)
+        var dx = translation.x
+        var dy = translation.y
+
+        if newFrame.minX < safeFrame.minX {
+            dx += safeFrame.minX - newFrame.minX
+        }
+        if newFrame.maxX > safeFrame.maxX {
+            dx -= newFrame.maxX - safeFrame.maxX
+        }
+        if newFrame.minY < safeFrame.minY {
+            dy += safeFrame.minY - newFrame.minY
+        }
+        if newFrame.maxY > safeFrame.maxY {
+            dy -= newFrame.maxY - safeFrame.maxY
+        }
+
+        newFrame = panelPanStartFrame.offsetBy(dx: dx, dy: dy)
+        panel.transform = panelPanStartTransform.translatedBy(x: dx, y: dy)
     }
 
     private func scheduleCustomFilterUpdate() {
