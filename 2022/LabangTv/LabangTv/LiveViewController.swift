@@ -596,6 +596,44 @@ class LiveViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
                         }
                     }
                     break
+
+                case "ACT1035": // ✅ wlive 카메라 영상 송출 중지
+                    var resultcd = "1"
+                    Task {
+                        do {
+                            if self.rtmpStream != nil {
+                                try await self.rtmpStream.close()
+                            }
+                            if self.rtmpConnection != nil {
+                                try await self.rtmpConnection.close()
+                            }
+                            // 자동 재연결 방지
+                            self.lastStreamUrl = nil
+                            self.lastStreamKey = nil
+                            print("✅ ACT1035: 송출 중지 완료")
+                        } catch {
+                            resultcd = "0"
+                            print("❌ ACT1035 송출 중지 오류: \(error)")
+                        }
+
+                        if !self.callback.isEmpty {
+                            var dic = Dictionary<String, String>()
+                            dic.updateValue(resultcd, forKey: "resultcd")
+                            do {
+                                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+                                let stringValue = String(data: jsonData, encoding: .utf8) ?? ""
+                                let javascript = "\(self.callback)('\(stringValue)')"
+                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                    // 결과 처리
+                                }
+                            } catch let error as NSError {
+                                print("ACT1035 JSON error: \(error)")
+                            }
+                        } else {
+                            print("⚠️ ACT1035: callback 없음 (응답 생략)")
+                        }
+                    }
+                    break
                 case "ACT1030": // 스트림키 전달 및 송출
                     var resultcd = "1"
                     if let streamUrl = actionParamObj?["stream_url"] as? String {
