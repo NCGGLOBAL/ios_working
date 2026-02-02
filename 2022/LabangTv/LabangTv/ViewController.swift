@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 import WebKit
 import CoreLocation
 import LightCompressor
@@ -14,7 +15,7 @@ import MobileCoreServices  // for kUTTypeMovie
 import AVKit
 
 class ViewController: UIViewController, WKUIDelegate,
-WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageViewControllerDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SFSafariViewControllerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -22,6 +23,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     @IBOutlet weak var backButton: UIButton!
     
     var webView: WKWebView!
+    private var safariViewController: SFSafariViewController?
     
     let kKeyOfWebActionKeyName = "iwebaction"
     let kKeyOfWebActionCode = "action_code"
@@ -788,10 +790,69 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
             })
         }
     
+    // MARK: - Kakao Login Helper Methods
+    private func isKakaoAuthURL(_ url: URL) -> Bool {
+        let urlString = url.absoluteString.lowercased()
+        // 카카오 도메인만 체크 (앱에 관계없이 동일하게 작동)
+        let isKakaoDomain = urlString.contains("kauth.kakao.com") || urlString.contains("accounts.kakao.com")
+        
+        #if DEBUG
+        if isKakaoDomain {
+            print("🔵 [Kakao Auth] 감지된 URL: \(url.absoluteString)")
+        }
+        #endif
+        
+        return isKakaoDomain
+    }
+    
+    private func presentKakaoAuth(url: URL) {
+        #if DEBUG
+        print("🔵 [Kakao Auth] SFSafariViewController 표시 시작: \(url.absoluteString)")
+        #endif
+        
+        // 기존 SFSafariViewController가 있으면 닫기
+        if let existingSafariVC = safariViewController {
+            existingSafariVC.dismiss(animated: false, completion: nil)
+        }
+        
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .fullScreen
+        safariVC.delegate = self
+        safariViewController = safariVC
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.present(safariVC, animated: true, completion: nil)
+            #if DEBUG
+            print("🔵 [Kakao Auth] SFSafariViewController 표시 완료")
+            #endif
+        }
+    }
+    
+    // MARK: - SFSafariViewControllerDelegate
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        #if DEBUG
+        print("🔵 [Kakao Auth] SFSafariViewController 닫힘")
+        #endif
+        safariViewController = nil
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var action: WKNavigationActionPolicy?
 
         guard let url = navigationAction.request.url else { return }
+
+        #if DEBUG
+        print("🔵 [decidePolicyFor] 요청 URL: \(url.absoluteString)")
+        #endif
+
+        if isKakaoAuthURL(url) {
+            #if DEBUG
+            print("🔵 [decidePolicyFor] Kakao Auth URL 감지됨 - SFSafariViewController로 전환")
+            #endif
+            presentKakaoAuth(url: url)
+            decisionHandler(.cancel)
+            return
+        }
 
         if url.absoluteString.range(of: "//itunes.apple.com/") != nil {
             UIApplication.shared.openURL(url)
