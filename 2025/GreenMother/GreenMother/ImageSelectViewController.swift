@@ -48,18 +48,19 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
             // User deselected an asset. Cancel whatever you did when asset was selected.
         }, cancel: { (assets) in
             // User canceled selection.
-        }, finish: { (assets) in
+        },         finish: { (assets) in
             // User finished selection assets.
             for asset in assets {
                 let imageItem = ImageData()
                 let imageFileItem = ImageFileData()
                 
-                let imageData = self.getAssetThumbnail(asset: asset).pngData()
-                imageFileItem.image = imageData
+                // 업로드용: 원본 해상도 JPEG 변환 (썸네일 PNG 대신 - 서버 호환성)
+                let (uploadImageData, uploadFileName) = self.getAssetImageForUpload(asset: asset)
+                guard let imageData = uploadImageData, !uploadFileName.isEmpty else { continue }
                 
-                let resources = PHAssetResource.assetResources(for: asset)
-                imageItem.fileName = resources.first!.originalFilename
-                imageFileItem.fileName = resources.first!.originalFilename
+                imageFileItem.image = imageData
+                imageFileItem.fileName = uploadFileName
+                imageItem.fileName = uploadFileName
                 
                 AppDelegate.imageArray.append(imageItem)
                 AppDelegate.ImageFileArray.append(imageFileItem)
@@ -73,34 +74,43 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        #if DEBUG
+        print("[카메라] didFinishPickingMediaWithInfo 호출됨, sourceType: \(picker.sourceType.rawValue)")
+        print("[카메라] info keys: \(info.keys.map { $0.rawValue })")
+        #endif
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let imageItem = ImageData()
             let imageFileItem = ImageFileData()
-            imageFileItem.image = image.jpegData(compressionQuality: 0.1)
+            // 앨범과 동일한 품질 (0.8)로 통일. orientation은 EXIF 유지 (Android도 카메라 원본→saveImage에서 EXIF 회전 적용)
+            let compressionQuality: CGFloat = 0.8
+            imageFileItem.image = image.jpegData(compressionQuality: compressionQuality)
 
-            var date = Date()  // 날짜 데이터
-            let dateFomatter = DateFormatter()
-            dateFomatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateString = dateFomatter.string(from: date)
-
-            // 이미지 확장자 추출
-            var imageExtention = ".jpg"
-            
-            // 이미지 이름 지정
-            let imageName : String = dateString + imageExtention
+            // 공백/콜론 제거 (앨범과 동일한 URL 호환성 - 서버·방화벽 이슈 방지)
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
+            let dateString = dateFormatter.string(from: date)
+            let imageName = dateString + ".jpg"
             imageItem.fileName = imageName
             imageFileItem.fileName = imageName
             print("imageName : \(imageName)")
             
             AppDelegate.imageArray.append(imageItem)
             AppDelegate.ImageFileArray.append(imageFileItem)
+            #if DEBUG
+            let imgData = imageFileItem.image!
+            print("[카메라] source: 직접촬영 | originalImage size: \(image.size), orientation: \(image.imageOrientation.rawValue)")
+            print("[카메라] JPEG compressionQuality: \(compressionQuality) | imageData size: \(imgData.count) bytes")
+            #endif
             
             self.navigationItem.title = "\(AppDelegate.imageArray.count) / \(LIMIT_IMAGE_SIZE)"
+        } else {
+            #if DEBUG
+            print("[카메라] originalImage 추출 실패 - info keys: \(info.keys)")
+            #endif
         }
         self.collectionView.reloadData()
-        
         AppDelegate.isChangeImage = true
-        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -115,6 +125,47 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         return thumbnail
     }
     
+    /// 업로드용: 원본 해상도 이미지를 JPEG로 변환. HEIC 등은 .jpg 확장자로 변경
+    func getAssetImageForUpload(asset: PHAsset) -> (Data?, String) {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        option.isSynchronous = true
+        option.deliveryMode = .highQualityFormat
+        option.isNetworkAccessAllowed = true
+        
+        var resultImage: UIImage?
+        manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { image, _ in
+            resultImage = image
+        }
+        
+        guard let image = resultImage else { return (nil, "") }
+        
+        // JPEG로 변환 (서버 호환성, HEIC 미지원 대비)
+        let compressionQuality: CGFloat = 0.8
+        let jpegData = image.jpegData(compressionQuality: compressionQuality)
+        
+        // 파일명: .HEIC, .heic 등은 .jpg로 변경
+        let resources = PHAssetResource.assetResources(for: asset)
+        var fileName = resources.first?.originalFilename ?? "image.jpg"
+        let originalFilename = fileName
+        if fileName.lowercased().hasSuffix(".heic") {
+            fileName = (fileName as NSString).deletingPathExtension + ".jpg"
+        } else if !fileName.lowercased().hasSuffix(".jpg") && !fileName.lowercased().hasSuffix(".jpeg") {
+            fileName = (fileName as NSString).deletingPathExtension + ".jpg"
+        }
+        
+        #if DEBUG
+        let mediaType = asset.mediaType.rawValue  // 1=image, 2=video, 3=audio
+        let mediaSubtypes = asset.mediaSubtypes.rawValue
+        print("[앨범] source: 앨범선택 | asset mediaType: \(mediaType), mediaSubtypes: \(mediaSubtypes)")
+        print("[앨범] originalFilename: \(originalFilename) -> fileName: \(fileName)")
+        print("[앨범] originalImage size: \(image.size), orientation: \(image.imageOrientation.rawValue)")
+        print("[앨범] JPEG compressionQuality: \(compressionQuality) | imageData size: \(jpegData?.count ?? 0) bytes | cgImage: \(image.cgImage != nil)")
+        #endif
+        
+        return (jpegData, fileName)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         AppDelegate.ImageFileArray.count
     }
@@ -123,12 +174,14 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         
         let item = AppDelegate.ImageFileArray[indexPath.row]
-        // 이미지 url 변환
         if item.imgUrl != nil {
             let url = URL(string: item.imgUrl!)
             cell.mainImageView.kf.setImage(with: url)
         } else {
             cell.mainImageView.image = UIImage(data: item.image!)
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): imageData size: \(item.image?.count ?? 0) bytes, imageView frame: \(cell.mainImageView.frame)")
+            #endif
         }
         return cell
     }

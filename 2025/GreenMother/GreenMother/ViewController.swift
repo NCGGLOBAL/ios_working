@@ -278,6 +278,14 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                             return
                         }
                         
+                        // 업로드할 이미지가 있는지 확인 (Android와 동일)
+                        let hasImagesToUpload = AppDelegate.ImageFileArray.contains { $0.image != nil }
+                        if !hasImagesToUpload {
+                            let javascript = "\(self.callback)(\"-1\")"
+                            self.webView.evaluateJavaScript(javascript, completionHandler: nil)
+                            return
+                        }
+                        
                         let boundary = "WebKitFormBoundaryDCqbvCHcQvEfbSAa" // 업로드 바이너리 이름
                         
                         let defaultConfigObject = URLSessionConfiguration.default
@@ -313,28 +321,33 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                             body.append(data1)
                         }
                         
-                        // add image data
-                        var imageToUpload: UIImage? = nil // 업로드할 이미지
-                        var imageData: Data? = nil // 업로드할 이미지 스트림
-                        var sImageName: String? = nil
-
+                        // add image data (imgUrl만 있고 image가 nil인 항목은 서버 기존 이미지이므로 스킵)
+                        var uploadCount = 0
                         for item in AppDelegate.ImageFileArray {
-                            imageData = imageToUpload?.jpegData(compressionQuality: 1.0)
+                            guard let imageData = item.image else { continue }
 
                             if let data1 = "--\(boundary)\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(item.fileName ?? "")\"\r\n".data(using: .utf8) {
+                            let fileName = item.fileName ?? "image.jpg"
+                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(fileName)\"\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
                             if let data1 = "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            body.append(item.image!)
+                            body.append(imageData)
                             if let data1 = "\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
+                            uploadCount += 1
+                            #if DEBUG
+                            print("[ACT1012 업로드] 파일: \(fileName), 크기: \(imageData.count) bytes")
+                            #endif
                         }
+                        #if DEBUG
+                        print("[ACT1012 업로드] 총 \(uploadCount)개 파일, body 크기: \(body.count) bytes")
+                        #endif
                         
                         if let data1 = "--\(boundary)--\r\n".data(using: .utf8) {
                             body.append(data1)
@@ -343,7 +356,7 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                         let contentType = "multipart/form-data; boundary=\(boundary)"
                         urlRequest?.setValue(contentType, forHTTPHeaderField: "Content-Type")
                         urlRequest?.httpMethod = "POST"
-                        urlRequest?.httpBody = body
+                        // uploadTask(with:from:) 사용 시 httpBody 설정하지 않음 (중복 시 에러 발생)
 
                         #if DEBUG
                         print("params body : \(body)")
@@ -360,25 +373,55 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                                 print("response : \(response)")
                             }
 
-                            if data != nil {
-                                var sResultData: String? = nil
-                                if let data = data {
-                                    sResultData = String(data: data, encoding: .utf8)
-                                    print("sResultData : \(sResultData ?? "")")
-                                    do {
-                                        print("jsonEncodedData : \(sResultData)")
-                                        let javascript = "\(self.callback)('\(sResultData ?? "")')"     // set funcName parameter as a single quoted string
-    //                                    print("jsonData : \(jsonData)")
-                                        print("javascript : \(javascript)")
-
-                                        // call back!
-                                        self.webView.evaluateJavaScript(javascript) { (result, error) in
-                                            print("result : \(String(describing: result))")
-                                            print("error : \(error)")
+                            if let data = data, let sResultData = String(data: data, encoding: .utf8) {
+                                #if DEBUG
+                                print("[ACT1012 응답] \(sResultData)")
+                                if let httpResponse = response as? HTTPURLResponse {
+                                    print("[ACT1012 응답] statusCode: \(httpResponse.statusCode)")
+                                }
+                                #endif
+                                // 서버가 imgUrl을 반환하지 않으면 업로드 성공 시 클라이언트에서 imgUrl 생성 (웹 썸네일 표시용)
+                                var callbackJson = sResultData
+                                if let jsonData = sResultData.data(using: .utf8),
+                                   var resDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                                   (resDict["resCode"] as? String) == "0000",
+                                   resDict["imgArr"] == nil {
+                                    let baseImageUrl = "\(AppDelegate.HOME_URL)/data/greenmother/photo"
+                                    var imgArr: [[String: Any]] = []
+                                    var sortIndex = 1
+                                    for item in AppDelegate.ImageFileArray {
+                                        guard item.image != nil else { continue }
+                                        let fileName = item.fileName ?? "image.jpg"
+                                        let encodedFileName = fileName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? fileName
+                                        let imgUrl = "\(baseImageUrl)/\(token ?? "")/\(encodedFileName)"
+                                        imgArr.append([
+                                            "fileName": fileName,
+                                            "imgUrl": imgUrl,
+                                            "sort": sortIndex,
+                                            "utype": 1
+                                        ])
+                                        // 로컬에 imgUrl 반영 (다음 sendImageData 시 사용)
+                                        item.imgUrl = imgUrl
+                                        if let arrIdx = AppDelegate.imageArray.firstIndex(where: { $0.fileName == item.fileName }) {
+                                            AppDelegate.imageArray[arrIdx].imgUrl = imgUrl
                                         }
-                                    } catch let error as NSError {
-                                        print(error)
+                                        sortIndex += 1
                                     }
+                                    resDict["imgArr"] = imgArr
+                                    if let mergedData = try? JSONSerialization.data(withJSONObject: resDict),
+                                       let mergedStr = String(data: mergedData, encoding: .utf8) {
+                                        callbackJson = mergedStr
+                                        #if DEBUG
+                                        print("[ACT1012] imgUrl 생성됨: \(imgArr)")
+                                        #endif
+                                    }
+                                }
+                                let javascript = "\(self.callback)(\(callbackJson))"
+                                self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                    #if DEBUG
+                                    print("result : \(String(describing: result))")
+                                    print("error : \(String(describing: error))")
+                                    #endif
                                 }
                             }
                         }
@@ -678,32 +721,31 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
     
     func sendImageData(){
         do {
-            let encoder = JSONEncoder()
-            let jsonData = try? encoder.encode(AppDelegate.imageArray)
-
-            if let jsonData = jsonData, let jsonString = String(data: jsonData, encoding: .utf8){
-                let utf8str = jsonString.data(using: .utf8)
-
-                let base64Encoded = utf8str?.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)) ?? ""
-                    print("Encoded: \(base64Encoded)")
-            
+            if AppDelegate.imageArray.count > 0 {
                 var dic = Dictionary<String, Any>()
                 dic.updateValue("1", forKey: "resultcd")  // 변경사항 있을경우 : 1, 없을경우 : 0
-                dic.updateValue(base64Encoded, forKey: "imgArr")
+                // Android와 동일: imgArr는 raw JSON 배열 (Base64 아님)
+                var imgArr: [[String: Any]] = []
+                for (index, item) in AppDelegate.imageArray.enumerated() {
+                    var dict: [String: Any] = [:]
+                    dict["fileName"] = item.fileName ?? ""
+                    dict["imgUrl"] = item.imgUrl ?? ""
+                    dict["sort"] = Int(item.sort ?? "\(index + 1)") ?? (index + 1)
+                    dict["utype"] = item.utype ?? 1
+                    imgArr.append(dict)
+                }
+                dic.updateValue(imgArr, forKey: "imgArr")
                 dic.updateValue(AppDelegate.imageModel.token ?? "", forKey: "token")
                 dic.updateValue(AppDelegate.imageModel.pageGbn ?? "1", forKey: "pageGbn")
                 dic.updateValue(AppDelegate.imageArray.count, forKey: "cnt")
-                print(jsonString)
+                let jsonDataForCallback = try JSONSerialization.data(withJSONObject: dic, options: [])
+                let jsonString = String(data: jsonDataForCallback, encoding: .utf8) ?? ""
+                #if DEBUG
+                print("cameraReturnApp jsonString : \(jsonString)")
+                #endif
                 
-                let calbackJsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                let stringValue = String(data: calbackJsonData, encoding: .utf8) ?? ""
-//                stringValue.replacingOccurrences(of: "\\", with: "")
-                
-                let dicJsonData = try JSONSerialization.data(withJSONObject: dic, options: [])  // serialize the data dictionary
-                print("dicJsonData : \(dicJsonData)")
-                let jsonEncodedData = dicJsonData.base64EncodedString()
-                let javascript = "\(callback)('\(stringValue)')"
-                print("javascript : \(javascript)")
+                // Android와 동일하게 JSON 객체로 콜백 호출 (callback(jsonObject) 형식)
+                let javascript = "\(callback)(\(jsonString))"
                 
                 // call back!
                 self.webView.evaluateJavaScript(javascript) { (result, error) in
