@@ -54,12 +54,13 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
                 let imageItem = ImageData()
                 let imageFileItem = ImageFileData()
                 
-                let imageData = self.getAssetThumbnail(asset: asset).pngData()
-                imageFileItem.image = imageData
+                // 업로드용: 원본 해상도 JPEG 변환 (썸네일 PNG 대신 - 서버 호환성)
+                let (uploadImageData, uploadFileName) = self.getAssetImageForUpload(asset: asset)
+                guard let imageData = uploadImageData, !uploadFileName.isEmpty else { continue }
                 
-                let resources = PHAssetResource.assetResources(for: asset)
-                imageItem.fileName = resources.first!.originalFilename
-                imageFileItem.fileName = resources.first!.originalFilename
+                imageFileItem.image = imageData
+                imageFileItem.fileName = uploadFileName
+                imageItem.fileName = uploadFileName
                 
                 AppDelegate.imageArray.append(imageItem)
                 AppDelegate.ImageFileArray.append(imageFileItem)
@@ -76,18 +77,16 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let imageItem = ImageData()
             let imageFileItem = ImageFileData()
-            imageFileItem.image = image.jpegData(compressionQuality: 0.1)
+            // 앨범과 동일한 품질 (0.8)로 통일. orientation은 EXIF 유지
+            let compressionQuality: CGFloat = 0.8
+            imageFileItem.image = image.jpegData(compressionQuality: compressionQuality)
 
-            var date = Date()  // 날짜 데이터
-            let dateFomatter = DateFormatter()
-            dateFomatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateString = dateFomatter.string(from: date)
-
-            // 이미지 확장자 추출
-            var imageExtention = ".jpg"
-            
-            // 이미지 이름 지정
-            let imageName : String = dateString + imageExtention
+            // 공백/콜론 제거 (앨범과 동일한 URL 호환성 - 서버·방화벽 이슈 방지)
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
+            let dateString = dateFormatter.string(from: date)
+            let imageName = dateString + ".jpg"
             imageItem.fileName = imageName
             imageFileItem.fileName = imageName
             print("imageName : \(imageName)")
@@ -115,6 +114,37 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         return thumbnail
     }
     
+    /// 업로드용: 원본 해상도 이미지를 JPEG로 변환. HEIC 등은 .jpg 확장자로 변경
+    func getAssetImageForUpload(asset: PHAsset) -> (Data?, String) {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        option.isSynchronous = true
+        option.deliveryMode = .highQualityFormat
+        option.isNetworkAccessAllowed = true
+        
+        var resultImage: UIImage?
+        manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { image, _ in
+            resultImage = image
+        }
+        
+        guard let image = resultImage else { return (nil, "") }
+        
+        // JPEG로 변환 (서버 호환성, HEIC 미지원 대비)
+        let compressionQuality: CGFloat = 0.8
+        let jpegData = image.jpegData(compressionQuality: compressionQuality)
+        
+        // 파일명: .HEIC, .heic 등은 .jpg로 변경
+        let resources = PHAssetResource.assetResources(for: asset)
+        var fileName = resources.first?.originalFilename ?? "image.jpg"
+        if fileName.lowercased().hasSuffix(".heic") {
+            fileName = (fileName as NSString).deletingPathExtension + ".jpg"
+        } else if !fileName.lowercased().hasSuffix(".jpg") && !fileName.lowercased().hasSuffix(".jpeg") {
+            fileName = (fileName as NSString).deletingPathExtension + ".jpg"
+        }
+        
+        return (jpegData, fileName)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         AppDelegate.ImageFileArray.count
     }
@@ -123,12 +153,23 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         
         let item = AppDelegate.ImageFileArray[indexPath.row]
-        // 이미지 url 변환
-        if item.imgUrl != nil {
-            let url = URL(string: item.imgUrl!)
+        if let imgData = item.image, let uiImage = UIImage(data: imgData) {
+            // 로컬에 이미지 데이터가 있으면 우선적으로 표시
+            cell.mainImageView.image = uiImage
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): 로컬 데이터 표시, size: \(imgData.count) bytes")
+            #endif
+        } else if let imgUrlStr = item.imgUrl, !imgUrlStr.isEmpty, let url = URL(string: imgUrlStr) {
+            // 로컬 데이터가 없고 URL이 유효하면 Kingfisher로 표시
             cell.mainImageView.kf.setImage(with: url)
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): 웹 URL 표시, url: \(imgUrlStr)")
+            #endif
         } else {
-            cell.mainImageView.image = UIImage(data: item.image!)
+            cell.mainImageView.image = nil
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): 표시할 이미지 없음 (image: \(item.image == nil ? "nil" : "exists"), imgUrl: \(item.imgUrl ?? "nil"))")
+            #endif
         }
         return cell
     }
@@ -139,6 +180,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let item = AppDelegate.ImageFileArray[indexPath.row]
         vc.titleString = "\(AppDelegate.imageArray.count)장 중 \(indexPath.row + 1)번째 선택"
         vc.selectedImage = item.image
+        vc.selectedImageUrl = item.imgUrl
         vc.selectedImageIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: true)
     }

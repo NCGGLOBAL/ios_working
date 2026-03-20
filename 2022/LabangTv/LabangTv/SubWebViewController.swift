@@ -62,6 +62,14 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
 //        navigationController?.isNavigationBarHidden = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if AppDelegate.isChangeImage {
+            self.sendImageData()
+            AppDelegate.isChangeImage = false
+        }
+    }
+    
     func initWebView() {
         let url = URL(string: self.urlString)
         var request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy)
@@ -211,26 +219,69 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         AppDelegate.imageModel.token = actionParamObj?["token"] as? String
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-
-                    if let values = actionParamObj?["imgArr"] as? Array<Any> {
-                        values.forEach { dictionary in
-                            let data = ImageData()
-                            let dict = dictionary as? Dictionary<String, AnyObject>
-                            data.fileName = dict?["fileName"] as? String
-                            data.imgUrl = dict?["imgUrl"] as? String
-                            data.sort = dict?["sort"] as? String
-                            data.utype = dict?["utype"] as? Int
-
-                            AppDelegate.imageModel.imgArr?.append(data)
-
-                            if data.imgUrl != nil {
-                                let imageFileData = ImageFileData()
-                                imageFileData.fileName = data.fileName
-                                imageFileData.imgUrl = data.imgUrl
-                                AppDelegate.ImageFileArray.append(imageFileData)
+                        
+                        // 웹에서 보내준 파일명 목록
+                        var webFileNames: [String] = []
+                        if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                            values.forEach { dictionary in
+                                let dict = dictionary as? Dictionary<String, AnyObject>
+                                if let fName = dict?["fileName"] as? String, !fName.isEmpty {
+                                    webFileNames.append(fName)
+                                }
                             }
                         }
-                    }
+                        
+                        // 1. 웹에 없는 파일은 로컬 배열에서 제거 (유저가 웹에서 X 눌러 지운 경우 등)
+                        AppDelegate.imageArray.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        AppDelegate.ImageFileArray.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        AppDelegate.imageModel.imgArr?.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        
+                        // 2. 웹에 있는 파일 중, 로컬에 없는 파일 추가 및 imgUrl 업데이트
+                        if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                            values.forEach { dictionary in
+                                let dict = dictionary as? Dictionary<String, AnyObject>
+                                let fName = dict?["fileName"] as? String ?? ""
+                                let imgUrl = dict?["imgUrl"] as? String ?? ""
+                                
+                                // 기존 파일 업데이트 (새로 imgUrl이 생긴 경우)
+                                if let arrIdx = AppDelegate.imageArray.firstIndex(where: { $0.fileName == fName }) {
+                                    if !imgUrl.isEmpty && (AppDelegate.imageArray[arrIdx].imgUrl == nil || AppDelegate.imageArray[arrIdx].imgUrl!.isEmpty) {
+                                        AppDelegate.imageArray[arrIdx].imgUrl = imgUrl
+                                    }
+                                }
+                                if let fileIdx = AppDelegate.ImageFileArray.firstIndex(where: { $0.fileName == fName }) {
+                                    if !imgUrl.isEmpty && (AppDelegate.ImageFileArray[fileIdx].imgUrl == nil || AppDelegate.ImageFileArray[fileIdx].imgUrl!.isEmpty) {
+                                        AppDelegate.ImageFileArray[fileIdx].imgUrl = imgUrl
+                                    }
+                                }
+                                
+                                // 로컬에 없는 파일명 추가 (다른 세션에서 등록되었거나 등등)
+                                if !fName.isEmpty && !AppDelegate.imageArray.contains(where: { $0.fileName == fName }) {
+                                    let data = ImageData()
+                                    data.fileName = fName
+                                    data.imgUrl = imgUrl
+                                    let sortVal = dict?["sort"]
+                                    if let sortStr = sortVal as? String {
+                                        data.sort = sortStr
+                                    } else if let sortInt = sortVal as? Int {
+                                        data.sort = String(sortInt)
+                                    }
+                                    data.utype = dict?["utype"] as? Int
+                                    
+                                    if AppDelegate.imageModel.imgArr == nil {
+                                        AppDelegate.imageModel.imgArr = []
+                                    }
+                                    AppDelegate.imageModel.imgArr?.append(data)
+                                    AppDelegate.imageArray.append(data)
+                                    
+                                    // 썸네일 배열에도 추가 (imgUrl이 비어있더라도 개수/자리를 유지하기 위해)
+                                    let imageFileData = ImageFileData()
+                                    imageFileData.fileName = data.fileName
+                                    imageFileData.imgUrl = imgUrl
+                                    AppDelegate.ImageFileArray.append(imageFileData)
+                                }
+                            }
+                        }
                         
                         #if DEBUG
                         print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")
@@ -242,6 +293,14 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                     case "ACT1012": // 사진 임시저장 통신
                         let token = actionParamObj?["token"] as? String
                         if token == nil {
+                            return
+                        }
+                        
+                        // 업로드할 이미지가 있는지 확인 (Android와 동일)
+                        let hasImagesToUpload = AppDelegate.ImageFileArray.contains { $0.image != nil }
+                        if !hasImagesToUpload {
+                            let javascript = "\(self.callback)(\"-1\")"
+                            self.webView.evaluateJavaScript(javascript, completionHandler: nil)
                             return
                         }
                         
@@ -280,28 +339,33 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                             body.append(data1)
                         }
                         
-                        // add image data
-                        var imageToUpload: UIImage? = nil // 업로드할 이미지
-                        var imageData: Data? = nil // 업로드할 이미지 스트림
-                        var sImageName: String? = nil
-
+                        // add image data (imgUrl만 있고 image가 nil인 항목은 서버 기존 이미지이므로 스킵)
+                        var uploadCount = 0
                         for item in AppDelegate.ImageFileArray {
-                            imageData = imageToUpload?.jpegData(compressionQuality: 1.0)
+                            guard let imageData = item.image else { continue }
 
                             if let data1 = "--\(boundary)\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(item.fileName ?? "")\"\r\n".data(using: .utf8) {
+                            let fileName = item.fileName ?? "image.jpg"
+                            if let data1 = "Content-Disposition: form-data; name=\"imgFile\"; filename=\"\(fileName)\"\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
                             if let data1 = "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
-                            body.append(item.image!)
+                            body.append(imageData)
                             if let data1 = "\r\n".data(using: .utf8) {
                                 body.append(data1)
                             }
+                            uploadCount += 1
+                            #if DEBUG
+                            print("[ACT1012 업로드] 파일: \(fileName), 크기: \(imageData.count) bytes")
+                            #endif
                         }
+                        #if DEBUG
+                        print("[ACT1012 업로드] 총 \(uploadCount)개 파일, body 크기: \(body.count) bytes")
+                        #endif
                         
                         if let data1 = "--\(boundary)--\r\n".data(using: .utf8) {
                             body.append(data1)
@@ -310,7 +374,7 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         let contentType = "multipart/form-data; boundary=\(boundary)"
                         urlRequest?.setValue(contentType, forHTTPHeaderField: "Content-Type")
                         urlRequest?.httpMethod = "POST"
-                        urlRequest?.httpBody = body
+                        // uploadTask(with:from:) 사용 시 httpBody 설정하지 않음 (중복 시 에러 발생)
 
                         #if DEBUG
                         print("params body : \(body)")
@@ -319,7 +383,6 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                         
                         //Create task
                         let task = defaultSession.uploadTask(with: urlRequest! as URLRequest, from: body) { data, response, error in
-                            //Handle your response here
                             #if DEBUG
                             if let error = error {
                                 print("error : \(error)")
@@ -327,35 +390,60 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                             if let response = response {
                                 print("response : \(response)")
                             }
-
-                            if data != nil {
-                                var jsonError: Error?
-                                var dicResData: String? = nil
-                                do {
-                                    if let data = data {
-                                        dicResData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? String
-                                    }
-                                } catch let jsonError {
-                                }
-
-
-                                let jsonData = dicResData?.data(using: .utf8)
-
-                                print("jsonData : \(jsonData ?? nil)")
-                                if let jsonError = jsonError {
-                                    print("jsonData : \(jsonError)")
-                                }
-
-
-                                var sResultData: String? = nil
-                                if let data = data {
-                                    sResultData = String(data: data, encoding: .utf8)
-                                }
-
-                                print("sResultData : \(sResultData ?? "")")
-                            }
                             #endif
 
+                            if let data = data, let sResultData = String(data: data, encoding: .utf8) {
+                                #if DEBUG
+                                print("[ACT1012 응답] \(sResultData)")
+                                if let httpResponse = response as? HTTPURLResponse {
+                                    print("[ACT1012 응답] statusCode: \(httpResponse.statusCode)")
+                                }
+                                #endif
+                                // 서버가 imgUrl을 반환하지 않으면 업로드 성공 시 클라이언트에서 imgUrl 생성 (웹 썸네일 표시용)
+                                var callbackJson = sResultData
+                                if let jsonData = sResultData.data(using: .utf8),
+                                   var resDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                                   (resDict["resCode"] as? String) == "0000",
+                                   resDict["imgArr"] == nil {
+                                    let baseImageUrl = "\(AppDelegate.HOME_URL)/data/labang/photo"
+                                    var imgArr: [[String: Any]] = []
+                                    var sortIndex = 1
+                                    for item in AppDelegate.ImageFileArray {
+                                        guard item.image != nil else { continue }
+                                        let fileName = item.fileName ?? "image.jpg"
+                                        let encodedFileName = fileName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? fileName
+                                        let imgUrl = "\(baseImageUrl)/\(token ?? "")/\(encodedFileName)"
+                                        imgArr.append([
+                                            "fileName": fileName,
+                                            "imgUrl": imgUrl,
+                                            "sort": sortIndex,
+                                            "utype": 1
+                                        ])
+                                        item.imgUrl = imgUrl
+                                        if let arrIdx = AppDelegate.imageArray.firstIndex(where: { $0.fileName == item.fileName }) {
+                                            AppDelegate.imageArray[arrIdx].imgUrl = imgUrl
+                                        }
+                                        sortIndex += 1
+                                    }
+                                    resDict["imgArr"] = imgArr
+                                    if let mergedData = try? JSONSerialization.data(withJSONObject: resDict),
+                                       let mergedStr = String(data: mergedData, encoding: .utf8) {
+                                        callbackJson = mergedStr
+                                        #if DEBUG
+                                        print("[ACT1012] imgUrl 생성됨: \(imgArr)")
+                                        #endif
+                                    }
+                                }
+                                let javascript = "\(self.callback)(\(callbackJson))"
+                                DispatchQueue.main.async {
+                                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                                        #if DEBUG
+                                        print("result : \(String(describing: result))")
+                                        print("error : \(String(describing: error))")
+                                        #endif
+                                    }
+                                }
+                            }
                         }
 
                         task.resume()
@@ -479,6 +567,45 @@ class SubWebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    func sendImageData(){
+        do {
+            if AppDelegate.imageArray.count > 0 {
+                var dic = Dictionary<String, Any>()
+                dic.updateValue("1", forKey: "resultcd")
+                var imgArr: [[String: Any]] = []
+                for (index, item) in AppDelegate.imageArray.enumerated() {
+                    var dict: [String: Any] = [:]
+                    dict["fileName"] = item.fileName ?? ""
+                    dict["imgUrl"] = item.imgUrl ?? ""
+                    dict["sort"] = Int(item.sort ?? "\(index + 1)") ?? (index + 1)
+                    dict["utype"] = item.utype ?? 1
+                    imgArr.append(dict)
+                }
+                dic.updateValue(imgArr, forKey: "imgArr")
+                dic.updateValue(AppDelegate.imageModel.token ?? "", forKey: "token")
+                dic.updateValue(AppDelegate.imageModel.pageGbn ?? "1", forKey: "pageGbn")
+                dic.updateValue(AppDelegate.imageArray.count, forKey: "cnt")
+                let jsonDataForCallback = try JSONSerialization.data(withJSONObject: dic, options: [])
+                let jsonString = String(data: jsonDataForCallback, encoding: .utf8) ?? ""
+                #if DEBUG
+                print("cameraReturnApp jsonString : \(jsonString)")
+                #endif
+                let javascript = "\(callback)(\(jsonString))"
+                DispatchQueue.main.async {
+                    self.webView.evaluateJavaScript(javascript) { (result, error) in
+                        #if DEBUG
+                        print("cameraReturnApp result : \(String(describing: result))")
+                        print("cameraReturnApp error : \(String(describing: error))")
+                        #endif
+                    }
+                }
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
     @IBAction func onClickBackButton(_ sender: UIButton) {
         self.backButton.isHidden = true
         self.navigationController?.popViewController(animated: true)

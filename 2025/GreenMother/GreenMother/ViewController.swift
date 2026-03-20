@@ -230,40 +230,72 @@ WKNavigationDelegate, WKScriptMessageHandler, CLLocationManagerDelegate, UIPageV
                     performSegue(withIdentifier: "qrReaderSeque", sender: nil)
                     break
                     case "ACT1011": // 카메라 및 사진 라이브라러 호출
-                        let token = actionParamObj?["token"] as? String
-                        if token != AppDelegate.imageModel.token {
-                            if AppDelegate.imageArray != nil && AppDelegate.imageArray.count > 0 {
-                                AppDelegate.imageArray.removeAll()
-                            }
-                            if AppDelegate.ImageFileArray != nil && AppDelegate.ImageFileArray.count > 0 {
-                                AppDelegate.ImageFileArray.removeAll()
-                            }
-                        }
-                        
-                        AppDelegate.imageModel.token = token
-                        
+                        AppDelegate.imageModel.token = actionParamObj?["token"] as? String
                         AppDelegate.imageModel.pageGbn = actionParamObj?["pageGbn"] as? String // 1 : 신규페이지에서 진입, 2 : 수정페이지에서 진입
                         AppDelegate.imageModel.cnt = actionParamObj?["cnt"] as? Int
-
-                    if let values = actionParamObj?["imgArr"] as? Array<Any> {
-                        values.forEach { dictionary in
-                            let data = ImageData()
-                            let dict = dictionary as? Dictionary<String, AnyObject>
-                            data.fileName = dict?["fileName"] as? String
-                            data.imgUrl = dict?["imgUrl"] as? String
-                            data.sort = dict?["sort"] as? String
-                            data.utype = dict?["utype"] as? Int
-
-                            AppDelegate.imageModel.imgArr?.append(data)
-
-                            if data.imgUrl != nil {
-                                let imageFileData = ImageFileData()
-                                imageFileData.fileName = data.fileName
-                                imageFileData.imgUrl = data.imgUrl
-                                AppDelegate.ImageFileArray.append(imageFileData)
+                        
+                        // 웹에서 보내준 파일명 목록
+                        var webFileNames: [String] = []
+                        if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                            values.forEach { dictionary in
+                                let dict = dictionary as? Dictionary<String, AnyObject>
+                                if let fName = dict?["fileName"] as? String, !fName.isEmpty {
+                                    webFileNames.append(fName)
+                                }
                             }
                         }
-                    }
+                        
+                        // 1. 웹에 없는 파일은 로컬 배열에서 제거 (유저가 웹에서 X 눌러 지운 경우 등)
+                        AppDelegate.imageArray.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        AppDelegate.ImageFileArray.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        AppDelegate.imageModel.imgArr?.removeAll(where: { !webFileNames.contains($0.fileName ?? "") })
+                        
+                        // 2. 웹에 있는 파일 중, 로컬에 없는 파일 추가 및 imgUrl 업데이트
+                        if let values = actionParamObj?["imgArr"] as? Array<Any> {
+                            values.forEach { dictionary in
+                                let dict = dictionary as? Dictionary<String, AnyObject>
+                                let fName = dict?["fileName"] as? String ?? ""
+                                let imgUrl = dict?["imgUrl"] as? String ?? ""
+                                
+                                // 기존 파일 업데이트 (새로 imgUrl이 생긴 경우)
+                                if let arrIdx = AppDelegate.imageArray.firstIndex(where: { $0.fileName == fName }) {
+                                    if !imgUrl.isEmpty && (AppDelegate.imageArray[arrIdx].imgUrl == nil || AppDelegate.imageArray[arrIdx].imgUrl!.isEmpty) {
+                                        AppDelegate.imageArray[arrIdx].imgUrl = imgUrl
+                                    }
+                                }
+                                if let fileIdx = AppDelegate.ImageFileArray.firstIndex(where: { $0.fileName == fName }) {
+                                    if !imgUrl.isEmpty && (AppDelegate.ImageFileArray[fileIdx].imgUrl == nil || AppDelegate.ImageFileArray[fileIdx].imgUrl!.isEmpty) {
+                                        AppDelegate.ImageFileArray[fileIdx].imgUrl = imgUrl
+                                    }
+                                }
+                                
+                                // 로컬에 없는 파일명 추가 (다른 세션에서 등록되었거나 등등)
+                                if !fName.isEmpty && !AppDelegate.imageArray.contains(where: { $0.fileName == fName }) {
+                                    let data = ImageData()
+                                    data.fileName = fName
+                                    data.imgUrl = imgUrl
+                                    let sortVal = dict?["sort"]
+                                    if let sortStr = sortVal as? String {
+                                        data.sort = sortStr
+                                    } else if let sortInt = sortVal as? Int {
+                                        data.sort = String(sortInt)
+                                    }
+                                    data.utype = dict?["utype"] as? Int
+                                    
+                                    if AppDelegate.imageModel.imgArr == nil {
+                                        AppDelegate.imageModel.imgArr = []
+                                    }
+                                    AppDelegate.imageModel.imgArr?.append(data)
+                                    AppDelegate.imageArray.append(data)
+                                    
+                                    // 썸네일 배열에도 추가 (imgUrl이 비어있더라도 개수/자리를 유지하기 위해)
+                                    let imageFileData = ImageFileData()
+                                    imageFileData.fileName = data.fileName
+                                    imageFileData.imgUrl = imgUrl
+                                    AppDelegate.ImageFileArray.append(imageFileData)
+                                }
+                            }
+                        }
                         
                         #if DEBUG
                         print("AppDelegate.imageModel.imgArr : \(AppDelegate.imageModel.imgArr)")

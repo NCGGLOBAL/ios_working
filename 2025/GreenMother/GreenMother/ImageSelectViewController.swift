@@ -174,13 +174,22 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         
         let item = AppDelegate.ImageFileArray[indexPath.row]
-        if item.imgUrl != nil {
-            let url = URL(string: item.imgUrl!)
-            cell.mainImageView.kf.setImage(with: url)
-        } else {
-            cell.mainImageView.image = UIImage(data: item.image!)
+        if let imgData = item.image, let uiImage = UIImage(data: imgData) {
+            // 로컬에 이미지 데이터가 있으면 우선적으로 표시
+            cell.mainImageView.image = uiImage
             #if DEBUG
-            print("[cellForItem] row \(indexPath.row): imageData size: \(item.image?.count ?? 0) bytes, imageView frame: \(cell.mainImageView.frame)")
+            print("[cellForItem] row \(indexPath.row): 로컬 데이터 표시, size: \(imgData.count) bytes")
+            #endif
+        } else if let imgUrlStr = item.imgUrl, !imgUrlStr.isEmpty, let url = URL(string: imgUrlStr) {
+            // 로컬 데이터가 없고 URL이 유효하면 Kingfisher로 표시
+            cell.mainImageView.kf.setImage(with: url)
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): 웹 URL 표시, url: \(imgUrlStr)")
+            #endif
+        } else {
+            cell.mainImageView.image = nil
+            #if DEBUG
+            print("[cellForItem] row \(indexPath.row): 표시할 이미지 없음 (image: \(item.image == nil ? "nil" : "exists"), imgUrl: \(item.imgUrl ?? "nil"))")
             #endif
         }
         return cell
@@ -192,6 +201,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         let item = AppDelegate.ImageFileArray[indexPath.row]
         vc.titleString = "\(AppDelegate.imageArray.count)장 중 \(indexPath.row + 1)번째 선택"
         vc.selectedImage = item.image
+        vc.selectedImageUrl = item.imgUrl
         vc.selectedImageIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: true)
     }
