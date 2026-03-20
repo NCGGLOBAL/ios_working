@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImageSelectDetailViewController: UIViewController {
     
     var titleString = ""
     var selectedImage: Data? = nil
+    var selectedImageUrl: String? = nil
     var selectedImageIndex: Int? = nil
 
     @IBOutlet weak var mainImageView: UIImageView!
@@ -19,7 +21,11 @@ class ImageSelectDetailViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = titleString
-        mainImageView.image = UIImage(data: selectedImage!)
+        if let imgData = selectedImage {
+            mainImageView.image = UIImage(data: imgData)
+        } else if let urlStr = selectedImageUrl, !urlStr.isEmpty, let url = URL(string: urlStr) {
+            mainImageView.kf.setImage(with: url)
+        }
     }
     
     @IBAction func onClickDeleteImage(_ sender: UIBarButtonItem) {
